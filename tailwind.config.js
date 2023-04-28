@@ -14,7 +14,12 @@ module.exports = {
       },
     },
     colors: {
-      primary: "#438EC9",
+      red: "#931914",
+      black: "#383332",
+      white: "#FFF",
+      green: "#005C6E",
+      gray: "#F4F4F5",
+      blue: "#2BB8C9",
     },
   },
   plugins: [],
