@@ -2,6 +2,7 @@ import { Inter } from "next/font/google";
 import { Header } from "@/components/header";
 import { SearchBar } from "@/components/searchbar";
 import { JobCardBig } from "@/components/job-card-big";
+import { JobCardMedium } from "@/components/card-medium";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -16,11 +17,7 @@ export default function Home() {
         <p>Recomendados</p>
         <div className="horizontal-scroll">
           <JobCardBig />
-          <JobCardBig />
-          <JobCardBig />
-          <JobCardBig />
-          <JobCardBig />
-          <JobCardBig />
+          <JobCardMedium />
         </div>
       </div>
     </>

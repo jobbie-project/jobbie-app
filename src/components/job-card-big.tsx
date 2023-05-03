@@ -11,14 +11,14 @@ export function JobCardBig() {
   return (
     <div className="bg-[#F4F4F5] rounded-xl px-7 py-5 my-3 flex-col justify-between">
       <div className="flex flex-row justify-between mb-4">
-        <div className="w-min">
-          <div className="bg-white w-min p-1 rounded-lg">
+        <div>
+          <div className="bg-white p-1 rounded-lg">
             <FaReact size={30} color="#61DAFB" />
           </div>
         </div>
         <div className="h-min flex flex-row justify-end">
-          <p className="bg-white w-min text-sm px-3 py-2 rounded-lg me-3">{type}</p>
-          <p className="bg-white w-min text-sm px-3 py-2 rounded-lg">{categories[0]}</p>
+          <p className="bg-white  text-sm px-3 py-2 rounded-lg me-3">{type}</p>
+          <p className="bg-white  text-sm px-3 py-2 rounded-lg">{categories[0]}</p>
         </div>
       </div>
       <div>
