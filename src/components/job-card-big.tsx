@@ -9,7 +9,7 @@ export function JobCardBig() {
   const salary = 1600;
   const companyName = "Lorem ipsum S/A";
   return (
-    <div className="bg-[#F4F4F5] rounded-xl px-7 py-5 my-3 flex-col justify-between">
+    <div className="bg-[#F4F4F5] max-w-xl rounded-xl px-7 py-5 my-3 flex-col justify-between">
       <div className="flex flex-row justify-between mb-4">
         <div>
           <div className="bg-white p-1 rounded-lg">

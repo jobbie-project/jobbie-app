@@ -9,7 +9,7 @@ export function JobCardMedium() {
   const salary = 1600;
   const companyName = "Lorem ipsum S/A";
   return (
-    <div className="bg-[#F4F4F5] rounded-xl px-7 pt-5 pb-2 my-2 flex-col justify-between">
+    <div className="bg-[#F4F4F5] max-w-xl rounded-xl px-7 pt-5 pb-2 my-2 flex-col justify-between">
       <div className="flex flex-row justify-start mb-1">
         <div className=" me-2">
           <div className="bg-white  p-1 rounded-lg">

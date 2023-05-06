@@ -12,9 +12,9 @@ export default function Home() {
     <>
       <Header />
       <div className="p-5">
-        <p>Olá, {username}</p>
+        <p className="my-5">Olá, {username}</p>
         <SearchBar />
-        <p>Recomendados</p>
+        <p className="my-5">Recomendados</p>
         <div className="horizontal-scroll">
           <JobCardBig />
           <JobCardMedium />
