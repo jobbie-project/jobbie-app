@@ -1,13 +1,9 @@
 import { LocationPin } from "@/icons/location-pin";
+import { Job } from "@/interfaces/job";
 import { Money } from "@/utils/money";
 import { FaReact } from "react-icons/fa";
 
-export function JobCardMedium() {
-  const type = "Estágio";
-  const categories = ["Design"];
-  const title = "Desenvolvedor Front-End";
-  const salary = 1600;
-  const companyName = "Lorem ipsum S/A";
+export function JobCardMedium(props: { job: Job }) {
   return (
     <div className="bg-[#F4F4F5] max-w-xl rounded-xl px-7 pt-5 pb-2 my-2 flex-col justify-between">
       <div className="flex flex-row justify-start mb-1">
@@ -17,8 +13,8 @@ export function JobCardMedium() {
           </div>
         </div>
         <div className="flex flex-col items-start justify-start">
-          <p className="">{title}</p>
-          <p className="text-xs text-[#81879C] mb-3">{companyName}</p>
+          <p className="">{props.job.title}</p>
+          <p className="text-xs text-[#81879C] mb-3">{props.job.company.name}</p>
         </div>
       </div>
       <div className="flex flex-row justify-between">
@@ -27,7 +23,7 @@ export function JobCardMedium() {
           <p className="mx-2">Remoto</p>
         </div>
         <div className="flex items-baseline">
-          <p className="text-lg font-medium me-2">{Money(salary).format()}</p>
+          <p className="text-lg font-medium me-2">{Money(props.job.salary).format()}</p>
           <p className="text-sm text-[#81879C]">/Mensal</p>
         </div>
       </div>
