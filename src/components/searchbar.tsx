@@ -1,4 +1,3 @@
-import { Filter } from "@/icons/filter";
 import { Search } from "@/icons/search";
 
 export function SearchBar() {
@@ -10,10 +9,14 @@ export function SearchBar() {
             <div className="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
               <Search />
             </div>
-            <input type="text" className="bg-gray text-gray-900 focus:outline-none text-sm rounded-lg block w-full pl-16 p-4" placeholder="Procure por vagas, empresas" />
+            <input
+              type="text"
+              className="bg-gray text-gray-900 focus:outline-n text-sm rounded-lg block w-full pl-16 p-4"
+              placeholder="Procure por vagas, empresas"
+            />
           </div>
-          <button className="p-2 rounded-lg ml-2 text-sm font-medium text-white bg-blue">
-            <Filter />
+          <button className="p-4 px-6 rounded-lg ml-4 text-sm font-medium text-white bg-blue">
+            Pesquisar
           </button>
         </form>
       </div>
