@@ -5,7 +5,7 @@ import { FaReact } from "react-icons/fa";
 
 export function JobCardMedium(props: { job: Job }) {
   return (
-    <div className="bg-[#F4F4F5] max-w-xl rounded-xl px-7 pt-5 pb-2 my-2 flex-col justify-between">
+    <div className="bg-slate-100 max-w-xl rounded-xl px-7 pt-5 pb-2 my-2 flex-col justify-between">
       <div className="flex flex-row justify-start mb-1">
         <div className=" me-2">
           <div className="bg-white  p-1 rounded-lg">
@@ -14,7 +14,7 @@ export function JobCardMedium(props: { job: Job }) {
         </div>
         <div className="flex flex-col items-start justify-start">
           <p className="">{props.job.title}</p>
-          <p className="text-xs text-[#81879C] mb-3">{props.job.company.name}</p>
+          <p className="text-xs text-slate-500 mb-3">{props.job.company.name}</p>
         </div>
       </div>
       <div className="flex flex-row justify-between">
@@ -24,7 +24,7 @@ export function JobCardMedium(props: { job: Job }) {
         </div>
         <div className="flex items-baseline">
           <p className="text-lg font-medium me-2">{Money(props.job.salary).format()}</p>
-          <p className="text-sm text-[#81879C]">/Mensal</p>
+          <p className="text-sm text-slate-500">/Mensal</p>
         </div>
       </div>
     </div>
