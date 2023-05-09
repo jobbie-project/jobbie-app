@@ -1,28 +1,22 @@
 export function Sidebar(props: { isOpen: boolean }) {
   return (
     <div
+      className={`text-white absolute z-10 bg-[#931914] w-52 ${props.isOpen ? "left-[0px]" : "left-[-210px]"}  overflow-auto rounded-br-lg `}
       style={{
-        zIndex: 4,
-        backgroundColor: "white",
-        minWidth: "200px",
-        position: "absolute",
-        left: `${props.isOpen ? "0px" : "-200px"}`,
         transition: "left 1s",
-        overflow: "auto",
-        minHeight: "90%",
       }}
     >
       <ul className="flex flex-col mt-4 font-medium">
         <li>
           <a className="block p-3">Inicio</a>
         </li>
-        <li>
+        <li className="border-t-white border-t ">
           <a className="block p-3">Vagas</a>
         </li>
-        <li>
+        <li className="border-t-white border-t">
           <a className="block p-3">Aplicações</a>
         </li>
-        <li>
+        <li className="border-t-white border-t bo">
           <a className="block p-3">Perfil</a>
         </li>
       </ul>

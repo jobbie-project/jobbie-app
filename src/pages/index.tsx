@@ -35,8 +35,8 @@ export default function Home() {
       <div className="p-5">
         <p className="my-5">Olá, {username}</p>
         <SearchBar />
-        <p className="my-5">Recomendados</p>
-        <div className="relative flex items-center">
+        <p className="mt-5">Recomendados</p>
+        <div className="relative flex mb-5 items-center">
           <div className="w-full h-full bg- overflow-x-scroll scroll whitespace-nowrap scroll-smooth scrollbar-hide">
             {Array(numberOfJobs)
               .fill(0)
@@ -47,7 +47,14 @@ export default function Home() {
               ))}
           </div>
         </div>
-        <JobCardMedium job={mockJob} />
+        <p>Vagas recentes</p>
+        {Array(numberOfJobs)
+          .fill(0)
+          .map((_, index) => (
+            <div className="mb-5">
+              <JobCardMedium job={mockJob} key={index} />
+            </div>
+          ))}
       </div>
     </>
   );
