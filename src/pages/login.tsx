@@ -20,25 +20,19 @@ export default function Login() {
                   <form className="mt-8" />
                   <div className="mx-auto max-w-lg">
                     <div className="py-2">
-                      <span className="px-1 text-sm text-gray-600">Email</span>
                       <input
-                        placeholder=""
+                        placeholder="Email"
                         type="text"
-                        className="text-md block px-3 py-2  rounded-lg w-full 
-                bg-white border-2 border-gray-300 placeholder-gray-600 shadow-md focus:placeholder-gray-500 focus:bg-white focus:border-gray-600 focus:outline-none"
+                        className="text-md block px-3 py-2  w-full 
+                bg-white border-b-2 border-b-gray3 focus:outline-none"
                       />
                     </div>
                     <div className="py-2" x-data="{ show: true }">
-                      <span className="px-1 text-sm text-gray-600">Senha</span>
                       <div className="relative">
                         <input
-                          placeholder=""
-                          className="text-md block px-3 py-2 rounded-lg w-full 
-                bg-white border-2 border-gray-300 placeholder-gray-600 shadow-md
-                focus:placeholder-gray-500
-                focus:bg-white 
-                focus:border-gray-600  
-                focus:outline-none"
+                          placeholder="Senha"
+                          className="text-md block px-3 py-2  w-full 
+                bg-white border-b-2 border-b-gray3 focus:outline-none"
                         />
                         <div className="absolute inset-y-0 right-0 pr-3 flex items-center text-sm leading-5">
                           <svg
@@ -68,31 +62,27 @@ export default function Login() {
                       </div>
                     </div>
                     <div className="flex p-3 justify-between">
-                      <label className="block text-gray-500 font-regular my-4">
+                      <label className="block text-gray-500 font-regular my-2">
                         <input
-                          checked
                           type="checkbox"
-                          className="leading-loose p-3 checked:bg-purple-600 checked:border-transparent"
+                          className="checked:bg-green -500 checked:border-green-700"
                         />{" "}
                         <span className="py-2 text-sm text-gray-600 leading-snug">
-                          {" "}
-                          Lembrar de mim{" "}
+                          Lembrar de mim
                         </span>
-                      </label>{" "}
-                      <label className="block text-gray-500 font-semibold my-4">
+                      </label>
+                      <label className="block text-gray-500 font-semibold my-2">
                         <a
                           href="#"
                           className="cursor-pointer tracking-tighter text-black"
                         >
-                          <span>Esqueceu sua senha?</span>
+                          <span className="text-green font-normal ">
+                            Esqueceu sua senha?
+                          </span>
                         </a>
                       </label>
                     </div>{" "}
-                    <button
-                      className="mt-7 text-lg bg-blue font-normal 
-                 w-full text-white rounded-lg
-                px-3 py-3 block shadow-xl"
-                    >
+                    <button className="mt-8 text-lg bg-red font-normal w-full text-white rounded px-3 py-3 block shadow-xl">
                       Login
                     </button>
                   </div>
