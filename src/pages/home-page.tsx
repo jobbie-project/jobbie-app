@@ -32,29 +32,31 @@ export default function Home() {
   return (
     <>
       <Header />
-      <div className="p-5">
-        <p className="my-5">Olá, {username}</p>
+      <div className="max-w-5xl p-5">
+        <p className="my-5 px-8 font-normal">Olá, {username}</p>
         <SearchBar />
-        <p className="mt-5">Recomendados</p>
+        <p className="mt-5 py-6 px-8 font-semibold">Recomendados</p>
         <div className="relative flex mb-5 items-center">
-          <div className="w-full h-full bg- overflow-x-scroll scroll whitespace-nowrap scroll-smooth scrollbar-hide">
+          <div className="px-8 w-full h-full bg- overflow-x-scroll scroll whitespace-nowrap scroll-smooth scrollbar-hide">
             {Array(numberOfJobs)
               .fill(0)
               .map((_, index) => (
-                <div className="inline-block mr-3 ">
+                <div className="inline-block mr-6 ">
                   <JobCardBig job={mockJob} key={index} />
                 </div>
               ))}
           </div>
         </div>
-        <p>Vagas recentes</p>
-        {Array(numberOfJobs)
-          .fill(0)
-          .map((_, index) => (
-            <div className="mb-5">
-              <JobCardMedium job={mockJob} key={index} />
-            </div>
-          ))}
+        <p className="px-8 font-semibold">Vagas recentes</p>
+        <div className="px-8 py-6">
+          {Array(numberOfJobs)
+            .fill(0)
+            .map((_, index) => (
+              <div className="mb-5">
+                <JobCardMedium job={mockJob} key={index} />
+              </div>
+            ))}
+        </div>
       </div>
     </>
   );

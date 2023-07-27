@@ -4,7 +4,7 @@ import React from "react";
 import Link from "next/link";
 
 export default function Login() {
-  const [exibir, setExibir] = React.useState(false);
+  const [exibir, setExibir] = React.useState(true);
 
   return (
     <>
@@ -15,7 +15,7 @@ export default function Login() {
               <div className="w-full relative">
                 <div className="mt-6">
                   <div className="mb-5 flex justify-center">
-                    <Logoblack />
+                    <Logoblack width={"100"} height={"50"} />
                   </div>
                   <div className="text-center font-regular text-black">
                     Continue com sua conta Jobbie.
@@ -64,19 +64,17 @@ export default function Login() {
                           href="#"
                           className="cursor-pointer tracking-tighter text-black"
                         >
-                          <span className="text-green font-normal ">
+                          <a className="text-black font-semibold ">
                             Esqueceu sua senha?
-                          </span>
+                          </a>
                         </a>
                       </label>
                     </div>{" "}
                     <div>
                       <Link href="/home-page">
-                        <a>
-                          <button className="mt-8 text-lg bg-red font-normal w-full text-white rounded px-3 py-3 block shadow-xl">
-                            Login
-                          </button>
-                        </a>
+                        <button className="mt-8 text-lg bg-red font-normal w-full text-white rounded px-3 py-3 block shadow-xl">
+                          Login
+                        </button>
                       </Link>
                     </div>
                   </div>
