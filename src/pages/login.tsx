@@ -65,7 +65,7 @@ export default function Login() {
                       <label className="block text-gray-500 font-regular my-2">
                         <input
                           type="checkbox"
-                          className="checked:bg-green -500 checked:border-green-700"
+                          className="appearence-none checked:bg-green-500 checked:border-green-700"
                         />{" "}
                         <span className="py-2 text-sm text-gray-600 leading-snug">
                           Lembrar de mim
