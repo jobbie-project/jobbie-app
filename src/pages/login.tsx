@@ -64,9 +64,9 @@ export default function Login() {
                           href="#"
                           className="cursor-pointer tracking-tighter text-black"
                         >
-                          <a className="text-black font-semibold ">
+                          <span className="text-black font-semibold ">
                             Esqueceu sua senha?
-                          </a>
+                          </span>
                         </a>
                       </label>
                     </div>{" "}
