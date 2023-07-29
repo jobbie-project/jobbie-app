@@ -32,13 +32,15 @@ export default function Home() {
   return (
     <>
       <Header />
-      <div className="max-w-full items-center p-5 flex flex-col min-h-screen">
-        <div className="max-w-5xl flex flex-col">
-          <p className="my-5 px-8 font-normal">Olá, {username}</p>
+      <div className="max-w-full items-center p-5 flex flex-col 'min-h-screen">
+        <div className="max-w-5xl px-8 w-full ">
+          <p className="my-5 font-normal">Olá, {username}</p>
           <SearchBar />
+              </div>
+        <div className="max-w-5xl flex flex-col w-full ">
           <p className="mt-5 py-6 px-8 font-semibold">Recomendados</p>
           <div className="relative flex mb-5 items-center">
-            <div className="px-8 w-full h-full bg- overflow-x-scroll scroll whitespace-nowrap scroll-smooth scrollbar-hide">
+            <div className="px-8  max-w-5xl h-full bg- overflow-x-scroll scroll whitespace-nowrap scroll-smooth scrollbar-hide">
               {Array(numberOfJobs)
                 .fill(0)
                 .map((_, index) => (
@@ -48,6 +50,8 @@ export default function Home() {
                 ))}
             </div>
           </div>
+            </div>
+         <div className="max-w-5xl flex flex-col w-full ">
           <p className="px-8 font-semibold">Vagas recentes</p>
           <div className="px-8 py-6">
             {Array(numberOfJobs)

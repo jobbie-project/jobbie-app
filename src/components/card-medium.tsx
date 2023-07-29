@@ -5,7 +5,7 @@ import { FaReact } from "react-icons/fa";
 
 export function JobCardMedium(props: { job: Job }) {
   return (
-    <div className="bg-gray max-w-xl rounded-xl px-7 pt-5 pb-2 my-2 flex-col justify-between">
+    <div className="bg-gray rounded-xl px-7 pt-5 pb-2 my-2 flex flex-col justify-between">
       <div className="flex flex-row justify-start mb-1">
         <div className=" me-2">
           <div className="bg-white  p-1 rounded-lg">
