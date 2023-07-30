@@ -1,7 +1,7 @@
 import { Logoblack } from "@/icons/logo-black";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import React from "react";
-import Link from "next/link";
+import { RouteButton } from "@/components/route-button";
 
 export default function Login() {
   const [exibir, setExibir] = React.useState(true);
@@ -71,11 +71,7 @@ export default function Login() {
                       </label>
                     </div>
                     <div>
-                      <Link href="/home-page">
-                        <button className="mt-8 text-lg bg-red font-normal w-full text-white rounded px-3 py-3 block shadow-xl">
-                          Login
-                        </button>
-                      </Link>
+                      <RouteButton text="Entrar" link="/home-page" />
                       <span className="text-warmGray-400 font-normal flex flex-row mt-8 justify-center">
                         Não possui conta?
                         <a className="ml-2 text-black font-semibold" href="">
