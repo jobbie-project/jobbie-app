@@ -69,13 +69,39 @@ export default function Login() {
                           </span>
                         </a>
                       </label>
-                    </div>{" "}
+                    </div>
                     <div>
                       <Link href="/home-page">
                         <button className="mt-8 text-lg bg-red font-normal w-full text-white rounded px-3 py-3 block shadow-xl">
                           Login
                         </button>
                       </Link>
+                      <span className="text-warmGray-400 font-normal flex flex-row mt-8 justify-center">
+                        Não possui conta?
+                        <a className="ml-2 text-black font-semibold" href="">
+                          Cadastre-se
+                        </a>
+                      </span>
+                      <div className="text-sm text-warmGray-400 font-normal flex flex-row mt-8 justify-center text-center">
+                        <span>
+                          Ao continuar você concorda que declara que leu e
+                          concorda com os{" "}
+                          <a
+                            className="text-black font-semibold inline-block"
+                            href=""
+                          >
+                            Termos de Uso
+                          </a>{" "}
+                          e a{" "}
+                          <a
+                            className="text-black font-semibold inline-block"
+                            href=""
+                          >
+                            Politica de Privacidade
+                          </a>
+                          .
+                        </span>
+                      </div>
                     </div>
                   </div>
                 </div>
