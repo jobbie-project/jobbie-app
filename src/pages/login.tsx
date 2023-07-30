@@ -1,7 +1,8 @@
 import { Logoblack } from "@/icons/logo-black";
-import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import React from "react";
 import { RouteButton } from "@/components/route-button";
+import Link from "next/link";
+import PasswordInput from "@/components/password";
 
 export default function Login() {
   const [exibir, setExibir] = React.useState(true);
@@ -26,35 +27,21 @@ export default function Login() {
                     <div className="py-2">
                       <input
                         placeholder="Email"
-                        type="text"
+                        type="email"
                         className="text-md block px-3 py-2  w-full 
                 bg-white border-b-2 border-b-gray3 focus:outline-none"
                       />
                     </div>
                     <div className="py-2" x-data="{ show: true }">
-                      <div className="relative border-b-2 border-b-gray3  flex flex-row items-center">
-                        <input
-                          placeholder="Senha"
-                          className="text-md block px-3 py-2  w-full 
-                focus:outline-none"
-                        />
-
-                        <div onClick={() => setExibir(!exibir)}>
-                          {exibir ? (
-                            <AiOutlineEye size={22} />
-                          ) : (
-                            <AiOutlineEyeInvisible size={22} />
-                          )}
-                        </div>
-                      </div>
+                      <PasswordInput />
                     </div>
-                    <div className="flex  justify-between">
+                    <div className="flex justify-between mt-6">
                       <label className="block text-gray-500 font-regular my-2">
                         <input
                           type="checkbox"
-                          className="peer relative left-0 h-4 w-4 shrink-0  appearance-none rounded-sm border outline-none after:absolute after:left-0 after:top-0 after:h-full after:w-full after:bg-[url('data:image/svg+xml;base64,PHN2ZyBoZWlnaHQ9JzMwMHB4JyB3aWR0aD0nMzAwcHgnICBmaWxsPSIjZmZmZmZmIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB2aWV3Qm94PSIwIDAgMTAwIDEwMCIgdmVyc2lvbj0iMS4xIiB4PSIwcHgiIHk9IjBweCI+PHRpdGxlPmljb25fYnlfUG9zaGx5YWtvdjEwPC90aXRsZT48ZGVzYz5DcmVhdGVkIHdpdGggU2tldGNoLjwvZGVzYz48ZyBzdHJva2U9Im5vbmUiIHN0cm9rZS13aWR0aD0iMSIgZmlsbD0ibm9uZSIgZmlsbC1ydWxlPSJldmVub2RkIj48ZyBmaWxsPSIjZmZmZmZmIj48ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSgyNi4wMDAwMDAsIDI2LjAwMDAwMCkiPjxwYXRoIGQ9Ik0xNy45OTk5ODc4LDMyLjQgTDEwLjk5OTk4NzgsMjUuNCBDMTAuMjI2Nzg5MSwyNC42MjY4MDE0IDguOTczMTg2NDQsMjQuNjI2ODAxNCA4LjE5OTk4Nzc5LDI1LjQgTDguMTk5OTg3NzksMjUuNCBDNy40MjY3ODkxNCwyNi4xNzMxOTg2IDcuNDI2Nzg5MTQsMjcuNDI2ODAxNCA4LjE5OTk4Nzc5LDI4LjIgTDE2LjU4NTc3NDIsMzYuNTg1Nzg2NCBDMTcuMzY2ODIyOCwzNy4zNjY4MzUgMTguNjMzMTUyOCwzNy4zNjY4MzUgMTkuNDE0MjAxNCwzNi41ODU3ODY0IEw0MC41OTk5ODc4LDE1LjQgQzQxLjM3MzE4NjQsMTQuNjI2ODAxNCA0MS4zNzMxODY0LDEzLjM3MzE5ODYgNDAuNTk5OTg3OCwxMi42IEw0MC41OTk5ODc4LDEyLjYgQzM5LjgyNjc4OTEsMTEuODI2ODAxNCAzOC41NzMxODY0LDExLjgyNjgwMTQgMzcuNzk5OTg3OCwxMi42IEwxNy45OTk5ODc4LDMyLjQgWiI+PC9wYXRoPjwvZz48L2c+PC9nPjwvc3ZnPg==')] after:bg-[length:30px] after:bg-center after:bg-no-repeat after:content-[''] checked:bg-red hover:ring hover:ring-gray"
-                        />{" "}
-                        <span className="py-2 px-2 text-sm text-gray-600 leading-snug">
+                          className="accent-red peer relative left-0 h-4 w-4 shrink-0  rounded-sm border outline-none align-middle"
+                        />
+                        <span className="py-2 px-1 text-sm text-gray-600 leading-snug align-middle">
                           {" "}
                           Lembrar de mim{" "}
                         </span>
@@ -74,9 +61,12 @@ export default function Login() {
                       <RouteButton text="Entrar" link="/home-page" />
                       <span className="text-warmGray-400 font-normal flex flex-row mt-8 justify-center">
                         Não possui conta?
-                        <a className="ml-2 text-black font-semibold" href="">
+                        <Link
+                          className="ml-2 text-black font-semibold"
+                          href="register/select-user"
+                        >
                           Cadastre-se
-                        </a>
+                        </Link>
                       </span>
                       <div className="text-sm text-warmGray-400 font-normal flex flex-row mt-8 justify-center text-center">
                         <span>

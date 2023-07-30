@@ -7,8 +7,8 @@ interface RouteButtonProps {
 
 export function RouteButton(props: RouteButtonProps) {
   return (
-    <Link href={props.link}>
-      <button className="mt-8 text-lg bg-red font-normal w-full text-white rounded px-3 py-3 block shadow-xl">
+    <Link className="w-full flex justify-center" href={props.link}>
+      <button className="mt-8 max-w-sm px-6 text-lg bg-red font-normal w-full text-white rounded py-3 block shadow-xl">
         {props.text}
       </button>
     </Link>
