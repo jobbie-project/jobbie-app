@@ -1,10 +1,13 @@
 import PasswordInput from "@/components/password";
+import PasswordStrengthMeter from "@/components/password-strength-meter";
 import RegisterHeader from "@/components/register-header";
 import { RouteButton } from "@/components/route-button";
 import router from "next/router";
-import React from "react";
+import React, { useState } from "react";
 
 export default function CreateAccount() {
+  const [password, setPassword] = useState("");
+
   return (
     <div>
       <RegisterHeader />
@@ -33,7 +36,8 @@ export default function CreateAccount() {
               />
             </div>
             <div className="py-2 w-full">
-              <PasswordInput />
+              <PasswordInput setPassword={setPassword} />
+              <PasswordStrengthMeter password={password} />
             </div>
           </div>
           <RouteButton

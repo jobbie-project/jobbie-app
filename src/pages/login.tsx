@@ -1,11 +1,12 @@
 import { Logoblack } from "@/icons/logo-black";
-import React from "react";
+import React, { useState } from "react";
 import { RouteButton } from "@/components/route-button";
 import Link from "next/link";
 import PasswordInput from "@/components/password";
 
 export default function Login() {
   const [exibir, setExibir] = React.useState(true);
+  const [password, setPassword] = useState("");
 
   return (
     <>
@@ -33,7 +34,7 @@ export default function Login() {
                       />
                     </div>
                     <div className="py-2" x-data="{ show: true }">
-                      <PasswordInput />
+                      <PasswordInput setPassword={setPassword} />
                     </div>
                     <div className="flex justify-between mt-6">
                       <label className="block text-gray-500 font-regular my-2">
@@ -63,7 +64,7 @@ export default function Login() {
                         Não possui conta?
                         <Link
                           className="ml-2 text-black font-semibold"
-                          href="register/select-user"
+                          href="/register"
                         >
                           Cadastre-se
                         </Link>
