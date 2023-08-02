@@ -9,18 +9,16 @@ const PasswordStrengthMeter: React.FC<PasswordStrengthMeterProps> = ({
   password,
 }) => {
   const testResult = zxcvbn(password);
-  const num = (testResult.score * 100) / 4;
-
   const createPassLabel = () => {
     switch (testResult.score) {
       case 0:
-        return "Muito fraca";
+        return "Muito fraco";
       case 1:
-        return "Fraca";
+        return "Fraco";
       case 2:
-        return "Boa";
+        return "Bom";
       case 3:
-        return "Ótima";
+        return "Forte";
       case 4:
         return "Excelente";
       default:
@@ -31,33 +29,48 @@ const PasswordStrengthMeter: React.FC<PasswordStrengthMeterProps> = ({
   const funcProgressColor = () => {
     switch (testResult.score) {
       case 0:
-        return "#828282";
+        return "#f1f1f1";
       case 1:
-        return "#EA1111";
+        return "#E30000";
       case 2:
-        return "#FFAD00";
+        return "#FFD80D";
       case 3:
-        return "#9bc158";
+        return "#51BC65";
       case 4:
-        return "#00b500";
+        return "#229337";
       default:
-        return "none";
+        return "#F1F1F1";
     }
   };
 
-  const changePasswordColor = (): React.CSSProperties => ({
-    width: `${num}%`,
-    background: funcProgressColor(),
-    height: "7px",
-  });
-
   return (
-    <>
-      <div className="progress" style={{ height: "7px" }}>
-        <div className="progress-bar" style={changePasswordColor()}></div>
+    <div
+      className="rounded-lg mt-4 flex flex-row items-center justify-between"
+      style={{ height: "6px" }}
+    >
+      <div className="w-full flex flex-row">
+        {Array(4)
+          .fill(0)
+          .map((_, index) => (
+            <div
+              style={{
+                width: "25%",
+                height: "6px",
+                background:
+                  index < testResult.score ? funcProgressColor() : "#F1F1F1",
+              }}
+              className={`rounded-lg ${index !== 0 && "ml-2"}`}
+            />
+          ))}
       </div>
-      <p style={{ color: funcProgressColor() }}>{createPassLabel()}</p>
-    </>
+
+      <span
+        className="text-sm min-w-[80px] text-end ml-4"
+        style={{ textDecorationColor: funcProgressColor() }}
+      >
+        {createPassLabel()}
+      </span>
+    </div>
   );
 };
 

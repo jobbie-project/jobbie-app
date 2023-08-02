@@ -2,11 +2,12 @@ import PasswordInput from "@/components/password";
 import PasswordStrengthMeter from "@/components/password-strength-meter";
 import RegisterHeader from "@/components/register-header";
 import { RouteButton } from "@/components/route-button";
-import router from "next/router";
+import { useRouter } from "next/router";
 import React, { useState } from "react";
 
 export default function CreateAccount() {
   const [password, setPassword] = useState("");
+  const router = useRouter();
 
   return (
     <div>
@@ -40,10 +41,13 @@ export default function CreateAccount() {
               <PasswordStrengthMeter password={password} />
             </div>
           </div>
-          <RouteButton
-            text="Continuar"
-            link={`${router.asPath}/verify-email`}
-          />
+          <div className="mt-2">
+            {" "}
+            <RouteButton
+              text="Continuar"
+              link={`${router.asPath}/verify-email`}
+            />
+          </div>
         </form>
       </div>
     </div>

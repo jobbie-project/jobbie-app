@@ -51,7 +51,7 @@ export default function SelecaoUsuario() {
           </div>
         </div>
 
-        <div className="mt-16 w-full">
+        <div className="mt-4 w-full">
           <RouteButton
             text="Continuar"
             link={
