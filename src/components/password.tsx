@@ -11,6 +11,7 @@ export default function PasswordInput(props: {
       <div className="py-2" x-data="{ show: true }">
         <div className="relative border-b-2 border-b-gray3  flex flex-row items-center">
           <input
+            required
             placeholder="Senha"
             onChange={(e) => props.setPassword(e.target.value)}
             type={exibir ? "password" : "text"}

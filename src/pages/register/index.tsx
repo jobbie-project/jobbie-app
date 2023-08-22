@@ -14,9 +14,9 @@ export default function SelecaoUsuario() {
           <div className=" mt-24 w-full font-semibold text-xl text-black">
             Boas vindas.
           </div>
-          <p className="mt-6">Tudo pronto para dar o próximo passo?</p>
+          <p className="mt-">Tudo pronto para dar o próximo passo?</p>
 
-          <div className="inline-block mt-16 w-full max-w-lg">
+          <div className="inline-block mt-14 w-full max-w-lg">
             <input
               onChange={() => setUserType("student")}
               type="radio"

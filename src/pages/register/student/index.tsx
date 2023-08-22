@@ -13,8 +13,10 @@ export default function CreateAccount() {
     <div>
       <RegisterHeader />
       <div className="max-w-full items-center p-5 flex flex-col min-h-screen mt-6">
-        <div className="max-w-sm w-full">
-          <p className="text-black font-semibold text-xl">Criar uma conta</p>
+        <div className="max-w-xs w-full">
+          <p className="text-black font-semibold text-xl mt-20">
+            Criar uma conta
+          </p>
           <p className="mt-6">
             Preencha com as informações que deseja utilizar para realizar login
             no portal.
@@ -44,6 +46,7 @@ export default function CreateAccount() {
           <div className="mt-2">
             {" "}
             <RouteButton
+              type="submit"
               text="Continuar"
               link={`${router.asPath}/verify-email`}
             />
