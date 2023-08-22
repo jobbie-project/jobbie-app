@@ -9,7 +9,8 @@ export default function Login() {
   const [password, setPassword] = useState("");
   const router = useRouter();
   const onSubmit = (data: any) => {
-    router.replace("/homepage");
+    console.log(data);
+    router.replace("/homepage", undefined, { shallow: true });
   };
 
   return (
@@ -56,7 +57,9 @@ export default function Login() {
                       className="cursor-pointer tracking-tighter text-black"
                     >
                       <span className="text-black font-semibold ">
-                        Esqueceu sua senha?
+                        <Link href={"/forget-password"}>
+                          Esqueceu sua senha?
+                        </Link>
                       </span>
                     </a>
                   </label>

@@ -14,7 +14,7 @@ export default function SelecaoUsuario() {
           <div className=" mt-24 w-full font-semibold text-xl text-black">
             Boas vindas.
           </div>
-          <p className="mt-">Tudo pronto para dar o próximo passo?</p>
+          <p className="mt-6">Tudo pronto para dar o próximo passo?</p>
 
           <div className="inline-block mt-14 w-full max-w-lg">
             <input
@@ -51,8 +51,9 @@ export default function SelecaoUsuario() {
           </div>
         </div>
 
-        <div className="mt-4 w-[336px]">
+        <div className="mt-6 w-[336px]">
           <RouteButton
+            type="submit"
             text="Continuar"
             link={
               userType === "student"
