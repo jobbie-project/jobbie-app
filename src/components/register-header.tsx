@@ -13,7 +13,7 @@ export default function RegisterHeader() {
             <IoChevronBackOutline size={34} className="relative" />
           </div>
         </div>
-        <div className="absolute flex flex-row items-center justify-between">
+        <div className="absolute flex flex-row items-center justify-between mt-20">
           <Logoblack width={"100"} height={"50"} />
         </div>
       </div>
