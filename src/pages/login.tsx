@@ -2,16 +2,15 @@ import {Logoblack} from '@/icons/logo-black';
 import PasswordInput from '@/components/password';
 import {Link, useNavigate} from 'react-router-dom';
 import {useForm} from 'react-hook-form';
+import { useState } from 'react';
 interface FormData {
   email: string;
   password: string;
 }
 
 export default function Login() {
-<<<<<<< Updated upstream
-=======
   const [,setPassword] = useState("");
->>>>>>> Stashed changes
+
   const navigate = useNavigate();
   const onSubmit = (data: FormData) => {
     navigate('/homepage');
