@@ -1,8 +1,11 @@
-import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
-import React from "react";
+import {AiOutlineEye, AiOutlineEyeInvisible} from 'react-icons/ai';
+import {FieldValues, Path, UseFormRegister} from 'react-hook-form';
 
-export default function PasswordInput(props: {
-  setPassword: React.Dispatch<React.SetStateAction<string>>;
+import React from 'react';
+
+export default function PasswordInput<T extends FieldValues>(props: {
+  registerName: Path<T>;
+  register: UseFormRegister<T>;
 }) {
   const [exibir, setExibir] = React.useState(true);
 
@@ -11,20 +14,16 @@ export default function PasswordInput(props: {
       <div className="py-2" x-data="{ show: true }">
         <div className="relative border-b-2 border-b-gray3  flex flex-row items-center">
           <input
+            {...props.register(props.registerName)}
             required
             placeholder="Senha"
-            onChange={(e) => props.setPassword(e.target.value)}
-            type={exibir ? "password" : "text"}
-            className="text-md block px-3 py-2  w-full 
+            type={exibir ? 'password' : 'text'}
+            className="text-md block px-3 py-2  w-full
                 focus:outline-none"
           />
 
           <div onClick={() => setExibir(!exibir)}>
-            {exibir ? (
-              <AiOutlineEye size={22} />
-            ) : (
-              <AiOutlineEyeInvisible size={22} />
-            )}
+            {exibir ? <AiOutlineEye size={22} /> : <AiOutlineEyeInvisible size={22} />}
           </div>
         </div>
       </div>
