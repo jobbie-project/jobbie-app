@@ -54,7 +54,11 @@ export default function Register() {
           <RouteButton
             type="submit"
             text="Continuar"
-            link={userType === "student" ? `/student` : `/company`}
+            link={
+              userType === "student"
+                ? `/registro/estudante`
+                : `/registro/empresa`
+            }
           />
         </div>
       </div>

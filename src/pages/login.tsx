@@ -43,7 +43,7 @@ export default function Login() {
                       type="checkbox"
                       className="accent-red peer relative left-0 h-4 w-4 shrink-0  rounded-sm border outline-none align-middle"
                     />
-                    <span className="py-2 px-1 text-sm text-gray-600 leading-snug align-middle">
+                    <span className="py-2 px-1 text-sm text-gray-600 leading-snug align-middle select-none">
                       {" "}
                       Lembrar de mim{" "}
                     </span>

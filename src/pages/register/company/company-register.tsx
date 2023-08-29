@@ -1,7 +1,6 @@
 import RegisterHeader from "@/components/register-header";
-import React from "react";
 
-export default function CreateAccount() {
+export default function CompanyRegister() {
   return (
     <div>
       <RegisterHeader />
