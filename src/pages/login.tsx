@@ -8,6 +8,10 @@ interface FormData {
 }
 
 export default function Login() {
+<<<<<<< Updated upstream
+=======
+  const [,setPassword] = useState("");
+>>>>>>> Stashed changes
   const navigate = useNavigate();
   const onSubmit = (data: FormData) => {
     navigate('/homepage');
