@@ -1,6 +1,8 @@
 import { Route, Routes } from "react-router-dom";
 import Login from "./pages/login";
 import Home from "./pages/homepage";
+import Register from "./pages/register/register";
+import StudentRegister from "./pages/register/student/student-register";
 
 export const App: React.FC = () => {
   return (
@@ -21,7 +23,9 @@ export const App: React.FC = () => {
         </Route>*/}
 
         {/* Public routes */}
-        <Route path={`/`} element={<Login />} />
+        <Route path={`/login`} element={<Login />} />
+        <Route path={`/registro`} element={<Register />} />
+        {/* <Route path={`/registro/estudante`} element={<StudentRegister />} /> */}
       </Routes>
     </>
   );

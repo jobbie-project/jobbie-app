@@ -1,15 +1,14 @@
 import { Logoblack } from "@/icons/logo-black";
-import Link from "next/link";
-import { useRouter } from "next/router";
 import { IoChevronBackOutline } from "react-icons/io5";
+import { useNavigate } from "react-router-dom";
 
 export default function RegisterHeader() {
-  const router = useRouter();
+  const navigate = useNavigate();
   return (
     <>
       <div className="w-full flex flex-row mt-16 justify-center">
         <div className="w-full ml-4 lg:ml-0 lg:w-1/2 mt-2">
-          <div onClick={() => router.back()}>
+          <div onClick={() => navigate(-1)}>
             <IoChevronBackOutline size={34} className="relative" />
           </div>
         </div>

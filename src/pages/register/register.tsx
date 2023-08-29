@@ -1,9 +1,8 @@
 import React from "react";
 import RegisterHeader from "@/components/register-header";
 import { RouteButton } from "@/components/route-button";
-import router from "next/router";
 
-export default function SelecaoUsuario() {
+export default function Register() {
   const [userType, setUserType] = React.useState<"student" | "company">();
 
   return (
@@ -55,11 +54,7 @@ export default function SelecaoUsuario() {
           <RouteButton
             type="submit"
             text="Continuar"
-            link={
-              userType === "student"
-                ? `${router.asPath}/student`
-                : `${router.asPath}/company`
-            }
+            link={userType === "student" ? `/student` : `/company`}
           />
         </div>
       </div>
