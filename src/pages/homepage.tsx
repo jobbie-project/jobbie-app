@@ -1,11 +1,11 @@
-import { Inter } from "next/font/google";
+// import { Inter } from "next/font/google";
 import { Header } from "@/components/header";
 import { SearchBar } from "@/components/searchbar";
 import { JobCardBig } from "@/components/job-card-big";
 import { JobCardMedium } from "@/components/card-medium";
 import { Job } from "@/interfaces/job";
 
-const inter = Inter({ subsets: ["latin"] });
+// const inter = Inter({ subsets: ["latin"] });
 
 const mockJob: Job = {
   title: "Desenvolvedor Front-end",
