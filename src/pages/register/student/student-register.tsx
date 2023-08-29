@@ -4,27 +4,21 @@ import RegisterHeader from "@/components/register-header";
 import { RouteButton } from "@/components/route-button";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-const navigate = useNavigate();
-const onSubmit = () => {
-  navigate("/verifica-email");
-};
 
 export default function StudentRegister() {
   const [password, setPassword] = useState("");
-
+  const navigate = useNavigate();
+  const onSubmit = () => {
+    navigate("/verifica-email");
+  };
   return (
     <div>
       <RegisterHeader />
       <form onSubmit={onSubmit}>
         <div className="max-w-full items-center p-5 flex flex-col min-h-screen mt-6">
           <div className="max-w-xs w-full">
-            <p className="text-black font-semibold text-xl mt-20">
-              Criar uma conta
-            </p>
-            <p className="mt-6">
-              Preencha com as informações que deseja utilizar para realizar
-              login no portal.
-            </p>
+            <p className="text-black font-semibold text-xl mt-20">Criar uma conta</p>
+            <p className="mt-6">Preencha com as informações que deseja utilizar para realizar login no portal.</p>
           </div>
           <form action="" className="w-full max-w-[336px]">
             <div className="mt-8 w-full">
@@ -51,11 +45,7 @@ export default function StudentRegister() {
             </div>
             <div className="mt-2">
               {" "}
-              <RouteButton
-                type="submit"
-                text="Continuar"
-                link={`/verifica-email`}
-              />
+              <RouteButton type="submit" text="Continuar" link={`/verifica-email`} />
             </div>
           </form>
         </div>
