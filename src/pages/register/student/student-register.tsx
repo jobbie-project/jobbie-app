@@ -28,7 +28,6 @@ export default function StudentRegister() {
 
   const onSubmit = (data: FormData) => {
     try {
-      console.log(data);
       if (!validate(data.email)) throw new Error('Utilize um email institucional da Fatec');
       if (!isPasswordValid) throw new Error('Senha muito fraca');
       navigate('/verifica-email');

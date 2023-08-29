@@ -7,11 +7,9 @@ interface PasswordStrengthMeterProps {
 }
 
 const PasswordStrengthMeter: React.FC<PasswordStrengthMeterProps> = ({password, onChange}) => {
-  console.log(password);
   const testResult = zxcvbn(password);
   const createPassLabel = () => {
     const textScore = ['Muito fraco', 'Fraco', 'Bom', 'Forte', 'Excelente'];
-    console.log(testResult.score >= 2);
     onChange(testResult.score >= 2);
     return textScore[testResult.score];
   };
