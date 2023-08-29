@@ -1,10 +1,12 @@
-import { Route, Routes } from "react-router-dom";
-import Login from "./pages/login";
-import Home from "./pages/homepage";
-import Register from "./pages/register/register";
-import StudentRegister from "./pages/register/student/student-register";
-import CompanyRegister from "./pages/register/company/company-register";
-import VerifyEmail from "./pages/register/student/verify-email";
+import {Route, Routes} from 'react-router-dom';
+import Login from './pages/login';
+import Home from './pages/homepage';
+import Register from './pages/register/register';
+import StudentRegister from './pages/register/student/student-register';
+import CompanyRegister from './pages/register/company/company-register';
+import VerifyEmail from './pages/register/student/verify-email';
+import 'react-toastify/dist/ReactToastify.css';
+import {ToastContainer} from 'react-toastify';
 
 export const App: React.FC = () => {
   return (
@@ -31,6 +33,7 @@ export const App: React.FC = () => {
         <Route path={`/registro/empresa`} element={<CompanyRegister />} />
         <Route path={`/verifica-email`} element={<VerifyEmail />} />
       </Routes>
+      <ToastContainer />
     </>
   );
 };

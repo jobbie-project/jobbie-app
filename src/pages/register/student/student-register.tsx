@@ -1,6 +1,8 @@
 import PasswordInput from '@/components/password';
 import PasswordStrengthMeter from '@/components/password-strength-meter';
 import RegisterHeader from '@/components/register-header';
+import {toastError} from '@/utils/toast-error';
+import {useState} from 'react';
 import {useForm} from 'react-hook-form';
 import {useNavigate} from 'react-router-dom';
 
@@ -11,28 +13,28 @@ interface FormData {
 }
 
 export default function StudentRegister() {
-  const {
-    register,
-    handleSubmit,
-    watch,
-    setError,
-    // clearErrors,
-    formState: {errors},
-  } = useForm<FormData>({
+  const {register, handleSubmit, watch} = useForm<FormData>({
     defaultValues: {
       name: '',
       email: '',
       password: '',
     },
   });
+  const [isPasswordValid, setIsPasswordValid] = useState(false);
   const navigate = useNavigate();
   const validate = (email: string) => {
     return email.split('@')[1] === 'fatec.sp.gov.br' ? true : false;
   };
-  console.log(errors);
+
   const onSubmit = (data: FormData) => {
-    console.log({...data});
-    navigate('/verifica-email');
+    try {
+      console.log(data);
+      if (!validate(data.email)) throw new Error('Utilize um email institucional da Fatec');
+      if (!isPasswordValid) throw new Error('Senha muito fraca');
+      navigate('/verifica-email');
+    } catch (error) {
+      toastError(error);
+    }
   };
 
   return (
@@ -55,27 +57,20 @@ export default function StudentRegister() {
             />
             <div className="mt-4 w-full">
               <input
-                {...register('email', {
-                  validate: value => validate(value) || 'Utilize um email institucional da Fatec',
-                })}
+                {...register('email')}
                 required
                 placeholder="Email Institucional"
                 type="email"
                 className="text-md block px-3 py-2 max-w-[336px] w-full
                 border-b-2 border-b-gray3 focus:outline-none bg-white"
               />
-              {errors.email && <p className="text-red text-sm">{errors.email.message}</p>}
             </div>
             <div className="py-2 w-full">
               <PasswordInput register={register} registerName="password" />
               <PasswordStrengthMeter
                 password={watch('password')}
-                onChange={(isValid: boolean) => {
-                  console.log(isValid, 'valid');
-                  !errors.password && !isValid && setError('password', {message: 'senha muito fraca kkk'});
-                }}
+                onChange={(isValid: boolean) => isValid !== isPasswordValid && setIsPasswordValid(isValid)}
               />
-              {errors.password && <p className="text-red text-sm">{errors.password.message}</p>}
             </div>
           </div>
           <div className="mt-2">
