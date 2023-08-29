@@ -2,9 +2,6 @@ import {Logoblack} from '@/icons/logo-black';
 import PasswordInput from '@/components/password';
 import {Link, useNavigate} from 'react-router-dom';
 import {useForm} from 'react-hook-form';
-import {toastError} from '@/utils/toast-error';
-import * as EmailValidator from 'email-validator';
-
 interface FormData {
   email: string;
   password: string;
@@ -13,12 +10,7 @@ interface FormData {
 export default function Login() {
   const navigate = useNavigate();
   const onSubmit = (data: FormData) => {
-    try {
-      if (!EmailValidator.validate(data.email)) throw new Error('Email inválido');
-      navigate('/homepage');
-    } catch (error) {
-      toastError(error);
-    }
+    navigate('/homepage');
   };
 
   const {register, handleSubmit} = useForm<FormData>({
