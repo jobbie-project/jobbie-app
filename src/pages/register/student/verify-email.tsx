@@ -16,7 +16,7 @@ export default function VerifyEmail() {
             <p className="text-black font-semibold text-xl mt-20">
               Verifique sua conta para continuar
             </p>
-            <p className="mt-6">
+            <p className="mt-6 ">
               Um link de ativação foi enviado para o endereço de email que você
               forneceu.
             </p>
