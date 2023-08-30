@@ -4,7 +4,7 @@ import Home from './pages/homepage';
 import Register from './pages/register/register';
 import StudentRegister from './pages/register/student/student-register';
 import CompanyRegister from './pages/register/company/company-register';
-import VerifyEmail from './pages/register/student/verify-email';
+import VerifyEmail from './pages/register/verify-email';
 import 'react-toastify/dist/ReactToastify.css';
 import {ToastContainer} from 'react-toastify';
 
