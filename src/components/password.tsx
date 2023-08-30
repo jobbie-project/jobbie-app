@@ -12,7 +12,7 @@ export default function PasswordInput<T extends FieldValues>(props: {
   return (
     <>
       <div className="py-2" x-data="{ show: true }">
-        <div className="relative border-b-2 border-b-gray3  flex flex-row items-center">
+        <div className="relative border-b-2 border-b-gray1  flex flex-row items-center">
           <input
             {...props.register(props.registerName)}
             required

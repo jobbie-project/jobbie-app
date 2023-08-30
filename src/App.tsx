@@ -7,6 +7,8 @@ import CompanyRegister from './pages/register/company/company-register';
 import VerifyEmail from './pages/register/verify-email';
 import 'react-toastify/dist/ReactToastify.css';
 import {ToastContainer} from 'react-toastify';
+import VerifiedEmail from './pages/register/verified-email';
+import StudentRegisterStep1 from './pages/profile/student/student-profile-step1';
 
 export const App: React.FC = () => {
   return (
@@ -32,6 +34,8 @@ export const App: React.FC = () => {
         <Route path={`/registro/estudante`} element={<StudentRegister />} />
         <Route path={`/registro/empresa`} element={<CompanyRegister />} />
         <Route path={`/verifica-email`} element={<VerifyEmail />} />
+        <Route path={`/email-verificado`} element={<VerifiedEmail />} />
+        <Route path={`/registro/estudante/passo-1`} element={<StudentRegisterStep1 />} />
       </Routes>
       <ToastContainer />
     </>

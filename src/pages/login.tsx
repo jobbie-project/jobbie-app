@@ -22,7 +22,7 @@ export default function Login() {
 
   return (
     <>
-      <div className="container max-w-full mx-auto py-24 px-6 font-sans">
+      <div className="max-h-[100vh] container max-w-full mx-auto py-24 px-6 font-sans">
         <div className="max-w-sm mx-auto px-6 relative flex flex-wrap mt-6">
           <div className="mt-6">
             <div className="mb-5 flex justify-center">
@@ -39,7 +39,7 @@ export default function Login() {
                     placeholder="Email"
                     type="email"
                     className="text-md block px-3 py-2  w-full
-                bg-white border-b-2 border-b-gray3 focus:outline-none"
+                bg-white border-b-2 border-b-gray1 focus:outline-none"
                   />
                 </div>
                 <div className="py-2">
@@ -71,7 +71,7 @@ export default function Login() {
                   </button>
                   <span className="text-warmGray-400 font-normal flex flex-row mt-8 justify-center">
                     Não possui conta?
-                    <Link className="ml-2 text-black font-semibold" to="/registro">
+                    <Link className="ml-1 text-black font-semibold" to="/registro">
                       Cadastre-se
                     </Link>
                   </span>
