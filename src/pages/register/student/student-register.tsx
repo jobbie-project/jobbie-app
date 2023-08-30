@@ -42,7 +42,7 @@ export default function StudentRegister() {
       <div className="max-w-full items-center p-5 flex flex-col min-h-screen mt-6">
         <form onSubmit={handleSubmit(onSubmit)} className="w-full max-w-[336px]">
           <div className="max-w-xs w-full">
-            <p className="text-black font-semibold text-xl mt-20">Criar uma conta</p>
+            <p className="text-black font-semibold text-xl mt-20 select-none">Criar uma conta</p>
             <p className="mt-6">Preencha com as informações que deseja utilizar para realizar login no portal.</p>
           </div>
           <div className="mt-8 w-full">
@@ -51,8 +51,8 @@ export default function StudentRegister() {
               required
               placeholder="Nome"
               type="string"
-              className="text-md block px-3 py-2 max-w-[336px] w-full
-                border-b-2 border-b-gray3 focus:outline-none bg-white"
+              className="text-sm block px-3 py-2 max-w-[336px] w-full
+                border-b-2 border-b-gray1 focus:outline-none bg-white"
             />
             <div className="mt-4 w-full">
               <input
@@ -60,8 +60,8 @@ export default function StudentRegister() {
                 required
                 placeholder="Email Institucional"
                 type="email"
-                className="text-md block px-3 py-2 max-w-[336px] w-full
-                border-b-2 border-b-gray3 focus:outline-none bg-white"
+                className="text-sm block px-3 py-2 max-w-[336px] w-full
+                border-b-2 border-b-gray1 focus:outline-none bg-white"
               />
             </div>
             <div className="py-2 w-full">

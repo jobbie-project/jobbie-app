@@ -18,7 +18,7 @@ export default function PasswordInput<T extends FieldValues>(props: {
             required
             placeholder="Senha"
             type={exibir ? 'password' : 'text'}
-            className="text-md block px-3 py-2  w-full
+            className="text-sm block px-3 py-2  w-full
                 focus:outline-none"
           />
 

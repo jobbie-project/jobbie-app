@@ -28,7 +28,7 @@ export default function Login() {
             <div className="mb-5 flex justify-center">
               <Logoblack width={'100'} height={'50'} />
             </div>
-            <div className="text-center font-regular text-black">Continue com sua conta Jobbie.</div>
+            <div className="text-center font-regular select-none text-black">Continue com sua conta Jobbie.</div>
 
             <form onSubmit={handleSubmit(onSubmit)}>
               <div className="mt-8 mx-auto max-w-lg">
@@ -38,7 +38,7 @@ export default function Login() {
                     required
                     placeholder="Email"
                     type="email"
-                    className="text-md block px-3 py-2  w-full
+                    className="text-sm block px-3 py-2  w-full
                 bg-white border-b-2 border-b-gray1 focus:outline-none"
                   />
                 </div>
