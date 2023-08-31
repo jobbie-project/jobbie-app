@@ -26,12 +26,11 @@ export default function StudentRegisterStep1() {
 
   return (
     <div>
-      <div className="flex flex-col bg-slate-400"></div>
       <RegisterHeader showProgress={{progress: 1, maxSteps: 8}} />
-      <div className="max-w-full items-center p-5 flex flex-col min-h-screen">
+      <div className="max-w-full items-center flex flex-col min-h-screen">
         <form onSubmit={handleSubmit(onSubmit)} className="w-full max-w-[336px]">
           <div className="max-w-xs w-full">
-            <p className="text-black font-semibold text-xl mt-20 select-none">Qual é o seu nome?</p>
+            <p className="text-black font-semibold text-xl mt-10 select-none">Qual é o seu nome?</p>
           </div>
           <div className="mt-8 w-full">
             <GeneralInput register={register} registerName="name" label="Nome completo" />

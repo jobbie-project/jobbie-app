@@ -24,7 +24,10 @@ export default function RegisterHeader(props: RegisterHeaderProps) {
           <Logoblack width={'100'} height={'50'} />
         </div>
         {props.showProgress && (
-          <div className="w-full flex items-center justify-center">
+          <div className="w-full flex flex-col items-center justify-center">
+            <div className="text-sm my-4 text-gray select-none">
+              Complete seu perfil para que ele seja visualizado pelas empresas.
+            </div>
             <ProgressBar actualStep={props.showProgress.progress} maxSteps={props.showProgress.maxSteps} />
           </div>
         )}

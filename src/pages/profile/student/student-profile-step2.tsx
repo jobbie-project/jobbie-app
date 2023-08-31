@@ -35,11 +35,11 @@ export default function StudentRegisterStep2() {
 
   return (
     <div>
-      <RegisterHeader />
-      <div className="max-w-full items-center p-5 flex flex-col min-h-screen mt-6">
+      <RegisterHeader showProgress={{progress: 2, maxSteps: 8}} />
+      <div className="max-w-full items-center p-5 flex flex-col min-h-screen">
         <form onSubmit={handleSubmit(onSubmit)} className="w-full max-w-[336px]">
           <div className="max-w-xs w-full">
-            <p className="text-black font-semibold text-xl select-none mt-20">Qual sua localização?</p>
+            <p className="text-black font-semibold text-xl select-none mt-10">Qual sua localização?</p>
           </div>
           <div className="mt-8 w-full">
             <GeneralInput register={register} registerName="endereco" label="Endereço" />
