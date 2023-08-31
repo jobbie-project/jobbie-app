@@ -34,7 +34,7 @@ export default function StudentRegisterStep1() {
           <div className="mt-8 w-full">
             <GeneralInput register={register} registerName="name" label="Nome completo" />
           </div>
-          <div className="mt-12 flex justify-center">
+          <div className="mt-8 flex justify-center">
             <ButtonHover text={'Continuar'} type={'submit'} className="font-semibold text-lg after:bg-red" />
           </div>
         </form>

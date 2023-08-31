@@ -1,4 +1,5 @@
 import {ButtonHover} from '@/components/button-hover-animation';
+import GeneralInput from '@/components/general-input';
 import RegisterHeader from '@/components/register-header';
 import {toastError} from '@/utils/toast-error';
 import {useState} from 'react';
@@ -41,41 +42,11 @@ export default function StudentRegisterStep2() {
             <p className="text-black font-semibold text-xl select-none mt-20">Qual sua localização?</p>
           </div>
           <div className="mt-8 w-full">
-            <div className="py-2 relative">
-              <input
-                {...register('endereco')}
-                placeholder=""
-                type="text"
-                className="peer h-8 border-b-2 w-full border-gray-300 text-gray-900 focus:outline-none focus:border-red"
-              />
-              <label
-                htmlFor="endereco"
-                className="absolute cursor-text left-0 -top-3.5 select-none text-gray-600 text-sm transition-all peer-placeholder-shown:text-sm peer-placeholder-shown:text-gray-400 peer-placeholder-shown:top-2 peer-focus:-top-3.5 peer-focus:text-gray-600 peer-focus:text-sm">
-                Endereço
-              </label>
-            </div>
-            <div className="mt-6 w-full">
-              <input
-                {...register('cidade')}
-                required
-                placeholder="Cidade, Estado"
-                type="string"
-                className="text-sm block px-3 py-2 max-w-[336px] w-full
-                border-b-2 border-b-gray1 focus:outline-none bg-white"
-              />
-            </div>
-            <div className="mt-6 w-full">
-              <input
-                {...register('cep')}
-                required
-                placeholder="Código postal"
-                type="string"
-                className="text-sm block px-3 py-2 max-w-[336px] w-full
-                border-b-2 border-b-gray1 focus:outline-none bg-white"
-              />
-            </div>
+            <GeneralInput register={register} registerName="endereco" label="Endereço" />
+            <GeneralInput register={register} registerName="cidade" label="Cidade, Estado" required />
+            <GeneralInput register={register} registerName="cep" label="Código postal" />
           </div>
-          <div className="mt-12 flex justify-center">
+          <div className="mt-8 flex justify-center">
             <ButtonHover text={'Continuar'} type={'button'} className="font-semibold text-lg after:bg-red" />
           </div>
         </form>

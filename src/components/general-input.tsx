@@ -1,17 +1,21 @@
 import {FieldValues, Path, UseFormRegister} from 'react-hook-form';
 
 export default function GeneralInput<T extends FieldValues>(props: {
-  registerName: Path<T>;
-  register: UseFormRegister<T>;
+  registerName?: Path<T>;
+  register?: UseFormRegister<T>;
   className?: string;
   label: string;
+  required?: boolean;
+  callback?: (o: any) => any;
 }) {
+  const inputProps = props.register && props.registerName && props.register(props.registerName);
   return (
     <>
       <div className="py-2" x-data="{ show: true }">
         <div className={`relative flex items-center ${props.className}`}>
           <input
-            {...props.register(props.registerName)}
+            onChange={props.callback}
+            {...inputProps}
             id={`${props.registerName}`}
             placeholder=""
             type="text"
@@ -21,6 +25,7 @@ export default function GeneralInput<T extends FieldValues>(props: {
             htmlFor={`${props.registerName}`}
             className="absolute cursor-text left-0 -top-3.5 select-none text-gray-600 text-sm transition-all peer-placeholder-shown:text-sm peer-placeholder-shown:text-gray-400 peer-placeholder-shown:top-2 peer-focus:-top-3.5 peer-focus:text-gray-600 peer-focus:text-sm">
             {props.label}
+            {props.required && <span className="text-red font-bold">*</span>}
           </label>
         </div>
       </div>

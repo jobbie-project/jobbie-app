@@ -1,4 +1,5 @@
 import {GeneralButton} from '@/components/general-button';
+import GeneralInput from '@/components/general-input';
 import PasswordInput from '@/components/password';
 import PasswordStrengthMeter from '@/components/password-strength-meter';
 import RegisterHeader from '@/components/register-header';
@@ -47,35 +48,9 @@ export default function StudentRegister() {
             <p className="text-black font-semibold text-xl mt-20 select-none">Criar uma conta</p>
             <p className="mt-6">Preencha com as informações que deseja utilizar para realizar login no portal.</p>
           </div>
-          <div className="mt-8 w-full">
-            <div className="py-2 relative">
-              <input
-                {...register('name')}
-                placeholder=""
-                type="text"
-                className="peer h-8 border-b-2 w-full border-gray1 text-gray-900 focus:outline-none focus:border-red"
-              />
-              <label
-                htmlFor="name"
-                className="absolute cursor-text left-0 -top-3.5 select-none text-gray-600 text-sm transition-all peer-placeholder-shown:text-sm peer-placeholder-shown:text-gray-400 peer-placeholder-shown:top-2 peer-focus:-top-3.5 peer-focus:text-gray-600 peer-focus:text-sm">
-                Nome completo
-              </label>
-            </div>
-            <div className="mt-4 w-full">
-              <div className="py-2 relative">
-                <input
-                  {...register('email')}
-                  placeholder=""
-                  type="string"
-                  className="peer h-8 border-b-2 w-full border-gray1 text-gray-900 focus:outline-none focus:border-red"
-                />
-                <label
-                  htmlFor="email"
-                  className="absolute cursor-text left-0 -top-3.5 select-none text-gray-600 text-sm transition-all peer-placeholder-shown:text-sm peer-placeholder-shown:text-gray-400 peer-placeholder-shown:top-2 peer-focus:-top-3.5 peer-focus:text-gray-600 peer-focus:text-sm">
-                  Email
-                </label>
-              </div>
-            </div>
+          <div className="mt-6 w-full">
+            <GeneralInput register={register} registerName="name" label="Nome completo" />
+            <GeneralInput register={register} registerName="email" label="Email" />
             <div className="py-2 w-full">
               <PasswordInput text="Senha" register={register} registerName="password" />
               <PasswordStrengthMeter
