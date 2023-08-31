@@ -1,5 +1,6 @@
 import {ButtonHover} from '@/components/button-hover-animation';
 import GeneralInput from '@/components/general-input';
+import {ProgressBar} from '@/components/progress-bar';
 import RegisterHeader from '@/components/register-header';
 import {toastError} from '@/utils/toast-error';
 import {useForm} from 'react-hook-form';
@@ -25,8 +26,9 @@ export default function StudentRegisterStep1() {
 
   return (
     <div>
-      <RegisterHeader />
-      <div className="max-w-full items-center p-5 flex flex-col min-h-screen mt-6">
+      <div className="flex flex-col bg-slate-400"></div>
+      <RegisterHeader showProgress={{progress: 1, maxSteps: 8}} />
+      <div className="max-w-full items-center p-5 flex flex-col min-h-screen">
         <form onSubmit={handleSubmit(onSubmit)} className="w-full max-w-[336px]">
           <div className="max-w-xs w-full">
             <p className="text-black font-semibold text-xl mt-20 select-none">Qual é o seu nome?</p>

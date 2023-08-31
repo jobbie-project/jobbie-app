@@ -1,20 +1,33 @@
-import { Logoblack } from "@/icons/logo-black";
-import { IoChevronBackOutline } from "react-icons/io5";
-import { useNavigate } from "react-router-dom";
+import {Logoblack} from '@/icons/logo-black';
+import {IoChevronBackOutline} from 'react-icons/io5';
+import {useNavigate} from 'react-router-dom';
+import {ProgressBar} from './progress-bar';
 
-export default function RegisterHeader() {
+interface RegisterHeaderProps {
+  showProgress?: {
+    progress: number;
+    maxSteps: number;
+  };
+}
+
+export default function RegisterHeader(props: RegisterHeaderProps) {
   const navigate = useNavigate();
   return (
     <>
-      <div className="w-full flex flex-row mt-16 justify-center">
-        <div className="w-full ml-4 lg:ml-0 lg:w-1/2 mt-2">
-          <div onClick={() => navigate(-1)}>
-            <IoChevronBackOutline size={34} className="relative" />
+      <div className="w-full flex flex-col mt-16 items-center ">
+        <div className="w-full pl-4 lg:pl-0 lg:w-[640px] mt-2">
+          <div onClick={() => navigate(-1)} className="cursor-pointer w-min">
+            <IoChevronBackOutline size={34} />
           </div>
         </div>
-        <div className="absolute flex flex-row items-center justify-between mt-20">
-          <Logoblack width={"100"} height={"50"} />
+        <div className="flex flex-row items-center justify-center">
+          <Logoblack width={'100'} height={'50'} />
         </div>
+        {props.showProgress && (
+          <div className="w-full flex items-center justify-center">
+            <ProgressBar actualStep={props.showProgress.progress} maxSteps={props.showProgress.maxSteps} />
+          </div>
+        )}
       </div>
     </>
   );

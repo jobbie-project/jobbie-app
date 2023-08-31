@@ -26,7 +26,7 @@ export default function ChangePassword() {
     try {
       if (data.password !== data.passwordMatch) throw new Error('As senhas não coincidem. Tente novamente.');
       if (!isPasswordValid) throw new Error('Senha muito fraca');
-      navigate('/recuperacao-de-conta/email-verificado');
+      navigate('/recuperacao-de-conta/senha-alterada');
     } catch (error) {
       toastError(error);
     }
