@@ -1,10 +1,11 @@
+import {GeneralButton} from '@/components/general-button';
 import PasswordInput from '@/components/password';
 import PasswordStrengthMeter from '@/components/password-strength-meter';
 import RegisterHeader from '@/components/register-header';
 import {toastError} from '@/utils/toast-error';
 import {useState} from 'react';
 import {useForm} from 'react-hook-form';
-import {useNavigate} from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 
 interface FormData {
   name: string;
@@ -70,16 +71,21 @@ export default function StudentRegister() {
                 password={watch('password')}
                 onChange={(isValid: boolean) => isValid !== isPasswordValid && setIsPasswordValid(isValid)}
               />
+              <div className="mt-4 text-xs text-gray3">
+                Senhas devem ter pelo menos: 6 caracteres com combinações de letras e números.
+              </div>
             </div>
           </div>
           <div className="mt-2">
-            <button
-              type="submit"
-              className="mt-6 max-w-sm px-6 text-lg bg-red font-normal w-full text-white rounded py-3 block shadow-xl">
-              Continuar
-            </button>
+            <GeneralButton text={'Continuar'} type={'submit'} />
           </div>
         </form>
+        <span className="text-warmGray-400 font-normal flex flex-row mt-8 justify-center">
+          Já possui conta?
+          <Link className="ml-1 text-black font-semibold" to="/entrar">
+            Entrar
+          </Link>
+        </span>
       </div>
     </div>
   );

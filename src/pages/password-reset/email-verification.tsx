@@ -4,7 +4,7 @@ import AnimationEmail from '../../assets/sent-email.json';
 import {toast} from 'react-toastify';
 import {useState} from 'react';
 
-export default function VerifyEmail() {
+export default function EmailVerification() {
   const [showResend, setShowButton] = useState(false);
   setTimeout(() => setShowButton(true), 2000);
 

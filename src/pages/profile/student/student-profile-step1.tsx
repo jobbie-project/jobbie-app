@@ -23,10 +23,11 @@ export default function StudentRegisterStep1() {
 
   const onSubmit = (data: FormData) => {
     try {
-      if (!data.name) throw new Error();
-      navigate('/');
+      if (!data.name) throw new Error('Insira seu primeiro nome.');
+      if (!data.lastname) throw new Error('Insira seu sobrenome.');
+      navigate('/registro/estudante/passo-2');
     } catch (error) {
-      toast.warn('Insira seu nome.');
+      toastError(error);
     }
   };
 
@@ -41,7 +42,6 @@ export default function StudentRegisterStep1() {
           <div className="mt-8 w-full">
             <input
               {...register('name')}
-              required
               placeholder="Nome"
               type="string"
               className="text-sm block px-3 py-2 max-w-[336px] w-full
@@ -50,7 +50,6 @@ export default function StudentRegisterStep1() {
             <div className="mt-6 w-full">
               <input
                 {...register('lastname')}
-                required
                 placeholder="Sobrenome"
                 type="string"
                 className="text-sm block px-3 py-2 max-w-[336px] w-full
@@ -59,12 +58,7 @@ export default function StudentRegisterStep1() {
             </div>
           </div>
           <div className="mt-12 flex justify-center">
-            <ButtonHover
-              text={'Continuar'}
-              link={'/registro/estudante/passo-2'}
-              type={'button'}
-              className="font-semibold text-lg after:bg-red"
-            />
+            <ButtonHover text={'Continuar'} type={'submit'} className="font-semibold text-lg after:bg-red" />
           </div>
         </form>
       </div>

@@ -5,14 +5,14 @@ import {ButtonHover} from '@/components/button-hover-animation';
 import {useState} from 'react';
 import {useNavigate} from 'react-router-dom';
 
-export default function VerifiedEmail() {
+export default function PasswordChanged() {
   const [showButton, setShowButton] = useState(false);
   setTimeout(() => setShowButton(true), 3500);
 
   const navigate = useNavigate();
 
   const onClick = () => {
-    navigate('/registro/estudante/passo-1');
+    navigate('/entrar');
   };
 
   return (
@@ -24,8 +24,8 @@ export default function VerifiedEmail() {
       </div>
       <div className="items-center p-5 flex flex-col min-h-screen">
         <div className="max-w-xs w-full">
-          <p className="text-black font-semibold text-xl mt-4">Sua conta foi verificada.</p>
-          <p className="mt-6 text-sm flex">Parabéns! continue para completar seu perfil.</p>
+          <p className="text-black font-semibold text-xl mt-4">Sua senha foi alterada.</p>
+          <p className="mt-6 text-sm flex">Sua conta foi recuperada e você já pode entrar.</p>
           <div className="flex justify-center">
             <Lottie
               animationData={AnimationVerified}

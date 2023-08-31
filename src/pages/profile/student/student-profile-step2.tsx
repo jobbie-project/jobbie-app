@@ -71,12 +71,7 @@ export default function StudentRegisterStep2() {
             </div>
           </div>
           <div className="mt-12 flex justify-center">
-            <ButtonHover
-              text={'Continuar'}
-              link={'/registro/estudante/passo-3'}
-              type={'button'}
-              className="font-semibold text-lg after:bg-red"
-            />
+            <ButtonHover text={'Continuar'} type={'button'} className="font-semibold text-lg after:bg-red" />
           </div>
         </form>
       </div>

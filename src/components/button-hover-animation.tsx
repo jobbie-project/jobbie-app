@@ -1,16 +1,15 @@
-import {Link} from 'react-router-dom';
-
 interface ButtonHoverProps {
   text: string;
-  link: string;
   type: 'button' | 'submit' | 'reset';
   className?: string;
+  callback?: () => void;
 }
 
 export function ButtonHover(props: ButtonHoverProps) {
   return (
-    <Link className="w-40 justify-center text-center flex flex-row btn group place-content " to={props.link}>
+    <div className="w-40 justify-center text-center flex flex-row btn group place-content ">
       <button
+        onClick={props.callback}
         type={props.type}
         className={`bg-transparent p-2 px-6 text-lightblack relative pr-4 pb-1 after:transition-transform after:duration-500 after:ease-out after:absolute after:bottom-0 after:left-0 after:block after:h-[2px] after:w-full after:origin-bottom-right after:scale-x-0 after:bg-lightgreen2 after:content-[''] after:group-hover:origin-bottom-left after:group-hover:scale-x-100 ${props.className}`}>
         {props.text}
@@ -28,6 +27,6 @@ export function ButtonHover(props: ButtonHoverProps) {
           data-name="Path 10"
           id="Path_10"></path>
       </svg>
-    </Link>
+    </div>
   );
 }

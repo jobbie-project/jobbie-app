@@ -2,6 +2,10 @@ import {Logoblack} from '@/icons/logo-black';
 import PasswordInput from '@/components/password';
 import {Link, useNavigate} from 'react-router-dom';
 import {useForm} from 'react-hook-form';
+import {toastError} from '@/utils/toast-error';
+import {GeneralButton} from '@/components/general-button';
+import * as EmailValidator from 'email-validator';
+
 interface FormData {
   email: string;
   password: string;
@@ -9,8 +13,16 @@ interface FormData {
 
 export default function Login() {
   const navigate = useNavigate();
+
   const onSubmit = (data: FormData) => {
-    navigate('/homepage');
+    try {
+      if (!data.email) throw new Error('Insira seu email.');
+      if (!EmailValidator.validate(data.email)) throw new Error('Insira um email válido');
+      if (!data.password) throw new Error('Insira sua senha.');
+      navigate('/inicio');
+    } catch (error) {
+      toastError(error);
+    }
   };
 
   const {register, handleSubmit} = useForm<FormData>({
@@ -32,18 +44,21 @@ export default function Login() {
 
             <form onSubmit={handleSubmit(onSubmit)}>
               <div className="mt-8 mx-auto max-w-lg">
-                <div className="py-2">
+                <div className="py-2 relative">
                   <input
                     {...register('email')}
-                    required
-                    placeholder="Email"
-                    type="email"
-                    className="text-sm block px-3 py-2  w-full
-                bg-white border-b-2 border-b-gray1 focus:outline-none"
+                    placeholder=""
+                    type="text"
+                    className="peer h-10 border-b-2 w-[336px] border-gray-300 text-gray-900 focus:outline-none focus:border-red"
                   />
+                  <label
+                    htmlFor="email"
+                    className="absolute cursor-text left-0 -top-3.5 select-none text-gray-600 text-sm transition-all peer-placeholder-shown:text-sm peer-placeholder-shown:text-gray-400 peer-placeholder-shown:top-2 peer-focus:-top-3.5 peer-focus:text-gray-600 peer-focus:text-sm">
+                    Email
+                  </label>
                 </div>
                 <div className="py-2">
-                  <PasswordInput register={register} registerName="password" />
+                  <PasswordInput register={register} text="Senha" registerName="password" />
                 </div>
 
                 <div className="flex justify-between mt-6">
@@ -59,16 +74,12 @@ export default function Login() {
                   </label>
                   <label className="block text-gray-500 font-semibold my-2">
                     <span className="cursor-pointer tracking-tighter text-black font-semibold ">
-                      <a href={'/forget-password'}>Esqueceu sua senha?</a>
+                      <a href={'/recuperacao-de-conta'}>Esqueceu sua senha?</a>
                     </span>
                   </label>
                 </div>
                 <div>
-                  <button
-                    type={'submit'}
-                    className="mt-6 max-w-sm px-6 text-lg bg-red font-normal w-full text-white rounded py-3 block shadow-xl">
-                    Entrar
-                  </button>
+                  <GeneralButton text={'Entrar'} type={'submit'} />
                   <span className="text-warmGray-400 font-normal flex flex-row mt-8 justify-center">
                     Não possui conta?
                     <Link className="ml-1 text-black font-semibold" to="/registro">
@@ -87,9 +98,8 @@ export default function Login() {
                 </a>{' '}
                 e a{' '}
                 <a className="text-black font-semibold inline-block" href="">
-                  Politica de Privacidade
+                  Politica de Privacidade.
                 </a>
-                .
               </span>
             </div>
           </div>

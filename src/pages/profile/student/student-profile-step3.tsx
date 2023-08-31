@@ -25,7 +25,7 @@ export default function StudentRegisterStep3() {
   const onSubmit = (data: FormData) => {
     try {
       if (!data.ciclo) throw new Error();
-      navigate('/');
+      navigate('/registro/estudante/passo-4');
     } catch (error) {
       toast.warn('É necessário informar o ciclo atual.');
     }
@@ -40,59 +40,42 @@ export default function StudentRegisterStep3() {
             <p className="text-black font-semibold text-lg select-none mt-20">Em qual instituição Fatec você estuda?</p>
           </div>
           <DropdownSelection className="mt-4 bg-lightgray1" />
-          <div className="w-full relative mt-8">
-            <input
-              required
-              {...register('ciclo')}
-              type="string"
-              placeholder="Ciclo"
-              className="peer h-5 text-sm w-36 border-b-2 border-b-gray1 focus:outline-none placeholder-transparent"
-            />
-            <label
-              htmlFor="ciclo"
-              className="absolute h-10 left-0 -top-3.5 text-gray-600 text-sm transition-all peer-placeholder-shown:text-sm peer-placeholder-shown:text-gray-400 peer-placeholder-shown:top-0 peer-focus:-top-3.5 peer-focus:text-gray-600 peer-focus:text-sm">
-              Ciclo
-            </label>
-            <input
-              required
-              {...register('dt_inicio')}
-              type="date"
-              placeholder="Data de ínicio"
-              className="ml-12 peer h-5 text-sm w-36 border-b-2 border-b-gray1 focus:outline-none placeholder-transparent"
-            />
-            <label
-              htmlFor="dt_inicio"
-              className="absolute h-10 left-45 -top-3.5 text-gray-600 text-sm transition-all peer-placeholder-shown:text-sm peer-placeholder-shown:text-gray-400 peer-placeholder-shown:top-0 peer-focus:-top-3.5 peer-focus:text-gray-600 peer-focus:text-sm">
-              Data de ínicio
-            </label>
-          </div>
-          {/* <div className="mt-8 inline-flex align-center">
-            <input
-              {...register('ciclo')}
-              required
-              placeholder="Ciclo"
-              type="string"
-              className="text-sm block max-w-[336px] w-full
-                border-b-2 border-b-gray1 focus:outline-none bg-white"
-            />
-            <div className="mt-8 inline-flex align-center">
+          <div className="w-full inline-flex mt-8">
+            <div className="relative">
               <input
-                {...register('dt_inicio')}
                 required
-                placeholder="Data de ínicio"
-                type="string"
-                className="text-sm block max-w-[336px] w-full
-                border-b-2 border-b-gray1 focus:outline-none bg-white"
+                {...register('ciclo')}
+                id="ciclo"
+                name="ciclo"
+                type="text"
+                className="peer h-10 w-36 border-b-2 border-gray-300 text-gray-900  focus:outline-none focus:border-red"
+                placeholder=""
               />
+              <label
+                htmlFor="ciclo"
+                className="absolute left-0 -top-3.5 select-none text-gray-600 text-sm transition-all peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-placeholder-shown:top-2 peer-focus:-top-3.5 peer-focus:text-gray-600 peer-focus:text-sm">
+                Ciclo
+              </label>
             </div>
-          </div> */}
+            <div className="relative">
+              <input
+                required
+                {...register('dt_inicio')}
+                id="dt_inicio"
+                type="text"
+                name="dt_inicio"
+                className="peer h-10 ml-12 w-36 border-b-2 select-none border-gray-300 text-gray-900 placeholder-transparent focus:outline-none focus:border-red"
+                placeholder=""
+              />
+              <label
+                htmlFor="dt_inicio"
+                className="absolute left-12 -top-3.5 text-gray-600 text-sm transition-all peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-placeholder-shown:top-2 peer-focus:-top-3.5 peer-focus:text-gray-600 peer-focus:text-sm">
+                Data de ínicio
+              </label>
+            </div>
+          </div>
           <div className="mt-12 flex justify-center">
-            <ButtonHover
-              text={'Continuar'}
-              link={'/registro/estudante/passo-2'}
-              type={'button'}
-              className="font-semibold text-lg after:bg-red"
-            />
+            <ButtonHover text={'Continuar'} type={'submit'} className="font-semibold text-base after:bg-red" />
           </div>
         </form>
       </div>
