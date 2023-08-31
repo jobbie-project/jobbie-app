@@ -5,24 +5,15 @@ interface ProgressBarProps {
 
 export function ProgressBar(props: ProgressBarProps) {
   return (
-    <>
-      {' '}
-      <div className="w-full max-w-[402px] flex flex-row" style={{height: '6px'}}>
-        {Array(props.maxSteps)
-          .fill(0)
-          .map((_, index) => (
-            <div
-              key={index}
-              style={{
-                width: `${100 / props.maxSteps}%`,
-                height: '6px',
-                background: props.actualStep > index ? '#B20000' : '#E5E7EB',
-                borderRadius: '8px',
-              }}
-              className={`${index === 0 && 'rounded-l-lg'} ${index + 1 === props.maxSteps && 'rounded-r-lg'}`}
-            />
-          ))}
-      </div>
-    </>
+    <div className="w-full max-w-[408px] rounded-full flex flex-row bg-[#E5E7EB]" style={{height: '6px'}}>
+      <div
+        style={{
+          width: `${(100 / props.maxSteps) * props.actualStep}%`,
+          height: '6px',
+          background: '#B20000',
+        }}
+        className="rounded-full"
+      />
+    </div>
   );
 }
