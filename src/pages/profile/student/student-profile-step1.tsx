@@ -1,30 +1,22 @@
 import {ButtonHover} from '@/components/button-hover-animation';
+import GeneralInput from '@/components/general-input';
 import RegisterHeader from '@/components/register-header';
 import {toastError} from '@/utils/toast-error';
-import {useState} from 'react';
 import {useForm} from 'react-hook-form';
 import {useNavigate} from 'react-router-dom';
-import {toast} from 'react-toastify';
 
 interface FormData {
   name: string;
-  lastname: string;
 }
 
 export default function StudentRegisterStep1() {
-  const {register, handleSubmit} = useForm<FormData>({
-    defaultValues: {
-      name: '',
-      lastname: '',
-    },
-  });
+  const {register, handleSubmit} = useForm<FormData>();
 
   const navigate = useNavigate();
 
   const onSubmit = (data: FormData) => {
     try {
-      if (!data.name) throw new Error('Insira seu primeiro nome.');
-      if (!data.lastname) throw new Error('Insira seu sobrenome.');
+      if (!data.name) throw new Error('Insira seu nome para continuar.');
       navigate('/registro/estudante/passo-2');
     } catch (error) {
       toastError(error);
@@ -40,22 +32,7 @@ export default function StudentRegisterStep1() {
             <p className="text-black font-semibold text-xl mt-20 select-none">Qual é o seu nome?</p>
           </div>
           <div className="mt-8 w-full">
-            <input
-              {...register('name')}
-              placeholder="Nome"
-              type="string"
-              className="text-sm block px-3 py-2 max-w-[336px] w-full
-                border-b-2 border-b-gray1 focus:outline-none bg-white"
-            />
-            <div className="mt-6 w-full">
-              <input
-                {...register('lastname')}
-                placeholder="Sobrenome"
-                type="string"
-                className="text-sm block px-3 py-2 max-w-[336px] w-full
-                border-b-2 border-b-gray1 focus:outline-none bg-white"
-              />
-            </div>
+            <GeneralInput register={register} registerName="name" label="Nome completo" />
           </div>
           <div className="mt-12 flex justify-center">
             <ButtonHover text={'Continuar'} type={'submit'} className="font-semibold text-lg after:bg-red" />

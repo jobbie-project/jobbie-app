@@ -5,6 +5,7 @@ import {useForm} from 'react-hook-form';
 import {toastError} from '@/utils/toast-error';
 import {GeneralButton} from '@/components/general-button';
 import * as EmailValidator from 'email-validator';
+import GeneralInput from '@/components/general-input';
 
 interface FormData {
   email: string;
@@ -34,7 +35,7 @@ export default function Login() {
 
   return (
     <>
-      <div className="max-h-[100vh] container max-w-full mx-auto py-24 px-6 font-sans">
+      <div className="max-h-[100vh] container flex justify-center max-w-full mx-auto py-24 px-6 font-sans">
         <div className="max-w-sm mx-auto px-6 relative flex flex-wrap mt-6">
           <div className="mt-6">
             <div className="mb-5 flex justify-center">
@@ -44,19 +45,7 @@ export default function Login() {
 
             <form onSubmit={handleSubmit(onSubmit)}>
               <div className="mt-8 mx-auto max-w-lg">
-                <div className="py-2 relative">
-                  <input
-                    {...register('email')}
-                    placeholder=""
-                    type="text"
-                    className="peer h-10 border-b-2 w-[336px] border-gray-300 text-gray-900 focus:outline-none focus:border-red"
-                  />
-                  <label
-                    htmlFor="email"
-                    className="absolute cursor-text left-0 -top-3.5 select-none text-gray-600 text-sm transition-all peer-placeholder-shown:text-sm peer-placeholder-shown:text-gray-400 peer-placeholder-shown:top-2 peer-focus:-top-3.5 peer-focus:text-gray-600 peer-focus:text-sm">
-                    Email
-                  </label>
-                </div>
+                <GeneralInput register={register} registerName="email" label="Email" />
                 <div className="py-2">
                   <PasswordInput register={register} text="Senha" registerName="password" />
                 </div>

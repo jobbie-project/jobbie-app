@@ -11,7 +11,7 @@ export function GeneralButton(props: GeneralButtonProps) {
       <button
         onClick={props.callback}
         type={props.type}
-        className={`mt-6 max-w-sm px-6 text-base bg-red font-normal w-full text-white rounded py-3 block shadow-xl ${props.className}`}>
+        className={`mt-6 px-6 text-base bg-red font-normal w-full text-white rounded py-3 block shadow-xl ${props.className}`}>
         {props.text}
       </button>
     </div>

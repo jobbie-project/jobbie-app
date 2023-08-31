@@ -29,9 +29,10 @@ export default function StudentRegister() {
 
   const onSubmit = (data: FormData) => {
     try {
+      if (!data.name) throw new Error('Insira um nome válido');
       if (!validate(data.email)) throw new Error('Utilize um email institucional da Fatec');
       if (!isPasswordValid) throw new Error('Senha muito fraca');
-      navigate('/verifica-email');
+      navigate('/verificacao-de-email');
     } catch (error) {
       toastError(error);
     }
@@ -47,26 +48,36 @@ export default function StudentRegister() {
             <p className="mt-6">Preencha com as informações que deseja utilizar para realizar login no portal.</p>
           </div>
           <div className="mt-8 w-full">
-            <input
-              {...register('name')}
-              required
-              placeholder="Nome"
-              type="string"
-              className="text-sm block px-3 py-2 max-w-[336px] w-full
-                border-b-2 border-b-gray1 focus:outline-none bg-white"
-            />
-            <div className="mt-4 w-full">
+            <div className="py-2 relative">
               <input
-                {...register('email')}
-                required
-                placeholder="Email Institucional"
-                type="email"
-                className="text-sm block px-3 py-2 max-w-[336px] w-full
-                border-b-2 border-b-gray1 focus:outline-none bg-white"
+                {...register('name')}
+                placeholder=""
+                type="text"
+                className="peer h-8 border-b-2 w-full border-gray1 text-gray-900 focus:outline-none focus:border-red"
               />
+              <label
+                htmlFor="name"
+                className="absolute cursor-text left-0 -top-3.5 select-none text-gray-600 text-sm transition-all peer-placeholder-shown:text-sm peer-placeholder-shown:text-gray-400 peer-placeholder-shown:top-2 peer-focus:-top-3.5 peer-focus:text-gray-600 peer-focus:text-sm">
+                Nome completo
+              </label>
+            </div>
+            <div className="mt-4 w-full">
+              <div className="py-2 relative">
+                <input
+                  {...register('email')}
+                  placeholder=""
+                  type="string"
+                  className="peer h-8 border-b-2 w-full border-gray1 text-gray-900 focus:outline-none focus:border-red"
+                />
+                <label
+                  htmlFor="email"
+                  className="absolute cursor-text left-0 -top-3.5 select-none text-gray-600 text-sm transition-all peer-placeholder-shown:text-sm peer-placeholder-shown:text-gray-400 peer-placeholder-shown:top-2 peer-focus:-top-3.5 peer-focus:text-gray-600 peer-focus:text-sm">
+                  Email
+                </label>
+              </div>
             </div>
             <div className="py-2 w-full">
-              <PasswordInput register={register} registerName="password" />
+              <PasswordInput text="Senha" register={register} registerName="password" />
               <PasswordStrengthMeter
                 password={watch('password')}
                 onChange={(isValid: boolean) => isValid !== isPasswordValid && setIsPasswordValid(isValid)}

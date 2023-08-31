@@ -35,7 +35,7 @@ export const App: React.FC = () => {
         <Route path={`/recuperacao-de-conta/email-verificado`} element={<PasswordChanged />} />
         <Route path={`/email-verificado`} element={<VerifiedEmail />} />
         <Route path={`/recuperacao-de-conta`} element={<ForgetPassword />} />
-        <Route path={`/redefinicao-de-conta`} element={<ChangePassword />} />
+        <Route path={`/redefinicao-de-senha`} element={<ChangePassword />} />
         <Route path={`/registro/estudante/passo-1`} element={<StudentRegisterStep1 />} />
         <Route path={`/registro/estudante/passo-2`} element={<StudentRegisterStep2 />} />
         <Route path={`/registro/estudante/passo-3`} element={<StudentRegisterStep3 />} />

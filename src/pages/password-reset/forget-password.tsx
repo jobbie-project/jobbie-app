@@ -31,14 +31,18 @@ export default function ForgetPassword() {
             <Lottie animationData={Padlock} autoPlay={true} style={{height: 140, width: 140}} />
           </div>
           <div className="mt-4 mx-auto max-w-lg">
-            <div className="py-2">
+            <div className="py-2 relative">
               <input
                 onChange={e => setEmail(e.target.value)}
-                placeholder="Email"
-                type="text"
-                className="text-sm block px-3 py-2  w-full
-                bg-white border-b-2 border-b-gray1 focus:outline-none"
+                placeholder=""
+                type="string"
+                className="peer h-8 border-b-2 w-full border-gray1 text-gray-900 focus:outline-none focus:border-red"
               />
+              <label
+                htmlFor="email"
+                className="absolute cursor-text left-0 -top-3.5 select-none text-gray-600 text-sm transition-all peer-placeholder-shown:text-sm peer-placeholder-shown:text-gray-400 peer-placeholder-shown:top-2 peer-focus:-top-3.5 peer-focus:text-gray-600 peer-focus:text-sm">
+                Email
+              </label>
             </div>
           </div>
           <GeneralButton text={'Continuar'} type={'submit'} callback={onSubmit} className="mt-4" />

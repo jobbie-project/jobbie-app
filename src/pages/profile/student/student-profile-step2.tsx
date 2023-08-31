@@ -41,14 +41,19 @@ export default function StudentRegisterStep2() {
             <p className="text-black font-semibold text-xl select-none mt-20">Qual sua localização?</p>
           </div>
           <div className="mt-8 w-full">
-            <input
-              {...register('endereco')}
-              required
-              placeholder="Endereço"
-              type="string"
-              className="text-sm block px-3 py-2 max-w-[336px] w-full
-                border-b-2 border-b-gray1 focus:outline-none bg-white"
-            />
+            <div className="py-2 relative">
+              <input
+                {...register('endereco')}
+                placeholder=""
+                type="text"
+                className="peer h-8 border-b-2 w-full border-gray-300 text-gray-900 focus:outline-none focus:border-red"
+              />
+              <label
+                htmlFor="endereco"
+                className="absolute cursor-text left-0 -top-3.5 select-none text-gray-600 text-sm transition-all peer-placeholder-shown:text-sm peer-placeholder-shown:text-gray-400 peer-placeholder-shown:top-2 peer-focus:-top-3.5 peer-focus:text-gray-600 peer-focus:text-sm">
+                Endereço
+              </label>
+            </div>
             <div className="mt-6 w-full">
               <input
                 {...register('cidade')}
