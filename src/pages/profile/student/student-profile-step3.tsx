@@ -6,6 +6,7 @@ import {useState} from 'react';
 import {useForm} from 'react-hook-form';
 import {useNavigate} from 'react-router-dom';
 import {toast} from 'react-toastify';
+import GeneralInput from '@/components/general-input';
 
 interface FormData {
   ciclo: string;
@@ -24,10 +25,10 @@ export default function StudentRegisterStep3() {
 
   const onSubmit = (data: FormData) => {
     try {
-      if (!data.ciclo) throw new Error();
+      if (!data.ciclo) throw new Error('É necessário informar o ciclo atual.');
       navigate('/registro/estudante/passo-4');
     } catch (error) {
-      toast.warn('É necessário informar o ciclo atual.');
+      toastError(error);
     }
   };
 
@@ -40,39 +41,9 @@ export default function StudentRegisterStep3() {
             <p className="text-black font-semibold text-lg select-none mt-20">Em qual instituição Fatec você estuda?</p>
           </div>
           <DropdownSelection className="mt-4 bg-lightgray1" />
-          <div className="w-full inline-flex mt-8">
-            <div className="relative">
-              <input
-                required
-                {...register('ciclo')}
-                id="ciclo"
-                name="ciclo"
-                type="text"
-                className="peer h-10 w-36 border-b-2 border-gray-300 text-gray-900  focus:outline-none focus:border-red"
-                placeholder=""
-              />
-              <label
-                htmlFor="ciclo"
-                className="absolute left-0 -top-3.5 select-none text-gray-600 text-sm transition-all peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-placeholder-shown:top-2 peer-focus:-top-3.5 peer-focus:text-gray-600 peer-focus:text-sm">
-                Ciclo
-              </label>
-            </div>
-            <div className="relative">
-              <input
-                required
-                {...register('dt_inicio')}
-                id="dt_inicio"
-                type="text"
-                name="dt_inicio"
-                className="peer h-10 ml-12 w-36 border-b-2 select-none border-gray-300 text-gray-900 placeholder-transparent focus:outline-none focus:border-red"
-                placeholder=""
-              />
-              <label
-                htmlFor="dt_inicio"
-                className="absolute left-12 -top-3.5 text-gray-600 text-sm transition-all peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-placeholder-shown:top-2 peer-focus:-top-3.5 peer-focus:text-gray-600 peer-focus:text-sm">
-                Data de ínicio
-              </label>
-            </div>
+          <div className="w-full inline-flex mt-8 justify-between">
+            <GeneralInput register={register} registerName="ciclo" label="Ciclo" required className="w-40" />
+            <GeneralInput register={register} registerName="dt_inicio" label="Data de ínicio" className="w-40" />
           </div>
           <div className="mt-12 flex justify-center">
             <ButtonHover text={'Continuar'} type={'submit'} className="font-semibold text-base after:bg-red" />

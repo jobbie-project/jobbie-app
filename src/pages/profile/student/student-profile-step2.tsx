@@ -2,10 +2,8 @@ import {ButtonHover} from '@/components/button-hover-animation';
 import GeneralInput from '@/components/general-input';
 import RegisterHeader from '@/components/register-header';
 import {toastError} from '@/utils/toast-error';
-import {useState} from 'react';
 import {useForm} from 'react-hook-form';
 import {useNavigate} from 'react-router-dom';
-import {toast} from 'react-toastify';
 
 interface FormData {
   endereco: string;
@@ -26,10 +24,10 @@ export default function StudentRegisterStep2() {
 
   const onSubmit = (data: FormData) => {
     try {
-      if (!data.cidade) throw new Error();
-      navigate('/');
+      if (!data.cidade) throw new Error('Insira a cidade em que você reside.');
+      navigate('/registro/estudante/passo-3');
     } catch (error) {
-      toast.error('Insira a cidade em que você reside.');
+      toastError(error);
     }
   };
 
@@ -45,7 +43,7 @@ export default function StudentRegisterStep2() {
             <div className="font-semibold select-none">País</div>
             <div className="flex flex-row justify-between mb-6">
               <span className="select-none">Brasil</span>
-              <div className="text-sm relative text-gray-400 select-none">Alterar</div>
+              <div className="text-sm relative text-gray-400 select-none cursor-pointer">Alterar</div>
             </div>
 
             <GeneralInput register={register} registerName="endereco" label="Endereço" />
@@ -53,7 +51,7 @@ export default function StudentRegisterStep2() {
             <GeneralInput register={register} registerName="cep" label="Código postal" />
           </div>
           <div className="mt-8 flex justify-center">
-            <ButtonHover text={'Continuar'} type={'button'} className="font-semibold text-lg after:bg-red" />
+            <ButtonHover text={'Continuar'} type={'submit'} className="font-semibold text-lg after:bg-red" />
           </div>
         </form>
       </div>
