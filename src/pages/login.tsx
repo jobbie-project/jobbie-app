@@ -6,6 +6,17 @@ import {toastError} from '@/utils/toast-error';
 import {GeneralButton} from '@/components/general-button';
 import * as EmailValidator from 'email-validator';
 import GeneralInput from '@/components/general-input';
+import {createTheme, ThemeProvider} from '@mui/material/styles';
+import Checkbox from '@mui/material/Checkbox';
+import {red} from '@mui/material/colors';
+
+const Theme = createTheme({
+  palette: {
+    primary: {
+      main: red[900],
+    },
+  },
+});
 
 interface FormData {
   email: string;
@@ -52,14 +63,12 @@ export default function Login() {
 
                 <div className="flex justify-between mt-6">
                   <label className="block text-gray-500 font-regular my-2">
-                    <input
-                      type="checkbox"
-                      className="accent-red peer relative left-0 h-4 w-4 shrink-0  rounded-sm border outline-none align-middle"
-                    />
-                    <span className="py-2 px-1 text-sm text-gray-600 leading-snug align-middle select-none">
-                      {' '}
-                      Lembrar de mim{' '}
-                    </span>
+                    <div className="flex flex-row items-center ml-[-10px]">
+                      <ThemeProvider theme={Theme}>
+                        <Checkbox defaultChecked />
+                      </ThemeProvider>
+                      <span>Lembrar de mim</span>
+                    </div>
                   </label>
                   <label className="block text-gray-500 font-semibold my-2">
                     <span className="cursor-pointer tracking-tighter text-black font-semibold ">

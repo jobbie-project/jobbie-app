@@ -1,8 +1,9 @@
 /* eslint-disable no-undef */
 /* eslint-disable @typescript-eslint/no-var-requires */
 /** @type {import('tailwindcss').Config} */
+const withMT = require('@material-tailwind/react/utils/withMT');
 const colors = require('tailwindcss/colors');
-export default {
+module.exports = withMT({
   content: [
     './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
     './src/components/**/*.{js,ts,jsx,tsx,mdx}',
@@ -10,6 +11,24 @@ export default {
     './index.html',
   ],
   theme: {
+    fontFamily: {
+      serif: [
+        'ui-sans-serif',
+        'system-ui',
+        'apple-system',
+        'BlinkMacSystemFont',
+        'Segoe UI',
+        'Roboto',
+        'Helvetica Neue',
+        'Arial',
+        'Noto Sans',
+        'sans-serif',
+        'Apple Color Emoji',
+        'Segoe UI Emoji',
+        'Segoe UI Symbol',
+        'Noto Color Emoji',
+      ],
+    },
     extend: {
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
@@ -33,4 +52,4 @@ export default {
     },
   },
   plugins: [require('tailwind-scrollbar-hide')],
-};
+});
