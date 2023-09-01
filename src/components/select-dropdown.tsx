@@ -10,7 +10,10 @@ export function SelectDropdown(props: SelectDropdownProps) {
   return (
     <div className="">
       <Select
-        className={`bg-lightgray1 rounded-lg w-full ${props.className}`}
+        labelProps={{
+          className: 'before:border-0 after:border-0',
+        }}
+        className={`bg-lightgray1 rounded-lg green w-full border-none  ${props.className}`}
         label={props.label}
         animate={{
           mount: {y: 0},
