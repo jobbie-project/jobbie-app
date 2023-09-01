@@ -13,30 +13,30 @@ export default function Register() {
           <div className=" mt-24 w-full font-semibold text-xl text-black">Boas vindas.</div>
           <p className="mt-6">Tudo pronto para dar o próximo passo?</p>
 
-          <div className="inline-block mt-14 w-full max-w-lg">
+          <div className="inline-block mt-10 w-full max-w-lg">
             <input
               onChange={() => setUserType('student')}
               type="radio"
               name="radio"
               id="candidato"
               value="candidato"
-              className="accent-red h-4 w-4 rounded-full border-gray-300"
+              className="accent-red h-4 w-4 rounded-full border-gray-300 align-middle"
             />
-            <label className="ml-2 text-black font-semibold text-base" htmlFor="candidato">
+            <label className="ml-2 text-black font-semibold text-base align-middle" htmlFor="candidato">
               Candidato
             </label>
           </div>
 
           <div className="inline-block mt-8 w-full max-w-lg">
             <input
-              className="accent-red h-4 w-4 rounded-full border-gray-300"
+              className="accent-red h-4 w-4 rounded-full border-gray-300 align-middle"
               onChange={() => setUserType('company')}
               type="radio"
               name="radio"
               id="empresa"
               value="empresa"
             />
-            <label className="ml-2 text-black font-semibold text-base" htmlFor="empresa">
+            <label className="ml-2 text-black font-semibold text-base align-middle" htmlFor="empresa">
               Empresa
             </label>
           </div>
