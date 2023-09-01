@@ -42,6 +42,12 @@ export default function StudentRegisterStep2() {
             <p className="text-black font-semibold text-xl select-none mt-10">Qual sua localização?</p>
           </div>
           <div className="mt-8 w-full">
+            <div className="font-semibold select-none">País</div>
+            <div className="flex flex-row justify-between mb-6">
+              <span className="select-none">Brasil</span>
+              <div className="text-sm relative text-gray-400 select-none">Alterar</div>
+            </div>
+
             <GeneralInput register={register} registerName="endereco" label="Endereço" />
             <GeneralInput register={register} registerName="cidade" label="Cidade, Estado" required />
             <GeneralInput register={register} registerName="cep" label="Código postal" />

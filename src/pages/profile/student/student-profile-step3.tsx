@@ -1,5 +1,5 @@
 import {ButtonHover} from '@/components/button-hover-animation';
-import DropdownSelection from '@/components/dropdown-select';
+import DropdownSelection from '@/components/select-dropdown';
 import RegisterHeader from '@/components/register-header';
 import {toastError} from '@/utils/toast-error';
 import {useState} from 'react';

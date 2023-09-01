@@ -11,7 +11,7 @@ export default function GeneralInput<T extends FieldValues>(props: {
   const inputProps = props.register && props.registerName && props.register(props.registerName);
   return (
     <>
-      <div className="py-2" x-data="{ show: true }">
+      <div className="py-2 mt-2" x-data="{ show: true }">
         <div className={`relative flex items-center ${props.className}`}>
           <input
             onChange={props.callback}
