@@ -13,7 +13,7 @@ interface FormData {
 }
 
 export default function StudentRegisterStep3() {
-  const {register, handleSubmit, watch, setValue} = useForm<FormData>({
+  const {register, handleSubmit} = useForm<FormData>({
     defaultValues: {
       ciclo: '',
       dt_inicio: '',
@@ -22,7 +22,7 @@ export default function StudentRegisterStep3() {
 
   const navigate = useNavigate();
 
-  const intitutions = [
+  const institutions = [
     {value: '2', label: 'Fatec Araçatuba'},
     {value: '3', label: 'Fatec Araraquara'},
     {value: '4', label: 'Fatec Barueri'},
@@ -30,6 +30,12 @@ export default function StudentRegisterStep3() {
     {value: '6', label: 'Fatec Botucatu'},
     {value: '7', label: 'Fatec Bragança Paulista'},
     {value: '8', label: 'Fatec Ribeirão Preto'},
+  ];
+
+  const courses = [
+    {value: '2', label: 'Análise e Desenvolvimento de Sistemas'},
+    {value: '3', label: 'Gestão e Inovação de Negócios'},
+    {value: '4', label: 'Sistemas Biomédicos'},
   ];
 
   const onSubmit = (data: FormData) => {
@@ -51,8 +57,9 @@ export default function StudentRegisterStep3() {
               Em qual instituição Fatec você estuda?
             </p>
           </div>
-          <SelectDropdown label={'Selecione sua Instituição'} />
-          <div className="w-full inline-flex mt-8 justify-between">
+          <SelectDropdown label={'Selecione sua Instituição'} options={institutions} />
+          <SelectDropdown label={'Selecione seu Curso'} options={courses} />
+          <div className="w-full inline-flex mt-4 justify-between">
             <GeneralInput register={register} registerName="ciclo" label="Ciclo" required className="w-40" />
             <GeneralInput register={register} registerName="dt_inicio" label="Data de ínicio" className="w-40" />
           </div>
