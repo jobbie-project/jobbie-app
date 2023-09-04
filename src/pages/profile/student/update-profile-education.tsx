@@ -5,9 +5,10 @@ import {useForm} from 'react-hook-form';
 import {useNavigate} from 'react-router-dom';
 import GeneralInput from '@/components/general-input';
 import {SelectDropdown} from '@/components/select-dropdown';
-import {useAppDispatch} from '@/store/store';
+import {RootState, useAppDispatch} from '@/store/store';
 
 import {setUserEducation} from '@/store/slices/profile-data';
+import {useSelector} from 'react-redux';
 
 interface FormData {
   institution: number;
@@ -18,6 +19,7 @@ interface FormData {
 
 export default function StudentRegisterStep3() {
   const {register, handleSubmit, setValue} = useForm<FormData>({defaultValues: {institution: 7}});
+  const userData = useSelector((state: RootState) => state.profileData);
 
   const navigate = useNavigate();
   const dispatch = useAppDispatch();

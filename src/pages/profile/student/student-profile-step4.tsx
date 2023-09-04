@@ -1,29 +1,30 @@
 import {ButtonHover} from '@/components/button-hover-animation';
 import RegisterHeader from '@/components/register-header';
-import {useForm} from 'react-hook-form';
-import {FiTrash, FiEdit} from 'react-icons/fi';
+import {ReviewCardMedium} from '@/components/review-card-medium';
+import {RootState} from '@/store/store';
+import moment from '@/utils/moment';
+import {useSelector} from 'react-redux';
 import {useNavigate} from 'react-router-dom';
 
 export default function StudentRegisterStep4() {
   const navigate = useNavigate();
+  const {education} = useSelector((state: RootState) => state.profileData);
 
   return (
     <div>
       <RegisterHeader showProgress={{progress: 3, maxSteps: 8}} />
       <div className="max-w-full items-center p-5 flex flex-col min-h-screen mt-6">
-        <div className="max-w-sm w-full bg-lightgray1 p-4 rounded-lg text-sm">
-          <div className="flex flex-row justify-between">
-            Nome do curso
-            <div className="flex flex-row">
-              <FiEdit size={20} className="mr-1" />
-              <FiTrash size={20} />
-            </div>
-          </div>
-          <div className="flex flex-col">
-            <div className="mt-4">nome da faculdade</div>
-            <div className="mt-4">ciclo - 10/11/1998</div>
-          </div>
-        </div>
+        {education.map((item, index) => (
+          <ReviewCardMedium
+            key={index}
+            canEdit={true}
+            title={item.degree}
+            subtitle={item.institution_name}
+            description={item.actual_cycle}
+            date={moment(item.start_date).format('MMMM [de] YYYY')}
+          />
+        ))}
+
         <div className="mt-8 flex justify-center">
           <ButtonHover text={'Continuar'} type={'button'} className="font-semibold text-base after:bg-red" />
         </div>

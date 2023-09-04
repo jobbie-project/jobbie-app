@@ -53,6 +53,7 @@ export const profileDataSlice = createSlice({
     },
 
     setUserEducation: (state, action) => {
+      !state.education[0].institution_name && (state.education = []);
       state.education.push(action.payload);
     },
     updateUserEducation: (state, action) => {

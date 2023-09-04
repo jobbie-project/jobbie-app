@@ -2,9 +2,10 @@ import {ButtonHover} from '@/components/button-hover-animation';
 import GeneralInput from '@/components/general-input';
 import RegisterHeader from '@/components/register-header';
 import {setUserAddress} from '@/store/slices/profile-data';
-import {useAppDispatch} from '@/store/store';
+import {RootState, useAppDispatch} from '@/store/store';
 import {toastError} from '@/utils/toast-error';
 import {useForm} from 'react-hook-form';
+import {useSelector} from 'react-redux';
 import {useNavigate} from 'react-router-dom';
 
 interface FormData {
