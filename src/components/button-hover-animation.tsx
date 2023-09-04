@@ -7,7 +7,7 @@ interface ButtonHoverProps {
 
 export function ButtonHover(props: ButtonHoverProps) {
   return (
-    <div className="w-40 justify-center text-center flex flex-row btn group place-content ">
+    <div className="w-40 justify-center text-center flex flex-row btn group place-content">
       <button
         onClick={props.callback}
         type={props.type}

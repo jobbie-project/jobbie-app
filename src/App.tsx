@@ -15,6 +15,7 @@ import ForgetPassword from './pages/password-reset/forget-password';
 import EmailVerification from './pages/password-reset/email-verification';
 import ChangePassword from './pages/password-reset/change-password';
 import PasswordChanged from './pages/password-reset/password-changed';
+import StudentRegisterStep4 from './pages/profile/student/student-profile-step4';
 
 export const App: React.FC = () => {
   return (
@@ -39,6 +40,7 @@ export const App: React.FC = () => {
         <Route path={`/registro/estudante/passo-1`} element={<StudentRegisterStep1 />} />
         <Route path={`/registro/estudante/passo-2`} element={<StudentRegisterStep2 />} />
         <Route path={`/registro/estudante/passo-3`} element={<StudentRegisterStep3 />} />
+        <Route path={`/registro/estudante/passo-4`} element={<StudentRegisterStep4 />} />
       </Routes>
       <ToastContainer />
     </>

@@ -33,7 +33,7 @@ export default function StudentRegisterStep1() {
             <p className="text-black font-semibold text-xl mt-10 select-none">Qual é o seu nome?</p>
           </div>
           <div className="mt-8 w-full">
-            <GeneralInput register={register} registerName="name" label="Nome completo" />
+            <GeneralInput register={register} registerName="name" label="Nome completo" required />
           </div>
           <div className="mt-8 flex justify-center">
             <ButtonHover text={'Continuar'} type={'submit'} className="font-semibold text-lg after:bg-red" />

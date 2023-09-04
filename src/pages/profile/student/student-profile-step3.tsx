@@ -5,8 +5,6 @@ import {useForm} from 'react-hook-form';
 import {useNavigate} from 'react-router-dom';
 import GeneralInput from '@/components/general-input';
 import {SelectDropdown} from '@/components/select-dropdown';
-import {useEffect} from 'react';
-import moment from '@/utils/moment';
 
 interface FormData {
   institution: string;
@@ -40,10 +38,6 @@ export default function StudentRegisterStep3() {
     {value: '3', label: 'Sistemas Biomédicos'},
   ];
 
-  // const publishDate: string = 'string'; // Suponha que você obtenha a data de algum lugar
-
-  // const date = publishDate ? formatDate(publishDate) : '';
-
   const onSubmit = (data: FormData) => {
     try {
       if (!data.ciclo) throw new Error('É necessário informar o ciclo atual.');
@@ -55,11 +49,11 @@ export default function StudentRegisterStep3() {
 
   return (
     <div>
-      <RegisterHeader />
+      <RegisterHeader showProgress={{progress: 3, maxSteps: 8}} />
       <div className="max-w-full items-center p-5 flex flex-col min-h-screen mt-6">
         <form onSubmit={handleSubmit(onSubmit)} className="w-full max-w-[336px]">
           <div className="max-w-xs w-full">
-            <p className="text-black font-semibold text-base select-none mt-20">
+            <p className="text-black font-semibold text-base select-none mt-4">
               Em qual instituição Fatec você estuda?
             </p>
           </div>
@@ -79,6 +73,7 @@ export default function StudentRegisterStep3() {
               label="Data de ínicio"
               className="w-40"
               type="month"
+              required
             />
           </div>
           <div className="mt-12 flex justify-center">
