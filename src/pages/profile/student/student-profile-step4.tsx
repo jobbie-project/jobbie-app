@@ -17,6 +17,7 @@ export default function StudentRegisterStep4() {
         {education.map((item, index) => (
           <ReviewCardMedium
             key={index}
+            canDelete={false}
             canEdit={true}
             title={item.degree}
             subtitle={item.institution_name}
