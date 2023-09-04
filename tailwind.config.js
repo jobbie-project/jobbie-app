@@ -49,6 +49,7 @@ module.exports = withMT({
       gray3: '#BDBDBD',
       gray4: '#A9B4CD',
       blue: '#2BB8C9',
+      default: '#8dB8C9',
     },
   },
   plugins: [require('tailwind-scrollbar-hide')],
