@@ -1,9 +1,11 @@
 import {ButtonHover} from '@/components/button-hover-animation';
 import GeneralInput from '@/components/general-input';
-import {ProgressBar} from '@/components/progress-bar';
 import RegisterHeader from '@/components/register-header';
+import {setUserName} from '@/store/slices/profile-data';
+import {RootState, useAppDispatch} from '@/store/store';
 import {toastError} from '@/utils/toast-error';
 import {useForm} from 'react-hook-form';
+import {useSelector} from 'react-redux';
 import {useNavigate} from 'react-router-dom';
 
 interface FormData {
@@ -12,12 +14,14 @@ interface FormData {
 
 export default function StudentRegisterStep1() {
   const {register, handleSubmit} = useForm<FormData>();
-
+  const userData = useSelector((state: RootState) => state.profileData);
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
 
   const onSubmit = (data: FormData) => {
     try {
       if (!data.name) throw new Error('Insira seu nome para continuar.');
+      dispatch(setUserName(data.name));
       navigate('/registro/estudante/passo-2');
     } catch (error) {
       toastError(error);

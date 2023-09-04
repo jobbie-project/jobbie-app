@@ -1,30 +1,29 @@
 import {ButtonHover} from '@/components/button-hover-animation';
 import GeneralInput from '@/components/general-input';
 import RegisterHeader from '@/components/register-header';
+import {setUserAddress} from '@/store/slices/profile-data';
+import {useAppDispatch} from '@/store/store';
 import {toastError} from '@/utils/toast-error';
 import {useForm} from 'react-hook-form';
 import {useNavigate} from 'react-router-dom';
 
 interface FormData {
-  endereco: string;
-  cidade: string;
-  cep: string;
+  street: string;
+  city: string;
+  state: string;
+  zip_code: string;
 }
 
 export default function StudentRegisterStep2() {
-  const {register, handleSubmit} = useForm<FormData>({
-    defaultValues: {
-      endereco: '',
-      cidade: '',
-      cep: '',
-    },
-  });
+  const {register, handleSubmit} = useForm<FormData>();
 
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
 
   const onSubmit = (data: FormData) => {
     try {
-      if (!data.cidade) throw new Error('Insira a cidade em que você reside.');
+      if (!data.city) throw new Error('Insira a cidade em que você reside.');
+      dispatch(setUserAddress(data));
       navigate('/registro/estudante/passo-3');
     } catch (error) {
       toastError(error);
@@ -46,9 +45,9 @@ export default function StudentRegisterStep2() {
               <div className="text-sm relative text-gray-400 select-none cursor-pointer">Alterar</div>
             </div>
 
-            <GeneralInput register={register} registerName="endereco" label="Endereço" />
-            <GeneralInput register={register} registerName="cidade" label="Cidade, Estado" required />
-            <GeneralInput register={register} registerName="cep" label="Código postal" />
+            <GeneralInput register={register} registerName="street" label="Endereço" />
+            <GeneralInput register={register} registerName="city" label="Cidade, Estado" required />
+            <GeneralInput register={register} registerName="zip_code" label="Código postal" />
           </div>
           <div className="mt-8 flex justify-center">
             <ButtonHover text={'Continuar'} type={'submit'} className="font-semibold text-lg after:bg-red" />
