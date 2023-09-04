@@ -57,7 +57,7 @@ export default function StudentRegisterStep3() {
               Em qual instituição Fatec você estuda?
             </p>
           </div>
-          <SelectDropdown label={'Selecione sua Instituição'} options={institutions} />
+          <SelectDropdown label={'Selecione sua Instituição'} options={institutions} className="disabled" />
           <SelectDropdown label={'Selecione seu Curso'} options={courses} />
           <div className="w-full inline-flex mt-4 justify-between">
             <GeneralInput register={register} registerName="ciclo" label="Ciclo" required className="w-40" />
