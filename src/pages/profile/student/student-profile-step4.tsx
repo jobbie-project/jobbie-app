@@ -24,7 +24,9 @@ export default function StudentRegisterStep4() {
             <div className="mt-4">ciclo - 10/11/1998</div>
           </div>
         </div>
-        <ButtonHover text={'Continuar'} type={'button'} className="font-semibold text-base after:bg-red" />
+        <div className="mt-8 flex justify-center">
+          <ButtonHover text={'Continuar'} type={'button'} className="font-semibold text-base after:bg-red" />
+        </div>
       </div>
     </div>
   );
