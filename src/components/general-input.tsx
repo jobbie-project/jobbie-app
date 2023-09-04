@@ -7,6 +7,7 @@ export default function GeneralInput<T extends FieldValues>(props: {
   label: string;
   required?: boolean;
   callback?: (o: any) => any;
+  type?: 'text' | 'password' | 'email' | 'number' | 'date' | 'month' | 'time';
 }) {
   const inputProps = props.register && props.registerName && props.register(props.registerName);
   return (
@@ -18,8 +19,8 @@ export default function GeneralInput<T extends FieldValues>(props: {
             {...inputProps}
             id={`${props.registerName}`}
             placeholder=""
-            type="text"
             className="peer h-10 w-full border-b-2 border-gray1 text-gray-900 focus:outline-none focus:border-red"
+            type={props.type || 'text'}
           />
           <label
             htmlFor={`${props.registerName}`}

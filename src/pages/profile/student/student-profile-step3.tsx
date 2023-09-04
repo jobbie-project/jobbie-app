@@ -5,6 +5,8 @@ import {useForm} from 'react-hook-form';
 import {useNavigate} from 'react-router-dom';
 import GeneralInput from '@/components/general-input';
 import {SelectDropdown} from '@/components/select-dropdown';
+import {useEffect} from 'react';
+import moment from '@/utils/moment';
 
 interface FormData {
   institution: string;
@@ -23,20 +25,24 @@ export default function StudentRegisterStep3() {
   const navigate = useNavigate();
 
   const institutions = [
-    {value: '2', label: 'Fatec Araçatuba'},
-    {value: '3', label: 'Fatec Araraquara'},
-    {value: '4', label: 'Fatec Barueri'},
-    {value: '5', label: 'Fatec Bauru'},
-    {value: '6', label: 'Fatec Botucatu'},
-    {value: '7', label: 'Fatec Bragança Paulista'},
-    {value: '8', label: 'Fatec Ribeirão Preto'},
+    {value: '1', label: 'Fatec Araçatuba'},
+    {value: '2', label: 'Fatec Araraquara'},
+    {value: '3', label: 'Fatec Barueri'},
+    {value: '4', label: 'Fatec Bauru'},
+    {value: '5', label: 'Fatec Botucatu'},
+    {value: '6', label: 'Fatec Bragança Paulista'},
+    {value: '7', label: 'Fatec Ribeirão Preto'},
   ];
 
   const courses = [
-    {value: '2', label: 'Análise e Desenvolvimento de Sistemas'},
-    {value: '3', label: 'Gestão e Inovação de Negócios'},
-    {value: '4', label: 'Sistemas Biomédicos'},
+    {value: '1', label: 'Análise e Desenvolvimento de Sistemas'},
+    {value: '2', label: 'Gestão e Inovação de Negócios'},
+    {value: '3', label: 'Sistemas Biomédicos'},
   ];
+
+  // const publishDate: string = 'string'; // Suponha que você obtenha a data de algum lugar
+
+  // const date = publishDate ? formatDate(publishDate) : '';
 
   const onSubmit = (data: FormData) => {
     try {
@@ -57,11 +63,23 @@ export default function StudentRegisterStep3() {
               Em qual instituição Fatec você estuda?
             </p>
           </div>
-          <SelectDropdown label={'Selecione sua Instituição'} options={institutions} className="disabled" />
+          <SelectDropdown
+            label={'Selecione sua Instituição'}
+            options={institutions}
+            disabled={true}
+            defaultValue={institutions[6].label}
+            className="bg-lightgray1"
+          />
           <SelectDropdown label={'Selecione seu Curso'} options={courses} />
           <div className="w-full inline-flex mt-4 justify-between">
             <GeneralInput register={register} registerName="ciclo" label="Ciclo" required className="w-40" />
-            <GeneralInput register={register} registerName="dt_inicio" label="Data de ínicio" className="w-40" />
+            <GeneralInput
+              register={register}
+              registerName="dt_inicio"
+              label="Data de ínicio"
+              className="w-40"
+              type="month"
+            />
           </div>
           <div className="mt-12 flex justify-center">
             <ButtonHover text={'Continuar'} type={'submit'} className="font-semibold text-base after:bg-red" />
