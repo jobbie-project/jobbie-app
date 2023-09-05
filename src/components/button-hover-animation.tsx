@@ -11,7 +11,7 @@ export function ButtonHover(props: ButtonHoverProps) {
       <button
         onClick={props.callback}
         type={props.type}
-        className={`bg-transparent p-2 px-6 text-lightblack relative pr-4 pb-1 after:transition-transform after:duration-500 after:ease-out after:absolute after:bottom-0 after:left-0 after:block after:h-[2px] after:w-full after:origin-bottom-right after:scale-x-0 after:bg-lightgreen2 after:content-[''] after:group-hover:origin-bottom-left after:group-hover:scale-x-100  ${props.className}`}>
+        className={`bg-transparent p-2 px-6 text-lightblack relative pr-4 pb-1 after:transition-transform after:duration-500 after:ease-out after:absolute after:bottom-0 after:left-0 after:block after:h-[2px] after:w-full after:origin-bottom-right after:scale-x-0 after:bg-redDefault after:content-[''] after:group-hover:origin-bottom-left after:group-hover:scale-x-100  ${props.className}`}>
         {props.text}
       </button>
       <svg

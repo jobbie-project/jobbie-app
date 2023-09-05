@@ -37,7 +37,7 @@ module.exports = withMT({
     },
     colors: {
       ...colors,
-      red: '#b20000',
+      redDefault: '#b20000',
       lightblack: '#3A3A3A',
       lightblack2: '#838383',
       white: '#FFF',
@@ -49,7 +49,6 @@ module.exports = withMT({
       gray3: '#BDBDBD',
       gray4: '#A9B4CD',
       blue: '#2BB8C9',
-      default: '#8dB8C9',
     },
   },
   plugins: [require('tailwind-scrollbar-hide')],

@@ -44,8 +44,6 @@ export default function StudentRegisterStep3() {
       if (!data.start_date) throw new Error('É necessário informar a data de ínicio do curso.');
       if (!data.degree) throw new Error('É necessário informar o curso.');
       if (!data.institution) throw new Error('É necessário informar a instituição.');
-      console.log(data);
-      console.log(institutions[Number(data.institution) - 1]);
       dispatch(
         setUserEducation({
           ...data,
@@ -93,8 +91,8 @@ export default function StudentRegisterStep3() {
               required
             />
           </div>
-          <div className="mt-8 flex justify-center">
-            <ButtonHover text={'Continuar'} type={'submit'} className="font-semibold text-base after:bg-red" />
+          <div className="mt-10 flex justify-center">
+            <ButtonHover text={'Continuar'} type={'submit'} className="font-semibold text-base" />
           </div>
         </form>
       </div>

@@ -1,5 +1,5 @@
-import { BiFilterAlt } from "react-icons/bi";
-import { CiSearch } from "react-icons/ci";
+import {BiFilterAlt} from 'react-icons/bi';
+import {CiSearch} from 'react-icons/ci';
 
 export function SearchBar() {
   return (
@@ -16,7 +16,7 @@ export function SearchBar() {
               placeholder="Procure por vagas, empresas"
             />
           </div>
-          <button className="p-3 rounded-lg ml-4 text-sm font-medium text-white bg-red">
+          <button className="p-3 rounded-lg ml-4 text-sm font-medium text-white redDefault">
             <BiFilterAlt size="22" />
           </button>
         </form>

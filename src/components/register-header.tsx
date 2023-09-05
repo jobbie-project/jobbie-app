@@ -14,7 +14,7 @@ export default function RegisterHeader(props: RegisterHeaderProps) {
   const navigate = useNavigate();
   return (
     <>
-      <div className="w-full flex flex-col mt-16 items-center ">
+      <div className="w-full flex flex-col mt-10 items-center ">
         <div className="w-full pl-4 lg:pl-0 lg:w-[640px] mt-2">
           <div onClick={() => navigate(-1)} className="cursor-pointer w-min">
             <IoChevronBackOutline size={34} />

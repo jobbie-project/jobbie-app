@@ -11,13 +11,16 @@ interface ReviewCardMediumProps {
 }
 
 export function ReviewCardMedium(props: ReviewCardMediumProps) {
+  const handleEdit = () => {};
+  const handleDelete = () => {};
+
   return (
-    <div className="max-w-sm w-full bg-lightgray1 p-4 rounded-lg text-sm">
+    <div className="max-w-sm w-full bg-lightgray1 p-4 rounded-lg text-sm mb-6">
       <div className={`flex flex-row justify-between font-semibold text-lightblack ${props.className}`}>
         {props.title}
         <div className="flex flex-row">
-          <div>{props.canEdit && <FiEdit size={20} className="mr-1" />}</div>
-          <div>{props.canDelete && <FiTrash size={20} />}</div>
+          <div onClick={handleEdit}>{props.canEdit && <FiEdit size={20} className="mr-1 cursor-pointer" />}</div>
+          <div onClick={handleDelete}>{props.canDelete && <FiTrash size={20} className="cursor-pointer" />}</div>
         </div>
       </div>
       <div className="flex flex-col">

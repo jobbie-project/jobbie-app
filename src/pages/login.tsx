@@ -6,17 +6,7 @@ import {toastError} from '@/utils/toast-error';
 import {GeneralButton} from '@/components/general-button';
 import * as EmailValidator from 'email-validator';
 import GeneralInput from '@/components/general-input';
-import {createTheme, ThemeProvider} from '@mui/material/styles';
-import Checkbox from '@mui/material/Checkbox';
-import {red} from '@mui/material/colors';
-
-const Theme = createTheme({
-  palette: {
-    primary: {
-      main: red[900],
-    },
-  },
-});
+import {CustomCheckbox} from '@/components/custom-checkbox';
 
 interface FormData {
   email: string;
@@ -61,34 +51,28 @@ export default function Login() {
                   <PasswordInput register={register} text="Senha" registerName="password" />
                 </div>
 
-                <div className="flex justify-between mt-6">
-                  <label className="block text-gray-500 font-regular my-2">
-                    <div className="flex flex-row items-center ml-[-10px]">
-                      <ThemeProvider theme={Theme}>
-                        <Checkbox defaultChecked />
-                      </ThemeProvider>
-                      <span>Lembrar de mim</span>
-                    </div>
-                  </label>
-                  <label className="block text-gray-500 font-semibold my-2">
-                    <span className="cursor-pointer tracking-tighter text-black font-semibold ">
-                      <a href={'/recuperacao-de-conta'}>Esqueceu sua senha?</a>
-                    </span>
-                  </label>
+                <div className="flex justify-between mt-6 items-center">
+                  <CustomCheckbox text="Lembrar de mim" />
+
+                  <div
+                    onClick={() => navigate('/recuperacao-de-conta')}
+                    className="cursor-pointer text-sm text-black font-semibold">
+                    Esqueceu sua senha?
+                  </div>
                 </div>
                 <div>
                   <GeneralButton text={'Entrar'} type={'submit'} />
-                  <span className="text-warmGray-400 font-normal flex flex-row mt-8 justify-center">
-                    Não possui conta?
-                    <Link className="ml-1 text-black font-semibold" to="/registro">
+                  <div className="text-sm text-warmGray-400 font-normal flex flex-row mt-8 justify-center">
+                    Não possui conta? &nbsp;
+                    <Link className="text-sm text-black font-semibold" to="/registro">
                       Cadastre-se
                     </Link>
-                  </span>
+                  </div>
                 </div>
               </div>
             </form>
 
-            <div className="text-sm text-warmGray-400 font-normal flex flex-row mt-8 justify-center text-center">
+            <div className="text-xs text-warmGray-400 font-normal flex flex-row mt-8 justify-center text-center">
               <span>
                 Ao continuar você concorda que declara que leu e concorda com os{' '}
                 <a className="text-black font-semibold inline-block" href="">

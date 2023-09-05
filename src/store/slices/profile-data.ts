@@ -20,6 +20,7 @@ export const profileDataSlice = createSlice({
         start_date: '',
         end_date: '',
         actual_cycle: '',
+        course: '',
         location: {
           city: '',
           state: '',
