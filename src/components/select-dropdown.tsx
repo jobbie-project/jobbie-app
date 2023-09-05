@@ -20,7 +20,7 @@ export function SelectDropdown(props: SelectDropdownProps) {
   };
 
   return (
-    <div className="mt-6">
+    <div className="mt-6 mb-4">
       <Select
         labelProps={{
           className: 'before:border-0 after:border-0',
