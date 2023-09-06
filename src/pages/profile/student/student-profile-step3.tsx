@@ -60,7 +60,7 @@ export default function StudentRegisterStep3() {
   return (
     <div>
       <RegisterHeader showProgress={{progress: 3, maxSteps: 8}} />
-      <div className="max-w-full items-center p-5 flex flex-col min-h-screen mt-6">
+      <div className="max-w-full items-center p-5 flex flex-col min-h-screen mt-6 select-none">
         <form onSubmit={handleSubmit(onSubmit)} className="w-full max-w-[336px]">
           <div className="max-w-xs w-full">
             <p className="text-black font-semibold text-base select-none mt-4">

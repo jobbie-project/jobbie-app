@@ -15,7 +15,7 @@ export function ReviewCardMedium(props: ReviewCardMediumProps) {
   const handleDelete = () => {};
 
   return (
-    <div className="max-w-sm w-full bg-lightgray1 p-4 rounded-lg text-sm mb-6">
+    <div className="max-w-sm w-full bg-lightgray1 p-4 rounded-lg text-sm mb-6 select-none">
       <div className={`flex flex-row justify-between font-semibold text-lightblack ${props.className}`}>
         {props.title}
         <div className="flex flex-row">

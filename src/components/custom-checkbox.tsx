@@ -10,6 +10,7 @@ const Theme = createTheme({
 });
 
 interface CustomCheckboxProps {
+  callback?: (checked: boolean) => void;
   className?: string;
   text?: string;
 }
@@ -18,7 +19,11 @@ export function CustomCheckbox(props: CustomCheckboxProps) {
   return (
     <div className={`flex flex-row items-center ml-[-10px] ${props.className}`}>
       <ThemeProvider theme={Theme}>
-        <Checkbox />
+        <Checkbox
+          onClick={(e: any) => {
+            props.callback && props.callback(e.target.checked);
+          }}
+        />
       </ThemeProvider>
       <div className="text-sm text-lightblack flex items-start">{props.text}</div>
     </div>
