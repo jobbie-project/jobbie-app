@@ -5,7 +5,8 @@ interface ReviewCardMediumProps {
   title: string;
   subtitle: string;
   description?: string;
-  date?: string;
+  start_date?: string;
+  end_date?: string;
   canDelete: boolean;
   canEdit: boolean;
 }
@@ -26,7 +27,7 @@ export function ReviewCardMedium(props: ReviewCardMediumProps) {
       <div className="flex flex-col">
         <div className="mt-4 font-medium text-gray3 ">{props.subtitle}</div>
         <div className="mt-4 flex flex-row font-medium text-gray3">
-          Ciclo: {props.description} Desde {props.date}
+          {props.description ? `Ciclo: ${props.description}` : ''} Desde {props.start_date} até {props.end_date}
         </div>
       </div>
     </div>

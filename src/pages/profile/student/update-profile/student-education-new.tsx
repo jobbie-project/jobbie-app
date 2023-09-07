@@ -11,6 +11,7 @@ import moment from 'moment-timezone';
 import {CustomCheckbox} from '@/components/custom-checkbox';
 import {SelectDropdown} from '@/components/select-dropdown';
 import {setUserEducation} from '@/store/slices/profile-data';
+import {useState} from 'react';
 
 interface FormData {
   institution: string;
@@ -31,7 +32,7 @@ const degree = [
 
 export default function AddNewEducation() {
   const {register, handleSubmit} = useForm<FormData>();
-
+  const [current, setCurrent] = useState<boolean>(false);
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
@@ -40,7 +41,6 @@ export default function AddNewEducation() {
       if (!data.location) throw new Error('É necessário informar a Cidade.');
       if (!data.institution) throw new Error('É necessário informar a instituição.');
       if (!data.start_date) throw new Error('É necessário informar a data de ínicio do curso.');
-      if (!data.end_date) throw new Error('É necessário informar a data de fim do curso.');
       if (!data.course) throw new Error('É necessário informar o curso.');
       const isAfter = moment(data.start_date).isAfter(data.end_date);
       if (isAfter) throw new Error('A data de ínicio não pode ser maior que a data de fim.');
@@ -51,6 +51,7 @@ export default function AddNewEducation() {
           ...data,
           institution_name: data.institution,
           degree: data.course,
+          end_date: data.end_date ? data.end_date : 'Atualmente',
         }),
       );
       navigate('/registro/estudante/passo-4');
@@ -81,16 +82,17 @@ export default function AddNewEducation() {
               type="month"
               required
             />
-            <GeneralInput
-              register={register}
-              registerName="end_date"
-              label="Data de fim"
-              className="w-36"
-              type="month"
-              required
-            />
+            {!current && (
+              <GeneralInput
+                register={register}
+                registerName="end_date"
+                label="Data de fim"
+                className="w-36"
+                type="month"
+              />
+            )}
           </div>
-          <CustomCheckbox className="mt-2" text="Atualmente matriculado" />
+          <CustomCheckbox className="mt-2" text="Atualmente matriculado" callback={setCurrent} />
           <div className="mt-8 flex justify-center">
             <ButtonHover text={'Continuar'} type={'submit'} className="font-semibold text-base after:bg-redDefault" />
           </div>

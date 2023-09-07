@@ -31,7 +31,7 @@ export default function StudentRegisterStep4() {
             title={education[0].degree}
             subtitle={education[0].institution_name}
             description={education[0].actual_cycle}
-            date={moment(education[0].start_date).format('MMMM [de] YYYY')}
+            start_date={moment(education[0].start_date).format('MMMM [de] YYYY')}
           />
 
           {education.slice(1).map((item, index) => (
@@ -42,7 +42,8 @@ export default function StudentRegisterStep4() {
               title={item.degree}
               subtitle={item.institution_name}
               description={item.actual_cycle}
-              date={moment(item.start_date).format('MMMM [de] YYYY')}
+              start_date={moment(item.start_date).format('MMMM [de] YYYY')}
+              end_date={moment(item.end_date).format('MMMM [de] YYYY')}
             />
           ))}
           <AddNewButton onClick={() => navigate('/estudante/educacao/adicionar')} />
