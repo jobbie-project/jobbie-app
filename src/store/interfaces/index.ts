@@ -44,10 +44,6 @@ export interface ProfileFatecEducation {
   course_name: string;
   start_date: Date;
   actual_cycle: string;
-  location: {
-    city: string;
-    state: string;
-  };
 }
 
 export interface ProfileData {

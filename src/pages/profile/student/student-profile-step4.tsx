@@ -14,8 +14,7 @@ export default function StudentRegisterStep4() {
   const {handleSubmit} = useForm();
 
   const onSubmit = () => {
-    console.log(fatecEducation);
-    // navigate('/registro/estudante/passo-5');
+    navigate('/registro/estudante/passo-5');
   };
 
   return (

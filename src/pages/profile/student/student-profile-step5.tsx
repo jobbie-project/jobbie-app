@@ -33,23 +33,25 @@ export default function StudentRegisterStep5() {
 
   const onSubmit = (data: FormData) => {
     try {
-      const isAfter = moment(data.start_date).isAfter(data.end_date);
-      if (isAfter) throw new Error('A data de ínicio não pode ser maior que a data de fim.');
-      const isSame = moment(data.start_date).isSame(data.end_date);
-      if (isSame) throw new Error('A data de ínicio não pode ser a mesma que a data de fim.');
-      if (!data.location) throw new Error('É necessário informar a Cidade.');
-      const city = data.location.split(',')[0];
-      const state = data.location.split(',')[1];
-      if (!city || !state) throw new Error('É necessário informar a Cidade e o Estado, separados por vírgula.');
-      dispatch(
-        setUserPreviousExperience({
-          ...data,
-          location: {
-            city: data.location.split(',')[0],
-            state: data.location.split(',')[1],
-          },
-        }),
-      );
+      if (!dontHaveExperience) {
+        const isAfter = moment(data.start_date).isAfter(data.end_date);
+        if (isAfter) throw new Error('A data de ínicio não pode ser maior que a data de fim.');
+        const isSame = moment(data.start_date).isSame(data.end_date);
+        if (isSame) throw new Error('A data de ínicio não pode ser a mesma que a data de fim.');
+        if (!data.location) throw new Error('É necessário informar a Cidade.');
+        const city = data.location.split(',')[0];
+        const state = data.location.split(',')[1];
+        if (!city || !state) throw new Error('É necessário informar a Cidade e o Estado, separados por vírgula.');
+        dispatch(
+          setUserPreviousExperience({
+            ...data,
+            location: {
+              city: data.location.split(',')[0],
+              state: data.location.split(',')[1],
+            },
+          }),
+        );
+      }
       navigate('/registro/estudante/passo-6');
     } catch (error) {
       toastError(error);
