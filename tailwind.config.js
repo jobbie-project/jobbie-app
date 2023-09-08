@@ -1,8 +1,10 @@
 /** @type {import('tailwindcss').Config} */
 /* eslint-disable no-undef */
 /* eslint-disable @typescript-eslint/no-var-requires */
+const withMT = require('@material-tailwind/react/utils/withMT');
+
 const colors = require('tailwindcss/colors');
-module.exports = {
+module.exports = withMT({
   darkMode: ['class'],
   content: [
     './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
@@ -73,4 +75,4 @@ module.exports = {
     },
     plugins: [require('tailwindcss-animate'), require('tailwind-scrollbar-hide')],
   },
-};
+});
