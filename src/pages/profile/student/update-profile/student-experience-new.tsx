@@ -7,19 +7,18 @@ import GeneralInput from '@/components/general-input';
 import {RootState, useAppDispatch} from '@/store/store';
 import {useSelector} from 'react-redux';
 import {SelectCountry} from '@/components/select-country';
-import moment from 'moment-timezone';
+import moment from '@/utils/moment';
 import {CustomCheckbox} from '@/components/custom-checkbox';
 import {SelectDropdown} from '@/components/select-dropdown';
 import {Textarea} from '@/components/ui/textarea';
-
 import {setUserEducation, setUserPreviousExperience} from '@/store/slices/profile-data';
 import {useState} from 'react';
 
 interface FormData {
   company_name: string;
   position: string;
-  start_date: string;
-  end_date: string;
+  start_date: Date;
+  end_date?: Date;
   location: string;
   description: string;
 }

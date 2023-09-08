@@ -4,23 +4,21 @@ import {toastError} from '@/utils/toast-error';
 import {useForm} from 'react-hook-form';
 import {useNavigate} from 'react-router-dom';
 import GeneralInput from '@/components/general-input';
-import {RootState, useAppDispatch} from '@/store/store';
-import {useSelector} from 'react-redux';
+import {useAppDispatch} from '@/store/store';
 import {SelectCountry} from '@/components/select-country';
-import moment from 'moment-timezone';
 import {CustomCheckbox} from '@/components/custom-checkbox';
 import {SelectDropdown} from '@/components/select-dropdown';
 import {Textarea} from '@/components/ui/textarea';
-
 import {setUserEducation, setUserPreviousExperience} from '@/store/slices/profile-data';
+import {TextBox} from '@/components/text-box';
 import {useState} from 'react';
 import {Checkbox} from '@/components/ui/checkbox';
-
+import moment from '@/utils/moment';
 interface FormData {
   company_name: string;
   position: string;
-  start_date: string;
-  end_date: string;
+  start_date: Date;
+  end_date?: Date;
   location: string;
   description: string;
 }
@@ -29,7 +27,6 @@ export default function StudentRegisterStep5() {
   const [dontHaveExperience, setDontHaveExperience] = useState<boolean>(false);
   const [currentJob, setCurrentJob] = useState<boolean>(false);
   const {register, handleSubmit} = useForm<FormData>();
-  const {previous_experience} = useSelector((state: RootState) => state.profileData);
 
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
@@ -40,6 +37,10 @@ export default function StudentRegisterStep5() {
       if (isAfter) throw new Error('A data de ínicio não pode ser maior que a data de fim.');
       const isSame = moment(data.start_date).isSame(data.end_date);
       if (isSame) throw new Error('A data de ínicio não pode ser a mesma que a data de fim.');
+      if (!data.location) throw new Error('É necessário informar a Cidade.');
+      const city = data.location.split(',')[0];
+      const state = data.location.split(',')[1];
+      if (!city || !state) throw new Error('É necessário informar a Cidade e o Estado, separados por vírgula.');
       dispatch(
         setUserPreviousExperience({
           ...data,

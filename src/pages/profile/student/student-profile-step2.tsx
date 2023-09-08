@@ -10,8 +10,7 @@ import {useNavigate} from 'react-router-dom';
 
 interface FormData {
   street: string;
-  city: string;
-  state: string;
+  location: string;
   zip_code: string;
 }
 
@@ -23,8 +22,18 @@ export default function StudentRegisterStep2() {
 
   const onSubmit = (data: FormData) => {
     try {
-      if (!data.city) throw new Error('Insira a cidade em que você reside.');
-      dispatch(setUserAddress(data));
+      if (!data.location) throw new Error('Insira a cidade em que você reside.');
+      const city = data.location.split(',')[0];
+      const state = data.location.split(',')[1];
+      if (!city || !state) throw new Error('É necessário informar a Cidade e o Estado, separados por vírgula.');
+
+      dispatch(
+        setUserAddress({
+          ...data,
+          city: data.location.split(',')[0],
+          state: data.location.split(',')[1],
+        }),
+      );
       navigate('/registro/estudante/passo-3');
     } catch (error) {
       toastError(error);
@@ -41,7 +50,7 @@ export default function StudentRegisterStep2() {
           </div>
           <SelectCountry />
           <GeneralInput register={register} registerName="street" label="Endereço" />
-          <GeneralInput register={register} registerName="city" label="Cidade, Estado" required />
+          <GeneralInput register={register} registerName="location" label="Cidade, Estado" required />
           <GeneralInput register={register} registerName="zip_code" label="Código postal" />
 
           <div className="mt-8 flex justify-center">

@@ -14,7 +14,7 @@ interface ReviewCardMediumProps {
 export function ReviewCardMedium(props: ReviewCardMediumProps) {
   const handleEdit = () => {};
   const handleDelete = () => {};
-
+  console.log(props.end_date);
   return (
     <div className="max-w-sm w-full bg-lightgray1 p-4 rounded-lg text-sm mb-6 select-none">
       <div className={`flex flex-row justify-between font-semibold text-lightblack ${props.className}`}>
@@ -27,7 +27,8 @@ export function ReviewCardMedium(props: ReviewCardMediumProps) {
       <div className="flex flex-col">
         <div className="mt-4 font-medium text-gray3 ">{props.subtitle}</div>
         <div className="mt-4 flex flex-row font-medium text-gray3">
-          {props.description ? `Ciclo: ${props.description}` : ''} Desde {props.start_date} até {props.end_date}
+          {props.description ? `Ciclo: ${props.description}` : ''} Desde {props.start_date} até{' '}
+          {props.end_date ?? 'Atualmente'}
         </div>
       </div>
     </div>

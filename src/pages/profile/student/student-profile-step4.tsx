@@ -10,11 +10,12 @@ import {useNavigate} from 'react-router-dom';
 
 export default function StudentRegisterStep4() {
   const navigate = useNavigate();
-  const {education} = useSelector((state: RootState) => state.profileData);
+  const {education, fatecEducation} = useSelector((state: RootState) => state.profileData);
   const {handleSubmit} = useForm();
 
   const onSubmit = () => {
-    navigate('/registro/estudante/passo-5');
+    console.log(fatecEducation);
+    // navigate('/registro/estudante/passo-5');
   };
 
   return (
@@ -28,22 +29,21 @@ export default function StudentRegisterStep4() {
           <ReviewCardMedium
             canDelete={false}
             canEdit={true}
-            title={education[0].degree}
-            subtitle={education[0].institution_name}
-            description={education[0].actual_cycle}
-            start_date={moment(education[0].start_date).format('MMMM [de] YYYY')}
+            title={fatecEducation.course_name}
+            subtitle={fatecEducation.institution_name}
+            description={fatecEducation.actual_cycle}
+            start_date={moment(fatecEducation.start_date).format('MMMM [de] YYYY')}
           />
 
-          {education.slice(1).map((item, index) => (
+          {education.map((item, index) => (
             <ReviewCardMedium
               key={index}
               canDelete={true}
               canEdit={true}
-              title={item.degree}
+              title={item.course}
               subtitle={item.institution_name}
-              description={item.actual_cycle}
               start_date={moment(item.start_date).format('MMMM [de] YYYY')}
-              end_date={moment(item.end_date).format('MMMM [de] YYYY')}
+              end_date={item.end_date && moment(item.end_date).format('MMMM [de] YYYY')}
             />
           ))}
           <AddNewButton onClick={() => navigate('/estudante/educacao/adicionar')} />

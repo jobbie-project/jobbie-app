@@ -1,24 +1,23 @@
 import {PayloadAction, createSlice} from '@reduxjs/toolkit';
-import {ProfileAddress, ProfileData, ProfileEducation, ProfileLinks, ProfilePreviousExperience} from '../interfaces';
+import {
+  ProfileAddress,
+  ProfileData,
+  ProfileEducation,
+  ProfileFatecEducation,
+  ProfileLinks,
+  ProfilePreviousExperience,
+} from '../interfaces';
 
 const initialState: ProfileData = {
   name: '',
   phone: '',
-  address: {
-    street: '',
-    city: '',
-    state: '',
-    zip_code: '',
-  },
+  address: {} as ProfileAddress,
   education: [],
+  fatecEducation: {} as ProfileFatecEducation,
   previous_experience: [],
   tech_stacks: [],
   certifications: [],
-  links: {
-    github: '',
-    linkedin: '',
-    portfolio: '',
-  },
+  links: {} as ProfileLinks,
 };
 
 export const profileDataSlice = createSlice({
@@ -28,7 +27,9 @@ export const profileDataSlice = createSlice({
     setUserAddress: (state, action: PayloadAction<ProfileAddress>) => {
       state.address = action.payload;
     },
-
+    setUserFatecEducation: (state, action: PayloadAction<ProfileFatecEducation>) => {
+      state.fatecEducation = action.payload;
+    },
     setUserEducation: (state, action: PayloadAction<ProfileEducation>) => {
       state.education.push(action.payload);
     },
@@ -83,6 +84,7 @@ export const profileDataSlice = createSlice({
 export const {
   setUserAddress,
   setUserEducation,
+  setUserFatecEducation,
   updateUserEducation,
   deleteUserEducation,
   setUserPreviousExperience,

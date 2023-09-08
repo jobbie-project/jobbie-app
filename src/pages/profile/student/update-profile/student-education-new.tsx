@@ -4,23 +4,14 @@ import {toastError} from '@/utils/toast-error';
 import {useForm} from 'react-hook-form';
 import {useNavigate} from 'react-router-dom';
 import GeneralInput from '@/components/general-input';
-import {RootState, useAppDispatch} from '@/store/store';
-import {useSelector} from 'react-redux';
+import {useAppDispatch} from '@/store/store';
 import {SelectCountry} from '@/components/select-country';
-import moment from 'moment-timezone';
+import moment from '@/utils/moment';
 import {CustomCheckbox} from '@/components/custom-checkbox';
 import {SelectDropdown} from '@/components/select-dropdown';
 import {setUserEducation} from '@/store/slices/profile-data';
 import {useState} from 'react';
-
-interface FormData {
-  institution: string;
-  degree: string;
-  start_date: string;
-  end_date: string;
-  location: string;
-  course: string;
-}
+import {ProfileEducation} from '@/store/interfaces';
 
 const degree = [
   {value: '1', label: 'Técnico'},
@@ -31,29 +22,22 @@ const degree = [
 ];
 
 export default function AddNewEducation() {
-  const {register, handleSubmit} = useForm<FormData>();
+  const {register, handleSubmit} = useForm<ProfileEducation>();
   const [current, setCurrent] = useState<boolean>(false);
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
-  const onSubmit = (data: FormData) => {
+  const onSubmit = (data: ProfileEducation) => {
     try {
       if (!data.location) throw new Error('É necessário informar a Cidade.');
-      if (!data.institution) throw new Error('É necessário informar a instituição.');
+      if (!data.institution_name) throw new Error('É necessário informar a instituição.');
       if (!data.start_date) throw new Error('É necessário informar a data de ínicio do curso.');
       if (!data.course) throw new Error('É necessário informar o curso.');
       const isAfter = moment(data.start_date).isAfter(data.end_date);
       if (isAfter) throw new Error('A data de ínicio não pode ser maior que a data de fim.');
       const isSame = moment(data.start_date).isSame(data.end_date);
       if (isSame) throw new Error('A data de ínicio não pode ser a mesma que a data de fim.');
-      dispatch(
-        setUserEducation({
-          ...data,
-          institution_name: data.institution,
-          degree: data.course,
-          end_date: data.end_date ? data.end_date : 'Atualmente',
-        }),
-      );
+      dispatch(setUserEducation({...data, end_date: current ? undefined : data.end_date}));
       navigate('/registro/estudante/passo-4');
     } catch (error) {
       toastError(error);
@@ -70,7 +54,7 @@ export default function AddNewEducation() {
           </div>
           <SelectCountry />
           <GeneralInput label={'Cidade, Estado'} register={register} registerName="location" required />
-          <GeneralInput label={'Nome da Instituição'} register={register} registerName="institution" required />
+          <GeneralInput label={'Nome da Instituição'} register={register} registerName="institution_name" required />
           <GeneralInput label={'Nome do Curso'} register={register} registerName="course" required />
           <SelectDropdown label={'Grau'} options={degree} />
           <div className="w-full inline-flex mt-4 justify-between">

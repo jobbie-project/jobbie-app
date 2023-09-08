@@ -20,7 +20,6 @@ export default function GeneralInput<T extends FieldValues>(props: {
             {...inputProps}
             onChange={e => props.callback && props.callback(e.target.value)}
             id={`${props.registerName}`}
-            placeholder=""
             className="peer h-10 w-full border-b-[3px] border-gray1 text-gray-900 focus:outline-none focus:border-redDefault text-sm"
             type={props.type || 'text'}
           />

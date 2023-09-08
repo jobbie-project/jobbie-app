@@ -3,20 +3,19 @@ import React from 'react';
 
 interface SelectDropdownProps {
   label: string;
-  callback?: (value: number) => void;
+  callback?: (value: string) => void;
   className?: string;
   options: {value: string; label: string}[];
   disabled?: boolean;
-  defaultValue?: number;
+  defaultValue?: string;
 }
 
 export function SelectDropdown(props: SelectDropdownProps) {
-  const [value, setValue] = React.useState<number | undefined>(props.defaultValue || undefined);
+  const [value, setValue] = React.useState<string | undefined>(props.defaultValue || undefined);
 
-  const handleChange = (e: string | undefined) => {
-    const newValue = Number(e) || undefined;
-    setValue(newValue);
-    props.callback && newValue && props.callback(newValue);
+  const handleChange = (selected: string | undefined) => {
+    setValue(selected);
+    props.callback && selected && props.callback(selected);
   };
 
   return (
@@ -29,7 +28,7 @@ export function SelectDropdown(props: SelectDropdownProps) {
         label={props.label}
         disabled={props.disabled}
         onChange={handleChange}
-        value={props.defaultValue ? `${value}` : undefined}
+        value={value}
         animate={{
           mount: {y: 0},
           unmount: {y: 25},

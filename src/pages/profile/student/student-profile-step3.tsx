@@ -7,17 +7,13 @@ import GeneralInput from '@/components/general-input';
 import {SelectDropdown} from '@/components/select-dropdown';
 import {useAppDispatch} from '@/store/store';
 
-import {setUserEducation} from '@/store/slices/profile-data';
-
-interface FormData {
-  institution: number;
-  degree: number;
-  actual_cycle: string;
-  start_date: string;
-}
+import {setUserFatecEducation} from '@/store/slices/profile-data';
+import {ProfileFatecEducation} from '@/store/interfaces';
 
 export default function StudentRegisterStep3() {
-  const {register, handleSubmit, setValue} = useForm<FormData>({defaultValues: {institution: 7}});
+  const {register, handleSubmit, setValue} = useForm<ProfileFatecEducation>({
+    defaultValues: {institution: '7'},
+  });
 
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
@@ -38,17 +34,18 @@ export default function StudentRegisterStep3() {
     {value: '3', label: 'Sistemas Biomédicos'},
   ];
 
-  const onSubmit = (data: FormData) => {
+  const onSubmit = (data: ProfileFatecEducation) => {
     try {
       if (!data.actual_cycle) throw new Error('É necessário informar o ciclo atual.');
       if (!data.start_date) throw new Error('É necessário informar a data de ínicio do curso.');
-      if (!data.degree) throw new Error('É necessário informar o curso.');
+      if (!data.course) throw new Error('É necessário informar o curso.');
       if (!data.institution) throw new Error('É necessário informar a instituição.');
       dispatch(
-        setUserEducation({
+        setUserFatecEducation({
           ...data,
-          institution_name: institutions[data.institution - 1].label,
-          degree: courses[data.degree - 1].label,
+          institution: institutions.find(institution => institution.value === data.institution)?.value || '',
+          institution_name: institutions.find(institution => institution.value === data.institution)?.label || '',
+          course_name: courses.find(course => course.value === data.course)?.label || '',
         }),
       );
       navigate('/registro/estudante/passo-4');
@@ -72,11 +69,11 @@ export default function StudentRegisterStep3() {
             label={'Selecione sua Instituição'}
             options={institutions}
             disabled={true}
-            defaultValue={7}
+            defaultValue={institutions[6].value}
             className="bg-lightgray1"
           />
           <SelectDropdown
-            callback={value => setValue('degree', value)}
+            callback={value => setValue('course', value)}
             label={'Selecione seu Curso'}
             options={courses}
           />
