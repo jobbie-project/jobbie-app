@@ -14,7 +14,6 @@ import {Textarea} from '@/components/ui/textarea';
 
 import {setUserEducation, setUserPreviousExperience} from '@/store/slices/profile-data';
 import {useState} from 'react';
-import {Checkbox} from '@/components/ui/checkbox';
 
 interface FormData {
   company_name: string;
@@ -25,8 +24,7 @@ interface FormData {
   description: string;
 }
 
-export default function StudentRegisterStep5() {
-  const [dontHaveExperience, setDontHaveExperience] = useState<boolean>(false);
+export default function AddNewExperience() {
   const [currentJob, setCurrentJob] = useState<boolean>(false);
   const {register, handleSubmit} = useForm<FormData>();
   const {previous_experience} = useSelector((state: RootState) => state.profileData);
@@ -40,6 +38,7 @@ export default function StudentRegisterStep5() {
       if (isAfter) throw new Error('A data de ínicio não pode ser maior que a data de fim.');
       const isSame = moment(data.start_date).isSame(data.end_date);
       if (isSame) throw new Error('A data de ínicio não pode ser a mesma que a data de fim.');
+
       dispatch(
         setUserPreviousExperience({
           ...data,
@@ -63,43 +62,37 @@ export default function StudentRegisterStep5() {
           <div className="max-w-xs w-full">
             <p className="text-black font-semibold text-base select-none mt-4">Adicionando Experiência Profissional</p>
           </div>
-          <div className="flex items-center mt-6">
-            <Checkbox id="noexperience" onClick={() => setDontHaveExperience(!dontHaveExperience)} />
-            <label htmlFor="noexperience" className="text-sm leading-none peer-disabled:cursor-not-allowed ml-2 mt-1">
-              Não tenho experiência
-            </label>
-          </div>
-          {!dontHaveExperience && (
-            <>
-              <SelectCountry />
-              <GeneralInput label={'Cidade, Estado'} register={register} registerName="location" required />
-              <GeneralInput label={'Cargo'} register={register} registerName="position" required />
-              <GeneralInput label={'Nome da Empresa'} register={register} registerName="company_name" />
-              <div className="w-full inline-flex mt-4 justify-between">
+
+          <>
+            <SelectCountry />
+            <GeneralInput label={'Cidade, Estado'} register={register} registerName="location" required />
+            <GeneralInput label={'Cargo'} register={register} registerName="position" required />
+            <GeneralInput label={'Nome da Empresa'} register={register} registerName="company_name" />
+            <div className="w-full inline-flex mt-4 justify-between">
+              <GeneralInput
+                register={register}
+                registerName="start_date"
+                label="Data de ínicio"
+                className="w-36"
+                type="month"
+                required
+              />
+              {!currentJob && (
                 <GeneralInput
                   register={register}
-                  registerName="start_date"
-                  label="Data de ínicio"
+                  registerName="end_date"
+                  label="Data de fim"
                   className="w-36"
                   type="month"
                   required
                 />
-                {!currentJob && (
-                  <GeneralInput
-                    register={register}
-                    registerName="end_date"
-                    label="Data de fim"
-                    className="w-36"
-                    type="month"
-                    required
-                  />
-                )}
-              </div>
-              <CustomCheckbox className="mt-2" text="Emprego atual" callback={setCurrentJob} />
-              <div className="text-sm font-semibold mt-4">Descrição:</div>
-              <Textarea placeholder="Fale sobre as atividades executadas nesse cargo." className="mt-4 text-sm" />
-            </>
-          )}
+              )}
+            </div>
+            <CustomCheckbox className="mt-2" text="Emprego atual" callback={setCurrentJob} />
+            <div className="text-sm font-semibold mt-4">Descrição:</div>
+            <Textarea placeholder="Fale sobre as atividades executadas nesse cargo." className="mt-4 text-sm" />
+          </>
+
           <div className="mt-8 flex justify-center">
             <ButtonHover text={'Continuar'} type={'submit'} className="font-semibold text-base after:bg-redDefault" />
           </div>
