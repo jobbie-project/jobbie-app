@@ -7,11 +7,11 @@ import GeneralInput from '@/components/general-input';
 import {useAppDispatch} from '@/store/store';
 import {SelectCountry} from '@/components/select-country';
 import moment from '@/utils/moment';
-import {CustomCheckbox} from '@/components/custom-checkbox';
 import {SelectDropdown} from '@/components/select-dropdown';
 import {setUserEducation} from '@/store/slices/profile-data';
 import {useState} from 'react';
 import {ProfileEducation} from '@/store/interfaces';
+import {Checkbox} from '@/components/ui/checkbox';
 
 const degree = [
   {value: '1', label: 'Técnico'},
@@ -76,7 +76,13 @@ export default function AddNewEducation() {
               />
             )}
           </div>
-          <CustomCheckbox className="mt-2" text="Atualmente matriculado" callback={setCurrent} />
+          <div className="flex items-center mt-4">
+            <Checkbox id="current" onClick={() => setCurrent(!current)} />
+            <label htmlFor="current" className="ml-2 text-sm">
+              Emprego Atual
+            </label>
+          </div>
+
           <div className="mt-8 flex justify-center">
             <ButtonHover text={'Continuar'} type={'submit'} className="font-semibold text-base after:bg-redDefault" />
           </div>

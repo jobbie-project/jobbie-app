@@ -27,7 +27,7 @@ export default function StudentRegisterStep6() {
             <p className="text-black font-semibold text-lg select-none mt-4 mb-4">Revise a Experiência Profissional</p>
           </div>
 
-          {previous_experience.length > 1 ? (
+          {previous_experience.length > 0 ? (
             previous_experience.map((item, index) => (
               <ReviewCardMedium
                 key={index}
@@ -44,12 +44,12 @@ export default function StudentRegisterStep6() {
               <Checkbox id="noexperience" checked disabled />
               <label
                 htmlFor="noexperience"
-                className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed font-semibold ml-2">
+                className="text-sm leading-none peer-disabled:cursor-not-allowed font-semibold ml-2">
                 Nenhuma Experiência Profissional Adicionada
               </label>
             </div>
           )}
-          {previous_experience.length > 1 ? (
+          {previous_experience.length > 0 ? (
             <AddNewButton onClick={() => navigate('/estudante/experiencia/adicionar')} />
           ) : (
             <div></div>

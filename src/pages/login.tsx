@@ -6,7 +6,7 @@ import {toastError} from '@/utils/toast-error';
 import {GeneralButton} from '@/components/general-button';
 import * as EmailValidator from 'email-validator';
 import GeneralInput from '@/components/general-input';
-import {CustomCheckbox} from '@/components/custom-checkbox';
+import {Checkbox} from '@/components/ui/checkbox';
 
 interface FormData {
   email: string;
@@ -52,7 +52,12 @@ export default function Login() {
                 </div>
 
                 <div className="flex justify-between mt-6 items-center">
-                  <CustomCheckbox text="Lembrar de mim" />
+                  <div className="flex items-center">
+                    <Checkbox id="remember" className="mb-1" />
+                    <label htmlFor="remember" className="text-sm leading-none peer-disabled:cursor-not-allowed ml-2">
+                      Lembrar de mim
+                    </label>
+                  </div>
 
                   <div
                     onClick={() => navigate('/recuperacao-de-conta')}

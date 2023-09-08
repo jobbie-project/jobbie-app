@@ -26,8 +26,8 @@ export function ReviewCardMedium(props: ReviewCardMediumProps) {
       <div className="flex flex-col">
         <div className="mt-4 font-medium text-gray3 ">{props.subtitle}</div>
         <div className="mt-4 flex flex-row font-medium text-gray3">
-          {props.description ? `Ciclo: ${props.description}` : ''} Desde {props.start_date} até{' '}
-          {props.end_date ?? 'Atualmente'}
+          {props.description ? `Ciclo: ${props.description}` : ''} Desde {props.start_date}
+          {props.end_date ? ' até atualmente.' : ''}
         </div>
       </div>
     </div>

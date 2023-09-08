@@ -1,9 +1,24 @@
 import React from 'react';
 import RegisterHeader from '@/components/register-header';
 import {RouteButton} from '@/components/route-button';
+import {RadioGroup, RadioGroupItem} from '@/components/ui/radio-group';
+import {Label} from '@/components/ui/label';
+import {toastError} from '@/utils/toast-error';
+import {GeneralButton} from '@/components/general-button';
+import {useNavigate} from 'react-router-dom';
 
 export default function Register() {
   const [userType, setUserType] = React.useState<'student' | 'company'>();
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    try {
+      if (!userType) throw new Error('Selecione um tipo de usuário.');
+      navigate(`${userType === 'student' ? `/registro/estudante` : `/registro/empresa`}`);
+    } catch (error) {
+      toastError(error);
+    }
+  };
 
   return (
     <>
@@ -13,41 +28,22 @@ export default function Register() {
           <div className=" mt-24 w-full font-semibold text-xl text-black">Boas vindas.</div>
           <p className="mt-6">Tudo pronto para dar o próximo passo?</p>
 
-          <div className="inline-block mt-10 w-full max-w-lg">
-            <input
-              onChange={() => setUserType('student')}
-              type="radio"
-              name="radio"
-              id="candidato"
-              value="candidato"
-              className="accent-red h-4 w-4 rounded-full border-gray-300 align-middle"
-            />
-            <label className="ml-2 text-black font-semibold text-base align-middle" htmlFor="candidato">
-              Candidato
-            </label>
-          </div>
-
-          <div className="inline-block mt-8 w-full max-w-lg">
-            <input
-              className="accent-red h-4 w-4 rounded-full border-gray-300 align-middle"
-              onChange={() => setUserType('company')}
-              type="radio"
-              name="radio"
-              id="empresa"
-              value="empresa"
-            />
-            <label className="ml-2 text-black font-semibold text-base align-middle" htmlFor="empresa">
-              Empresa
-            </label>
+          <div className="inline-block mt-10 w-full">
+            <RadioGroup defaultValue="option">
+              <div className="flex items-center space-x-2">
+                <RadioGroupItem onClick={() => setUserType('student')} value="student" id="r1" />
+                <Label htmlFor="r1">Candidato</Label>
+              </div>
+              <div className="flex items-center space-x-2 mt-2">
+                <RadioGroupItem onClick={() => setUserType('company')} value="company" id="r2" />
+                <Label htmlFor="r2">Empresa</Label>
+              </div>
+            </RadioGroup>
           </div>
         </div>
 
         <div className="mt-6 w-[336px]">
-          <RouteButton
-            type="submit"
-            text="Continuar"
-            link={userType === 'student' ? `/registro/estudante` : `/registro/empresa`}
-          />
+          <GeneralButton type="submit" text="Continuar" callback={handleClick} />
         </div>
       </div>
     </>

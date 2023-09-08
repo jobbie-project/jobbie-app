@@ -43,6 +43,9 @@ export const profileDataSlice = createSlice({
     setUserPreviousExperience: (state, action: PayloadAction<ProfilePreviousExperience>) => {
       state.previous_experience.push(action.payload);
     },
+    eraseUserPreviousExperience: state => {
+      state.previous_experience = [];
+    },
     updateUserPreviousExperience: (
       state,
       action: PayloadAction<{index: number; previousExperience: ProfilePreviousExperience}>,
@@ -97,6 +100,7 @@ export const {
   deleteUserTechStacks,
   setUserCertifications,
   deleteUserCertifications,
+  eraseUserPreviousExperience,
 } = profileDataSlice.actions;
 
 export default profileDataSlice.reducer;

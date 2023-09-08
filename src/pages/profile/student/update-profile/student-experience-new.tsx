@@ -8,11 +8,11 @@ import {RootState, useAppDispatch} from '@/store/store';
 import {useSelector} from 'react-redux';
 import {SelectCountry} from '@/components/select-country';
 import moment from '@/utils/moment';
-import {CustomCheckbox} from '@/components/custom-checkbox';
 import {SelectDropdown} from '@/components/select-dropdown';
 import {Textarea} from '@/components/ui/textarea';
 import {setUserEducation, setUserPreviousExperience} from '@/store/slices/profile-data';
 import {useState} from 'react';
+import {Checkbox} from '@/components/ui/checkbox';
 
 interface FormData {
   company_name: string;
@@ -33,20 +33,24 @@ export default function AddNewExperience() {
 
   const onSubmit = (data: FormData) => {
     try {
-      const isAfter = moment(data.start_date).isAfter(data.end_date);
-      if (isAfter) throw new Error('A data de ínicio não pode ser maior que a data de fim.');
-      const isSame = moment(data.start_date).isSame(data.end_date);
-      if (isSame) throw new Error('A data de ínicio não pode ser a mesma que a data de fim.');
+      if (!previous_experience) {
+        if (!data.location) throw new Error('É necessário informar a Cidade.');
+        if (!data.position) throw new Error('É necessário informar o cargo.');
+        const isAfter = moment(data.start_date).isAfter(data.end_date);
+        if (isAfter) throw new Error('A data de ínicio não pode ser maior que a data de fim.');
+        const isSame = moment(data.start_date).isSame(data.end_date);
+        if (isSame) throw new Error('A data de ínicio não pode ser a mesma que a data de fim.');
 
-      dispatch(
-        setUserPreviousExperience({
-          ...data,
-          location: {
-            city: data.location.split(',')[0],
-            state: data.location.split(',')[1],
-          },
-        }),
-      );
+        dispatch(
+          setUserPreviousExperience({
+            ...data,
+            location: {
+              city: data.location.split(',')[0],
+              state: data.location.split(',')[1],
+            },
+          }),
+        );
+      }
       navigate('/registro/estudante/passo-6');
     } catch (error) {
       toastError(error);
@@ -87,7 +91,8 @@ export default function AddNewExperience() {
                 />
               )}
             </div>
-            <CustomCheckbox className="mt-2" text="Emprego atual" callback={setCurrentJob} />
+            <Checkbox id="current" className="mt-2" onClick={() => setCurrentJob(!{setCurrentJob})} />
+            <label htmlFor="current">Emprego Atual</label>
             <div className="text-sm font-semibold mt-4">Descrição:</div>
             <Textarea placeholder="Fale sobre as atividades executadas nesse cargo." className="mt-4 text-sm" />
           </>

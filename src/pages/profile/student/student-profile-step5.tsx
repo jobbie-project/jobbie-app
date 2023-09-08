@@ -6,11 +6,8 @@ import {useNavigate} from 'react-router-dom';
 import GeneralInput from '@/components/general-input';
 import {useAppDispatch} from '@/store/store';
 import {SelectCountry} from '@/components/select-country';
-import {CustomCheckbox} from '@/components/custom-checkbox';
-import {SelectDropdown} from '@/components/select-dropdown';
 import {Textarea} from '@/components/ui/textarea';
-import {setUserEducation, setUserPreviousExperience} from '@/store/slices/profile-data';
-import {TextBox} from '@/components/text-box';
+import {eraseUserPreviousExperience, setUserEducation, setUserPreviousExperience} from '@/store/slices/profile-data';
 import {useState} from 'react';
 import {Checkbox} from '@/components/ui/checkbox';
 import moment from '@/utils/moment';
@@ -51,6 +48,8 @@ export default function StudentRegisterStep5() {
             },
           }),
         );
+      } else {
+        dispatch(eraseUserPreviousExperience());
       }
       navigate('/registro/estudante/passo-6');
     } catch (error) {
@@ -98,7 +97,13 @@ export default function StudentRegisterStep5() {
                   />
                 )}
               </div>
-              <CustomCheckbox className="mt-2" text="Emprego atual" callback={setCurrentJob} />
+
+              <div className="flex items-center mt-4">
+                <Checkbox id="current" onClick={() => setCurrentJob(!currentJob)} />
+                <label htmlFor="current" className="ml-2 text-sm">
+                  Emprego Atual
+                </label>
+              </div>
               <div className="text-sm font-semibold mt-4">Descrição:</div>
               <Textarea placeholder="Fale sobre as atividades executadas nesse cargo." className="mt-4 text-sm" />
             </>
