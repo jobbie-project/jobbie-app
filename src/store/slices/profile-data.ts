@@ -1,102 +1,80 @@
-import {EducationLevel} from '@/interfaces/education-level';
-import {createSlice} from '@reduxjs/toolkit';
+import {PayloadAction, createSlice} from '@reduxjs/toolkit';
+import {ProfileAddress, ProfileData, ProfileEducation, ProfileLinks, ProfilePreviousExperience} from '../interfaces';
+
+const initialState: ProfileData = {
+  name: '',
+  phone: '',
+  address: {
+    street: '',
+    city: '',
+    state: '',
+    zip_code: '',
+  },
+  education: [],
+  previous_experience: [],
+  tech_stacks: [],
+  certifications: [],
+  links: {
+    github: '',
+    linkedin: '',
+    portfolio: '',
+  },
+};
 
 export const profileDataSlice = createSlice({
   name: 'profileData',
-  initialState: {
-    name: '',
-    phone: '',
-    address: {
-      street: '',
-      city: '',
-      state: '',
-      zip_code: '',
-    },
-    education: [
-      {
-        institution_name: '',
-        degree: '',
-        level: null as EducationLevel | null,
-        start_date: '',
-        end_date: '',
-        actual_cycle: '',
-        course: '',
-        location: {
-          city: '',
-          state: '',
-        },
-      },
-    ],
-    previous_experience: [
-      {
-        company_name: '',
-        position: '',
-        start_date: '',
-        end_date: '',
-        location: {
-          city: '',
-          state: '',
-        },
-        description: '',
-      },
-    ],
-    tech_stacks: [''],
-    certifications: [''],
-    links: {
-      github: '',
-      linkedin: '',
-      portfolio: '',
-    },
-  },
+  initialState: initialState,
   reducers: {
-    setUserAddress: (state, action) => {
+    setUserAddress: (state, action: PayloadAction<ProfileAddress>) => {
       state.address = action.payload;
     },
 
-    setUserEducation: (state, action) => {
-      !state.education[0].institution_name && (state.education = []);
+    setUserEducation: (state, action: PayloadAction<ProfileEducation>) => {
       state.education.push(action.payload);
     },
-    updateUserEducation: (state, action) => {
+    updateUserEducation: (state, action: PayloadAction<{index: number; education: ProfileEducation}>) => {
       state.education[action.payload.index] = action.payload.education;
     },
-    deleteUserEducation: (state, action) => {
+    deleteUserEducation: (state, action: PayloadAction<{index: number}>) => {
       state.education.splice(action.payload.index, 1);
     },
 
-    setUserPreviousExperience: (state, action) => {
+    setUserPreviousExperience: (state, action: PayloadAction<ProfilePreviousExperience>) => {
       state.previous_experience.push(action.payload);
     },
-    updateUserPreviousExperience: (state, action) => {
+    updateUserPreviousExperience: (
+      state,
+      action: PayloadAction<{index: number; previousExperience: ProfilePreviousExperience}>,
+    ) => {
       state.previous_experience[action.payload.index] = action.payload.previousExperience;
     },
-    deleteUserPreviousExperience: (state, action) => {
+    deleteUserPreviousExperience: (state, action: PayloadAction<{index: number}>) => {
       state.previous_experience.splice(action.payload.index, 1);
     },
 
-    setUserLinks: (state, action) => {
-      state.links = action.payload;
+    setUserLinks: (state, action: PayloadAction<ProfileLinks>) => {
+      state.links = {...state.links, ...action.payload};
     },
 
-    setUserName: (state, action) => {
+    setUserName: (state, action: PayloadAction<string>) => {
       state.name = action.payload;
     },
 
-    setUserPhone: (state, action) => {
+    setUserPhone: (state, action: PayloadAction<string>) => {
       state.phone = action.payload;
     },
 
-    setUserTechStacks: (state, action) => {
+    setUserTechStacks: (state, action: PayloadAction<string>) => {
       state.tech_stacks.push(action.payload);
     },
-    deleteUserTechStacks: (state, action) => {
+    deleteUserTechStacks: (state, action: PayloadAction<{index: number}>) => {
       state.tech_stacks.splice(action.payload.index, 1);
     },
 
-    setUserCertifications: (state, action) => {
+    setUserCertifications: (state, action: PayloadAction<string>) => {
       state.certifications.push(action.payload);
     },
-    deleteUserCertifications: (state, action) => {
+    deleteUserCertifications: (state, action: PayloadAction<{index: number}>) => {
       state.certifications.splice(action.payload.index, 1);
     },
   },
