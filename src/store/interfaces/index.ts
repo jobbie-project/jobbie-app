@@ -3,7 +3,7 @@ import {EducationLevel} from '@/interfaces/education-level';
 export interface ProfileEducation {
   institution_name: string;
   course: string;
-  degree: EducationLevel | null;
+  degree: string;
   start_date: Date;
   end_date?: Date;
   location: {

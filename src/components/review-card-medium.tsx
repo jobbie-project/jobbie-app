@@ -1,4 +1,7 @@
+import {deleteUserEducation} from '@/store/slices/profile-data';
+import {useAppDispatch} from '@/store/store';
 import {FiEdit, FiTrash} from 'react-icons/fi';
+import {useNavigate} from 'react-router-dom';
 
 interface ReviewCardMediumProps {
   className?: string;
@@ -9,11 +12,27 @@ interface ReviewCardMediumProps {
   end_date?: string;
   canDelete: boolean;
   canEdit: boolean;
+  index?: number;
+  isFatec?: boolean;
 }
 
 export function ReviewCardMedium(props: ReviewCardMediumProps) {
-  const handleEdit = () => {};
-  const handleDelete = () => {};
+  const navigate = useNavigate();
+
+  const handleEdit = () => {
+    if (props.isFatec) {
+      navigate(`/estudante/fatec/editar`);
+    } else {
+      navigate(`/estudante/educacao/editar?id=${props.index}`);
+    }
+  };
+
+  const dispatch = useAppDispatch();
+
+  const handleDelete = () => {
+    props.index !== undefined && dispatch(deleteUserEducation({index: props.index}));
+  };
+
   return (
     <div className="max-w-sm w-full bg-lightgray1 p-4 rounded-lg text-sm mb-6 select-none">
       <div className={`flex flex-row justify-between font-semibold text-lightblack ${props.className}`}>

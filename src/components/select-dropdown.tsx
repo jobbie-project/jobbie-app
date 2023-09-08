@@ -3,7 +3,7 @@ import React from 'react';
 
 interface SelectDropdownProps {
   label: string;
-  callback?: (value: string) => void;
+  callback?: ({value, label}: {value: string; label: string}) => void;
   className?: string;
   options: {value: string; label: string}[];
   disabled?: boolean;
@@ -15,7 +15,7 @@ export function SelectDropdown(props: SelectDropdownProps) {
 
   const handleChange = (selected: string | undefined) => {
     setValue(selected);
-    props.callback && selected && props.callback(selected);
+    props.callback && selected !== undefined && props.callback(props.options[Number(selected)]);
   };
 
   return (

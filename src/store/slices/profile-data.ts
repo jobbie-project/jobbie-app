@@ -12,7 +12,7 @@ const initialState: ProfileData = {
   name: '',
   phone: '',
   address: {} as ProfileAddress,
-  education: [],
+  education: [] as ProfileEducation[],
   fatecEducation: {} as ProfileFatecEducation,
   previous_experience: [],
   tech_stacks: [],

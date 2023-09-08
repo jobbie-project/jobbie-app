@@ -2,16 +2,19 @@ import {ButtonHover} from '@/components/button-hover-animation';
 import RegisterHeader from '@/components/register-header';
 import {toastError} from '@/utils/toast-error';
 import {useForm} from 'react-hook-form';
-import {useNavigate} from 'react-router-dom';
+import {useNavigate, useParams, useSearchParams} from 'react-router-dom';
 import GeneralInput from '@/components/general-input';
-import {useAppDispatch} from '@/store/store';
+import {RootState, useAppDispatch} from '@/store/store';
 import {SelectCountry} from '@/components/select-country';
 import moment from '@/utils/moment';
 import {SelectDropdown} from '@/components/select-dropdown';
 import {setUserEducation} from '@/store/slices/profile-data';
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 import {ProfileEducation} from '@/store/interfaces';
 import {Checkbox} from '@/components/ui/checkbox';
+import {useSelect} from '@material-tailwind/react';
+import {useSelector} from 'react-redux';
+import {EducationLevel} from '@/interfaces/education-level';
 
 const degree = [
   {value: '1', label: 'Técnico'},
@@ -22,10 +25,25 @@ const degree = [
 ];
 
 export default function AddNewEducation() {
-  const {register, handleSubmit} = useForm<ProfileEducation>();
+  const {register, handleSubmit, setValue} = useForm<ProfileEducation>();
+  const [params] = useSearchParams();
+  const [editMode, setEditMode] = useState<boolean>(false);
+  const [currentEducation, setCurrentEducation] = useState<ProfileEducation>({} as ProfileEducation);
   const [current, setCurrent] = useState<boolean>(false);
+  const {education} = useSelector((state: RootState) => state.profileData);
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    if (params.get('id') !== null) {
+      const id = Number(params.get('id'));
+      console.log(education[id], 'education');
+      setEditMode(true);
+      setCurrentEducation(education[id]);
+      setCurrent(education[id].end_date === undefined);
+      console.log(editMode ? degree.find(item => item.label === currentEducation.degree)?.value : '');
+    }
+  }, [education]);
 
   const onSubmit = (data: ProfileEducation) => {
     try {
@@ -53,10 +71,35 @@ export default function AddNewEducation() {
             <p className="text-black font-semibold text-lg select-none mt-4">Adicionando nova Escolaridade</p>
           </div>
           <SelectCountry />
-          <GeneralInput label={'Cidade, Estado'} register={register} registerName="location" required />
-          <GeneralInput label={'Nome da Instituição'} register={register} registerName="institution_name" required />
-          <GeneralInput label={'Nome do Curso'} register={register} registerName="course" required />
-          <SelectDropdown label={'Grau'} options={degree} />
+          <GeneralInput
+            label={'Cidade, Estado'}
+            register={register}
+            registerName="location"
+            required
+            defaultValue={editMode ? `${currentEducation.location.city}, ${currentEducation.location.state}` : ''}
+          />
+          <GeneralInput
+            label={'Nome da Instituição'}
+            register={register}
+            registerName="institution_name"
+            required
+            defaultValue={editMode ? currentEducation.institution_name : ''}
+          />
+          <GeneralInput
+            label={'Nome do Curso'}
+            register={register}
+            registerName="course"
+            required
+            defaultValue={editMode ? currentEducation.course : ''}
+          />
+          <SelectDropdown
+            label={'Grau'}
+            options={degree}
+            defaultValue={degree[1].value}
+            callback={({value, label}: {value: string; label: string}) => {
+              setValue('degree', label);
+            }}
+          />
           <div className="w-full inline-flex mt-4 justify-between">
             <GeneralInput
               register={register}
@@ -65,6 +108,7 @@ export default function AddNewEducation() {
               className="w-36"
               type="month"
               required
+              defaultValue={editMode ? moment(currentEducation.start_date).format('YYYY-MM') : ''}
             />
             {!current && (
               <GeneralInput
@@ -73,13 +117,16 @@ export default function AddNewEducation() {
                 label="Data de fim"
                 className="w-36"
                 type="month"
+                defaultValue={
+                  editMode && currentEducation.end_date ? moment(currentEducation.end_date).format('YYYY-MM') : ''
+                }
               />
             )}
           </div>
           <div className="flex items-center mt-4">
-            <Checkbox id="current" onClick={() => setCurrent(!current)} />
+            <Checkbox id="current" onClick={() => setCurrent(!current)} checked={current} />
             <label htmlFor="current" className="ml-2 text-sm">
-              Emprego Atual
+              Atualmente matriculado
             </label>
           </div>
 
