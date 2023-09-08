@@ -14,6 +14,12 @@ export interface ProfileEducation {
   };
 }
 
+export interface ProfileLinks {
+  github?: string;
+  linkedin?: string;
+  portfolio?: string;
+}
+
 export interface ProfilePreviousExperience {
   company_name: string;
   position: string;
@@ -26,22 +32,20 @@ export interface ProfilePreviousExperience {
   description: string;
 }
 
+export interface ProfileAddress {
+  street: string;
+  city: string;
+  state: string;
+  zip_code: string;
+}
+
 export interface ProfileData {
   name: string;
   phone: string;
-  address: {
-    street: string;
-    city: string;
-    state: string;
-    zip_code: string;
-  };
+  address: ProfileAddress;
   education: ProfileEducation[];
   previous_experience: ProfilePreviousExperience[];
   tech_stacks: string[];
   certifications: string[];
-  links: {
-    github: string;
-    linkedin: string;
-    portfolio: string;
-  };
+  links: ProfileLinks;
 }
