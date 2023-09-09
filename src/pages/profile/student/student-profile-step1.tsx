@@ -42,8 +42,8 @@ export default function StudentRegisterStep1() {
     <div>
       <RegisterHeader showProgress={{progress: 1, maxSteps: 8}} />
       <div className="max-w-full items-center flex flex-col min-h-screen">
-        <form onSubmit={handleSubmit(onSubmit)} className="w-full max-w-[336px]">
-          <div className="max-w-xs w-full">
+        <form onSubmit={handleSubmit(onSubmit)} className="w-full max-w-sm">
+          <div className="max-w-sm w-full">
             <p className="text-black font-semibold text-lg mt-10 select-none">Qual é o seu nome?</p>
           </div>
           <div className="mt-8 w-full">

@@ -44,9 +44,9 @@ export default function StudentRegisterStep2() {
     <div>
       <RegisterHeader showProgress={{progress: 2, maxSteps: 8}} />
       <div className="max-w-full items-center p-5 flex flex-col min-h-screen">
-        <form onSubmit={handleSubmit(onSubmit)} className="w-full max-w-[336px]">
-          <div className="max-w-xs w-full">
-            <p className="text-black font-semibold text-lg select-none mt-10">Qual sua localização?</p>
+        <form onSubmit={handleSubmit(onSubmit)} className="w-full max-w-sm">
+          <div className="max-w-sm w-full">
+            <p className="text-black font-semibold text-lg select-none mt-8">Qual sua localização?</p>
           </div>
           <SelectCountry />
           <GeneralInput register={register} registerName="street" label="Endereço" />

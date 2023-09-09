@@ -21,7 +21,7 @@ export default function StudentRegisterStep6() {
   return (
     <div>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <RegisterHeader showProgress={{progress: 4, maxSteps: 8}} />
+        <RegisterHeader showProgress={{progress: 5, maxSteps: 8}} />
         <div className="max-w-full items-center flex flex-col min-h-screen mt-10">
           <div className="max-w-sm w-full">
             <p className="text-black font-semibold text-lg select-none mt-4 mb-4">Revise a Experiência Profissional</p>

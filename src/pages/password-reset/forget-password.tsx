@@ -25,14 +25,14 @@ export default function ForgetPassword() {
     <>
       <RegisterHeader />
       <div className="max-w-full items-center p-5 flex flex-col min-h-screen mt-6">
-        <div className="max-w-xs w-full">
+        <div className="max-w-sm w-full">
           <p className="text-black font-semibold text-xl mt-20">Esqueceu sua senha?</p>
           <p className="mt-6 text-sm">Digite seu email para receber instruções sobre a redefinição de senha.</p>
           <div className="mt-8 flex justify-center">
             <Lottie animationData={Padlock} autoPlay={true} style={{height: 140, width: 140}} />
           </div>
           <div className="mt-4 mx-auto max-w-lg">
-            <GeneralInput callback={e => setEmail(e.target.value)} label="Email" />
+            <GeneralInput callback={e => setEmail(e)} label="Email" />
           </div>
           <GeneralButton text={'Continuar'} type={'submit'} callback={onSubmit} className="mt-4" />
           <span className="text-warmGray-400 font-normal flex flex-row mt-8 justify-center">

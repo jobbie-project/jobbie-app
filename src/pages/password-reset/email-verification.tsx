@@ -26,7 +26,7 @@ export default function EmailVerification() {
     <>
       <RegisterHeader />
       <div className="max-w-full items-center p-5 flex flex-col min-h-screen mt-6">
-        <div className="max-w-xs w-full">
+        <div className="max-w-sm w-full">
           <p className="text-black font-semibold text-xl mt-20">Verifique seu email para continuar</p>
           <p className="mt-6 text-sm">Um link de confirmação foi enviado para o seu endereço de email.</p>
           <div className="mt-8 flex justify-center">

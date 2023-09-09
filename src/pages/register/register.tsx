@@ -24,7 +24,7 @@ export default function Register() {
     <>
       <RegisterHeader />
       <div className="max-w-full items-center p-5 flex flex-col min-h-screen px-6">
-        <div className="max-w-xs w-full font-normal text-base text-black">
+        <div className="max-w-sm w-full font-normal text-base text-black">
           <div className=" mt-24 w-full font-semibold text-xl text-black">Boas vindas.</div>
           <p className="mt-6">Tudo pronto para dar o próximo passo?</p>
 
@@ -40,10 +40,9 @@ export default function Register() {
               </div>
             </RadioGroup>
           </div>
-        </div>
-
-        <div className="mt-6 w-[336px]">
-          <GeneralButton type="submit" text="Continuar" callback={handleClick} />
+          <div className="mt-6 w-full">
+            <GeneralButton type="submit" text="Continuar" callback={handleClick} />
+          </div>
         </div>
       </div>
     </>

@@ -61,10 +61,8 @@ export default function StudentRegisterStep5() {
     <div>
       <RegisterHeader showProgress={{progress: 4, maxSteps: 8}} />
       <div className="max-w-full items-center p-5 flex flex-col min-h-screen mt-6">
-        <form onSubmit={handleSubmit(onSubmit)} className="w-full max-w-[336px]">
-          <div className="max-w-xs w-full">
-            <p className="text-black font-semibold text-base select-none mt-4">Adicionando Experiência Profissional</p>
-          </div>
+        <form onSubmit={handleSubmit(onSubmit)} className="w-full max-w-sm">
+          <p className="text-black font-semibold text-base select-none mt-4">Adicionando Experiência Profissional</p>
           <div className="flex items-center mt-6">
             <Checkbox id="noexperience" onClick={() => setDontHaveExperience(!dontHaveExperience)} />
             <label htmlFor="noexperience" className="text-sm leading-none peer-disabled:cursor-not-allowed ml-2 mt-1">
@@ -97,7 +95,6 @@ export default function StudentRegisterStep5() {
                   />
                 )}
               </div>
-
               <div className="flex items-center mt-4">
                 <Checkbox id="current" onClick={() => setCurrentJob(!currentJob)} />
                 <label htmlFor="current" className="ml-2 text-sm">

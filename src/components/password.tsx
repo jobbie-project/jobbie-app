@@ -21,7 +21,7 @@ export default function PasswordInput<T extends FieldValues>(props: {
             name={`${props.registerName}`}
             placeholder=""
             type={exibir ? 'password' : 'text'}
-            className="peer h-10 w-[336px] border-b-2 border-gray1 text-gray-900 focus:outline-none focus:border-red"
+            className="peer h-10 w-full border-b-[3px] border-gray1 text-gray-900 focus:outline-none focus:border-redDefault"
           />
           <label
             htmlFor={`${props.registerName}`}
@@ -29,7 +29,7 @@ export default function PasswordInput<T extends FieldValues>(props: {
             {props.text}
           </label>
 
-          <div className="flex absolute ml-[310px]" onClick={() => setExibir(!exibir)}>
+          <div className="flex absolute ml-[350px]" onClick={() => setExibir(!exibir)}>
             {exibir ? <AiOutlineEye size={22} /> : <AiOutlineEyeInvisible size={22} />}
           </div>
         </div>
