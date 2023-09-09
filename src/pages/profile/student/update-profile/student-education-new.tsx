@@ -2,31 +2,33 @@ import {ButtonHover} from '@/components/button-hover-animation';
 import RegisterHeader from '@/components/register-header';
 import {toastError} from '@/utils/toast-error';
 import {useForm} from 'react-hook-form';
-import {useNavigate, useParams, useSearchParams} from 'react-router-dom';
+import {useNavigate, useSearchParams} from 'react-router-dom';
 import GeneralInput from '@/components/general-input';
 import {RootState, useAppDispatch} from '@/store/store';
 import {SelectCountry} from '@/components/select-country';
 import moment from '@/utils/moment';
 import {SelectDropdown} from '@/components/select-dropdown';
-import {setUserEducation} from '@/store/slices/profile-data';
+import {setUserEducation, updateUserEducation} from '@/store/slices/profile-data';
 import {useEffect, useState} from 'react';
 import {ProfileEducation} from '@/store/interfaces';
 import {Checkbox} from '@/components/ui/checkbox';
-import {useSelect} from '@material-tailwind/react';
 import {useSelector} from 'react-redux';
-import {EducationLevel} from '@/interfaces/education-level';
+import {ValueOption} from '@/interfaces/option';
+import {Degrees} from '@/utils/consts';
+import {EducationLevel} from '@/enums';
 
-const degree = [
-  {value: '1', label: 'Técnico'},
-  {value: '2', label: 'Graduação'},
-  {value: '3', label: 'Pós-graduação'},
-  {value: '4', label: 'Mestrado'},
-  {value: '5', label: 'Doutorado'},
-];
+interface FormData {
+  institution_name: string;
+  course: string;
+  degree: EducationLevel;
+  start_date: Date;
+  end_date?: Date;
+  location: string;
+}
 
 export default function AddNewEducation() {
-  const {register, handleSubmit, setValue} = useForm<ProfileEducation>();
   const [params] = useSearchParams();
+  const [currentId, setCurrentId] = useState<number>();
   const [editMode, setEditMode] = useState<boolean>(false);
   const [currentEducation, setCurrentEducation] = useState<ProfileEducation>({} as ProfileEducation);
   const [current, setCurrent] = useState<boolean>(false);
@@ -34,28 +36,55 @@ export default function AddNewEducation() {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
+  const {register, handleSubmit, setValue, reset} = useForm<FormData>();
+
   useEffect(() => {
     if (params.get('id') !== null) {
       const id = Number(params.get('id'));
-      console.log(education[id], 'education');
       setEditMode(true);
+      setCurrentId(id);
       setCurrentEducation(education[id]);
       setCurrent(education[id].end_date === undefined);
-      console.log(editMode ? degree.find(item => item.label === currentEducation.degree)?.value : '');
+      reset({
+        institution_name: education[id].institution_name,
+        course: education[id].course,
+        location: `${education[id].location.city},${education[id].location.state}`,
+        start_date: education[id].start_date,
+        end_date: education[id].end_date ? education[id].end_date : undefined,
+      });
     }
   }, [education]);
 
-  const onSubmit = (data: ProfileEducation) => {
+  const onSubmit = (data: FormData) => {
     try {
       if (!data.location) throw new Error('É necessário informar a Cidade.');
       if (!data.institution_name) throw new Error('É necessário informar a instituição.');
       if (!data.start_date) throw new Error('É necessário informar a data de ínicio do curso.');
       if (!data.course) throw new Error('É necessário informar o curso.');
+      if (!data.degree) throw new Error('É necessário informar o grau.');
       const isAfter = moment(data.start_date).isAfter(data.end_date);
       if (isAfter) throw new Error('A data de ínicio não pode ser maior que a data de fim.');
       const isSame = moment(data.start_date).isSame(data.end_date);
       if (isSame) throw new Error('A data de ínicio não pode ser a mesma que a data de fim.');
-      dispatch(setUserEducation({...data, end_date: current ? undefined : data.end_date}));
+      const userEducation = {
+        ...data,
+        degree: EducationLevel[data.degree],
+        end_date: current ? undefined : data.end_date,
+        location: {
+          city: data.location.split(',')[0],
+          state: data.location.split(',')[1],
+        },
+      };
+      console.log(userEducation.degree);
+      dispatch(
+        editMode && currentId !== undefined
+          ? updateUserEducation({
+              index: currentId,
+              education: userEducation,
+            })
+          : setUserEducation(userEducation),
+      );
+
       navigate('/registro/estudante/passo-4');
     } catch (error) {
       toastError(error);
@@ -92,12 +121,13 @@ export default function AddNewEducation() {
             required
             defaultValue={editMode ? currentEducation.course : ''}
           />
+
           <SelectDropdown
             label={'Grau'}
-            options={degree}
-            defaultValue={degree[1].value}
-            callback={({value, label}: {value: string; label: string}) => {
-              setValue('degree', label);
+            options={Degrees}
+            defaultValue={editMode ? currentEducation.degree : undefined}
+            callback={(option: ValueOption) => {
+              setValue('degree', option.value as EducationLevel);
             }}
           />
           <div className="w-full inline-flex mt-4 justify-between">
