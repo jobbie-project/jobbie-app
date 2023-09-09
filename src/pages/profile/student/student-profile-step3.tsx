@@ -1,23 +1,39 @@
+import moment from '@/utils/moment';
 import {ButtonHover} from '@/components/button-hover-animation';
 import RegisterHeader from '@/components/register-header';
 import {toastError} from '@/utils/toast-error';
 import {useForm} from 'react-hook-form';
-import {useNavigate} from 'react-router-dom';
+import {useNavigate, useSearchParams} from 'react-router-dom';
 import GeneralInput from '@/components/general-input';
 import {SelectDropdown} from '@/components/select-dropdown';
-import {useAppDispatch} from '@/store/store';
-
+import {RootState, useAppDispatch} from '@/store/store';
 import {setUserFatecEducation} from '@/store/slices/profile-data';
 import {ProfileFatecEducation} from '@/store/interfaces';
 import {Courses, FatecInstitutions} from '@/utils/consts';
+import {useSelector} from 'react-redux';
+import {useEffect, useState} from 'react';
 
 export default function StudentRegisterStep3() {
-  const {register, handleSubmit, setValue, watch} = useForm<ProfileFatecEducation>({
+  const {register, handleSubmit, setValue, watch, reset} = useForm<ProfileFatecEducation>({
     defaultValues: {institution: '7'},
   });
-
+  const [editMode, setEditMode] = useState(false);
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
+  const {fatecEducation} = useSelector((state: RootState) => state.profileData);
+  const [params] = useSearchParams();
+
+  useEffect(() => {
+    if (params.get('editar') !== null && !!params.get('editar')) {
+      setEditMode(true);
+      reset({
+        institution: fatecEducation.institution,
+        course: fatecEducation.course,
+        actual_cycle: fatecEducation.actual_cycle,
+        start_date: fatecEducation.start_date,
+      });
+    }
+  }, [fatecEducation]);
 
   const onSubmit = (data: ProfileFatecEducation) => {
     try {
@@ -64,13 +80,21 @@ export default function StudentRegisterStep3() {
             options={Courses}
           />
           <div className="w-full inline-flex mt-4 justify-between">
-            <GeneralInput register={register} registerName="actual_cycle" label="Ciclo" required className="w-40" />
+            <GeneralInput
+              register={register}
+              registerName="actual_cycle"
+              label="Ciclo"
+              required
+              className="w-40"
+              defaultValue={editMode ? fatecEducation.actual_cycle : ''}
+            />
             <GeneralInput
               register={register}
               registerName="start_date"
               label="Data de ínicio"
               className="w-40"
               type="month"
+              defaultValue={editMode ? moment(fatecEducation.start_date).format('YYYY-MM') : undefined}
               required
             />
           </div>

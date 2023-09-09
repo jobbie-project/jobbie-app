@@ -52,7 +52,6 @@ export const App: React.FC = () => {
         <Route path={`/registro/estudante/passo-7`} element={<StudentRegisterStep7 />} />
         <Route path={`/estudante/educacao/adicionar`} element={<AddNewEducation />} />
         <Route path={`/estudante/experiencia/adicionar`} element={<AddNewExperience />} />
-        <Route path={`/estudante/fatec/editar`} element={<StudentRegisterStep3 />} />
         <Route path={`/estudante/educacao/editar`} element={<AddNewEducation />} />
         <Route path={`/estudante/perfil/revisar`} element={<StudentProfileReview />} />
       </Routes>
