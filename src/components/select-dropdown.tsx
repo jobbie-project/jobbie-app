@@ -1,28 +1,16 @@
-import {EducationLevel} from '@/enums';
 import {ValueOption} from '@/interfaces/option';
 import {Select, Option} from '@material-tailwind/react';
-import React from 'react';
 
 interface SelectDropdownProps {
   label: string;
-  callback?: (option: ValueOption) => void;
+  callback: (option: string) => void;
   className?: string;
   options: ValueOption[];
   disabled?: boolean;
-  defaultValue?: string;
+  value: string;
 }
 
 export function SelectDropdown(props: SelectDropdownProps) {
-  const [value, setValue] = React.useState<string | undefined>(props.defaultValue || undefined);
-  console.log(props.defaultValue);
-  const handleChange = (selected: string | undefined) => {
-    setValue(selected);
-    if (props.callback) {
-      const option = props.options.find(option => option.value === selected);
-      if (option) props.callback(option);
-    }
-  };
-
   return (
     <div className="mt-6 mb-4">
       <Select
@@ -32,9 +20,8 @@ export function SelectDropdown(props: SelectDropdownProps) {
         className={`bg-lightgray1 rounded-lg w-full border-none ${props.className}`}
         label={props.label}
         disabled={props.disabled}
-        onChange={handleChange}
-        defaultValue={props.defaultValue}
-        value={value}
+        onChange={option => props.callback(option ?? '')}
+        value={props.value}
         animate={{
           mount: {y: 0},
           unmount: {y: 25},

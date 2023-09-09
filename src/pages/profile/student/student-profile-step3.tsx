@@ -12,7 +12,7 @@ import {ProfileFatecEducation} from '@/store/interfaces';
 import {Courses, FatecInstitutions} from '@/utils/consts';
 
 export default function StudentRegisterStep3() {
-  const {register, handleSubmit, setValue} = useForm<ProfileFatecEducation>({
+  const {register, handleSubmit, setValue, watch} = useForm<ProfileFatecEducation>({
     defaultValues: {institution: '7'},
   });
 
@@ -50,15 +50,16 @@ export default function StudentRegisterStep3() {
             <p className="text-black font-semibold text-base select-none">Em qual instituição Fatec você estuda?</p>
           </div>
           <SelectDropdown
-            callback={option => setValue('institution', option.value)}
+            callback={option => setValue('institution', option)}
             label={'Selecione sua Instituição'}
             options={FatecInstitutions}
             disabled={true}
-            defaultValue={FatecInstitutions[6].value}
+            value={watch('institution')}
             className="bg-lightgray1"
           />
           <SelectDropdown
-            callback={value => setValue('course', value.label)}
+            callback={value => setValue('course', value)}
+            value={watch('course')}
             label={'Selecione seu Curso'}
             options={Courses}
           />

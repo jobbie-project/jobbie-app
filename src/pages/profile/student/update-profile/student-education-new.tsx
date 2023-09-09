@@ -36,7 +36,7 @@ export default function AddNewEducation() {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
-  const {register, handleSubmit, setValue, reset} = useForm<FormData>();
+  const {register, handleSubmit, setValue, reset, watch} = useForm<FormData>();
 
   useEffect(() => {
     if (params.get('id') !== null) {
@@ -125,9 +125,9 @@ export default function AddNewEducation() {
           <SelectDropdown
             label={'Grau'}
             options={Degrees}
-            defaultValue={editMode ? currentEducation.degree : undefined}
-            callback={(option: ValueOption) => {
-              setValue('degree', option.value as EducationLevel);
+            value={editMode ? currentEducation.degree : watch('degree')}
+            callback={(option: string) => {
+              setValue('degree', option as EducationLevel);
             }}
           />
           <div className="w-full inline-flex mt-4 justify-between">
