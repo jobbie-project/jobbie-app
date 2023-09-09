@@ -9,6 +9,7 @@ import {useAppDispatch} from '@/store/store';
 
 import {setUserFatecEducation} from '@/store/slices/profile-data';
 import {ProfileFatecEducation} from '@/store/interfaces';
+import {Courses, FatecInstitutions} from '@/utils/consts';
 
 export default function StudentRegisterStep3() {
   const {register, handleSubmit, setValue} = useForm<ProfileFatecEducation>({
@@ -17,22 +18,6 @@ export default function StudentRegisterStep3() {
 
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-
-  const institutions = [
-    {value: '1', label: 'Fatec Araçatuba'},
-    {value: '2', label: 'Fatec Araraquara'},
-    {value: '3', label: 'Fatec Barueri'},
-    {value: '4', label: 'Fatec Bauru'},
-    {value: '5', label: 'Fatec Botucatu'},
-    {value: '6', label: 'Fatec Bragança Paulista'},
-    {value: '7', label: 'Fatec Ribeirão Preto'},
-  ];
-
-  const courses = [
-    {value: '1', label: 'Análise e Desenvolvimento de Sistemas'},
-    {value: '2', label: 'Gestão e Inovação de Negócios'},
-    {value: '3', label: 'Sistemas Biomédicos'},
-  ];
 
   const onSubmit = (data: ProfileFatecEducation) => {
     try {
@@ -43,9 +28,9 @@ export default function StudentRegisterStep3() {
       dispatch(
         setUserFatecEducation({
           ...data,
-          institution: institutions.find(institution => institution.value === data.institution)?.value || '',
-          institution_name: institutions.find(institution => institution.value === data.institution)?.label || '',
-          course_name: courses.find(course => course.value === data.course)?.label || '',
+          institution: FatecInstitutions.find(institution => institution.value === data.institution)?.value || '',
+          institution_name: FatecInstitutions.find(institution => institution.value === data.institution)?.label || '',
+          course_name: Courses.find(course => course.value === data.course)?.label || '',
         }),
       );
       navigate('/registro/estudante/passo-4');
@@ -65,17 +50,17 @@ export default function StudentRegisterStep3() {
             <p className="text-black font-semibold text-base select-none">Em qual instituição Fatec você estuda?</p>
           </div>
           <SelectDropdown
-            // callback={value => setValue('institution', value)}
+            callback={option => setValue('institution', option.value)}
             label={'Selecione sua Instituição'}
-            options={institutions}
+            options={FatecInstitutions}
             disabled={true}
-            defaultValue={institutions[6].value}
+            defaultValue={FatecInstitutions[6].value}
             className="bg-lightgray1"
           />
           <SelectDropdown
-            // callback={value => setValue('course', value)}
+            callback={value => setValue('course', value.label)}
             label={'Selecione seu Curso'}
-            options={courses}
+            options={Courses}
           />
           <div className="w-full inline-flex mt-4 justify-between">
             <GeneralInput register={register} registerName="actual_cycle" label="Ciclo" required className="w-40" />

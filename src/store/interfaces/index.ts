@@ -1,11 +1,11 @@
-import {EducationLevel} from '@/interfaces/education-level';
+import {EducationLevel} from '@/enums';
 
 export interface ProfileEducation {
   institution_name: string;
   course: string;
-  degree: string;
+  degree: EducationLevel;
   start_date: Date;
-  end_date?: Date;
+  end_date?: Date | undefined;
   location: {
     city: string;
     state: string;
