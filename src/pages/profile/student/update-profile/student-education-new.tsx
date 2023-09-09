@@ -51,6 +51,7 @@ export default function AddNewEducation() {
         location: `${education[id].location.city},${education[id].location.state}`,
         start_date: education[id].start_date,
         end_date: education[id].end_date ? education[id].end_date : undefined,
+        degree: education[id].degree,
       });
     }
   }, [education]);
