@@ -21,7 +21,7 @@ export function ReviewCardMedium(props: ReviewCardMediumProps) {
 
   const handleEdit = () => {
     if (props.isFatec) {
-      navigate(`/estudante/fatec/editar`);
+      navigate(`/estudante/fatec/editar?editar=true`);
     } else {
       navigate(`/estudante/educacao/editar?id=${props.index}`);
     }

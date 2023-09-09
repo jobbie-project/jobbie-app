@@ -76,7 +76,6 @@ export default function AddNewEducation() {
           state: data.location.split(',')[1],
         },
       };
-      console.log(userEducation.degree);
       dispatch(
         editMode && currentId !== undefined
           ? updateUserEducation({
