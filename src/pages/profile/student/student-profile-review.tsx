@@ -1,6 +1,7 @@
 import {AddNewButton} from '@/components/add-new-button';
 import {ButtonHover} from '@/components/button-hover-animation';
 import RegisterHeader from '@/components/register-header';
+import {ReviewCardLarge} from '@/components/review-card-large';
 import {ReviewCardMedium} from '@/components/review-card-medium';
 import {RootState} from '@/store/store';
 import moment from '@/utils/moment';
@@ -10,7 +11,7 @@ import {useNavigate} from 'react-router-dom';
 
 export default function StudentProfileReview() {
   const navigate = useNavigate();
-  const {education, fatecEducation} = useSelector((state: RootState) => state.profileData);
+  const profileData = useSelector((state: RootState) => state.profileData);
   const {handleSubmit} = useForm();
 
   const onSubmit = () => {
@@ -26,17 +27,25 @@ export default function StudentProfileReview() {
             <p className="text-black font-semibold text-xl select-none mb-4">Seu currículo está pronto?</p>
             <p className="text-sm text-lightblack select-none mb-4">Revise e faça as alterações necessárias.</p>
           </div>
+          <ReviewCardLarge
+            canDelete={false}
+            editRoute={'/registro/estudante/passo-1?editar=true'}
+            title={profileData.name}
+            subtitle={profileData.phone}
+            // description={profileData.email}
+          />
+
           <ReviewCardMedium
             isFatec
             canDelete={false}
             canEdit={true}
-            title={fatecEducation.course_name}
-            subtitle={fatecEducation.institution_name}
-            description={fatecEducation.actual_cycle}
-            start_date={moment(fatecEducation.start_date).format('MMMM [de] YYYY')}
+            title={profileData.fatecEducation.course_name}
+            subtitle={profileData.fatecEducation.institution_name}
+            description={profileData.fatecEducation.actual_cycle}
+            start_date={moment(profileData.fatecEducation.start_date).format('MMMM [de] YYYY')}
           />
 
-          {education.map((item, index) => (
+          {profileData.education.map((item, index) => (
             <ReviewCardMedium
               index={index}
               key={index}

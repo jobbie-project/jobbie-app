@@ -40,12 +40,12 @@ export default function StudentRegisterStep6() {
               />
             ))
           ) : (
-            <div className="flex items-center text-gray-700 font-semibold text-sm select-none mt-8 mb-4 w-full max-w-sm">
+            <div className="flex items-center text-gray-700 font-semibold text-sm select-none mt-4 mb-4 w-full max-w-sm">
               <Checkbox id="noexperience" checked disabled />
               <label
                 htmlFor="noexperience"
                 className="text-sm leading-none peer-disabled:cursor-not-allowed font-semibold ml-2">
-                Nenhuma Experiência Profissional Adicionada
+                Não tenho experiência
               </label>
             </div>
           )}
