@@ -38,7 +38,7 @@ export default function StudentProfileReview() {
           <ReviewCardMedium
             isFatec
             canDelete={false}
-            canEdit={true}
+            editRoute="/registro/estudante/passo-3?editar=true"
             title={profileData.fatecEducation.course_name}
             subtitle={profileData.fatecEducation.institution_name}
             description={profileData.fatecEducation.actual_cycle}
@@ -49,8 +49,8 @@ export default function StudentProfileReview() {
             <ReviewCardMedium
               index={index}
               key={index}
+              editRoute={`/estudante/educacao/editar?id=${index}`}
               canDelete={true}
-              canEdit={true}
               title={item.course}
               subtitle={item.institution_name}
               start_date={moment(item.start_date).format('MMMM [de] YYYY')}

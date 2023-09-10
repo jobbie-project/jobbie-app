@@ -53,6 +53,7 @@ export const App: React.FC = () => {
         <Route path={`/estudante/educacao/adicionar`} element={<AddNewEducation />} />
         <Route path={`/estudante/experiencia/adicionar`} element={<AddNewExperience />} />
         <Route path={`/estudante/educacao/editar`} element={<AddNewEducation />} />
+        <Route path={`/estudante/experiencia/editar`} element={<AddNewExperience />} />
         <Route path={`/estudante/perfil/revisar`} element={<StudentProfileReview />} />
       </Routes>
       <ToastContainer />

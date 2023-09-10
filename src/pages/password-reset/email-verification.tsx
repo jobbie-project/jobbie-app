@@ -14,7 +14,6 @@ export default function EmailVerification() {
 
   const handleResend = () => {
     toast.success('O email de verificação foi reenviado.');
-    console;
     setWasResended(true);
   };
 

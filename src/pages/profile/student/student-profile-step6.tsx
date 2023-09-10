@@ -3,7 +3,6 @@ import {ButtonHover} from '@/components/button-hover-animation';
 import RegisterHeader from '@/components/register-header';
 import {ReviewCardMedium} from '@/components/review-card-medium';
 import {Checkbox} from '@/components/ui/checkbox';
-import {Label} from '@/components/ui/label';
 import {RootState} from '@/store/store';
 import moment from '@/utils/moment';
 import {useForm} from 'react-hook-form';
@@ -31,12 +30,13 @@ export default function StudentRegisterStep6() {
             previous_experience.map((item, index) => (
               <ReviewCardMedium
                 key={index}
+                index={index}
                 canDelete={true}
-                canEdit={true}
+                editRoute={`/estudante/experiencia/editar?id=${index}`}
                 title={item.position}
                 subtitle={item.company_name}
                 start_date={moment(item.start_date).format('MMMM [de] YYYY')}
-                end_date={moment(item.end_date).format('MMMM [de] YYYY')}
+                end_date={item.end_date && moment(item.end_date).format('MMMM [de] YYYY')}
               />
             ))
           ) : (

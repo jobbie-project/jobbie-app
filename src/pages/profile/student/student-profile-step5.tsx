@@ -31,10 +31,12 @@ export default function StudentRegisterStep5() {
   const onSubmit = (data: FormData) => {
     try {
       if (!dontHaveExperience) {
-        const isAfter = moment(data.start_date).isAfter(data.end_date);
-        if (isAfter) throw new Error('A data de ínicio não pode ser maior que a data de fim.');
-        const isSame = moment(data.start_date).isSame(data.end_date);
-        if (isSame) throw new Error('A data de ínicio não pode ser a mesma que a data de fim.');
+        if (!currentJob) {
+          const isAfter = moment(data.start_date).isAfter(data.end_date);
+          if (isAfter) throw new Error('A data de ínicio não pode ser maior que a data de fim.');
+          const isSame = moment(data.start_date).isSame(data.end_date);
+          if (isSame) throw new Error('A data de ínicio não pode ser a mesma que a data de fim.');
+        }
         if (!data.location) throw new Error('É necessário informar a Cidade.');
         const city = data.location.split(',')[0];
         const state = data.location.split(',')[1];
@@ -42,6 +44,7 @@ export default function StudentRegisterStep5() {
         dispatch(
           setUserPreviousExperience({
             ...data,
+            end_date: currentJob ? undefined : data.end_date,
             location: {
               city: data.location.split(',')[0],
               state: data.location.split(',')[1],

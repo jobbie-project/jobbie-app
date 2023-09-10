@@ -28,7 +28,7 @@ export default function StudentRegisterStep4() {
           <ReviewCardMedium
             isFatec
             canDelete={false}
-            canEdit={true}
+            editRoute={'/registro/estudante/passo-3?editar=true'}
             title={fatecEducation.course_name}
             subtitle={fatecEducation.institution_name}
             description={fatecEducation.actual_cycle}
@@ -40,7 +40,7 @@ export default function StudentRegisterStep4() {
               index={index}
               key={index}
               canDelete={true}
-              canEdit={true}
+              editRoute={`/estudante/educacao/editar?id=${index}`}
               title={item.course}
               subtitle={item.institution_name}
               start_date={moment(item.start_date).format('MMMM [de] YYYY')}

@@ -11,7 +11,7 @@ interface ReviewCardMediumProps {
   start_date?: string;
   end_date?: string;
   canDelete: boolean;
-  canEdit: boolean;
+  editRoute: string;
   index?: number;
   isFatec?: boolean;
 }
@@ -20,11 +20,7 @@ export function ReviewCardMedium(props: ReviewCardMediumProps) {
   const navigate = useNavigate();
 
   const handleEdit = () => {
-    if (props.isFatec) {
-      navigate(`/registro/estudante/passo-3?editar=true`);
-    } else {
-      navigate(`/estudante/educacao/editar?id=${props.index}`);
-    }
+    props.editRoute && navigate(props.editRoute);
   };
 
   const dispatch = useAppDispatch();
@@ -38,15 +34,17 @@ export function ReviewCardMedium(props: ReviewCardMediumProps) {
       <div className={`flex flex-row justify-between font-semibold text-lightblack ${props.className}`}>
         {props.title}
         <div className="flex flex-row">
-          <div onClick={handleEdit}>{props.canEdit && <FiEdit size={20} className="mr-1 cursor-pointer" />}</div>
+          <div onClick={handleEdit}>{props.editRoute && <FiEdit size={20} className="mr-1 cursor-pointer" />}</div>
           <div onClick={handleDelete}>{props.canDelete && <FiTrash size={20} className="cursor-pointer" />}</div>
         </div>
       </div>
       <div className="flex flex-col">
         <div className="mt-4 font-medium text-gray3 ">{props.subtitle}</div>
         <div className="mt-4 flex flex-row font-medium text-gray3">
-          {props.description ? `Ciclo: ${props.description}` : ''} Desde {props.start_date}
-          {props.end_date ? ' até atualmente.' : ''}
+          {props.description ? `Ciclo: ${props.description} ` : ''}
+          {props.end_date ? 'De ' : 'Desde '}
+          {props.start_date}
+          {props.end_date ? ` até ${props.end_date}` : ' até atualmente.'}
         </div>
       </div>
     </div>

@@ -2,7 +2,7 @@ import {ButtonHover} from '@/components/button-hover-animation';
 import RegisterHeader from '@/components/register-header';
 import {toastError} from '@/utils/toast-error';
 import {useForm} from 'react-hook-form';
-import {useNavigate} from 'react-router-dom';
+import {useNavigate, useSearchParams} from 'react-router-dom';
 import GeneralInput from '@/components/general-input';
 import {RootState, useAppDispatch} from '@/store/store';
 import {useSelector} from 'react-redux';
@@ -10,9 +10,10 @@ import {SelectCountry} from '@/components/select-country';
 import moment from '@/utils/moment';
 import {SelectDropdown} from '@/components/select-dropdown';
 import {Textarea} from '@/components/ui/textarea';
-import {setUserEducation, setUserPreviousExperience} from '@/store/slices/profile-data';
-import {useState} from 'react';
+import {setUserEducation, setUserPreviousExperience, updateUserPreviousExperience} from '@/store/slices/profile-data';
+import {useEffect, useState} from 'react';
 import {Checkbox} from '@/components/ui/checkbox';
+import {ProfilePreviousExperience} from '@/store/interfaces';
 
 interface FormData {
   company_name: string;
@@ -25,32 +26,59 @@ interface FormData {
 
 export default function AddNewExperience() {
   const [currentJob, setCurrentJob] = useState<boolean>(false);
-  const {register, handleSubmit} = useForm<FormData>();
+  const {register, handleSubmit, reset} = useForm<FormData>();
   const {previous_experience} = useSelector((state: RootState) => state.profileData);
+  const [params] = useSearchParams();
+  const [currentId, setCurrentId] = useState<number>();
+  const [editMode, setEditMode] = useState<boolean>(false);
+  const [currentEditingJob, setCurrentEditingJob] = useState<ProfilePreviousExperience>(
+    {} as ProfilePreviousExperience,
+  );
 
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
+  useEffect(() => {
+    if (params.get('id') !== null) {
+      const id = Number(params.get('id'));
+      setEditMode(true);
+      setCurrentId(id);
+      setCurrentEditingJob(previous_experience[id]);
+      setCurrentJob(previous_experience[id].end_date === undefined);
+      reset({
+        company_name: previous_experience[id].company_name,
+        position: previous_experience[id].position,
+        location: `${previous_experience[id].location.city},${previous_experience[id].location.state}`,
+        start_date: previous_experience[id].start_date,
+        end_date: previous_experience[id].end_date ? previous_experience[id].end_date : undefined,
+      });
+    }
+  }, [previous_experience]);
+
   const onSubmit = (data: FormData) => {
     try {
-      if (!previous_experience) {
-        if (!data.location) throw new Error('É necessário informar a Cidade.');
-        if (!data.position) throw new Error('É necessário informar o cargo.');
+      if (!data.location) throw new Error('É necessário informar a Cidade.');
+      if (!data.position) throw new Error('É necessário informar o cargo.');
+      if (!currentJob) {
         const isAfter = moment(data.start_date).isAfter(data.end_date);
         if (isAfter) throw new Error('A data de ínicio não pode ser maior que a data de fim.');
         const isSame = moment(data.start_date).isSame(data.end_date);
         if (isSame) throw new Error('A data de ínicio não pode ser a mesma que a data de fim.');
-
-        dispatch(
-          setUserPreviousExperience({
-            ...data,
-            location: {
-              city: data.location.split(',')[0],
-              state: data.location.split(',')[1],
-            },
-          }),
-        );
       }
+      const userPreviousExperience: ProfilePreviousExperience = {
+        ...data,
+        end_date: currentJob ? undefined : data.end_date,
+        location: {
+          city: data.location.split(',')[0],
+          state: data.location.split(',')[1],
+        },
+      };
+      dispatch(
+        editMode && currentId !== undefined
+          ? updateUserPreviousExperience({index: currentId, previousExperience: userPreviousExperience})
+          : setUserPreviousExperience(userPreviousExperience),
+      );
+
       navigate('/registro/estudante/passo-6');
     } catch (error) {
       toastError(error);
@@ -68,9 +96,26 @@ export default function AddNewExperience() {
 
           <>
             <SelectCountry />
-            <GeneralInput label={'Cidade, Estado'} register={register} registerName="location" required />
-            <GeneralInput label={'Cargo'} register={register} registerName="position" required />
-            <GeneralInput label={'Nome da Empresa'} register={register} registerName="company_name" />
+            <GeneralInput
+              label={'Cidade, Estado'}
+              register={register}
+              registerName="location"
+              required
+              defaultValue={editMode ? `${currentEditingJob.location.city}, ${currentEditingJob.location.state}` : ''}
+            />
+            <GeneralInput
+              label={'Cargo'}
+              register={register}
+              registerName="position"
+              required
+              defaultValue={editMode ? currentEditingJob.position : ''}
+            />
+            <GeneralInput
+              label={'Nome da Empresa'}
+              register={register}
+              registerName="company_name"
+              defaultValue={editMode ? currentEditingJob.company_name : ''}
+            />
             <div className="w-full inline-flex mt-4 justify-between">
               <GeneralInput
                 register={register}
@@ -79,6 +124,7 @@ export default function AddNewExperience() {
                 className="w-36"
                 type="month"
                 required
+                defaultValue={editMode ? moment(currentEditingJob.start_date).format('YYYY-MM') : ''}
               />
               {!currentJob && (
                 <GeneralInput
@@ -88,11 +134,19 @@ export default function AddNewExperience() {
                   className="w-36"
                   type="month"
                   required
+                  defaultValue={
+                    editMode && currentEditingJob.end_date ? moment(currentEditingJob.end_date).format('YYYY-MM') : ''
+                  }
                 />
               )}
             </div>
-            <Checkbox id="current" className="mt-2" onClick={() => setCurrentJob(!{setCurrentJob})} />
-            <label htmlFor="current">Emprego Atual</label>
+            <div className="flex items-center mt-4">
+              <Checkbox id="current" onClick={() => setCurrentJob(!currentJob)} checked={currentJob} />
+              <label htmlFor="current" className="ml-2 text-sm">
+                Emprego Atual
+              </label>
+            </div>
+
             <div className="text-sm font-semibold mt-4">Descrição:</div>
             <Textarea placeholder="Fale sobre as atividades executadas nesse cargo." className="mt-4 text-sm" />
           </>
