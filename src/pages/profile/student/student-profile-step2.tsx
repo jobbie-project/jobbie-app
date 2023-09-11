@@ -6,7 +6,7 @@ import {setUserAddress} from '@/store/slices/profile-data';
 import {useAppDispatch} from '@/store/store';
 import {toastError} from '@/utils/toast-error';
 import {useForm} from 'react-hook-form';
-import {useNavigate} from 'react-router-dom';
+import {useNavigate, useSearchParams} from 'react-router-dom';
 
 interface FormData {
   street: string;
@@ -19,6 +19,7 @@ export default function StudentRegisterStep2() {
 
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
+  const [params] = useSearchParams();
 
   const onSubmit = (data: FormData) => {
     try {
@@ -34,7 +35,7 @@ export default function StudentRegisterStep2() {
           state: data.location.split(',')[1],
         }),
       );
-      navigate('/registro/estudante/passo-3');
+      navigate(params.get('redirect') ?? '/registro/estudante/passo-3');
     } catch (error) {
       toastError(error);
     }
@@ -43,7 +44,7 @@ export default function StudentRegisterStep2() {
   return (
     <div>
       <RegisterHeader showProgress={{progress: 2, maxSteps: 8}} />
-      <div className="max-w-full items-center p-5 flex flex-col min-h-screen">
+      <div className="max-w-full items-center p-5 flex flex-col">
         <form onSubmit={handleSubmit(onSubmit)} className="w-full max-w-sm">
           <div className="max-w-sm w-full">
             <p className="text-black font-semibold text-lg select-none mt-8">Qual sua localização?</p>

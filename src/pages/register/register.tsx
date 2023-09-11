@@ -23,7 +23,7 @@ export default function Register() {
   return (
     <>
       <RegisterHeader />
-      <div className="max-w-full items-center p-5 flex flex-col min-h-screen px-6">
+      <div className="max-w-full items-center p-5 flex flex-col  px-6">
         <div className="max-w-sm w-full font-normal text-base text-black">
           <div className=" mt-24 w-full font-semibold text-xl text-black">Boas vindas.</div>
           <p className="mt-6">Tudo pronto para dar o próximo passo?</p>

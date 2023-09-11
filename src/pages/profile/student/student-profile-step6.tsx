@@ -1,7 +1,7 @@
-import {AddNewButton} from '@/components/add-new-button';
+import {ButtonAddNew} from '@/components/button-add-new';
 import {ButtonHover} from '@/components/button-hover-animation';
+import {JobReviewCard} from '@/components/job-review-card';
 import RegisterHeader from '@/components/register-header';
-import {ReviewCardMedium} from '@/components/review-card-medium';
 import {Checkbox} from '@/components/ui/checkbox';
 import {RootState} from '@/store/store';
 import moment from '@/utils/moment';
@@ -21,14 +21,14 @@ export default function StudentRegisterStep6() {
     <div>
       <form onSubmit={handleSubmit(onSubmit)}>
         <RegisterHeader showProgress={{progress: 5, maxSteps: 8}} />
-        <div className="max-w-full items-center flex flex-col min-h-screen mt-10">
+        <div className="max-w-full items-center flex flex-col mt-10">
           <div className="max-w-sm w-full">
             <p className="text-black font-semibold text-lg select-none mt-4 mb-4">Revise a Experiência Profissional</p>
           </div>
 
           {previous_experience.length > 0 ? (
             previous_experience.map((item, index) => (
-              <ReviewCardMedium
+              <JobReviewCard
                 key={index}
                 index={index}
                 canDelete={true}
@@ -50,7 +50,7 @@ export default function StudentRegisterStep6() {
             </div>
           )}
           {previous_experience.length > 0 ? (
-            <AddNewButton onClick={() => navigate('/estudante/experiencia/adicionar')} />
+            <ButtonAddNew onClick={() => navigate('/estudante/experiencia/adicionar')} />
           ) : (
             <div></div>
           )}

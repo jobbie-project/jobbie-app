@@ -8,6 +8,7 @@ interface ReviewCardMediumProps {
   title: string;
   subtitle: string;
   description?: string;
+  info?: string;
   start_date?: string;
   end_date?: string;
   canDelete: boolean;
@@ -32,15 +33,16 @@ export function ReviewCardMedium(props: ReviewCardMediumProps) {
   return (
     <div className="max-w-sm w-full bg-lightgray1 p-4 rounded-lg text-sm mb-4 select-none">
       <div className={`flex flex-row justify-between font-semibold text-lightblack ${props.className}`}>
-        {props.title}
+        {props.info}
         <div className="flex flex-row">
           <div onClick={handleEdit}>{props.editRoute && <FiEdit size={20} className="mr-1 cursor-pointer" />}</div>
           <div onClick={handleDelete}>{props.canDelete && <FiTrash size={20} className="cursor-pointer" />}</div>
         </div>
       </div>
       <div className="flex flex-col">
-        <div className="mt-4 font-medium text-gray3 ">{props.subtitle}</div>
-        <div className="mt-4 flex flex-row font-medium text-gray3">
+        <div className="mt-4 font-medium text-primaryGray">{props.title}</div>
+        <div className="mt-4 font-medium text-primaryGray">{props.subtitle}</div>
+        <div className="mt-4 flex flex-row font-medium text-primaryGray">
           {props.description ? `Ciclo: ${props.description} ` : ''}
           {props.end_date ? 'De ' : 'Desde '}
           {props.start_date}

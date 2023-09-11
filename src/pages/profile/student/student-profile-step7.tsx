@@ -1,4 +1,4 @@
-import {AddNewButton} from '@/components/add-new-button';
+import {ButtonAddNew} from '@/components/button-add-new';
 import {ButtonHover} from '@/components/button-hover-animation';
 import RegisterHeader from '@/components/register-header';
 import {ReviewCardSmall} from '@/components/review-card-small';
@@ -22,7 +22,7 @@ export default function StudentRegisterStep7() {
   return (
     <div>
       <RegisterHeader showProgress={{progress: 6, maxSteps: 8}} />
-      <div className="max-w-full items-center p-5 flex flex-col min-h-screen mt-6">
+      <div className="max-w-full items-center p-5 flex flex-col mt-6 select-none">
         <div className="max-w-sm w-full">
           <p className="text-black font-semibold text-lg select-none mt-4 mb-4">
             Quais certificações ou licenças você tem?
@@ -39,7 +39,7 @@ export default function StudentRegisterStep7() {
               className="bg-lightgray1 border-none"
             />
             <div className="ml-4">
-              <AddNewButton
+              <ButtonAddNew
                 onClick={() => {
                   setCertification('');
                   dispatch(setUserCertifications(certification));

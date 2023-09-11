@@ -19,7 +19,7 @@ export function ReviewCardSmall(props: ReviewCardSmallProps) {
 
   return (
     <div className="max-w-sm w-full bg-lightgray1 p-2 px-4 rounded-lg text-sm mb-4 select-none">
-      <div className={`flex flex-row justify-between font-semibold text-lightblack ${props.className}`}>
+      <div className={`flex flex-row justify-between font-semibold text-primaryGray ${props.className}`}>
         {props.title}
         <div className="flex flex-row">
           <div onClick={handleDelete}>{props.canDelete && <FiTrash size={20} className="cursor-pointer" />}</div>

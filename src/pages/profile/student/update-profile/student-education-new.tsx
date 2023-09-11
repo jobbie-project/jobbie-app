@@ -85,7 +85,7 @@ export default function AddNewEducation() {
           : setUserEducation(userEducation),
       );
 
-      navigate('/registro/estudante/passo-4');
+      navigate(params.get('redirect') ?? '/registro/estudante/passo-4');
     } catch (error) {
       toastError(error);
     }
@@ -94,7 +94,7 @@ export default function AddNewEducation() {
   return (
     <div>
       <RegisterHeader showProgress={{progress: 3, maxSteps: 8}} />
-      <div className="max-w-full items-center p-5 flex flex-col min-h-screen mt-6">
+      <div className="max-w-full items-center p-5 flex flex-col mt-6 select-none">
         <form onSubmit={handleSubmit(onSubmit)} className="w-full max-w-[336px]">
           <div className="max-w-xs w-full">
             <p className="text-black font-semibold text-lg select-none mt-4">Adicionando nova Escolaridade</p>

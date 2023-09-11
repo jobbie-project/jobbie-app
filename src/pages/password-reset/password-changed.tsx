@@ -22,7 +22,7 @@ export default function PasswordChanged() {
           <Logoblack width={'100'} height={'50'} />
         </div>
       </div>
-      <div className="items-center p-5 flex flex-col min-h-screen">
+      <div className="items-center p-5 flex flex-col ">
         <div className="max-w-sm w-full">
           <p className="text-black font-semibold text-xl mt-4">Sua senha foi alterada.</p>
           <p className="mt-6 text-sm flex">Sua conta foi recuperada e você já pode entrar.</p>

@@ -7,7 +7,7 @@ import {toastError} from '@/utils/toast-error';
 import {useState} from 'react';
 import {set, useForm} from 'react-hook-form';
 import {useSelector} from 'react-redux';
-import {useNavigate} from 'react-router-dom';
+import {useNavigate, useSearchParams} from 'react-router-dom';
 
 interface FormData {
   name: string;
@@ -20,12 +20,13 @@ export default function StudentRegisterStep1() {
   const userData = useSelector((state: RootState) => state.profileData);
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
+  const [params] = useSearchParams();
 
   const onSubmit = (data: FormData) => {
     try {
       if (!data.name) throw new Error('Insira seu nome para continuar.');
       dispatch(setUserName(data.name));
-      navigate('/registro/estudante/passo-2');
+      navigate(params.get('redirect') ?? '/registro/estudante/passo-2');
     } catch (error) {
       toastError(error);
     }
@@ -41,7 +42,7 @@ export default function StudentRegisterStep1() {
   return (
     <div>
       <RegisterHeader showProgress={{progress: 1, maxSteps: 8}} />
-      <div className="max-w-full items-center flex flex-col min-h-screen">
+      <div className="max-w-full items-center flex flex-col">
         <form onSubmit={handleSubmit(onSubmit)} className="w-full max-w-sm">
           <div className="max-w-sm w-full">
             <p className="text-black font-semibold text-lg mt-10 select-none">Qual é o seu nome?</p>

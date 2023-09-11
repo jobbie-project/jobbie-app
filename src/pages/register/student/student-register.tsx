@@ -42,7 +42,7 @@ export default function StudentRegister() {
   return (
     <div>
       <RegisterHeader />
-      <div className="max-w-full items-center p-5 flex flex-col min-h-screen mt-6">
+      <div className="max-w-full items-center p-5 flex flex-col  mt-6">
         <form onSubmit={handleSubmit(onSubmit)} className="w-full max-w-sm">
           <div className="max-w-sm w-full">
             <p className="text-black font-semibold text-xl mt-20 select-none">Criar uma conta</p>

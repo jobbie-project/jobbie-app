@@ -49,7 +49,8 @@ export default function StudentRegisterStep3() {
           course_name: Courses.find(course => course.value === data.course)?.label || '',
         }),
       );
-      navigate('/registro/estudante/passo-4');
+
+      navigate(params.get('redirect') ?? '/registro/estudante/passo-4');
     } catch (error) {
       toastError(error);
     }
@@ -59,7 +60,7 @@ export default function StudentRegisterStep3() {
     <div>
       <RegisterHeader showProgress={{progress: 3, maxSteps: 8}} />
       <div
-        className="max-w-full items-center p-5 flex flex-col min-h-screen mt-6
+        className="max-w-full items-center p-5 flex flex-col mt-6
        select-none">
         <form onSubmit={handleSubmit(onSubmit)} className="w-full max-w-sm">
           <div className="max-w-sm w-full">
