@@ -23,6 +23,7 @@ export default function Login() {
       if (!EmailValidator.validate(formData.email)) throw new Error('Insira um email válido');
       if (!formData.password) throw new Error('Insira sua senha.');
       console.log({username: formData.email, password: formData.password});
+      console.log(Api.defaults);
       const {data} = await Api.post('/auth/authenticate', {username: formData.email, password: formData.password});
       console.log(data);
       navigate('/inicio');

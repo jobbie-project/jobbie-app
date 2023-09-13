@@ -3,8 +3,9 @@ import {Logoblack} from '@/icons/logo-black';
 import {RiMenuLine} from 'react-icons/ri';
 import {useWindowSize} from '@/hooks/useWindowSize';
 import {Sidebar} from './sidebar';
-import {CiSettings} from 'react-icons/ci';
+import {Button} from '@/components/ui/button';
 import {IoIosNotificationsOutline} from 'react-icons/io';
+import {SettingsMenu} from './settings';
 
 export function Header() {
   const window = useWindowSize();
@@ -42,10 +43,12 @@ export function Header() {
 
           <div className={`py-4 flex ${isMobile && 'absolute right-5'}`}>
             <a className="px-4" href="#">
-              <IoIosNotificationsOutline size="30" />
+              <Button variant="none" className="border-none hover:none">
+                <IoIosNotificationsOutline size="30" />
+              </Button>
             </a>
             <a href="#">
-              <CiSettings size="30" />
+              <SettingsMenu />
             </a>
           </div>
         </div>

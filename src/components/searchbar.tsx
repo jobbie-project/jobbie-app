@@ -12,7 +12,7 @@ export function SearchBar() {
             </div>
             <input
               type="text"
-              className="bg-gray text-gray-900 focus:outline-none text-sm rounded-lg block w-full pl-16 p-4"
+              className="bg-lightgray1 text-gray-900 focus:outline-none text-sm rounded-lg block w-full pl-16 p-4"
               placeholder="Procure por vagas, empresas"
             />
           </div>
