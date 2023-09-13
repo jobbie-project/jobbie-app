@@ -7,6 +7,7 @@ import {GeneralButton} from '@/components/general-button';
 import * as EmailValidator from 'email-validator';
 import GeneralInput from '@/components/general-input';
 import {Checkbox} from '@/components/ui/checkbox';
+import Api from '@/services/api/api.service';
 
 interface FormData {
   email: string;
@@ -16,11 +17,14 @@ interface FormData {
 export default function Login() {
   const navigate = useNavigate();
 
-  const onSubmit = (data: FormData) => {
+  const onSubmit = async (formData: FormData) => {
     try {
-      if (!data.email) throw new Error('Insira seu email.');
-      if (!EmailValidator.validate(data.email)) throw new Error('Insira um email válido');
-      if (!data.password) throw new Error('Insira sua senha.');
+      if (!formData.email) throw new Error('Insira seu email.');
+      if (!EmailValidator.validate(formData.email)) throw new Error('Insira um email válido');
+      if (!formData.password) throw new Error('Insira sua senha.');
+      console.log({username: formData.email, password: formData.password});
+      const {data} = await Api.post('/auth/authenticate', {username: formData.email, password: formData.password});
+      console.log(data);
       navigate('/inicio');
     } catch (error) {
       toastError(error);

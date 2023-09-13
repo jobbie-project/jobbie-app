@@ -14,7 +14,7 @@ const initialState: ProfileData = {
   address: {} as ProfileAddress,
   education: [] as ProfileEducation[],
   fatecEducation: {} as ProfileFatecEducation,
-  previous_experience: [],
+  previous_experience: [] as ProfilePreviousExperience[],
   tech_stacks: [],
   certifications: [],
   links: {} as ProfileLinks,
