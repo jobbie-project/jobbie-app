@@ -12,7 +12,7 @@ export function Header() {
   const [isOpen, setIsOpen] = React.useState(false);
   return (
     <>
-      <div className="absolute flex justify-center px-4 py-2 w-full bg-lightgray1">
+      <div className="flex justify-center px-4 py-2 w-full bg-lightgray1">
         <div className={`flex ${isMobile ? 'justify-center' : 'justify-between'}  w-[1200px]`}>
           {isMobile && (
             <button onClick={() => setIsOpen(!isOpen)} className="absolute py-3 left-5">

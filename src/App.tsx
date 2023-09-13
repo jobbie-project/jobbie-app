@@ -22,7 +22,6 @@ import StudentRegisterStep6 from './pages/profile/student/student-profile-step6'
 import AddNewExperience from './pages/profile/student/update-profile/student-experience-new';
 import StudentRegisterStep7 from './pages/profile/student/student-profile-step7';
 import StudentProfileReview from './pages/profile/student/student-profile-review';
-import StudentProfileComplete from './pages/profile/student/student-profile-complete';
 
 export const App: React.FC = () => {
   return (
@@ -56,7 +55,6 @@ export const App: React.FC = () => {
         <Route path={`/estudante/educacao/editar`} element={<AddNewEducation />} />
         <Route path={`/estudante/experiencia/editar`} element={<AddNewExperience />} />
         <Route path={`/estudante/perfil/revisar`} element={<StudentProfileReview />} />
-        <Route path={`/estudante/perfil/finalizado`} element={<StudentProfileComplete />} />
       </Routes>
       <ToastContainer />
     </div>

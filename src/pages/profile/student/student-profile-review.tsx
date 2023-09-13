@@ -5,6 +5,17 @@ import RegisterHeader from '@/components/register-header';
 import {ReviewCardLarge} from '@/components/review-card-large';
 import {ReviewCardMedium} from '@/components/review-card-medium';
 import {ReviewCardSmall} from '@/components/review-card-small';
+import {FaMedal} from 'react-icons/fa';
+import {Button} from '@/components/ui/button';
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from '@/components/ui/dialog';
 import {RootState} from '@/store/store';
 import {Degrees} from '@/utils/consts';
 import moment from '@/utils/moment';
@@ -13,14 +24,17 @@ import {Checkbox} from '@radix-ui/react-checkbox';
 import {useForm} from 'react-hook-form';
 import {useSelector} from 'react-redux';
 import {useNavigate} from 'react-router-dom';
+import {useState} from 'react';
 
 export default function StudentProfileReview() {
   const navigate = useNavigate();
+  const [isOpen, setIsOpen] = useState(false);
   const profileData = useSelector((state: RootState) => state.profileData);
   const {handleSubmit} = useForm();
 
   const onSubmit = () => {
-    navigate('/registro/estudante/finalizado');
+    setIsOpen(false);
+    navigate('/inicio');
   };
 
   return (
@@ -127,7 +141,34 @@ export default function StudentProfileReview() {
           ))}
 
           <div className="mt-8 flex justify-center mb-20">
-            <ButtonHover text={'Continuar'} type={'submit'} className="font-semibold text-base" />
+            <ButtonHover
+              text={'Continuar'}
+              type={'button'}
+              callback={() => setIsOpen(true)}
+              className="font-semibold text-base"
+            />
+            <Dialog open={isOpen} onOpenChange={setIsOpen}>
+              <DialogContent className="sm:max-w-[425px]">
+                <DialogHeader>
+                  <div className="flex justify-center m-6">
+                    <FaMedal size={60} color={'#b20000'} />
+                  </div>
+                  <DialogTitle className="flex justify-center">Parabéns, seu perfil está completo!</DialogTitle>
+                  <DialogDescription className="flex justify-center">
+                    Vamos encontrar sua próxima vaga.
+                  </DialogDescription>
+                </DialogHeader>
+
+                <DialogFooter>
+                  <Button
+                    type="submit"
+                    onClick={onSubmit}
+                    className=" bg-lightgray1 font-semibold text-black hover:bg-redDefault hover:text-white">
+                    Continuar
+                  </Button>
+                </DialogFooter>
+              </DialogContent>
+            </Dialog>
           </div>
         </div>
       </form>
