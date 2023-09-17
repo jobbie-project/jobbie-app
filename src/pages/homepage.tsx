@@ -32,7 +32,7 @@ export default function Home() {
       <div className="max-w-full items-center p-5 flex flex-col ">
         <div className="max-w-5xl px-8 w-full ">
           <p className="my-5 font-normal">Olá, {username}</p>
-          <SearchBar />
+          <SearchBar placeholder="Procure por vagas, empresas" showFilter />
         </div>
         <div className="max-w-5xl flex flex-col w-full ">
           <p className="mt-5 py-6 px-8 font-semibold">Recomendados</p>
