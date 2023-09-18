@@ -13,7 +13,7 @@ import {Textarea} from '@/components/ui/textarea';
 import {setUserEducation, setUserPreviousExperience, updateUserPreviousExperience} from '@/store/slices/profile-data';
 import {useEffect, useState} from 'react';
 import {Checkbox} from '@/components/ui/checkbox';
-import {ProfilePreviousExperience} from '@/store/interfaces';
+import {ProfilePreviousExperience} from '@/store/interfaces/profile-data-interface';
 
 interface FormData {
   company_name: string;

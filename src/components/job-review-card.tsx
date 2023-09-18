@@ -29,7 +29,7 @@ export function JobReviewCard(props: JobReviewCardProps) {
   };
 
   return (
-    <div className="max-w-sm w-full bg-lightgray1 p-4 rounded-lg text-sm mb-4 select-none">
+    <div className="max-w-xl w-full bg-lightgray1 p-4 rounded-lg text-sm mb-4 select-none">
       <div className={`flex flex-row justify-between font-semibold text-lightblack ${props.className}`}>
         {`Cargo: ${props.title}`}
         <div className="flex flex-row">

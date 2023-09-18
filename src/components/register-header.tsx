@@ -8,6 +8,7 @@ interface RegisterHeaderProps {
     progress: number;
     maxSteps: number;
   };
+  text?: string;
 }
 
 export default function RegisterHeader(props: RegisterHeaderProps) {
@@ -26,7 +27,7 @@ export default function RegisterHeader(props: RegisterHeaderProps) {
         {props.showProgress && (
           <div className="w-full flex flex-col items-center justify-center">
             <div className="text-sm my-4 text-gray select-none">
-              Complete seu perfil para que ele seja visualizado pelas empresas.
+              {props.text ? props.text : 'Complete seu perfil para que ele seja visualizado pelas empresas.'}
             </div>
             <ProgressBar actualStep={props.showProgress.progress} maxSteps={props.showProgress.maxSteps} />
           </div>

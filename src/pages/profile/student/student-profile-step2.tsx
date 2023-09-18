@@ -45,8 +45,8 @@ export default function StudentRegisterStep2() {
     <div>
       <RegisterHeader showProgress={{progress: 2, maxSteps: 8}} />
       <div className="max-w-full items-center p-5 flex flex-col">
-        <form onSubmit={handleSubmit(onSubmit)} className="w-full max-w-sm">
-          <div className="max-w-sm w-full">
+        <form onSubmit={handleSubmit(onSubmit)} className="w-full max-w-xl">
+          <div className="max-w-xl w-full">
             <p className="text-black font-semibold text-lg select-none mt-8">Qual sua localização?</p>
           </div>
           <SelectCountry />

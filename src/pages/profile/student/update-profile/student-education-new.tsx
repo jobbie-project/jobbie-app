@@ -10,7 +10,7 @@ import moment from '@/utils/moment';
 import {SelectDropdown} from '@/components/select-dropdown';
 import {setUserEducation, updateUserEducation} from '@/store/slices/profile-data';
 import {useEffect, useState} from 'react';
-import {ProfileEducation} from '@/store/interfaces';
+import {ProfileEducation} from '@/store/interfaces/profile-data-interface';
 import {Checkbox} from '@/components/ui/checkbox';
 import {useSelector} from 'react-redux';
 import {ValueOption} from '@/interfaces/option';

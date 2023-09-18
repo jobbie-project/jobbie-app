@@ -2,11 +2,9 @@ import {ButtonHover} from '@/components/button-hover-animation';
 import GeneralInput from '@/components/general-input';
 import RegisterHeader from '@/components/register-header';
 import {setUserName} from '@/store/slices/profile-data';
-import {RootState, useAppDispatch} from '@/store/store';
+import {useAppDispatch} from '@/store/store';
 import {toastError} from '@/utils/toast-error';
-import {useState} from 'react';
-import {set, useForm} from 'react-hook-form';
-import {useSelector} from 'react-redux';
+import {useForm} from 'react-hook-form';
 import {useNavigate, useSearchParams} from 'react-router-dom';
 
 interface FormData {
@@ -16,8 +14,6 @@ interface FormData {
 
 export default function StudentRegisterStep1() {
   const {register, handleSubmit, setValue} = useForm<FormData>();
-
-  const userData = useSelector((state: RootState) => state.profileData);
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const [params] = useSearchParams();
@@ -43,8 +39,8 @@ export default function StudentRegisterStep1() {
     <div>
       <RegisterHeader showProgress={{progress: 1, maxSteps: 8}} />
       <div className="max-w-full items-center flex flex-col">
-        <form onSubmit={handleSubmit(onSubmit)} className="w-full max-w-sm">
-          <div className="max-w-sm w-full">
+        <form onSubmit={handleSubmit(onSubmit)} className="w-full max-w-xl">
+          <div className="max-w-xl w-full">
             <p className="text-black font-semibold text-lg mt-10 select-none">Qual é o seu nome?</p>
           </div>
           <div className="mt-8 w-full">

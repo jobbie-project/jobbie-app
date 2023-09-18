@@ -41,12 +41,12 @@ export default function StudentProfileReview() {
       <form onSubmit={handleSubmit(onSubmit)}>
         <RegisterHeader showProgress={{progress: 7, maxSteps: 8}} />
         <div className="max-w-full items-center p-5 flex flex-col  mt-6 select-none">
-          <div className="max-w-sm w-full">
+          <div className="max-w-xl w-full">
             <p className="text-black font-semibold text-xl select-none mb-4">Seu currículo está pronto?</p>
             <p className="text-sm text-lightblack select-none mb-4">Revise e faça as alterações necessárias.</p>
           </div>
 
-          <div className="max-w-sm w-full font-semibold text-lg text-lightblack flex flex-row justify-between">
+          <div className="max-w-xl w-full font-semibold text-lg text-lightblack flex flex-row justify-between">
             <p className="p-2">Sobre você</p>
           </div>
           <ReviewCardLarge
@@ -65,7 +65,7 @@ export default function StudentProfileReview() {
             subtitle={`${profileData.address.street}, ${profileData.address.zip_code}`}
           />
 
-          <div className="max-w-sm w-full p-2 font-semibold text-lightblack flex flex-row justify-between">
+          <div className="max-w-xl w-full p-2 font-semibold text-lightblack flex flex-row justify-between">
             <p className="p-2">Formação Acadêmica</p>
             <div className="py-2">
               <ButtonAddNew onClick={() => navigate('/estudante/educacao/adicionar')} />
@@ -95,7 +95,7 @@ export default function StudentProfileReview() {
               end_date={item.end_date && moment(item.end_date).format('MMMM [de] YYYY')}
             />
           ))}
-          <div className="max-w-sm w-full p-2 font-semibold text-lightblack flex flex-row justify-between">
+          <div className="max-w-xl w-full p-2 font-semibold text-lightblack flex flex-row justify-between">
             <p className="p-2">Experiência Profissional</p>
             <div className="py-2">
               <ButtonAddNew
@@ -117,7 +117,7 @@ export default function StudentProfileReview() {
               />
             ))
           ) : (
-            <div className="flex items-center text-gray-700 font-semibold text-sm select-none mt-4 mb-4 w-full max-w-sm">
+            <div className="flex items-center text-gray-700 font-semibold text-sm select-none mt-4 mb-4 w-full max-w-xl">
               <Checkbox id="noexperience" checked disabled />
               <label
                 htmlFor="noexperience"
@@ -127,7 +127,7 @@ export default function StudentProfileReview() {
             </div>
           )}
 
-          <div className="max-w-sm w-full p-2 font-semibold text-lightblack flex flex-row justify-between">
+          <div className="max-w-xl w-full p-2 font-semibold text-lightblack flex flex-row justify-between">
             <p className="p-2">Certificações e Licenças</p>
             <div className="py-2">
               <ButtonAddNew

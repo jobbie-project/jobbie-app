@@ -6,7 +6,7 @@ import {
   ProfileFatecEducation,
   ProfileLinks,
   ProfilePreviousExperience,
-} from '../interfaces';
+} from '../interfaces/profile-data-interface';
 
 const initialState: ProfileData = {
   name: '',

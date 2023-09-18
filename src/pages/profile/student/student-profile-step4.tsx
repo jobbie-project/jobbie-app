@@ -3,7 +3,7 @@ import {ButtonHover} from '@/components/button-hover-animation';
 import RegisterHeader from '@/components/register-header';
 import {ReviewCardMedium} from '@/components/review-card-medium';
 import {EducationLevel} from '@/enums';
-import {ProfileEducation} from '@/store/interfaces';
+import {ProfileEducation} from '@/store/interfaces/profile-data-interface';
 import {RootState} from '@/store/store';
 import {Degrees} from '@/utils/consts';
 import moment from '@/utils/moment';
@@ -25,7 +25,7 @@ export default function StudentRegisterStep4() {
       <form onSubmit={handleSubmit(onSubmit)}>
         <RegisterHeader showProgress={{progress: 3, maxSteps: 8}} />
         <div className="max-w-full items-center p-5 flex flex-col mt-6 select-none">
-          <div className="max-w-sm w-full">
+          <div className="max-w-xl w-full">
             <p className="text-black font-semibold text-lg select-none mt-4 mb-4">Revise a Escolaridade</p>
           </div>
           <ReviewCardMedium

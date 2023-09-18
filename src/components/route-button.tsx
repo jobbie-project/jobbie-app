@@ -12,7 +12,7 @@ export function RouteButton(props: RouteButtonProps) {
     <Link className="w-full flex justify-center" to={props.link}>
       <button
         type={props.type}
-        className={`mt-6 max-w-sm px-6 text-sm bg-redDefault font-normal w-full text-white rounded py-3 block shadow-xl ${props.className}`}>
+        className={`mt-6 max-w-xl px-6 text-sm bg-redDefault font-normal w-full text-white rounded py-3 block shadow-xl ${props.className}`}>
         {props.text}
       </button>
     </Link>

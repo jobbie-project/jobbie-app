@@ -8,7 +8,7 @@ export default function JobManagement() {
   const navigate = useNavigate();
 
   const sendTo = () => {
-    navigate('/inicio');
+    navigate('/nova-vaga/passo-1');
   };
 
   return (
@@ -19,7 +19,9 @@ export default function JobManagement() {
           <div className="w-full">
             <div className="flex flex-row justify-between">
               <div className="font-semibold m-4">Gerenciamento de Vagas</div>
-              <Button onClick={sendTo} className="bg-redDefault text-white hover:bg-lightgray1 hover:text-black">
+              <Button
+                onClick={sendTo}
+                className="bg-redDefault text-white font-semibold hover:bg-lightgray1 hover:text-black">
                 Publicar nova vaga
               </Button>
             </div>

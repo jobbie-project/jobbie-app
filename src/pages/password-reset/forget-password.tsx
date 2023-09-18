@@ -25,7 +25,7 @@ export default function ForgetPassword() {
     <>
       <RegisterHeader />
       <div className="max-w-full items-center p-5 flex flex-col  mt-6">
-        <div className="max-w-sm w-full">
+        <div className="max-w-xl w-full">
           <p className="text-black font-semibold text-xl mt-20">Esqueceu sua senha?</p>
           <p className="mt-6 text-sm">Digite seu email para receber instruções sobre a redefinição de senha.</p>
           <div className="mt-8 flex justify-center">

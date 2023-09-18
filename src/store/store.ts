@@ -1,9 +1,11 @@
 import {Action, ThunkAction, combineReducers, configureStore} from '@reduxjs/toolkit';
 import profileDataSlice from './slices/profile-data';
 import {useDispatch} from 'react-redux';
+import jobDataSlice from './slices/job-data';
 
 const reducers = combineReducers({
   profileData: profileDataSlice,
+  jobData: jobDataSlice,
 });
 
 const store = configureStore({

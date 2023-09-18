@@ -36,8 +36,8 @@ export default function ChangePassword() {
     <div>
       <RegisterHeader />
       <div className="max-w-full items-center p-5 flex flex-col  mt-6">
-        <form onSubmit={handleSubmit(onSubmit)} className="w-full max-w-sm">
-          <div className="max-w-sm w-full">
+        <form onSubmit={handleSubmit(onSubmit)} className="w-full max-w-xl">
+          <div className="max-w-xl w-full">
             <p className="text-black font-semibold text-xl mt-20 select-none">Redefinição de senha</p>
             <p className="mt-6">Crie uma nova senha para realizar login no portal.</p>
           </div>

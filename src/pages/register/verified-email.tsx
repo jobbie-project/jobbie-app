@@ -23,7 +23,7 @@ export default function VerifiedEmail() {
         </div>
       </div>
       <div className="items-center p-5 flex flex-col ">
-        <div className="max-w-sm w-full">
+        <div className="max-w-xl w-full">
           <p className="text-black font-semibold text-xl mt-4">Sua conta foi verificada.</p>
           <p className="mt-6 text-sm flex">Parabéns! continue para completar seu perfil.</p>
           <div className="flex justify-center">

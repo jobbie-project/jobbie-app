@@ -22,7 +22,7 @@ export default function StudentRegisterStep6() {
       <form onSubmit={handleSubmit(onSubmit)}>
         <RegisterHeader showProgress={{progress: 5, maxSteps: 8}} />
         <div className="max-w-full items-center flex flex-col mt-10">
-          <div className="max-w-sm w-full">
+          <div className="max-w-xl w-full">
             <p className="text-black font-semibold text-lg select-none mt-4 mb-4">Revise a Experiência Profissional</p>
           </div>
 
@@ -40,7 +40,7 @@ export default function StudentRegisterStep6() {
               />
             ))
           ) : (
-            <div className="flex items-center text-gray-700 font-semibold text-sm select-none mt-4 mb-4 w-full max-w-sm">
+            <div className="flex items-center text-gray-700 font-semibold text-sm select-none mt-4 mb-4 w-full max-w-xl">
               <Checkbox id="noexperience" checked disabled />
               <label
                 htmlFor="noexperience"

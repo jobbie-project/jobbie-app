@@ -1,6 +1,5 @@
 import React from 'react';
 import RegisterHeader from '@/components/register-header';
-import {RouteButton} from '@/components/route-button';
 import {RadioGroup, RadioGroupItem} from '@/components/ui/radio-group';
 import {Label} from '@/components/ui/label';
 import {toastError} from '@/utils/toast-error';
@@ -24,7 +23,7 @@ export default function Register() {
     <>
       <RegisterHeader />
       <div className="max-w-full items-center p-5 flex flex-col  px-6">
-        <div className="max-w-sm w-full font-normal text-base text-black">
+        <div className="max-w-xl w-full font-normal text-base text-black">
           <div className=" mt-24 w-full font-semibold text-xl text-black">Boas vindas.</div>
           <p className="mt-6">Tudo pronto para dar o próximo passo?</p>
 

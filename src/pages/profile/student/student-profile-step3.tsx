@@ -8,7 +8,7 @@ import GeneralInput from '@/components/general-input';
 import {SelectDropdown} from '@/components/select-dropdown';
 import {RootState, useAppDispatch} from '@/store/store';
 import {setUserFatecEducation} from '@/store/slices/profile-data';
-import {ProfileFatecEducation} from '@/store/interfaces';
+import {ProfileFatecEducation} from '@/store/interfaces/profile-data-interface';
 import {Courses, FatecInstitutions} from '@/utils/consts';
 import {useSelector} from 'react-redux';
 import {useEffect, useState} from 'react';
@@ -63,8 +63,8 @@ export default function StudentRegisterStep3() {
       <div
         className="max-w-full items-center p-5 flex flex-col mt-6
        select-none">
-        <form onSubmit={handleSubmit(onSubmit)} className="w-full max-w-sm">
-          <div className="max-w-sm w-full">
+        <form onSubmit={handleSubmit(onSubmit)} className="w-full max-w-xl">
+          <div className="max-w-xl w-full">
             <p className="text-black font-semibold text-base select-none">Em qual instituição Fatec você estuda?</p>
           </div>
           <SelectDropdown
