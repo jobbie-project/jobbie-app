@@ -6,6 +6,14 @@ class AuthService {
     localStorage.setItem('user_role', role);
     window.dispatchEvent(new Event('storage'));
   };
+
+  logout = () => {
+    localStorage.removeItem('user_id');
+    localStorage.removeItem('user_token');
+    localStorage.removeItem('user_name');
+    localStorage.removeItem('user_role');
+    window.dispatchEvent(new Event('storage'));
+  };
 }
 
 export default new AuthService();

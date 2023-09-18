@@ -10,8 +10,17 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
+import {useNavigate} from 'react-router-dom';
+import authenticationService from '@/services/authentication/authentication.service';
 
 export function SettingsMenu() {
+  const navigate = useNavigate();
+
+  const onClick = () => {
+    navigate('/entrar');
+    authenticationService.logout();
+  };
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -43,9 +52,11 @@ export function SettingsMenu() {
           <span>API</span>
         </DropdownMenuItem>
         <DropdownMenuSeparator />
-        <DropdownMenuItem>
-          <LogOut className="mr-2 h-4 w-4" />
-          <span>Sair</span>
+        <DropdownMenuItem onClick={onClick}>
+          <div className="flex flex-row items-center">
+            <LogOut className="mr-2 h-4 w-4" />
+            <span>Sair</span>
+          </div>
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

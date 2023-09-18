@@ -8,6 +8,7 @@ import * as EmailValidator from 'email-validator';
 import GeneralInput from '@/components/general-input';
 import {Checkbox} from '@/components/ui/checkbox';
 import Api from '@/services/api/api.service';
+import authenticationService from '@/services/authentication/authentication.service';
 
 interface FormData {
   email: string;
@@ -25,6 +26,7 @@ export default function Login() {
       console.log({username: formData.email, password: formData.password});
       console.log(Api.defaults);
       const {data} = await Api.post('/auth/authenticate', {username: formData.email, password: formData.password});
+      authenticationService.authenticate(data.id, data.access_token, data.name, data.role);
       console.log(data);
       navigate('/inicio');
     } catch (error) {
