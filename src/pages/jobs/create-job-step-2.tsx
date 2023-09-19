@@ -26,13 +26,13 @@ export default function CreateJobStep2() {
   const [params] = useSearchParams();
 
   const formatNumberToBRL = (event: string) => {
-    let userInput: string = event.replace(/[^0-9]/g, '');
+    const userInput: string = event.replace(/[^0-9]/g, '');
     if (userInput === '') {
       setValue('salary', 'R$ 0,00');
     } else {
-      let userInputAsNumber: number = parseInt(userInput, 10) / 100;
+      const userInputAsNumber: number = parseInt(userInput, 10) / 100;
 
-      let formattedNumber: string = `R$ ${userInputAsNumber
+      const formattedNumber: string = `R$ ${userInputAsNumber
         .toFixed(2)
         .replace('.', ',')
         .replace(/(\d)(?=(\d{3})+\,)/g, '$1.')}`;

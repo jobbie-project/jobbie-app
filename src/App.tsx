@@ -23,7 +23,7 @@ import AddNewExperience from './pages/profile/student/update-profile/student-exp
 import StudentRegisterStep7 from './pages/profile/student/student-profile-step7';
 import StudentProfileReview from './pages/profile/student/student-profile-review';
 import JobManagement from './pages/admin-management/job-management';
-import CreateJobStep1 from './pages/jobs/create-job-step1';
+import CreateJobStep1 from './pages/jobs/create-job-step-1';
 import CreateJobStep2 from './pages/jobs/create-job-step-2';
 import CreateJobStep3 from './pages/jobs/create-job-step-3';
 import JobReview from './pages/jobs/job-review';
