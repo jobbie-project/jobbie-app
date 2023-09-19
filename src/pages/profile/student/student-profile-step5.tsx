@@ -6,11 +6,11 @@ import {useNavigate} from 'react-router-dom';
 import GeneralInput from '@/components/general-input';
 import {useAppDispatch} from '@/store/store';
 import {SelectCountry} from '@/components/select-country';
-import {Textarea} from '@/components/ui/textarea';
 import {eraseUserPreviousExperience, setUserEducation, setUserPreviousExperience} from '@/store/slices/profile-data';
 import {useState} from 'react';
 import {Checkbox} from '@/components/ui/checkbox';
 import moment from '@/utils/moment';
+import Textarea from '@/components/ui/textarea';
 interface FormData {
   company_name: string;
   position: string;

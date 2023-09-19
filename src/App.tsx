@@ -25,6 +25,8 @@ import StudentProfileReview from './pages/profile/student/student-profile-review
 import JobManagement from './pages/admin-management/job-management';
 import CreateJobStep1 from './pages/jobs/create-job-step1';
 import CreateJobStep2 from './pages/jobs/create-job-step-2';
+import CreateJobStep3 from './pages/jobs/create-job-step-3';
+import JobReview from './pages/jobs/job-review';
 
 export const App: React.FC = () => {
   return (
@@ -60,7 +62,12 @@ export const App: React.FC = () => {
         <Route path={`/estudante/perfil/revisar`} element={<StudentProfileReview />} />
         <Route path={`/gerenciamento`} element={<JobManagement />} />
         <Route path={`/nova-vaga/passo-1`} element={<CreateJobStep1 />} />
+        <Route path={`/nova-vaga/passo-1/editar`} element={<CreateJobStep1 />} />
         <Route path={`/nova-vaga/passo-2`} element={<CreateJobStep2 />} />
+        <Route path={`/nova-vaga/passo-2/editar`} element={<CreateJobStep2 />} />
+        <Route path={`/nova-vaga/passo-3`} element={<CreateJobStep3 />} />
+        <Route path={`/nova-vaga/passo-3/editar`} element={<CreateJobStep3 />} />
+        <Route path={`/nova-vaga/revisar`} element={<JobReview />} />
       </Routes>
       <ToastContainer />
     </div>

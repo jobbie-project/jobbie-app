@@ -4,7 +4,7 @@ export interface JobData {
   owner_email: string;
   position: string;
   salary: string;
-  num_positions: number;
+  num_positions: string;
   location?: {
     city: string;
     state: string;
@@ -12,5 +12,5 @@ export interface JobData {
   description: string;
   type: string;
   time: string;
-  date?: Date;
+  contract_type: string;
 }

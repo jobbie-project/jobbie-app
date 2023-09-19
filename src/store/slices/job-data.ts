@@ -6,7 +6,7 @@ const initialState: JobData = {
   owner: '',
   owner_email: '',
   position: '',
-  num_positions: 0,
+  num_positions: '',
   salary: '',
   location: {
     city: '',
@@ -15,7 +15,7 @@ const initialState: JobData = {
   description: '',
   type: '',
   time: '',
-  date: new Date(),
+  contract_type: '',
 };
 
 export const jobDataSlice = createSlice({
@@ -41,7 +41,7 @@ export const jobDataSlice = createSlice({
       state.salary = action.payload;
     },
 
-    setJobNumPositions: (state, action: PayloadAction<number>) => {
+    setJobNumPositions: (state, action: PayloadAction<string>) => {
       state.num_positions = action.payload;
     },
     setJobLocation: (state, action: PayloadAction<{city: string; state: string}>) => {
@@ -56,8 +56,8 @@ export const jobDataSlice = createSlice({
     setJobTime: (state, action: PayloadAction<string>) => {
       state.time = action.payload;
     },
-    setJobDate: (state, action: PayloadAction<Date>) => {
-      state.date = action.payload;
+    setJobContractType: (state, action: PayloadAction<string>) => {
+      state.contract_type = action.payload;
     },
   },
 });
@@ -74,7 +74,7 @@ export const {
   setJobDescription,
   setJobType,
   setJobTime,
-  setJobDate,
+  setJobContractType,
 } = jobDataSlice.actions;
 
 export default jobDataSlice.reducer;

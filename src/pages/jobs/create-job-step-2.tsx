@@ -2,7 +2,7 @@ import {useAppDispatch} from '@/store/store';
 import {toastError} from '@/utils/toast-error';
 import {useForm} from 'react-hook-form';
 import {useNavigate, useSearchParams} from 'react-router-dom';
-import {setJobLocation, setJobNumPositions, setJobPosition, setJobSalary} from '@/store/slices/job-data';
+import {setJobLocation, setJobNumPositions, setJobPosition, setJobSalary, setJobType} from '@/store/slices/job-data';
 import RegisterHeader from '@/components/register-header';
 import GeneralInput from '@/components/general-input';
 import {ButtonHover} from '@/components/button-hover-animation';
@@ -12,7 +12,7 @@ import {Label} from '@/components/ui/label';
 
 interface FormData {
   position: string;
-  num_positions: number;
+  num_positions: string;
   salary: string;
   location: string;
 }
@@ -49,8 +49,10 @@ export default function CreateJobStep2() {
       if (!data.salary) throw new Error('Insira o salário para continuar.');
       dispatch(setJobSalary(data.salary));
       if (!location) throw new Error('Selecione a modalidade da vaga.');
+      location === 'remote' ? dispatch(setJobType('Remoto')) : dispatch(setJobType('Presencial'));
       if (location === 'face-to-face' && !data.location) throw new Error('Informe o Local de Trabalho.');
-      dispatch(setJobLocation({...data, city: data.location.split(',')[0], state: data.location.split(',')[1]}));
+      if (location === 'face-to-face')
+        dispatch(setJobLocation({...data, city: data.location.split(',')[0], state: data.location.split(',')[1]}));
       navigate(params.get('redirect') ?? '/nova-vaga/passo-3');
     } catch (error) {
       toastError(error);
@@ -58,9 +60,12 @@ export default function CreateJobStep2() {
   };
   return (
     <>
-      <RegisterHeader showProgress={{progress: 1, maxSteps: 4}} text="Adicione as informações básicas da vaga." />
+      <RegisterHeader showProgress={{progress: 2, maxSteps: 4.5}} text="Conclua os passos para publicação da vaga." />
       <div className="py-6 flex justify-center">
         <form onSubmit={handleSubmit(onSubmit)} className="max-w-xl w-full">
+          <div className="font-semibold mt-4 text-lg select-none">
+            Informe os dados básicos da vaga que você está criando.
+          </div>
           <div className="mt-8 w-full">
             <GeneralInput register={register} registerName="position" label="Cargo" required />
             <GeneralInput register={register} registerName="num_positions" label="Número de vagas" />

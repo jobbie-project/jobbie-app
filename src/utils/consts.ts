@@ -24,3 +24,18 @@ export const Courses = [
   {value: '2', label: 'Gestão e Inovação de Negócios'},
   {value: '3', label: 'Sistemas Biomédicos'},
 ];
+
+export const ContractTypes = [
+  {value: '1', label: 'CLT'},
+  {value: '2', label: 'PJ'},
+  {value: '3', label: 'Estágio'},
+  {value: '4', label: 'Trainee'},
+  {value: '5', label: 'Temporário'},
+  {value: '6', label: 'Freelancer'},
+];
+
+export const JobTime = [
+  {value: '1', label: 'Integral'},
+  {value: '2', label: 'Parcial'},
+  {value: '3', label: 'A combinar'},
+];

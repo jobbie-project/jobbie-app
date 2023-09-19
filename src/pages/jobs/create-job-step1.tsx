@@ -34,14 +34,17 @@ export default function CreateJobStep1() {
   };
   return (
     <>
-      <RegisterHeader showProgress={{progress: 1, maxSteps: 4}} text="Adicione as informações básicas da vaga." />
-      <div className="py-6 flex justify-center">
+      <RegisterHeader showProgress={{progress: 1, maxSteps: 4.5}} text="Conclua os passos para publicação da vaga." />
+      <div className="py-6 flex justify-center ">
         <form onSubmit={handleSubmit(onSubmit)} className="max-w-xl w-full">
+          <div className="font-semibold mt-4 text-lg select-none">
+            Preencha os dados abaixo para recebimento dos currículos dos candidatos
+          </div>
           <div className="mt-8 w-full">
             <GeneralInput register={register} registerName="company_name" label="Nome da empresa" required />
             <GeneralInput register={register} registerName="owner" label="Responsável pela vaga" required />
             <GeneralInput register={register} registerName="owner_email" label="Email" required />
-            <span className="text-xs text-gray-400">
+            <span className="text-xs text-gray-400 select-none">
               os currículos dos candidatos serão enviados para o email que você fornecer acima.
             </span>
           </div>
