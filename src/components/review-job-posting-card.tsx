@@ -3,7 +3,7 @@ import {useAppDispatch} from '@/store/store';
 import {FiEdit, FiTrash} from 'react-icons/fi';
 import {useNavigate} from 'react-router-dom';
 
-interface ReviewJobCardProps {
+interface ReviewJobPostingCardProps {
   className?: string;
   title: string;
   subtitle: string;
@@ -17,7 +17,7 @@ interface ReviewJobCardProps {
   titleForText3?: string;
 }
 
-export function ReviewJobCard(props: ReviewJobCardProps) {
+export function ReviewJobPostingCard(props: ReviewJobPostingCardProps) {
   const navigate = useNavigate();
 
   const dispatch = useAppDispatch();

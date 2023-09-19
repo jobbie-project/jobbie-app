@@ -16,7 +16,7 @@ import {useForm} from 'react-hook-form';
 import {useSelector} from 'react-redux';
 import {useNavigate} from 'react-router-dom';
 import {useState} from 'react';
-import {ReviewJobCard} from '@/components/review-job-card';
+import {ReviewJobPostingCard} from '@/components/review-job-posting-card';
 import Lottie from 'lottie-react';
 
 export default function StudentProfileReview() {
@@ -43,7 +43,7 @@ export default function StudentProfileReview() {
             </p>
             <p className="text-sm text-lightblack select-none mb-4">Revise e faça as alterações necessárias.</p>
           </div>
-          <ReviewJobCard
+          <ReviewJobPostingCard
             canDelete={false}
             editRoute={'/nova-vaga/passo-1?editar=true&redirect=/nova-vaga/revisar'}
             info="Dados para recebimento de currículos"
@@ -54,7 +54,7 @@ export default function StudentProfileReview() {
             description={jobData.owner_email}
             titleForText3="E-mail:"
           />
-          <ReviewJobCard
+          <ReviewJobPostingCard
             canDelete={false}
             editRoute={'/nova-vaga/passo-2?editar=true&redirect=/nova-vaga/revisar'}
             info="Informações da vaga"
@@ -65,7 +65,7 @@ export default function StudentProfileReview() {
             titleForText3="Modalidade:"
             description={jobData.type}
           />
-          <ReviewJobCard
+          <ReviewJobPostingCard
             canDelete={false}
             editRoute={'/nova-vaga/passo-3?editar=true&redirect=/nova-vaga/revisar'}
             info="Detalhes da vaga"
