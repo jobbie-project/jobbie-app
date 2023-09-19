@@ -1,4 +1,4 @@
-import {useAppDispatch} from '@/store/store';
+import {RootState, useAppDispatch} from '@/store/store';
 import {toastError} from '@/utils/toast-error';
 import {useForm} from 'react-hook-form';
 import {useNavigate, useSearchParams} from 'react-router-dom';
@@ -6,6 +6,8 @@ import {setJobCompanyName, setJobOwner, setJobOwnerEmail} from '@/store/slices/j
 import RegisterHeader from '@/components/register-header';
 import GeneralInput from '@/components/general-input';
 import {ButtonHover} from '@/components/button-hover-animation';
+import {useEffect, useState} from 'react';
+import {useSelector} from 'react-redux';
 
 interface FormData {
   company_name: string;
@@ -14,10 +16,23 @@ interface FormData {
 }
 
 export default function CreateJobStep1() {
-  const {register, handleSubmit} = useForm<FormData>();
+  const {register, handleSubmit, reset} = useForm<FormData>();
+  const [editMode, setEditMode] = useState(false);
+  const jobData = useSelector((state: RootState) => state.jobData);
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const [params] = useSearchParams();
+
+  useEffect(() => {
+    if (params.get('editar') !== null && !!params.get('editar')) {
+      setEditMode(true);
+      reset({
+        company_name: jobData.company_name,
+        owner: jobData.owner,
+        owner_email: jobData.owner_email,
+      });
+    }
+  }, [jobData]);
 
   const onSubmit = (data: FormData) => {
     try {
@@ -41,9 +56,27 @@ export default function CreateJobStep1() {
             Preencha os dados abaixo para recebimento dos currículos dos candidatos
           </div>
           <div className="mt-8 w-full">
-            <GeneralInput register={register} registerName="company_name" label="Nome da empresa" required />
-            <GeneralInput register={register} registerName="owner" label="Responsável pela vaga" required />
-            <GeneralInput register={register} registerName="owner_email" label="Email" required />
+            <GeneralInput
+              register={register}
+              registerName="company_name"
+              label="Nome da empresa"
+              defaultValue={editMode ? jobData.company_name : ''}
+              required
+            />
+            <GeneralInput
+              register={register}
+              registerName="owner"
+              label="Responsável pela vaga"
+              defaultValue={editMode ? jobData.owner : ''}
+              required
+            />
+            <GeneralInput
+              register={register}
+              registerName="owner_email"
+              label="Email"
+              defaultValue={editMode ? jobData.owner_email : ''}
+              required
+            />
             <span className="text-xs text-gray-400 select-none">
               os currículos dos candidatos serão enviados para o email que você fornecer acima.
             </span>
