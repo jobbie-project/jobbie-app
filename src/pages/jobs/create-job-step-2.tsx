@@ -1,4 +1,4 @@
-import {useAppDispatch} from '@/store/store';
+import {RootState, useAppDispatch} from '@/store/store';
 import {toastError} from '@/utils/toast-error';
 import {useForm} from 'react-hook-form';
 import {useNavigate, useSearchParams} from 'react-router-dom';
@@ -7,8 +7,9 @@ import RegisterHeader from '@/components/register-header';
 import GeneralInput from '@/components/general-input';
 import {ButtonHover} from '@/components/button-hover-animation';
 import {RadioGroup, RadioGroupItem} from '@/components/ui/radio-group';
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {Label} from '@/components/ui/label';
+import {useSelector} from 'react-redux';
 
 interface FormData {
   position: string;
@@ -18,12 +19,25 @@ interface FormData {
 }
 
 export default function CreateJobStep2() {
-  const {register, handleSubmit, setValue} = useForm<FormData>();
+  const {register, handleSubmit, setValue, reset} = useForm<FormData>();
   const [location, setLocation] = React.useState<'remote' | 'face-to-face'>();
-
+  const [editMode, setEditMode] = useState(false);
+  const jobData = useSelector((state: RootState) => state.jobData);
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const [params] = useSearchParams();
+
+  useEffect(() => {
+    if (params.get('editar') !== null && !!params.get('editar')) {
+      setEditMode(true);
+      reset({
+        position: jobData.position,
+        num_positions: jobData.num_positions,
+        salary: jobData.salary,
+        // location: jobData.location,
+      });
+    }
+  }, [jobData]);
 
   const formatNumberToBRL = (event: string) => {
     const userInput: string = event.replace(/[^0-9]/g, '');
