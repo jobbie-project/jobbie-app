@@ -83,7 +83,7 @@ export default function StudentRegisterStep5() {
                   register={register}
                   registerName="start_date"
                   label="Data de ínicio"
-                  className="w-36"
+                  className="w-64"
                   type="month"
                   required
                 />
@@ -92,7 +92,7 @@ export default function StudentRegisterStep5() {
                     register={register}
                     registerName="end_date"
                     label="Data de fim"
-                    className="w-36"
+                    className="w-64"
                     type="month"
                     required
                   />
@@ -104,8 +104,13 @@ export default function StudentRegisterStep5() {
                   Emprego Atual
                 </label>
               </div>
-              <div className="text-sm font-semibold mt-4">Descrição:</div>
-              <Textarea placeholder="Fale sobre as atividades executadas nesse cargo." className="mt-4 text-sm" />
+              <div className="text-sm mt-4 w-full flex flex-col">
+                <p className="font-semibold">Descrição:</p>
+                <Textarea
+                  placeholder="Fale sobre as atividades executadas nesse cargo."
+                  className="mt-4 text-sm min-h-[100px] border border-gray-300 rounded-md p-2 w-full"
+                />
+              </div>
             </>
           )}
           <div className="mt-8 flex justify-center">

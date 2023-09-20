@@ -47,7 +47,7 @@ export default function StudentProfileReview() {
           </div>
 
           <div className="max-w-xl w-full font-semibold text-lg text-lightblack flex flex-row justify-between">
-            <p className="p-2">Sobre você</p>
+            <p className="py-2">Sobre você</p>
           </div>
           <ReviewCardLarge
             canDelete={false}
@@ -66,7 +66,7 @@ export default function StudentProfileReview() {
           />
 
           <div className="max-w-xl w-full p-2 font-semibold text-lightblack flex flex-row justify-between">
-            <p className="p-2">Formação Acadêmica</p>
+            <p className="py-2 flex items-end">Formação Acadêmica</p>
             <div className="py-2">
               <ButtonAddNew onClick={() => navigate('/estudante/educacao/adicionar')} />
             </div>
@@ -96,7 +96,7 @@ export default function StudentProfileReview() {
             />
           ))}
           <div className="max-w-xl w-full p-2 font-semibold text-lightblack flex flex-row justify-between">
-            <p className="p-2">Experiência Profissional</p>
+            <p className="py-2 flex items-end">Experiência Profissional</p>
             <div className="py-2">
               <ButtonAddNew
                 onClick={() => navigate('/estudante/experiencia/adicionar?redirect=/estudante/perfil/revisar')}
@@ -128,7 +128,7 @@ export default function StudentProfileReview() {
           )}
 
           <div className="max-w-xl w-full p-2 font-semibold text-lightblack flex flex-row justify-between">
-            <p className="p-2">Certificações e Licenças</p>
+            <p className="py-2 flex items-end">Certificações e Licenças</p>
             <div className="py-2">
               <ButtonAddNew
                 onClick={() => navigate('/estudante/experiencia/adicionar?redirect=/estudante/perfil/revisar')}

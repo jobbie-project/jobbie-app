@@ -35,7 +35,7 @@ export default function CreateJobStep2() {
         position: jobData.position,
         num_positions: jobData.num_positions,
         salary: jobData.salary,
-        location: `${jobData.location?.city},${jobData.location?.state}`,
+        location: `${jobData.location?.city} ${jobData.location?.state}`,
       });
     }
   }, [jobData]);

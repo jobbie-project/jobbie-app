@@ -1,4 +1,4 @@
-import {useAppDispatch} from '@/store/store';
+import {RootState, useAppDispatch} from '@/store/store';
 import {toastError} from '@/utils/toast-error';
 import {useForm} from 'react-hook-form';
 import {useNavigate, useSearchParams} from 'react-router-dom';
@@ -8,23 +8,38 @@ import {ContractTypes, JobTime} from '@/utils/consts';
 import Textarea from '@/components/ui/textarea';
 import {SelectDropdown} from '@/components/select-dropdown';
 import {setJobContractType, setJobDescription, setJobTime} from '@/store/slices/job-data';
+import {useEffect, useState} from 'react';
+import {useSelector} from 'react-redux';
 
 interface FormData {
   description: string;
   time: string;
-  contract_types: string;
+  contract_type: string;
 }
 
 export default function CreateJobStep3() {
-  const {register, handleSubmit, setValue, watch} = useForm<FormData>();
+  const {register, handleSubmit, setValue, watch, reset} = useForm<FormData>();
+  const [editMode, setEditMode] = useState(false);
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const [params] = useSearchParams();
+  const jobData = useSelector((state: RootState) => state.jobData);
+
+  useEffect(() => {
+    if (params.get('editar') !== null && !!params.get('editar')) {
+      setEditMode(true);
+      reset({
+        description: jobData.description,
+        time: jobData.time,
+        contract_type: jobData.contract_type,
+      });
+    }
+  }, [jobData]);
 
   const onSubmit = (data: FormData) => {
     try {
-      if (!data.contract_types) throw new Error('Insira o Tipo da Vaga.');
-      dispatch(setJobContractType(data.contract_types));
+      if (!data.contract_type) throw new Error('Insira o Tipo da Vaga.');
+      dispatch(setJobContractType(data.contract_type));
       if (!data.time) throw new Error('Insira o Horário de Trabalho.');
       dispatch(setJobTime(data.time));
       if (!data.description) throw new Error('Insira a Descrição da Vaga.');
@@ -39,14 +54,14 @@ export default function CreateJobStep3() {
       <RegisterHeader showProgress={{progress: 3, maxSteps: 4.5}} text="Conclua os passos para publicação da vaga." />
       <div className="py-6 flex justify-center">
         <form onSubmit={handleSubmit(onSubmit)} className="max-w-xl w-full">
-          <div className="font-semibold mt-4 text-lg select-none">
+          <div className="font-semibold mt-4 text-base select-none">
             Adicione os detalhes da vaga para encontrar seu próximo colaborador.
           </div>
           <div className="mt-8 w-full">
             <SelectDropdown
               className="text-black"
-              callback={value => setValue('contract_types', value)}
-              value={watch('contract_types')}
+              callback={value => setValue('contract_type', value)}
+              value={watch('contract_type')}
               label={'Selecione o Tipo da Vaga'}
               options={ContractTypes}
             />
@@ -64,6 +79,7 @@ export default function CreateJobStep3() {
               <Textarea
                 callback={value => setValue('description', value)}
                 placeholder="Informe os requisitos para essa vaga."
+                defaultValue={editMode ? jobData.description : ''}
               />
             </div>
           </div>

@@ -26,7 +26,7 @@ interface FormData {
 
 export default function AddNewExperience() {
   const [currentJob, setCurrentJob] = useState<boolean>(false);
-  const {register, handleSubmit, reset} = useForm<FormData>();
+  const {register, handleSubmit, reset, setValue} = useForm<FormData>();
   const {previous_experience} = useSelector((state: RootState) => state.profileData);
   const [params] = useSearchParams();
   const [currentId, setCurrentId] = useState<number>();
@@ -89,7 +89,7 @@ export default function AddNewExperience() {
     <div>
       <RegisterHeader showProgress={{progress: 4, maxSteps: 8}} />
       <div className="max-w-full items-center p-5 flex flex-col mt-6 select-none">
-        <form onSubmit={handleSubmit(onSubmit)} className="w-full max-w-[336px]">
+        <form onSubmit={handleSubmit(onSubmit)} className="w-full max-w-xl">
           <div className="max-w-xs w-full">
             <p className="text-black font-semibold text-base select-none mt-4">Adicionando Experiência Profissional</p>
           </div>
@@ -121,7 +121,7 @@ export default function AddNewExperience() {
                 register={register}
                 registerName="start_date"
                 label="Data de ínicio"
-                className="w-36"
+                className="w-64"
                 type="month"
                 required
                 defaultValue={editMode ? moment(currentEditingJob.start_date).format('YYYY-MM') : ''}
@@ -131,7 +131,7 @@ export default function AddNewExperience() {
                   register={register}
                   registerName="end_date"
                   label="Data de fim"
-                  className="w-36"
+                  className="w-64"
                   type="month"
                   required
                   defaultValue={
@@ -147,12 +147,19 @@ export default function AddNewExperience() {
               </label>
             </div>
 
-            <div className="text-sm font-semibold mt-4">Descrição:</div>
-            <Textarea placeholder="Fale sobre as atividades executadas nesse cargo." className="mt-4 text-sm" />
+            <div className="text-sm mt-4 w-full flex flex-col">
+              <p className="font-semibold">Descrição:</p>
+              <Textarea
+                placeholder="Fale sobre as atividades executadas nesse cargo."
+                className="mt-4 text-sm min-h-[100px] border border-gray-300 rounded-md p-2 w-full"
+                defaultValue={editMode ? currentEditingJob.description : ''}
+                callback={value => setValue('description', value)}
+              />
+            </div>
           </>
 
           <div className="mt-8 flex justify-center">
-            <ButtonHover text={'Continuar'} type={'submit'} className="font-semibold text-base after:bg-redDefault" />
+            <ButtonHover text={'Continuar'} type={'submit'} className="text-base after:bg-redDefault" />
           </div>
         </form>
       </div>

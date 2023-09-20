@@ -12,7 +12,6 @@ import {ProfileFatecEducation} from '@/store/interfaces/profile-data-interface';
 import {Courses, FatecInstitutions} from '@/utils/consts';
 import {useSelector} from 'react-redux';
 import {useEffect, useState} from 'react';
-import {DatePicker} from '@/components/date-picker';
 
 export default function StudentRegisterStep3() {
   const {register, handleSubmit, setValue, watch, reset} = useForm<ProfileFatecEducation>({
@@ -87,22 +86,18 @@ export default function StudentRegisterStep3() {
               registerName="actual_cycle"
               label="Ciclo"
               required
-              className="w-40"
+              className="w-64"
               defaultValue={editMode ? fatecEducation.actual_cycle : ''}
             />
             <GeneralInput
               register={register}
               registerName="start_date"
               label="Data de ínicio"
-              className="w-40"
+              className="w-64"
               type="month"
               defaultValue={editMode ? moment(fatecEducation.start_date).format('YYYY-MM') : undefined}
               required
             />
-            {/* <DatePicker
-              defaultValue={editMode ? moment(fatecEducation.start_date).format('YYYY-MM') : undefined}
-              required
-            /> */}
           </div>
           <div className="mt-10 flex justify-center">
             <ButtonHover text={'Continuar'} type={'submit'} className="font-semibold text-base" />
