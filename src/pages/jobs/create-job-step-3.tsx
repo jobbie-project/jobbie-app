@@ -10,6 +10,7 @@ import {SelectDropdown} from '@/components/select-dropdown';
 import {setJobContractType, setJobDescription, setJobTime} from '@/store/slices/job-data';
 import {useEffect, useState} from 'react';
 import {useSelector} from 'react-redux';
+import {Button} from '@/components/ui/button';
 
 interface FormData {
   description: string;
@@ -18,7 +19,7 @@ interface FormData {
 }
 
 export default function CreateJobStep3() {
-  const {register, handleSubmit, setValue, watch, reset} = useForm<FormData>();
+  const {handleSubmit, setValue, watch, reset} = useForm<FormData>();
   const [editMode, setEditMode] = useState(false);
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
@@ -83,7 +84,12 @@ export default function CreateJobStep3() {
               />
             </div>
           </div>
-          <div className="mt-8 flex justify-center">
+          <div className="mt-10 flex flex-row justify-between">
+            <Button
+              onClick={() => navigate('/gerenciamento')}
+              className=" bg-lightgray1 font-semibold text-black hover:bg-redDefault hover:text-white">
+              Cancelar
+            </Button>
             <ButtonHover text={'Continuar'} type={'submit'} className="font-semibold text-base" />
           </div>
         </form>

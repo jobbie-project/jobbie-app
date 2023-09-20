@@ -3,9 +3,11 @@ import GeneralInput from '@/components/general-input';
 import RegisterHeader from '@/components/register-header';
 import {SelectCountry} from '@/components/select-country';
 import {setUserAddress} from '@/store/slices/profile-data';
-import {useAppDispatch} from '@/store/store';
+import {RootState, useAppDispatch} from '@/store/store';
 import {toastError} from '@/utils/toast-error';
+import {useEffect, useState} from 'react';
 import {useForm} from 'react-hook-form';
+import {useSelector} from 'react-redux';
 import {useNavigate, useSearchParams} from 'react-router-dom';
 
 interface FormData {
@@ -15,24 +17,28 @@ interface FormData {
 }
 
 export default function StudentRegisterStep2() {
-  const {register, handleSubmit} = useForm<FormData>();
-
+  const {register, handleSubmit, reset} = useForm<FormData>();
+  const [editMode, setEditMode] = useState(false);
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const [params] = useSearchParams();
+  const profileAddress = useSelector((state: RootState) => state.profileData.address);
 
   const onSubmit = (data: FormData) => {
     try {
+      if (!data.street) throw new Error('Insira seu endereço para continuar.');
       if (!data.location) throw new Error('Insira a cidade em que você reside.');
       const city = data.location.split(',')[0];
       const state = data.location.split(',')[1];
       if (!city || !state) throw new Error('É necessário informar a Cidade e o Estado, separados por vírgula.');
-
+      if (!data.zip_code) throw new Error('Insira seu CEP para continuar.');
       dispatch(
         setUserAddress({
           ...data,
+          street: data.street,
           city: data.location.split(',')[0],
           state: data.location.split(',')[1],
+          zip_code: data.zip_code,
         }),
       );
       navigate(params.get('redirect') ?? '/registro/estudante/passo-3');
@@ -40,6 +46,17 @@ export default function StudentRegisterStep2() {
       toastError(error);
     }
   };
+
+  useEffect(() => {
+    if (params.get('editar') !== null && !!params.get('editar')) {
+      setEditMode(true);
+      reset({
+        street: profileAddress.street,
+        location: `${profileAddress.city},${profileAddress.state}`,
+        zip_code: profileAddress.zip_code,
+      });
+    }
+  }, [profileAddress]);
 
   return (
     <div>
@@ -50,9 +67,26 @@ export default function StudentRegisterStep2() {
             <p className="text-black font-semibold text-lg select-none mt-8">Qual sua localização?</p>
           </div>
           <SelectCountry />
-          <GeneralInput register={register} registerName="street" label="Endereço" />
-          <GeneralInput register={register} registerName="location" label="Cidade, Estado" required />
-          <GeneralInput register={register} registerName="zip_code" label="Código postal" />
+          <GeneralInput
+            register={register}
+            registerName="street"
+            label="Endereço"
+            defaultValue={editMode ? profileAddress.street : ''}
+            required
+          />
+          <GeneralInput
+            register={register}
+            registerName="location"
+            label="Cidade, Estado"
+            defaultValue={editMode ? `${profileAddress.city}, ${profileAddress.state}` : ''}
+            required
+          />
+          <GeneralInput
+            register={register}
+            registerName="zip_code"
+            label="Código postal"
+            defaultValue={editMode ? profileAddress.zip_code : ''}
+          />
 
           <div className="mt-8 flex justify-center">
             <ButtonHover text={'Continuar'} type={'submit'} className="font-semibold text-base" />

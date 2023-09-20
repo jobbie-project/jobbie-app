@@ -15,6 +15,9 @@ interface ReviewCardMediumProps {
   editRoute: string;
   index?: number;
   isFatec?: boolean;
+  titleForText1?: string;
+  titleForText2?: string;
+  titleForText3?: string;
 }
 
 export function ReviewCardMedium(props: ReviewCardMediumProps) {
@@ -40,11 +43,18 @@ export function ReviewCardMedium(props: ReviewCardMediumProps) {
         </div>
       </div>
       <div className="flex flex-col">
-        <div className="mt-4 font-medium text-primaryGray">{props.title}</div>
-        <div className="mt-4 font-medium text-primaryGray">{props.subtitle}</div>
+        <div className="mt-4 font-medium text-primaryGray flex flex-row">
+          <div className="font-semibold mr-1">{props.titleForText1}</div>
+          {props.title}
+        </div>
+        <div className="mt-4 font-medium text-primaryGray flex flex-row">
+          <div className="font-semibold mr-1">{props.titleForText2}</div>
+          {props.subtitle}
+        </div>
         <div className="mt-4 flex flex-row font-medium text-primaryGray">
-          {props.description ? `Ciclo: ${props.description} ` : ''}
-          {props.end_date ? 'De ' : 'Desde '}
+          <div className="font-semibold mr-1">{props.titleForText3}</div>
+          {props.description ? `${props.description}, ` : ''}
+          {props.end_date ? 'de ' : 'desde '}
           {props.start_date}
           {props.end_date ? ` até ${props.end_date}` : ' até atualmente.'}
         </div>

@@ -8,6 +8,7 @@ import GeneralInput from '@/components/general-input';
 import {ButtonHover} from '@/components/button-hover-animation';
 import {useEffect, useState} from 'react';
 import {useSelector} from 'react-redux';
+import {Button} from '@/components/ui/button';
 
 interface FormData {
   company_name: string;
@@ -81,7 +82,12 @@ export default function CreateJobStep1() {
               os currículos dos candidatos serão enviados para o email que você fornecer acima.
             </span>
           </div>
-          <div className="mt-8 flex justify-center">
+          <div className="mt-8 flex flex-row justify-between">
+            <Button
+              onClick={() => navigate('/gerenciamento')}
+              className=" bg-lightgray1 font-semibold text-black hover:bg-redDefault hover:text-white">
+              Cancelar
+            </Button>
             <ButtonHover text={'Continuar'} type={'submit'} className="font-semibold text-base" />
           </div>
         </form>

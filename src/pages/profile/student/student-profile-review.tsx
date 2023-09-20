@@ -19,7 +19,6 @@ import {RootState} from '@/store/store';
 import {Degrees} from '@/utils/consts';
 import moment from '@/utils/moment';
 import {Checkbox} from '@radix-ui/react-checkbox';
-
 import {useForm} from 'react-hook-form';
 import {useSelector} from 'react-redux';
 import {useNavigate} from 'react-router-dom';
@@ -53,19 +52,22 @@ export default function StudentProfileReview() {
             canDelete={false}
             editRoute={'/registro/estudante/passo-1?editar=true&redirect=/estudante/perfil/revisar'}
             info="Dados Pessoais"
+            titleForText1="Nome:"
             title={profileData.name}
+            titleForText2="Telefone:"
             subtitle={profileData.phone}
-            // description={profileData.email}
           />
           <ReviewCardLarge
             canDelete={false}
             editRoute={'/registro/estudante/passo-2?editar=true&redirect=/estudante/perfil/revisar'}
             info="Endereço"
+            titleForText1="Localização:"
             title={`${profileData.address.city}, ${profileData.address.state}`}
+            titleForText2="Rua:"
             subtitle={`${profileData.address.street}, ${profileData.address.zip_code}`}
           />
 
-          <div className="max-w-xl w-full p-2 font-semibold text-lightblack flex flex-row justify-between">
+          <div className="max-w-xl w-full font-semibold text-lightblack flex flex-row justify-between">
             <p className="py-2 flex items-end">Formação Acadêmica</p>
             <div className="py-2">
               <ButtonAddNew onClick={() => navigate('/estudante/educacao/adicionar')} />
@@ -76,8 +78,11 @@ export default function StudentProfileReview() {
             canDelete={false}
             editRoute="/registro/estudante/passo-3?editar=true&redirect=/estudante/perfil/revisar"
             info="Graduação"
+            titleForText1="Curso:"
             title={profileData.fatecEducation.course_name}
+            titleForText2="Instituição:"
             subtitle={profileData.fatecEducation.institution_name}
+            titleForText3="Ciclo:"
             description={profileData.fatecEducation.actual_cycle}
             start_date={moment(profileData.fatecEducation.start_date).format('MMMM [de] YYYY')}
           />
@@ -95,7 +100,7 @@ export default function StudentProfileReview() {
               end_date={item.end_date && moment(item.end_date).format('MMMM [de] YYYY')}
             />
           ))}
-          <div className="max-w-xl w-full p-2 font-semibold text-lightblack flex flex-row justify-between">
+          <div className="max-w-xl w-full font-semibold text-lightblack flex flex-row justify-between">
             <p className="py-2 flex items-end">Experiência Profissional</p>
             <div className="py-2">
               <ButtonAddNew
@@ -127,7 +132,7 @@ export default function StudentProfileReview() {
             </div>
           )}
 
-          <div className="max-w-xl w-full p-2 font-semibold text-lightblack flex flex-row justify-between">
+          <div className="max-w-xl w-full font-semibold text-lightblack flex flex-row justify-between">
             <p className="py-2 flex items-end">Certificações e Licenças</p>
             <div className="py-2">
               <ButtonAddNew

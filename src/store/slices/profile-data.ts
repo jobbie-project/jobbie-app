@@ -24,6 +24,9 @@ export const profileDataSlice = createSlice({
   name: 'profileData',
   initialState: initialState,
   reducers: {
+    setProfileData: (state, action: PayloadAction<ProfileData>) => {
+      state = action.payload;
+    },
     setUserAddress: (state, action: PayloadAction<ProfileAddress>) => {
       state.address = action.payload;
     },
@@ -85,6 +88,7 @@ export const profileDataSlice = createSlice({
 });
 
 export const {
+  setProfileData,
   setUserAddress,
   setUserEducation,
   setUserFatecEducation,

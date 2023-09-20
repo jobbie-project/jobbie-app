@@ -41,15 +41,15 @@ export function ReviewCardLarge(props: ReviewCardLargeProps) {
       </div>
       <div className="flex flex-col">
         <div className="mt-4 font-medium text-primaryGray flex flex-row">
-          <div className="font-semibold">{props.titleForText1}</div>
+          <div className="font-semibold mr-1">{props.titleForText1}</div>
           {props.title}
         </div>
         <div className="mt-4 font-medium text-primaryGray flex flex-row">
-          <div className="font-semibold">{props.titleForText2}</div>
+          <div className="font-semibold mr-1">{props.titleForText2}</div>
           {props.subtitle}
         </div>
         <div className="mt-4 font-medium text-primaryGray flex flex-row">
-          <div className="font-semibold">{props.titleForText3}</div>
+          <div className="font-semibold mr-1">{props.titleForText3}</div>
           {props.description}
         </div>
       </div>

@@ -99,7 +99,7 @@ export default function StudentRegisterStep3() {
               required
             />
           </div>
-          <div className="mt-10 flex justify-center">
+          <div className="mt-8 flex justify-center">
             <ButtonHover text={'Continuar'} type={'submit'} className="font-semibold text-base" />
           </div>
         </form>

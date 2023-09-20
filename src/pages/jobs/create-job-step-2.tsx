@@ -10,6 +10,7 @@ import {RadioGroup, RadioGroupItem} from '@/components/ui/radio-group';
 import React, {useEffect, useState} from 'react';
 import {Label} from '@/components/ui/label';
 import {useSelector} from 'react-redux';
+import {Button} from '@/components/ui/button';
 
 interface FormData {
   position: string;
@@ -143,7 +144,12 @@ export default function CreateJobStep2() {
               )}
             </div>
           </div>
-          <div className="mt-8 flex justify-center">
+          <div className="mt-8 flex flex-row justify-between">
+            <Button
+              onClick={() => navigate('/gerenciamento')}
+              className=" bg-lightgray1 font-semibold text-black hover:bg-redDefault hover:text-white">
+              Cancelar
+            </Button>
             <ButtonHover text={'Continuar'} type={'submit'} className="font-semibold text-base" />
           </div>
         </form>
