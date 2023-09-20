@@ -63,7 +63,7 @@ export default function StudentProfileReview() {
             titleForText2="Salário: "
             subtitle={jobData.salary}
             titleForText3="Modalidade:"
-            description={jobData.type}
+            description={jobData.type === 'remote' ? 'Remoto' : 'Presencial'}
           />
           <ReviewJobPostingCard
             canDelete={false}

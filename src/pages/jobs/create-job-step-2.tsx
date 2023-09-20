@@ -20,7 +20,7 @@ interface FormData {
 
 export default function CreateJobStep2() {
   const {register, handleSubmit, setValue, reset} = useForm<FormData>();
-  const [location, setLocation] = React.useState<'remote' | 'face-to-face'>();
+  const [type, setType] = React.useState<'remote' | 'face-to-face'>();
   const [editMode, setEditMode] = useState(false);
   const jobData = useSelector((state: RootState) => state.jobData);
   const navigate = useNavigate();
@@ -30,11 +30,12 @@ export default function CreateJobStep2() {
   useEffect(() => {
     if (params.get('editar') !== null && !!params.get('editar')) {
       setEditMode(true);
+      setType(jobData.type);
       reset({
         position: jobData.position,
         num_positions: jobData.num_positions,
         salary: jobData.salary,
-        // location: jobData.location,
+        location: `${jobData.location?.city},${jobData.location?.state}`,
       });
     }
   }, [jobData]);
@@ -62,11 +63,12 @@ export default function CreateJobStep2() {
       dispatch(setJobNumPositions(data.num_positions));
       if (!data.salary) throw new Error('Insira o salário para continuar.');
       dispatch(setJobSalary(data.salary));
-      if (!location) throw new Error('Selecione a modalidade da vaga.');
-      location === 'remote' ? dispatch(setJobType('Remoto')) : dispatch(setJobType('Presencial'));
-      if (location === 'face-to-face' && !data.location) throw new Error('Informe o Local de Trabalho.');
-      if (location === 'face-to-face')
-        dispatch(setJobLocation({...data, city: data.location.split(',')[0], state: data.location.split(',')[1]}));
+      if (!type) throw new Error('Selecione a modalidade da vaga.');
+      dispatch(setJobType(type));
+      if (type === 'face-to-face' && !data.location) throw new Error('Informe o Local de Trabalho.');
+      type === 'face-to-face'
+        ? dispatch(setJobLocation({...data, city: data.location.split(',')[0], state: data.location.split(',')[1]}))
+        : dispatch(setJobLocation({city: '', state: ''}));
       navigate(params.get('redirect') ?? '/nova-vaga/passo-3');
     } catch (error) {
       toastError(error);
@@ -81,34 +83,62 @@ export default function CreateJobStep2() {
             Informe os dados básicos da vaga que você está criando.
           </div>
           <div className="mt-8 w-full">
-            <GeneralInput register={register} registerName="position" label="Cargo" required />
-            <GeneralInput register={register} registerName="num_positions" label="Número de vagas" />
+            <GeneralInput
+              register={register}
+              registerName="position"
+              label="Cargo"
+              defaultValue={editMode ? jobData.position : ''}
+              required
+            />
+            <GeneralInput
+              register={register}
+              registerName="num_positions"
+              label="Número de vagas"
+              defaultValue={editMode ? jobData.num_positions : ''}
+            />
             <GeneralInput
               register={register}
               registerName="salary"
               label="Salário"
               callback={formatNumberToBRL}
+              defaultValue={editMode ? jobData.salary : ''}
               required
             />
             <div>
               <div className="font-semibold py-4">Modalidade</div>
-              <RadioGroup defaultValue="option">
+              <RadioGroup>
                 <div className="flex items-center space-x-2">
-                  <RadioGroupItem onClick={() => setLocation('remote')} value="remote" id="r1" />
+                  <RadioGroupItem
+                    onClick={() => setType('remote')}
+                    value="remote"
+                    id="r1"
+                    checked={type === 'remote'}
+                  />
                   <Label htmlFor="r1" className="mt-1">
                     Remoto
                   </Label>
                 </div>
                 <div className="flex items-center space-x-2 mt-2">
-                  <RadioGroupItem onClick={() => setLocation('face-to-face')} value="ftf" id="r2" />
+                  <RadioGroupItem
+                    onClick={() => setType('face-to-face')}
+                    value="face-to-face"
+                    id="r2"
+                    checked={type === 'face-to-face'}
+                  />
                   <Label htmlFor="r2" className="mt-1">
                     Presencial
                   </Label>
                 </div>
               </RadioGroup>
-              {location === 'face-to-face' && (
+              {type === 'face-to-face' && (
                 <div className="mt-4">
-                  <GeneralInput register={register} registerName="location" label="Local de Trabalho" required />
+                  <GeneralInput
+                    register={register}
+                    registerName="location"
+                    label="Local de Trabalho"
+                    defaultValue={editMode ? `${jobData.location?.city} ${jobData.location?.state}` : ''}
+                    required
+                  />
                 </div>
               )}
             </div>

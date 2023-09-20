@@ -13,7 +13,7 @@ const initialState: JobData = {
     state: '',
   },
   description: '',
-  type: '',
+  type: undefined,
   time: '',
   contract_type: '',
 };
@@ -50,7 +50,7 @@ export const jobDataSlice = createSlice({
     setJobDescription: (state, action: PayloadAction<string>) => {
       state.description = action.payload;
     },
-    setJobType: (state, action: PayloadAction<string>) => {
+    setJobType: (state, action: PayloadAction<'face-to-face' | 'remote'>) => {
       state.type = action.payload;
     },
     setJobTime: (state, action: PayloadAction<string>) => {

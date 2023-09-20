@@ -10,7 +10,7 @@ export interface JobData {
     state: string;
   };
   description: string;
-  type: string;
+  type: 'face-to-face' | 'remote' | undefined;
   time: string;
   contract_type: string;
 }
