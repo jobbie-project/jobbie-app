@@ -1,5 +1,4 @@
 import {Filter} from '@/icons/filter';
-import {BiFilterAlt} from 'react-icons/bi';
 import {CiSearch} from 'react-icons/ci';
 
 interface SearchBarProps {
