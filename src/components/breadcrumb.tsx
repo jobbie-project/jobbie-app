@@ -9,12 +9,8 @@ export default function BreadCrumbComponent(props: BreadCrumbComponentProps) {
   const location = useLocation();
 
   return (
-    <div className={`flex flex-row justify-center ${props.className}`}>
-      {location.pathname[0] && (
-        <div className="flex items-center">
-          <div className="m-1 text-sm font-semibold text-black">Início</div>
-        </div>
-      )}
+    <div className={`flex flex-row justify-start ${props.className}`}>
+      {location.pathname[0] && <div className="text-sm font-semibold text-black">Início</div>}
       {location.pathname
         .split('/')
         .slice(1)
@@ -23,7 +19,7 @@ export default function BreadCrumbComponent(props: BreadCrumbComponentProps) {
           return (
             <div key={index} className="flex items-center">
               <MdKeyboardArrowRight />
-              <div className="m-1 text-sm font-semibold text-black">{capitalizedItem}</div>
+              <div className="text-sm font-semibold text-black">{capitalizedItem}</div>
             </div>
           );
         })}
