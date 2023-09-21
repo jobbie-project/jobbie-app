@@ -21,14 +21,14 @@ export function Header() {
             </button>
           )}
           <div className="py-2 px-6">
-            <a href="">
+            <a href="/inicio">
               <Logoblack width={isMobile ? '80' : '100'} height={isMobile ? '40' : '50'} />
             </a>
           </div>
           {!isMobile && (
             <div className="flex items-center">
               <div className="flex items-center justify-between w-full ">
-                <a href="" className="block py-2 pr-4 pl-3 font-medium text-black" aria-current="page">
+                <a href="/inicio" className="block py-2 pr-4 pl-3 font-medium text-black" aria-current="page">
                   Inicio
                 </a>
                 <a href="#" className="block py-2 pr-4 pl-3 font-medium text-black" aria-current="page">

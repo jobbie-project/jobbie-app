@@ -21,7 +21,7 @@ const mockJob: Job = {
 
 const numberOfJobs = 1;
 
-export default function JobViewer() {
+export default function JobDataViewer() {
   return (
     <>
       {Array(numberOfJobs)
