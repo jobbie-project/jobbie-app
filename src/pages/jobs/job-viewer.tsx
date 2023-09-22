@@ -10,7 +10,7 @@ import {SalaryIcon} from '@/icons/salary';
 
 export default function JobViewer() {
   return (
-    <div className="w-full">
+    <div className="w-full select-none">
       <Header />
       <div className="w-full flex justify-center">
         <div className="max-w-4xl w-full">
@@ -96,7 +96,7 @@ export default function JobViewer() {
                 <div className="flex flex-row ">
                   <Button
                     variant="none"
-                    className="h-10 px-4 text-sm text-lightblack2 bg-white border-2 border-lightgray1 whitespace-nowrap	">
+                    className="h-10 px-4 text-sm text-lightblack2 bg-white border-2 border-lightgray1 whitespace-nowrap">
                     Relatar um problema
                   </Button>
                   <Button variant="none" className="h-10 px-6 ml-4 text-sm text-white bg-redDefault">
