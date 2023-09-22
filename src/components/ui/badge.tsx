@@ -9,7 +9,7 @@ const badgeVariants = cva(
     variants: {
       variant: {
         default:
-          'bg-white text-black rounded-md hover:outline-none hover:ring-[1.5px] hover:ring-redDefault cursor-pointer h-6',
+          'bg-white text-black rounded-md hover:outline-none hover:ring-[1.5px] hover:ring-redDefault cursor-pointer h-6 p-4',
       },
     },
     defaultVariants: {

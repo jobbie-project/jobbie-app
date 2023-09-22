@@ -1,4 +1,4 @@
-import {Filter} from '@/icons/filter';
+import {FilterIcon} from '@/icons/filter';
 import {CiSearch} from 'react-icons/ci';
 
 interface SearchBarProps {
@@ -24,7 +24,7 @@ export function SearchBar(props: SearchBarProps) {
               />
               {props.showFilter && (
                 <div className="flex flex-row items-center mr-4">
-                  <Filter width="30" height="30" />
+                  <FilterIcon width="30" height="30" />
                 </div>
               )}
             </div>
