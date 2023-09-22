@@ -15,11 +15,11 @@ export function SearchBar(props: SearchBarProps) {
           <div className="relative w-full">
             <div className="bg-lightgray1 rounded-lg flex flex-row h-12">
               <div className="flex absolute inset-y-0 left-2 items-center pl-3 pointer-events-none">
-                <CiSearch size="30" color={'#BDBDBD'} />
+                <CiSearch size="30" color={'#7C7979'} />
               </div>
               <input
                 type="text"
-                className="bg-lightgray1 text-gray-900 focus:outline-none text-sm rounded-lg block w-full pl-16 placeholder-[#BDBDBD]"
+                className="bg-lightgray1 text-gray-900 focus:outline-none text-sm rounded-lg block w-full pl-16 placeholder-[#7C7979]"
                 placeholder={props.placeholder ? props.placeholder : 'Pesquisar'}
               />
               {props.showFilter && (

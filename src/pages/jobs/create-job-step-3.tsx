@@ -79,7 +79,7 @@ export default function CreateJobStep3() {
               </div>
               <Textarea
                 callback={value => setValue('description', value)}
-                placeholder="Informe os requisitos para essa vaga."
+                placeholder="Informe os requisitos e benefícios para essa vaga."
                 defaultValue={editMode ? jobData.description : ''}
               />
             </div>

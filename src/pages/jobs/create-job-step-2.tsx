@@ -147,7 +147,7 @@ export default function CreateJobStep2() {
           <div className="mt-8 flex flex-row justify-between">
             <Button
               onClick={() => navigate('/gerenciamento')}
-              className=" bg-lightgray1 font-semibold text-black hover:bg-redDefault hover:text-white">
+              className="bg-lightgray1 font-semibold text-black hover:bg-redDefault hover:text-white">
               Cancelar
             </Button>
             <ButtonHover text={'Continuar'} type={'submit'} className="font-semibold text-base" />
