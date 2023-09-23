@@ -11,7 +11,7 @@ import {
   DialogTitle,
 } from '@/components/ui/dialog';
 import {RootState} from '@/store/store';
-import {ContractTypes, JobTime} from '@/utils/consts';
+import {ContractTypes, JobTimes} from '@/utils/consts';
 import {useForm} from 'react-hook-form';
 import {useSelector} from 'react-redux';
 import {useNavigate} from 'react-router-dom';
@@ -71,7 +71,7 @@ export default function StudentProfileReview() {
               info="Detalhes da vaga"
               title={ContractTypes.find(contractTypes => contractTypes.value === jobData.contract_type)?.label ?? ''}
               titleForText1="Tipo de Contrato:"
-              subtitle={JobTime.find(jobTime => jobTime.value === jobData.time)?.label ?? ''}
+              subtitle={JobTimes.find(jobTime => jobTime.value === jobData.time)?.label ?? ''}
               titleForText2="Horário de Trabalho: "
               description={jobData.description}
               titleForText3="Descrição da vaga:"

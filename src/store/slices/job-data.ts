@@ -1,5 +1,6 @@
 import {PayloadAction, createSlice} from '@reduxjs/toolkit';
 import {JobData} from '../interfaces/job-data-interface';
+import {ContractType, JobTime, JobType} from '@/enums';
 
 const initialState: JobData = {
   company_name: '',
@@ -14,8 +15,8 @@ const initialState: JobData = {
   },
   description: '',
   type: undefined,
-  time: '',
-  contract_type: '',
+  time: '' as JobTime,
+  contract_type: '' as ContractType,
 };
 
 export const jobDataSlice = createSlice({
@@ -50,13 +51,13 @@ export const jobDataSlice = createSlice({
     setJobDescription: (state, action: PayloadAction<string>) => {
       state.description = action.payload;
     },
-    setJobType: (state, action: PayloadAction<'face-to-face' | 'remote'>) => {
+    setJobType: (state, action: PayloadAction<JobType>) => {
       state.type = action.payload;
     },
-    setJobTime: (state, action: PayloadAction<string>) => {
+    setJobTime: (state, action: PayloadAction<JobTime>) => {
       state.time = action.payload;
     },
-    setJobContractType: (state, action: PayloadAction<string>) => {
+    setJobContractType: (state, action: PayloadAction<ContractType>) => {
       state.contract_type = action.payload;
     },
   },

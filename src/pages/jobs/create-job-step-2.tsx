@@ -11,6 +11,7 @@ import React, {useEffect, useState} from 'react';
 import {Label} from '@/components/ui/label';
 import {useSelector} from 'react-redux';
 import {Button} from '@/components/ui/button';
+import {JobType} from '@/enums';
 
 interface FormData {
   position: string;
@@ -21,7 +22,7 @@ interface FormData {
 
 export default function CreateJobStep2() {
   const {register, handleSubmit, setValue, reset} = useForm<FormData>();
-  const [type, setType] = React.useState<'remote' | 'face-to-face'>();
+  const [type, setType] = React.useState<JobType>();
   const [editMode, setEditMode] = useState(false);
   const jobData = useSelector((state: RootState) => state.jobData);
   const navigate = useNavigate();
@@ -31,7 +32,7 @@ export default function CreateJobStep2() {
   useEffect(() => {
     if (params.get('editar') !== null && !!params.get('editar')) {
       setEditMode(true);
-      setType(jobData.type);
+      setType(jobData.type as JobType);
       reset({
         position: jobData.position,
         num_positions: jobData.num_positions,
@@ -60,14 +61,14 @@ export default function CreateJobStep2() {
     try {
       if (!data.position) throw new Error('Insira o cargo para continuar.');
       dispatch(setJobPosition(data.position));
-      if (!data.num_positions) throw new Error('Insira o número de vagas para continuar.');
-      dispatch(setJobNumPositions(data.num_positions));
+      if (Number.isNaN(Number(data.num_positions))) throw new Error('Número de vagas inválido');
+      data.num_positions && dispatch(setJobNumPositions(data.num_positions));
       if (!data.salary) throw new Error('Insira o salário para continuar.');
       dispatch(setJobSalary(data.salary));
       if (!type) throw new Error('Selecione a modalidade da vaga.');
-      dispatch(setJobType(type));
-      if (type === 'face-to-face' && !data.location) throw new Error('Informe o Local de Trabalho.');
-      type === 'face-to-face'
+      dispatch(setJobType(type as JobType));
+      if (type === JobType.FACE_TO_FACE && !data.location) throw new Error('Informe o Local de Trabalho.');
+      type === JobType.FACE_TO_FACE
         ? dispatch(setJobLocation({...data, city: data.location.split(',')[0], state: data.location.split(',')[1]}))
         : dispatch(setJobLocation({city: '', state: ''}));
       navigate(params.get('redirect') ?? '/nova-vaga/passo-3');
@@ -110,10 +111,10 @@ export default function CreateJobStep2() {
               <RadioGroup>
                 <div className="flex items-center space-x-2">
                   <RadioGroupItem
-                    onClick={() => setType('remote')}
+                    onClick={() => setType(JobType.REMOTE)}
                     value="remote"
                     id="r1"
-                    checked={type === 'remote'}
+                    checked={type === JobType.REMOTE}
                   />
                   <Label htmlFor="r1" className="mt-1">
                     Remoto
@@ -121,17 +122,17 @@ export default function CreateJobStep2() {
                 </div>
                 <div className="flex items-center space-x-2 mt-2">
                   <RadioGroupItem
-                    onClick={() => setType('face-to-face')}
+                    onClick={() => setType(JobType.FACE_TO_FACE)}
                     value="face-to-face"
                     id="r2"
-                    checked={type === 'face-to-face'}
+                    checked={type === JobType.FACE_TO_FACE}
                   />
                   <Label htmlFor="r2" className="mt-1">
                     Presencial
                   </Label>
                 </div>
               </RadioGroup>
-              {type === 'face-to-face' && (
+              {type === JobType.FACE_TO_FACE && (
                 <div className="mt-4">
                   <GeneralInput
                     register={register}

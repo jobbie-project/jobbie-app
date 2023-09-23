@@ -1,3 +1,5 @@
+import {ContractType, JobTime, JobType} from '@/enums';
+
 export interface JobData {
   company_name: string;
   owner: string;
@@ -10,7 +12,7 @@ export interface JobData {
     state: string;
   };
   description: string;
-  type: 'face-to-face' | 'remote' | undefined;
-  time: string;
-  contract_type: string;
+  type: JobType | undefined;
+  time: JobTime;
+  contract_type: ContractType;
 }

@@ -1,4 +1,4 @@
-import {EducationLevel} from '@/enums';
+import {ContractType, EducationLevel, JobTime} from '@/enums';
 import {ValueOption} from '@/interfaces/option';
 
 export const Degrees: ValueOption[] = [
@@ -26,16 +26,16 @@ export const Courses = [
 ];
 
 export const ContractTypes = [
-  {value: '1', label: 'CLT'},
-  {value: '2', label: 'PJ'},
-  {value: '3', label: 'Estágio'},
-  {value: '4', label: 'Trainee'},
-  {value: '5', label: 'Temporário'},
-  {value: '6', label: 'Freelancer'},
+  {value: ContractType.CLT, label: 'CLT'},
+  {value: ContractType.PJ, label: 'PJ'},
+  {value: ContractType.INTERNSHIP, label: 'Estágio'},
+  {value: ContractType.TRAINEE, label: 'Trainee'},
+  {value: ContractType.TEMPORARY, label: 'Temporário'},
+  {value: ContractType.FREE_LANCER, label: 'Freelancer'},
 ];
 
-export const JobTime = [
-  {value: '1', label: 'Integral'},
-  {value: '2', label: 'Parcial'},
-  {value: '3', label: 'A combinar'},
+export const JobTimes = [
+  {value: JobTime.FULL_TIME, label: 'Integral'},
+  {value: JobTime.PART_TIME, label: 'Parcial'},
+  {value: JobTime.TO_MATCH, label: 'A combinar'},
 ];

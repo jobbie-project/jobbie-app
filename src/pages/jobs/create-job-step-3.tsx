@@ -4,18 +4,19 @@ import {useForm} from 'react-hook-form';
 import {useNavigate, useSearchParams} from 'react-router-dom';
 import RegisterHeader from '@/components/register-header';
 import {ButtonHover} from '@/components/button-hover-animation';
-import {ContractTypes, JobTime} from '@/utils/consts';
+import {ContractTypes, JobTimes} from '@/utils/consts';
 import Textarea from '@/components/ui/textarea';
 import {SelectDropdown} from '@/components/select-dropdown';
 import {setJobContractType, setJobDescription, setJobTime} from '@/store/slices/job-data';
 import {useEffect, useState} from 'react';
 import {useSelector} from 'react-redux';
 import {Button} from '@/components/ui/button';
+import {ContractType, JobTime} from '@/enums';
 
 interface FormData {
   description: string;
-  time: string;
-  contract_type: string;
+  time: JobTime;
+  contract_type: ContractType;
 }
 
 export default function CreateJobStep3() {
@@ -61,17 +62,17 @@ export default function CreateJobStep3() {
           <div className="mt-8 w-full">
             <SelectDropdown
               className="text-black"
-              callback={value => setValue('contract_type', value)}
+              callback={value => setValue('contract_type', value as ContractType)}
               value={watch('contract_type')}
               label={'Selecione o Tipo da Vaga'}
               options={ContractTypes}
             />
             <SelectDropdown
               className="text-black"
-              callback={value => setValue('time', value)}
+              callback={value => setValue('time', value as JobTime)}
               value={watch('time')}
               label={'Selecione o Horário de Trabalho'}
-              options={JobTime}
+              options={JobTimes}
             />
             <div className="mt-6">
               <div className="text-sm font-semibold my-2">
