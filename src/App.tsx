@@ -28,6 +28,7 @@ import CreateJobStep2 from './pages/jobs/create-job-step-2';
 import CreateJobStep3 from './pages/jobs/create-job-step-3';
 import JobReview from './pages/jobs/job-review';
 import JobViewer from './pages/jobs/job-viewer';
+import JobSearch from './pages/jobs/job-search';
 
 export const App: React.FC = () => {
   return (
@@ -70,6 +71,7 @@ export const App: React.FC = () => {
         <Route path={`/nova-vaga/passo-3/editar`} element={<CreateJobStep3 />} />
         <Route path={`/nova-vaga/revisar`} element={<JobReview />} />
         <Route path={`/vaga/detalhes`} element={<JobViewer />} />
+        <Route path={`/vaga/pesquisar`} element={<JobSearch />} />
       </Routes>
       <ToastContainer />
     </div>
