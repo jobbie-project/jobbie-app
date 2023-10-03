@@ -3,6 +3,8 @@ import {SearchBar} from '@/components/searchbar';
 import {JobCardBig} from '@/components/job-card-big';
 import {JobCardMedium} from '@/components/card-medium';
 import {Job} from '@/interfaces/job';
+import {useEffect} from 'react';
+import authenticationService from '@/services/authentication/authentication.service';
 
 const mockJob: Job = {
   title: 'Desenvolvedor Front-end',
@@ -26,6 +28,12 @@ const numberOfJobs = 5;
 
 export default function Home() {
   const username = 'Usuário';
+  const data = authenticationService.getUserData();
+
+  useEffect(() => {
+    if (!data.id) window.location.href = '/entrar';
+  }, [data]);
+
   return (
     <>
       <Header />

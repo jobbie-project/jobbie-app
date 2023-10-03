@@ -15,6 +15,16 @@ class AuthService {
     localStorage.removeItem('user_role');
     window.dispatchEvent(new Event('storage'));
   };
+
+  getUserData = () => {
+    return {
+      id: localStorage.getItem('user_id'),
+      token: localStorage.getItem('user_token'),
+      name: localStorage.getItem('user_name'),
+      role: localStorage.getItem('user_role'),
+      profile_completed: localStorage.getItem('user_profile_completed') === 'true',
+    };
+  };
 }
 
 export default new AuthService();

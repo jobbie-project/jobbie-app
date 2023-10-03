@@ -41,12 +41,12 @@ export const App: React.FC = () => {
       <Routes>
         {/* Home Redirect */}
         <Route>
-          <Route path={`/inicio`} element={<Home />} />
+          <Route path="/*" element={<RedirectToLogin />} />
         </Route>
 
         {/* Public routes */}
         <Route path={`/entrar`} element={<Login />} />
-        <Route path="/*" element={<RedirectToLogin />} />
+        <Route path={`/inicio`} element={<Home />} />
         <Route path={`/registro`} element={<Register />} />
         <Route path={`/registro/estudante`} element={<StudentRegister />} />
         <Route path={`/registro/empresa`} element={<CompanyRegister />} />
