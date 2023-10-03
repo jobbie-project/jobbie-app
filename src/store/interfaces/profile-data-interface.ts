@@ -50,7 +50,7 @@ export interface ProfileData {
   name: string;
   phone: string;
   address: ProfileAddress;
-  fatecEducation: ProfileFatecEducation;
+  fatec_education: ProfileFatecEducation;
   education: ProfileEducation[];
   previous_experience: ProfilePreviousExperience[];
   tech_stacks: string[];

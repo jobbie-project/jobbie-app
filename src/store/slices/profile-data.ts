@@ -13,7 +13,7 @@ const initialState: ProfileData = {
   phone: '',
   address: {} as ProfileAddress,
   education: [] as ProfileEducation[],
-  fatecEducation: {} as ProfileFatecEducation,
+  fatec_education: {} as ProfileFatecEducation,
   previous_experience: [] as ProfilePreviousExperience[],
   tech_stacks: [],
   certifications: [],
@@ -31,7 +31,7 @@ export const profileDataSlice = createSlice({
       state.address = action.payload;
     },
     setUserFatecEducation: (state, action: PayloadAction<ProfileFatecEducation>) => {
-      state.fatecEducation = action.payload;
+      state.fatec_education = action.payload;
     },
     setUserEducation: (state, action: PayloadAction<ProfileEducation>) => {
       state.education.push(action.payload);

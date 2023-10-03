@@ -20,20 +20,20 @@ export default function StudentRegisterStep3() {
   const [editMode, setEditMode] = useState(false);
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const {fatecEducation} = useSelector((state: RootState) => state.profileData);
+  const {fatec_education} = useSelector((state: RootState) => state.profileData);
   const [params] = useSearchParams();
 
   useEffect(() => {
     if (params.get('editar') !== null && !!params.get('editar')) {
       setEditMode(true);
       reset({
-        institution: fatecEducation.institution,
-        course: fatecEducation.course,
-        actual_cycle: fatecEducation.actual_cycle,
-        start_date: fatecEducation.start_date,
+        institution: fatec_education.institution,
+        course: fatec_education.course,
+        actual_cycle: fatec_education.actual_cycle,
+        start_date: fatec_education.start_date,
       });
     }
-  }, [fatecEducation]);
+  }, [fatec_education]);
 
   const onSubmit = (data: ProfileFatecEducation) => {
     try {
@@ -87,7 +87,7 @@ export default function StudentRegisterStep3() {
               label="Ciclo"
               required
               className="w-64"
-              defaultValue={editMode ? fatecEducation.actual_cycle : ''}
+              defaultValue={editMode ? fatec_education.actual_cycle : ''}
             />
             <GeneralInput
               register={register}
@@ -95,7 +95,7 @@ export default function StudentRegisterStep3() {
               label="Data de ínicio"
               className="w-64"
               type="month"
-              defaultValue={editMode ? moment(fatecEducation.start_date).format('YYYY-MM') : undefined}
+              defaultValue={editMode ? moment(fatec_education.start_date).format('YYYY-MM') : undefined}
               required
             />
           </div>

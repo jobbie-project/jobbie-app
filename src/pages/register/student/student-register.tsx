@@ -3,6 +3,8 @@ import GeneralInput from '@/components/general-input';
 import PasswordInput from '@/components/password';
 import PasswordStrengthMeter from '@/components/password-strength-meter';
 import RegisterHeader from '@/components/register-header';
+import {UserRole} from '@/enums';
+import Api from '@/services/api/api.service';
 import {toastError} from '@/utils/toast-error';
 import {useState} from 'react';
 import {useForm} from 'react-hook-form';
@@ -28,11 +30,12 @@ export default function StudentRegister() {
     return email.split('@')[1] === 'fatec.sp.gov.br' ? true : false;
   };
 
-  const onSubmit = (data: FormData) => {
+  const onSubmit = async (data: FormData) => {
     try {
       if (!data.name) throw new Error('Insira um nome válido');
       if (!validate(data.email)) throw new Error('Utilize um email institucional da Fatec');
       if (!isPasswordValid) throw new Error('Senha muito fraca');
+      await Api.post('/user/create', {...data, role: UserRole.STUDENT});
       navigate('/verificacao-de-email');
     } catch (error) {
       toastError(error);

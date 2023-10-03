@@ -23,12 +23,9 @@ export default function Login() {
       if (!formData.email) throw new Error('Insira seu email.');
       if (!EmailValidator.validate(formData.email)) throw new Error('Insira um email válido');
       if (!formData.password) throw new Error('Insira sua senha.');
-      console.log({username: formData.email, password: formData.password});
-      console.log(Api.defaults);
       const {data} = await Api.post('/auth/authenticate', {username: formData.email, password: formData.password});
-      authenticationService.authenticate(data.id, data.access_token, data.name, data.role);
-      console.log(data);
-      navigate('/inicio');
+      authenticationService.authenticate(data.id, data.access_token, data.name, data.role, data.profile_completed);
+      data.profile_completed ? navigate('/inicio') : navigate('/registro/estudante/passo-1');
     } catch (error) {
       toastError(error);
     }

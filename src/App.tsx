@@ -30,6 +30,11 @@ import JobReview from './pages/jobs/job-review';
 import JobViewer from './pages/jobs/job-viewer';
 import JobSearch from './pages/jobs/job-search';
 
+const RedirectToLogin: React.FC = () => {
+  window.location.href = '/inicio';
+  return <></>;
+};
+
 export const App: React.FC = () => {
   return (
     <div className="h-[100vh]">
@@ -41,6 +46,7 @@ export const App: React.FC = () => {
 
         {/* Public routes */}
         <Route path={`/entrar`} element={<Login />} />
+        <Route path="/*" element={<RedirectToLogin />} />
         <Route path={`/registro`} element={<Register />} />
         <Route path={`/registro/estudante`} element={<StudentRegister />} />
         <Route path={`/registro/empresa`} element={<CompanyRegister />} />

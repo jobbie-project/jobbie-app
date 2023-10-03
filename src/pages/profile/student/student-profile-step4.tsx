@@ -13,7 +13,7 @@ import {useNavigate} from 'react-router-dom';
 
 export default function StudentRegisterStep4() {
   const navigate = useNavigate();
-  const {education, fatecEducation} = useSelector((state: RootState) => state.profileData);
+  const {education, fatec_education} = useSelector((state: RootState) => state.profileData);
   const {handleSubmit} = useForm();
 
   const onSubmit = () => {
@@ -33,10 +33,10 @@ export default function StudentRegisterStep4() {
             canDelete={false}
             editRoute={'/registro/estudante/passo-3?editar=true'}
             info="Graduação"
-            title={fatecEducation.course_name}
-            subtitle={fatecEducation.institution_name}
-            description={fatecEducation.actual_cycle}
-            start_date={moment(fatecEducation.start_date).format('MMMM [de] YYYY')}
+            title={fatec_education.course_name}
+            subtitle={fatec_education.institution_name}
+            description={fatec_education.actual_cycle}
+            start_date={moment(fatec_education.start_date).format('MMMM [de] YYYY')}
           />
 
           {education.map((item: ProfileEducation, index) => (

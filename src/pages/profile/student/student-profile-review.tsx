@@ -23,6 +23,9 @@ import {useForm} from 'react-hook-form';
 import {useSelector} from 'react-redux';
 import {useNavigate} from 'react-router-dom';
 import {useState} from 'react';
+import {toastError} from '@/utils/toast-error';
+import Api from '@/services/api/api.service';
+import {castFatecEducationData} from '@/utils/helpers';
 
 export default function StudentProfileReview() {
   const navigate = useNavigate();
@@ -33,6 +36,18 @@ export default function StudentProfileReview() {
   const onSubmit = () => {
     setIsOpen(false);
     navigate('/inicio');
+  };
+
+  const handleSubmitProfile = async () => {
+    try {
+      await Api.post('/student/create', {
+        ...profileData,
+        fatec_education: castFatecEducationData(profileData.fatec_education),
+      });
+      setIsOpen(true);
+    } catch (error) {
+      toastError(error);
+    }
   };
 
   return (
@@ -79,12 +94,12 @@ export default function StudentProfileReview() {
             editRoute="/registro/estudante/passo-3?editar=true&redirect=/estudante/perfil/revisar"
             info="Graduação"
             titleForText1="Curso:"
-            title={profileData.fatecEducation.course_name}
+            title={profileData.fatec_education.course_name}
             titleForText2="Instituição:"
-            subtitle={profileData.fatecEducation.institution_name}
+            subtitle={profileData.fatec_education.institution_name}
             titleForText3="Ciclo:"
-            description={profileData.fatecEducation.actual_cycle}
-            start_date={moment(profileData.fatecEducation.start_date).format('MMMM [de] YYYY')}
+            description={profileData.fatec_education.actual_cycle}
+            start_date={moment(profileData.fatec_education.start_date).format('MMMM [de] YYYY')}
           />
 
           {profileData.education.map((item, index) => (
@@ -148,7 +163,7 @@ export default function StudentProfileReview() {
             <ButtonHover
               text={'Continuar'}
               type={'button'}
-              callback={() => setIsOpen(true)}
+              callback={handleSubmitProfile}
               className="font-semibold text-base"
             />
             <Dialog open={isOpen} onOpenChange={setIsOpen}>
