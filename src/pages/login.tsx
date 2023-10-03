@@ -45,7 +45,7 @@ export default function Login() {
           <div className="flex justify-center">
             <Logoblack width={'100'} height={'50'} />
           </div>
-          <p className="text-black font-regular text-base select-none mt-20 flex justify-center ">
+          <p className="text-black font-regular text-base select-none mt-8 flex justify-center ">
             Continue com sua conta Jobbie.
           </p>
           <form onSubmit={handleSubmit(onSubmit)}>

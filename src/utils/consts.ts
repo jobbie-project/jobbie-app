@@ -31,7 +31,7 @@ export const ContractTypes = [
   {value: ContractType.INTERNSHIP, label: 'Estágio'},
   {value: ContractType.TRAINEE, label: 'Trainee'},
   {value: ContractType.TEMPORARY, label: 'Temporário'},
-  {value: ContractType.FREE_LANCER, label: 'Freelancer'},
+  {value: ContractType.FREE_LANCER, label: 'Freelance'},
 ];
 
 export const JobTimes = [

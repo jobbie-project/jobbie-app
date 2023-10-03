@@ -30,7 +30,8 @@ const mockJob: Job = {
 const numberOfJobs = 5;
 
 export default function JobViewer() {
-  const [showOptions, setShowOptions] = useState(false);
+  const [showModality, setShowModality] = useState(false);
+  const [showCategory, setShowCategory] = useState(false);
 
   return (
     <div className="w-full select-none">
@@ -60,11 +61,11 @@ export default function JobViewer() {
               <div className="mb-6 flex flex-col border-2 border-lightgray1 rounded-md px-4 text-sm">
                 <div
                   className="my-6 flex flex-row justify-between font-semibold"
-                  onClick={() => setShowOptions(!showOptions)}>
+                  onClick={() => setShowModality(!showModality)}>
                   Modalidade
-                  {showOptions ? <IoIosArrowUp size={20} /> : <IoIosArrowDown size={20} />}
+                  {showModality ? <IoIosArrowUp size={20} /> : <IoIosArrowDown size={20} />}
                 </div>
-                {showOptions && (
+                {showModality && (
                   <div className="pb-4">
                     <div className="flex flex-row items-center mb-4">
                       <Checkbox id="face-to-face" />
@@ -76,6 +77,54 @@ export default function JobViewer() {
                       <Checkbox id="remote" />
                       <label htmlFor="remote" className="ml-2 cursor-pointer">
                         Remoto
+                      </label>
+                    </div>
+                  </div>
+                )}
+              </div>
+              <div className="mb-6 flex flex-col border-2 border-lightgray1 rounded-md px-4 text-sm">
+                <div
+                  className="my-6 flex flex-row justify-between font-semibold"
+                  onClick={() => setShowCategory(!showCategory)}>
+                  Categoria
+                  {showCategory ? <IoIosArrowUp size={20} /> : <IoIosArrowDown size={20} />}
+                </div>
+                {showCategory && (
+                  <div className="pb-4">
+                    <div className="flex flex-row items-center mb-4">
+                      <Checkbox id="clt" />
+                      <label htmlFor="clt" className="ml-2 cursor-pointer">
+                        CLT
+                      </label>
+                    </div>
+                    <div className="flex flex-row items-center mb-2">
+                      <Checkbox id="pj" />
+                      <label htmlFor="pj" className="ml-2 cursor-pointer">
+                        PJ
+                      </label>
+                    </div>
+                    <div className="flex flex-row items-center mb-2">
+                      <Checkbox id="estagio" />
+                      <label htmlFor="estagio" className="ml-2 cursor-pointer">
+                        Estágio
+                      </label>
+                    </div>
+                    <div className="flex flex-row items-center mb-2">
+                      <Checkbox id="trainee" />
+                      <label htmlFor="trainee" className="ml-2 cursor-pointer">
+                        Trainee
+                      </label>
+                    </div>
+                    <div className="flex flex-row items-center mb-2">
+                      <Checkbox id="temporario" />
+                      <label htmlFor="temporario" className="ml-2 cursor-pointer">
+                        Temporário
+                      </label>
+                    </div>
+                    <div className="flex flex-row items-center mb-2">
+                      <Checkbox id="freelance" />
+                      <label htmlFor="freelance" className="ml-2 cursor-pointer">
+                        Freelance
                       </label>
                     </div>
                   </div>
