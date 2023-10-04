@@ -5,9 +5,10 @@ import {Button} from '@/components/ui/button';
 import {IoIosArrowDown, IoIosArrowUp} from 'react-icons/io';
 import CardLarge from '@/components/card-large';
 import {Job} from '@/interfaces/job';
-import {useState} from 'react';
-import {spawn} from 'child_process';
+import Pagination from '@mui/material/Pagination';
+import Stack from '@mui/material/Stack';
 import {Checkbox} from '@/components/ui/checkbox';
+import {useState} from 'react';
 
 const mockJob: Job = {
   title: 'Desenvolvedor Front-end',
@@ -27,11 +28,12 @@ const mockJob: Job = {
   daily_hours: 6,
 };
 
-const numberOfJobs = 5;
+const numberOfJobs = 30;
 
 export default function JobViewer() {
   const [showModality, setShowModality] = useState(false);
   const [showCategory, setShowCategory] = useState(false);
+  const jobs = Array(5).fill(mockJob);
 
   return (
     <div className="w-full select-none">
@@ -47,11 +49,14 @@ export default function JobViewer() {
           </div>
           <div className="w-full flex flex-row mt-8 justify-between">
             <div className="w-full">
-              {Array(numberOfJobs)
-                .fill(0)
-                .map((_, index) => (
-                  <CardLarge />
-                ))}
+              {jobs.map((_, index) => (
+                <CardLarge key={index} />
+              ))}
+              <div className="flex flex-row my-8 justify-center">
+                <Stack spacing={2}>
+                  <Pagination count={numberOfJobs} shape="rounded" />
+                </Stack>
+              </div>
             </div>
             <div className="flex flex-col ml-6 w-96">
               <span className="text-xs text-lightblack">60 Resultados</span>
