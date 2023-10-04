@@ -25,7 +25,7 @@ export default function Login() {
       if (!formData.password) throw new Error('Insira sua senha.');
       const {data} = await Api.post('/auth/authenticate', {username: formData.email, password: formData.password});
       authenticationService.authenticate(data.id, data.access_token, data.name, data.role, data.profile_completed);
-      data.profile_completed ? navigate('/inicio') : navigate('/registro/estudante/passo-1');
+      authenticationService.handleRedirect(data, navigate);
     } catch (error) {
       toastError(error);
     }

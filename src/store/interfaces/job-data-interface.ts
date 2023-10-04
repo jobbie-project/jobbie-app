@@ -2,7 +2,7 @@ import {ContractType, JobTime, JobType} from '@/enums';
 
 export interface JobData {
   company_name: string;
-  owner: string;
+  owner_name: string;
   owner_email: string;
   position: string;
   salary: string;
@@ -13,6 +13,6 @@ export interface JobData {
   };
   description: string;
   type: JobType | undefined;
-  time: JobTime;
+  job_time: JobTime;
   contract_type: ContractType;
 }

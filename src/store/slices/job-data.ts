@@ -4,7 +4,7 @@ import {ContractType, JobTime, JobType} from '@/enums';
 
 const initialState: JobData = {
   company_name: '',
-  owner: '',
+  owner_name: '',
   owner_email: '',
   position: '',
   num_positions: '',
@@ -15,7 +15,7 @@ const initialState: JobData = {
   },
   description: '',
   type: undefined,
-  time: '' as JobTime,
+  job_time: '' as JobTime,
   contract_type: '' as ContractType,
 };
 
@@ -30,7 +30,7 @@ export const jobDataSlice = createSlice({
       state.company_name = action.payload;
     },
     setJobOwner: (state, action: PayloadAction<string>) => {
-      state.owner = action.payload;
+      state.owner_name = action.payload;
     },
     setJobOwnerEmail: (state, action: PayloadAction<string>) => {
       state.owner_email = action.payload;
@@ -55,7 +55,7 @@ export const jobDataSlice = createSlice({
       state.type = action.payload;
     },
     setJobTime: (state, action: PayloadAction<JobTime>) => {
-      state.time = action.payload;
+      state.job_time = action.payload;
     },
     setJobContractType: (state, action: PayloadAction<ContractType>) => {
       state.contract_type = action.payload;
