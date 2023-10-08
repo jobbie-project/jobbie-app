@@ -18,6 +18,8 @@ import {useNavigate} from 'react-router-dom';
 import {useState} from 'react';
 import {ReviewJobPostingCard} from '@/components/review-job-posting-card';
 import Lottie from 'lottie-react';
+import {toastError} from '@/utils/toast-error';
+import Api from '@/services/api/api.service';
 
 export default function StudentProfileReview() {
   const navigate = useNavigate();
@@ -25,9 +27,15 @@ export default function StudentProfileReview() {
   const jobData = useSelector((state: RootState) => state.jobData);
   const {handleSubmit} = useForm();
 
-  const onSubmit = () => {
-    setIsOpen(false);
-    navigate('/gerenciamento');
+  const onSubmit = async () => {
+    try {
+      const formattedSalary = parseFloat(jobData.salary.replace(/[^0-9,-]+/g, ''));
+      await Api.post('/job/create', {...jobData, salary: formattedSalary});
+      setIsOpen(false);
+      navigate('/gerenciamento');
+    } catch (error) {
+      toastError(error);
+    }
   };
 
   const [showButton, setShowButton] = useState(false);
@@ -49,7 +57,7 @@ export default function StudentProfileReview() {
               info="Dados para recebimento de currículos"
               titleForText1="Nome da Empresa:"
               title={` ${jobData.company_name}`}
-              subtitle={jobData.owner}
+              subtitle={jobData.owner_name}
               titleForText2="Nome do Responsável:"
               description={jobData.owner_email}
               titleForText3="E-mail:"
@@ -71,7 +79,7 @@ export default function StudentProfileReview() {
               info="Detalhes da vaga"
               title={ContractTypes.find(contractTypes => contractTypes.value === jobData.contract_type)?.label ?? ''}
               titleForText1="Tipo de Contrato:"
-              subtitle={JobTimes.find(jobTime => jobTime.value === jobData.time)?.label ?? ''}
+              subtitle={JobTimes.find(jobTime => jobTime.value === jobData.job_time)?.label ?? ''}
               titleForText2="Horário de Trabalho: "
               description={jobData.description}
               titleForText3="Descrição da vaga:"

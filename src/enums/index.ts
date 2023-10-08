@@ -31,3 +31,9 @@ export enum UserRole {
   COMPANY = 'company',
   STUDENT = 'student',
 }
+
+export enum JobStatus {
+  OPEN = 'open',
+  INACTIVE = 'inactive',
+  CLOSED = 'closed',
+}

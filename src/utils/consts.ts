@@ -39,3 +39,9 @@ export const JobTimes = [
   {value: JobTime.PART_TIME, label: 'Parcial'},
   {value: JobTime.TO_MATCH, label: 'A combinar'},
 ];
+
+export const JobStatus = [
+  {value: 'open', label: 'Aberto'},
+  {value: 'inactive', label: 'Inativo'},
+  {value: 'closed', label: 'Fechado'},
+];

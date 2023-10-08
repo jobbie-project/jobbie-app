@@ -1,59 +1,13 @@
 import {Table, TableBody, TableCell, TableHead, TableHeader, TableRow} from '@/components/ui/table';
+import {useJobData} from '@/hooks/useJobData';
+import {Job} from '@/interfaces/job';
+import Api from '@/services/api/api.service';
 import {useAppDispatch} from '@/store/store';
+import {JobStatus} from '@/utils/consts';
+import moment from '@/utils/moment';
+import {useEffect, useState} from 'react';
 import {FiEdit, FiTrash} from 'react-icons/fi';
 import {useNavigate} from 'react-router-dom';
-
-const data = [
-  {
-    code: '0001',
-    date: '10/10/2021',
-    roleStatus: 'Aberto',
-    companyName: 'fsdfsdfsdf',
-    numberOfCandidates: '70',
-  },
-  {
-    code: '0001',
-    date: '10/10/2021',
-    roleStatus: 'Aberto',
-    companyName: 'fsdfsdfsdf',
-    numberOfCandidates: '70',
-  },
-  {
-    code: '0001',
-    date: '10/10/2021',
-    roleStatus: 'Aberto',
-    companyName: 'fsdfsdfsdf',
-    numberOfCandidates: '70',
-  },
-  {
-    code: '0001',
-    date: '10/10/2021',
-    roleStatus: 'Aberto',
-    companyName: 'fsdfsdfsdf',
-    numberOfCandidates: '70',
-  },
-  {
-    code: '0001',
-    date: '10/10/2021',
-    roleStatus: 'Aberto',
-    companyName: 'fsdfsdfsdf',
-    numberOfCandidates: '70',
-  },
-  {
-    code: '0001',
-    date: '10/10/2021',
-    roleStatus: 'Aberto',
-    companyName: 'fsdfsdfsdf',
-    numberOfCandidates: '70',
-  },
-  {
-    code: '0001',
-    date: '10/10/2021',
-    roleStatus: 'Aberto',
-    companyName: 'fsdfsdfsdf',
-    numberOfCandidates: '70',
-  },
-];
 
 // const navigate = useNavigate();
 
@@ -64,6 +18,7 @@ const data = [
 // const handleDelete = () => {};
 
 export default function TableList() {
+  const {jobData} = useJobData();
   return (
     <Table>
       <TableHeader>
@@ -78,23 +33,24 @@ export default function TableList() {
         </TableRow>
       </TableHeader>
       <TableBody className="text-center">
-        {data.map(data => (
-          <TableRow key={data.code}>
-            <TableCell>{data.code}</TableCell>
-            <TableCell>{data.date}</TableCell>
-            <TableCell>{data.roleStatus}</TableCell>
-            <TableCell>{data.companyName}</TableCell>
-            <TableCell>{data.numberOfCandidates}</TableCell>
-            <TableCell className="text-right">
-              <div className="max-w-[60px] ml-4">
-                <div className="flex justify-between">
-                  <div>{<FiEdit size={20} className="cursor-pointer" />}</div>
-                  <div>{<FiTrash size={20} className="cursor-pointer" />}</div>
+        {jobData.jobs.length > 0 &&
+          jobData.jobs.map(data => (
+            <TableRow key={data.code}>
+              <TableCell>{data.code}</TableCell>
+              <TableCell>{moment(data.created_at).format('DD/MM/YYYY')}</TableCell>
+              <TableCell>{JobStatus.find(status => status.value === data.status)?.label}</TableCell>
+              <TableCell>{data.company_name}</TableCell>
+              <TableCell>{10 /* data.numberOfCandidates */}</TableCell>
+              <TableCell className="text-right">
+                <div className="max-w-[60px] ml-4">
+                  <div className="flex justify-between">
+                    <div>{<FiEdit size={20} className="cursor-pointer" />}</div>
+                    <div>{<FiTrash size={20} className="cursor-pointer" />}</div>
+                  </div>
                 </div>
-              </div>
-            </TableCell>
-          </TableRow>
-        ))}
+              </TableCell>
+            </TableRow>
+          ))}
       </TableBody>
     </Table>
   );
