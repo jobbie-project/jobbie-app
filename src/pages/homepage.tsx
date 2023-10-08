@@ -5,28 +5,11 @@ import {JobCardMedium} from '@/components/card-medium';
 import {Job} from '@/interfaces/job';
 import {useEffect} from 'react';
 import authenticationService from '@/services/authentication/authentication.service';
-
-const mockJob: Job = {
-  title: 'Desenvolvedor Front-end',
-  company: {
-    name: 'Lorem ipsum S/A',
-    email: 'mockemail@gmail.com',
-    phone: '11 99999-9999',
-    document: '99.999.999/9999-99',
-    sector: 'Tecnologia',
-    address: 'Rua Lorem Ipsum, 9999',
-  },
-  sector: ['Design'],
-  category: 'Estágio',
-  description: 'Lorem ipsum dolor sit amet, consectetu',
-  salary: 1600,
-  modalities: 'Remoto',
-  daily_hours: 6,
-};
-
-const numberOfJobs = 5;
+import {useJobData} from '@/hooks/useJobData';
 
 export default function Home() {
+  const {jobData} = useJobData();
+
   const username = 'Usuário';
   const data = authenticationService.getUserData();
 
@@ -46,11 +29,10 @@ export default function Home() {
           <p className="mt-5 py-6 px-8 font-semibold">Recomendados</p>
           <div className="relative flex mb-5 items-center">
             <div className="px-8  max-w-5xl h-full bg- overflow-x-scroll scroll whitespace-nowrap scroll-smooth scrollbar-hide">
-              {Array(numberOfJobs)
-                .fill(0)
-                .map((_, index) => (
+              {jobData.jobs.length > 0 &&
+                jobData.jobs.map((job, index) => (
                   <div className="inline-block mr-6 ">
-                    <JobCardBig job={mockJob} key={index} />
+                    <JobCardBig job={job} key={index} />
                   </div>
                 ))}
             </div>
@@ -59,11 +41,10 @@ export default function Home() {
         <div className="max-w-5xl flex flex-col w-full ">
           <p className="px-8 font-semibold">Vagas recentes</p>
           <div className="px-8 py-6">
-            {Array(numberOfJobs)
-              .fill(0)
-              .map((_, index) => (
+            {jobData.jobs.length > 0 &&
+              jobData.jobs.map((job, index) => (
                 <div className="mb-5">
-                  <JobCardMedium job={mockJob} key={index} />
+                  <JobCardMedium job={job} key={index} />
                 </div>
               ))}
           </div>
