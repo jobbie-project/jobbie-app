@@ -3,7 +3,7 @@ import Api from '@/services/api/api.service';
 import {toastError} from '@/utils/toast-error';
 import React from 'react';
 
-export function useJobData() {
+export function useGetJobList() {
   const [jobData, setJobData] = React.useState<{total: number; jobs: Job[]}>({total: 0, jobs: []});
   const [loading, setLoading] = React.useState(false);
   const [error, setError] = React.useState(null);
@@ -16,6 +16,8 @@ export function useJobData() {
     } catch (error) {
       setError(error as any);
       toastError(error);
+    } finally {
+      setLoading(false);
     }
   };
 

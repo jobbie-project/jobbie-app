@@ -1,4 +1,3 @@
-import {BiSolidShareAlt} from 'react-icons/bi';
 import {Badge} from './ui/badge';
 import {Button} from './ui/button';
 

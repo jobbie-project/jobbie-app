@@ -1,13 +1,19 @@
 import {CiLocationOn} from 'react-icons/ci';
 import {Job} from '@/interfaces/job';
 import {Money} from '@/utils/money';
-import {FaReact} from 'react-icons/fa';
+import {useNavigate} from 'react-router-dom';
 
-export function JobCardMedium({job}: {job: Job}) {
+export function JobCardMedium({job, code}: {job: Job; code: string}) {
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    navigate(`/vaga/detalhes?codigo=${code}`);
+  };
+
   return (
     <div className="bg-lightgray1 rounded-xl px-7 pt-5 pb-2 my-2 flex flex-col justify-between">
-      <div className="flex flex-row justify-start mb-1">
-        <div className=" me-2">
+      <div onClick={handleClick} className="flex max-w-fit cursor-pointer flex-row justify-start mb-1">
+        <div className="me-2">
           <div className="bg-lightblack text-center text-white p-2 w-10 rounded-lg">
             <p>
               {job.company_name

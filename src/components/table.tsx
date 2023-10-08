@@ -1,5 +1,5 @@
 import {Table, TableBody, TableCell, TableHead, TableHeader, TableRow} from '@/components/ui/table';
-import {useJobData} from '@/hooks/useJobData';
+import {useGetJobList} from '@/hooks/useGetJobList';
 import {Job} from '@/interfaces/job';
 import Api from '@/services/api/api.service';
 import {useAppDispatch} from '@/store/store';
@@ -18,7 +18,7 @@ import {useNavigate} from 'react-router-dom';
 // const handleDelete = () => {};
 
 export default function TableList() {
-  const {jobData} = useJobData();
+  const {jobData} = useGetJobList();
   return (
     <Table>
       <TableHeader>

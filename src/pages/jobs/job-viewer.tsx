@@ -7,8 +7,18 @@ import {BiSolidShareAlt} from 'react-icons/bi';
 import LocationIcon from '@/icons/location';
 import {CategoryIcon} from '@/icons/category';
 import {SalaryIcon} from '@/icons/salary';
+import {useSearchParams} from 'react-router-dom';
+import {useGetJobData} from '@/hooks/useGetJobData';
+import {Money} from '@/utils/money';
+import moment from '@/utils/moment';
+import {useEffect} from 'react';
+import {JobTimes} from '@/utils/consts';
+import {JobType} from '@/enums';
 
 export default function JobViewer() {
+  const [params] = useSearchParams();
+  const {job, loading} = useGetJobData(params.get('codigo') ?? '');
+  useEffect(() => {}, []);
   return (
     <div className="w-full select-none">
       <Header />
@@ -26,18 +36,19 @@ export default function JobViewer() {
               <div className="w-full">
                 <div className="w-full rounded-md px-7 bg-lightgray1">
                   <div className="flex flex-row w-full justify-between">
-                    <p className="pt-7 text-lg font-semibold">Desenvolvedor Front-End</p>
+                    <p className="pt-7 text-lg font-semibold">{job?.position}</p>
                     <div className="flex flex-row justify-between mt-7">
                       <Badge variant="default" className="mr-4">
-                        Estágio
+                        {job?.contract_type}
                       </Badge>
-                      <Badge variant="default">Remoto</Badge>
+                      <Badge variant="default">{job?.type === 'remote' ? 'Remoto' : 'Presencial'}</Badge>
                     </div>
                   </div>
-                  <p className="text-xs">Lorem Ipsum S/A</p>
+                  <p className="text-xs">{job?.company_name}</p>
                   <div className="mt-8 mb-7 pb-7 flex flex-row justify-between">
                     <div className="font-semibold flex flex-row items-end">
-                      R$ 2200 <div className="text-xs font-normal flex items-end mb-[2px]">/Mensal</div>
+                      {Money(job?.salary ?? 0).format()}{' '}
+                      <div className="text-xs font-normal flex items-end mb-[2px]">/Mensal</div>
                     </div>
                     <Button variant="none" className="h-8 p-2 rounded-md bg-white flex flex-row items-center">
                       <BiSolidShareAlt size="24" color="#7C7979" />
@@ -48,41 +59,28 @@ export default function JobViewer() {
                   <div className="flex flex-col items-center">
                     <LocationIcon width="52" height="52" />
                     <p className="text-xs text-lightblack2 my-2">Local</p>
-                    <div className="text-black font-semibold text-sm">Presencial</div>
+                    <div className="text-black font-semibold text-sm">
+                      {job?.type === 'remote' ? 'Remoto' : 'Presencial'}
+                    </div>
                   </div>
                   <div className="flex flex-col items-center">
                     <CategoryIcon width="52" height="52" />
                     <p className="text-xs text-lightblack2 my-2">Categoria</p>
-                    <div className="text-black font-semibold text-sm">Estágio</div>
+                    <div className="text-black font-semibold text-sm">{job?.contract_type}</div>
                   </div>
                   <div className="flex flex-col items-center">
                     <SalaryIcon width="52" height="52" />
                     <p className="text-xs text-lightblack2 my-2">Salário</p>
-                    <div className="text-black font-semibold text-sm">R$ 2200</div>
+                    <div className="text-black font-semibold text-sm">{Money(job?.salary ?? 0).format()}</div>
                   </div>
                 </div>
                 <div className="flex flex-col px-7 mt-6">
                   <span className="bg-lightgray1 rounded-md w-full h-1"></span>
                   <span className="text-sm mt-6 flex flex-row text-black">
-                    Anunciado em: <p className="ml-1">11 de Agosto</p>
+                    Anunciado em: <p className="ml-1">{moment(job?.created_at).format('DD/MM/YYYY')}</p>
                   </span>
                   <p className="font-semibold mt-6">Descrição da vaga</p>
-                  <div className="mt-6 text-sm text-justify">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas et elit ultricies, auctor diam id,
-                    suscipit diam. Integer nunc erat, placerat sed suscipit vitae, placerat sed sapien. Vivamus interdum
-                    sem mi, ac fringilla ipsum tempus eget. Nulla euismod ac tortor sit amet aliquam. Donec mauris arcu,
-                    dictum vitae imperdiet vitae, sodales in massa. Lorem ipsum dolor sit amet, consectetur adipiscing
-                    elit. Phasellus et justo consectetur, facilisis enim vel, dictum est. Mauris dapibus ante at augue
-                    commodo, a rhoncus arcu fringilla. Praesent quam risus, egestas a commodo at, maximus vitae justo.
-                    Nunc fringilla nibh ac fermentum tempus. Pellentesque a porttitor felis. Phasellus vitae ligula
-                    sapien. Fusce dictum nisl enim, vitae malesuada ipsum pellentesque ut. Donec eu porta sem. Morbi
-                    fermentum semper justo a finibus. Fusce ut faucibus tellus. Fusce dapibus dignissim lectus, eu
-                    viverra dolor porta sit amet. Etiam sed sem sit amet massa dignissim efficitur. Nam commodo sapien
-                    ac massa congue, vitae posuere nibh iaculis. Maecenas consequat velit vel arcu imperdiet aliquet.
-                    Phasellus at diam velit. Nullam eget erat cursus ipsum lacinia tristique. Morbi hendrerit justo ut
-                    ex viverra sollicitudin. Praesent congue mauris purus, a luctus libero finibus vitae. Nullam
-                    hendrerit justo eget sem eleifend, consequat efficitur est tincidunt.
-                  </div>
+                  <div className="mt-6 text-sm text-justify">{job?.description}</div>
                   <span className="bg-lightgray1 mt-6 rounded-md w-full h-1"></span>
                   <div className="mb-20">
                     <p className="mt-6 font-semibold text-sm">
@@ -105,31 +103,43 @@ export default function JobViewer() {
                 </div>
                 <div className="flex flex-col mt-8 border-2 border-lightgray1 rounded-md p-6">
                   <span className="text-xs mb-6 flex flex-row font-semibold text-black">
-                    Anunciado em: <p className="ml-1">11 de Agosto</p>
+                    Anunciado em: <p className="ml-1">{moment(job?.created_at).format('DD/MM/YYYY')}</p>
                   </span>
                   <div className="text-xs text-lightblack2">
-                    Responsável:<p className="font-semibold text-sm text-black">Lorem</p>
+                    Responsável:<p className="font-semibold text-sm text-black">{job?.owner_name}</p>
                   </div>
                   <div className="text-xs text-lightblack2 mt-6">
-                    Número de Vagas:<p className="font-semibold text-sm text-black">4</p>
+                    Número de Vagas:<p className="font-semibold text-sm text-black">{job?.num_positions}</p>
                   </div>
                   <div className="text-xs text-lightblack2 mt-6">
-                    Categoria:<p className="font-semibold text-sm text-black">Estágio</p>
+                    Categoria:<p className="font-semibold text-sm text-black">{job?.contract_type}</p>
                   </div>
                   <div className="text-xs text-lightblack2 mt-6">
-                    Jornada de Trabalho:<p className="font-semibold text-sm text-black">Meio Período</p>
+                    Jornada de Trabalho:
+                    <p className="font-semibold text-sm text-black">
+                      {JobTimes.find(jobTime => jobTime.value === job?.job_time)?.label}
+                    </p>
                   </div>
                   <div className="text-xs text-lightblack2 mt-6">
-                    Salário:<p className="font-semibold text-sm text-black">R$ 2200</p>
+                    Salário:<p className="font-semibold text-sm text-black">{Money(job?.salary ?? 0).format()}</p>
                   </div>
                   <div className="text-xs text-lightblack2 mt-6">
-                    Modalidade:<p className="font-semibold text-sm text-black">Presencial</p>
+                    Modalidade:
+                    <p className="font-semibold text-sm text-black">
+                      {job?.type === 'remote' ? 'Remoto' : 'Presencial'}
+                    </p>
                   </div>
-                  <span className="mt-6 bg-lightgray1 rounded-md w-full h-1"></span>
-                  <div className="text-xs mt-6">
-                    Local de Trabalho:
-                    <p className="text-sm font-semibold text-black">Rua Lorem Ipsum, 69 Dolor - SIT</p>
-                  </div>
+                  {job?.type === JobType.FACE_TO_FACE && (
+                    <>
+                      <span className="mt-6 bg-lightgray1 rounded-md w-full h-1"></span>
+                      <div className="text-xs mt-6">
+                        Local de Trabalho:
+                        <p className="text-sm font-semibold text-black">
+                          {job?.location.city} - {job?.location.state}
+                        </p>
+                      </div>
+                    </>
+                  )}
                 </div>
               </div>
             </div>

@@ -1,14 +1,19 @@
 import {CiLocationOn} from 'react-icons/ci';
 import {Job} from '@/interfaces/job';
 import {Money} from '@/utils/money';
-import {FaReact} from 'react-icons/fa';
-
-export function JobCardBig({job}: {job: Job}) {
+import {JobTimes} from '@/utils/consts';
+import {useNavigate} from 'react-router-dom';
+export function JobCardBig({job, code}: {job: Job; code: string}) {
+  const navigate = useNavigate();
   const generateCompanyName = () => {
     const array = job.company_name.split(' ');
     if (array.length === 1) return array[0][0].toUpperCase();
     const firstAndLast = array[0][0] + array[array.length - 1][0];
     return firstAndLast.toUpperCase();
+  };
+
+  const handleClick = () => {
+    navigate(`/vaga/detalhes?codigo=${code}`);
   };
 
   return (
@@ -21,6 +26,9 @@ export function JobCardBig({job}: {job: Job}) {
         </div>
         <div className="h-min flex flex-row justify-end">
           <p className="bg-white  text-sm px-3 py-2 rounded-lg me-3">{job.contract_type}</p>
+          <p className="bg-white  text-sm px-3 py-2 rounded-lg me-3">
+            {JobTimes.find(jobTime => jobTime.value === job.job_time)?.label}
+          </p>
         </div>
       </div>
       <div>
@@ -36,7 +44,9 @@ export function JobCardBig({job}: {job: Job}) {
           <p className="text-lg font-medium me-2">{Money(job.salary).format()}</p>
           <p className="text-sm text-slate-500">/Mensal</p>
         </div>
-        <div className="bg-redDefault text-white font-medium px-6 py-2 rounded-xl">Aplicar</div>
+        <button className="bg-redDefault text-white font-medium px-6 py-2 rounded-xl" onClick={handleClick}>
+          Aplicar
+        </button>
       </div>
     </div>
   );

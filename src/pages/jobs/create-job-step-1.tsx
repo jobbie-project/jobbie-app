@@ -12,7 +12,7 @@ import {Button} from '@/components/ui/button';
 
 interface FormData {
   company_name: string;
-  owner: string;
+  owner_name?: string;
   owner_email: string;
 }
 
@@ -29,7 +29,7 @@ export default function CreateJobStep1() {
       setEditMode(true);
       reset({
         company_name: jobData.company_name,
-        owner: jobData.owner,
+        owner_name: jobData.owner_name,
         owner_email: jobData.owner_email,
       });
     }
@@ -39,10 +39,9 @@ export default function CreateJobStep1() {
     try {
       if (!data.company_name) throw new Error('Insira seu nome para continuar.');
       dispatch(setJobCompanyName(data.company_name));
-      if (!data.owner) throw new Error('Insira seu nome para continuar.');
-      dispatch(setJobOwner(data.owner));
-      if (!data.owner_email) throw new Error('Insira seu email para continuar.');
-      dispatch(setJobOwnerEmail(data.owner_email));
+      if (!data.owner_name) throw new Error('Insira seu nome para continuar.');
+      dispatch(setJobOwner(data.owner_name));
+      dispatch(setJobOwnerEmail(data.owner_email ?? ''));
       navigate(params.get('redirect') ?? '/nova-vaga/passo-2');
     } catch (error) {
       toastError(error);
@@ -66,10 +65,9 @@ export default function CreateJobStep1() {
             />
             <GeneralInput
               register={register}
-              registerName="owner"
+              registerName="owner_name"
               label="Responsável pela vaga"
-              defaultValue={editMode ? jobData.owner : ''}
-              required
+              defaultValue={editMode ? jobData.owner_name : ''}
             />
             <GeneralInput
               register={register}
