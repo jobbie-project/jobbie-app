@@ -30,7 +30,7 @@ const mockJob: Job = {
 
 const numberOfJobs = 30;
 
-export default function JobViewer() {
+export default function JobSearch() {
   const [showModality, setShowModality] = useState(false);
   const [showCategory, setShowCategory] = useState(false);
   const jobs = Array(5).fill(mockJob);
@@ -40,7 +40,7 @@ export default function JobViewer() {
       <Header />
       <div className="w-full flex justify-center">
         <div className="max-w-4xl w-full">
-          <BreadCrumbComponent className="my-8" />
+          <BreadCrumbComponent className="my-10" />
           <div className="flex flex-row">
             <SearchBar showFilter />
             <Button variant="none" className="ml-4 h-12 px-6 text-white bg-redDefault">

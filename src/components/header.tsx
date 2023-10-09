@@ -6,11 +6,14 @@ import {Sidebar} from './sidebar';
 import {Button} from '@/components/ui/button';
 import {IoIosNotificationsOutline} from 'react-icons/io';
 import {SettingsMenu} from './settings';
+import {useNavigate} from 'react-router-dom';
 
 export function Header() {
   const window = useWindowSize();
   const isMobile = window.width < 768;
   const [isOpen, setIsOpen] = React.useState(false);
+  const navigate = useNavigate();
+
   return (
     <>
       <div className="flex justify-center px-4 w-full mb-2 bg-lightgray1">
@@ -28,15 +31,34 @@ export function Header() {
           {!isMobile && (
             <div className="flex items-center">
               <div className="flex items-center justify-between w-full ">
-                <a href="/inicio" className="block py-2 pr-4 pl-3 font-medium text-black" aria-current="page">
+                <div
+                  onClick={() => {
+                    navigate('/inicio');
+                  }}
+                  className="block py-2 pr-4 pl-3 font-medium text-black cursor-pointer">
                   Inicio
-                </a>
-                <a href="#" className="block py-2 pr-4 pl-3 font-medium text-black" aria-current="page">
+                </div>
+                <div
+                  onClick={() => {
+                    navigate('/vaga/pesquisar');
+                  }}
+                  className="block py-2 pr-4 pl-3 font-medium text-black cursor-pointer">
                   Pesquisar Vagas
-                </a>
-                <a href="#" className="block py-2 pr-4 pl-3 font-medium text-black" aria-current="page">
-                  Sou Empresa
-                </a>
+                </div>
+                <div
+                  onClick={() => {
+                    navigate('/aplicacoes');
+                  }}
+                  className="block py-2 pr-4 pl-3 font-medium text-black cursor-pointer">
+                  Minhas aplicações
+                </div>
+                <div
+                  onClick={() => {
+                    navigate('/sobre');
+                  }}
+                  className="block py-2 pr-4 pl-3 font-medium text-black cursor-pointer">
+                  Sobre
+                </div>
               </div>
             </div>
           )}

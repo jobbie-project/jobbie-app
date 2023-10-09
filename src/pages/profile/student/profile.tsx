@@ -26,8 +26,9 @@ import {useState} from 'react';
 import {toastError} from '@/utils/toast-error';
 import Api from '@/services/api/api.service';
 import {castFatecEducationData} from '@/utils/helpers';
+import {on} from 'events';
 
-export default function StudentProfileReview() {
+export default function Profile() {
   const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
   const profileData = useSelector((state: RootState) => state.profileData);
@@ -35,7 +36,7 @@ export default function StudentProfileReview() {
 
   const onSubmit = () => {
     setIsOpen(false);
-    navigate('/inicio');
+    navigate('navigate(-1)');
   };
 
   const handleSubmitProfile = async () => {
@@ -160,34 +161,7 @@ export default function StudentProfileReview() {
           ))}
 
           <div className="mt-8 flex justify-center mb-20">
-            <ButtonHover
-              text={'Continuar'}
-              type={'button'}
-              callback={handleSubmitProfile}
-              className="font-semibold text-base"
-            />
-            <Dialog open={isOpen} onOpenChange={setIsOpen}>
-              <DialogContent className="sm:max-w-[425px]">
-                <DialogHeader>
-                  <div className="flex justify-center m-6">
-                    <FaMedal size={60} color={'#b20000'} />
-                  </div>
-                  <DialogTitle className="flex justify-center">Parabéns, seu perfil está completo!</DialogTitle>
-                  <DialogDescription className="flex justify-center">
-                    Vamos encontrar sua próxima vaga.
-                  </DialogDescription>
-                </DialogHeader>
-
-                <DialogFooter>
-                  <Button
-                    type="submit"
-                    onClick={onSubmit}
-                    className=" bg-lightgray1 font-semibold text-black hover:bg-redDefault hover:text-white">
-                    Continuar
-                  </Button>
-                </DialogFooter>
-              </DialogContent>
-            </Dialog>
+            <ButtonHover text={'Continuar'} type={'button'} callback={onSubmit} className="font-semibold text-base" />
           </div>
         </div>
       </form>

@@ -1,5 +1,4 @@
 import {Cloud, LifeBuoy, LogOut, Settings, User} from 'lucide-react';
-
 import {CiSettings} from 'react-icons/ci';
 import {Button} from '@/components/ui/button';
 import {
@@ -12,6 +11,7 @@ import {
 } from '@/components/ui/dropdown-menu';
 import {useNavigate} from 'react-router-dom';
 import authenticationService from '@/services/authentication/authentication.service';
+import {toast} from 'react-toastify';
 
 export function SettingsMenu() {
   const navigate = useNavigate();
@@ -19,6 +19,12 @@ export function SettingsMenu() {
   const onClick = () => {
     navigate('/entrar');
     authenticationService.logout();
+  };
+
+  const notAdded = () => {
+    toast('Oops! Funcionalidade ainda não implementada.', {
+      icon: '🥺',
+    });
   };
 
   return (
@@ -31,19 +37,16 @@ export function SettingsMenu() {
       <DropdownMenuContent className="w-56">
         <DropdownMenuLabel>Sua Conta</DropdownMenuLabel>
         <DropdownMenuSeparator />
-        <DropdownMenuItem>
+        <DropdownMenuItem onClick={() => navigate('/perfil')}>
           <User className="mr-2 h-4 w-4" />
           <span>Perfil</span>
         </DropdownMenuItem>
-        <DropdownMenuItem>
+        <DropdownMenuItem onClick={notAdded}>
           <Settings className="mr-2 h-4 w-4" />
           <span>Configurações</span>
         </DropdownMenuItem>
         <DropdownMenuSeparator />
-        <DropdownMenuItem>
-          <span className="ml-6 h-4 w-4">Sobre</span>
-        </DropdownMenuItem>
-        <DropdownMenuItem>
+        <DropdownMenuItem onClick={notAdded}>
           <LifeBuoy className="mr-2 h-4 w-4" />
           <span>Suporte</span>
         </DropdownMenuItem>

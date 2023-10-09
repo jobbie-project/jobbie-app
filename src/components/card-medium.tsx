@@ -11,10 +11,10 @@ export function JobCardMedium({job, code}: {job: Job; code: string}) {
   };
 
   return (
-    <div className="bg-lightgray1 rounded-xl px-7 pt-5 pb-2 my-2 flex flex-col justify-between">
+    <div className="bg-lightgray1 rounded-xl p-6 flex flex-col justify-between">
       <div onClick={handleClick} className="flex max-w-fit cursor-pointer flex-row justify-start mb-1">
-        <div className="me-2">
-          <div className="bg-lightblack text-center text-white p-2 w-10 rounded-lg">
+        <div className="me-2 mr-6">
+          <div className="bg-white text-center text-black font-semibold p-2 w-10 rounded-lg ">
             <p>
               {job.company_name
                 .split(' ')

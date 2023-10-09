@@ -30,6 +30,8 @@ import JobReview from './pages/jobs/job-review';
 import JobViewer from './pages/jobs/job-viewer';
 import JobSearch from './pages/jobs/job-search';
 import NotFound from './pages/notfound';
+import Applications from './pages/applications';
+import Profile from './pages/profile/student/profile';
 
 const RedirectToLogin: React.FC = () => {
   window.location.href = '/inicio';
@@ -79,7 +81,9 @@ export const App: React.FC = () => {
         <Route path={`/nova-vaga/revisar`} element={<JobReview />} />
         <Route path={`/vaga/detalhes`} element={<JobViewer />} />
         <Route path={`/vaga/pesquisar`} element={<JobSearch />} />
+        <Route path={`/aplicacoes`} element={<Applications />} />
         <Route path={`/404`} element={<NotFound />} />
+        <Route path={`/perfil`} element={<Profile />} />
       </Routes>
       <ToastContainer />
     </div>
