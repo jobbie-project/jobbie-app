@@ -1,10 +1,17 @@
-import {CiLocationOn} from 'react-icons/ci';
+import {HiLocationMarker} from 'react-icons/hi';
 import {Job} from '@/interfaces/job';
 import {Money} from '@/utils/money';
 import {useNavigate} from 'react-router-dom';
 
 export function JobCardMedium({job, code}: {job: Job; code: string}) {
   const navigate = useNavigate();
+  const capitalize = (word: string) => {
+    const array = word.split(' ');
+    array.map((word, index) => {
+      array[index] = word[0].toUpperCase() + word.slice(1);
+    });
+    return array.join(' ');
+  };
 
   const handleClick = () => {
     navigate(`/vaga/detalhes?codigo=${code}`);
@@ -27,17 +34,17 @@ export function JobCardMedium({job, code}: {job: Job; code: string}) {
           </div>
         </div>
         <div className="flex flex-col items-start justify-start">
-          <p className="">{job.position}</p>
-          <p className="text-xs text-slate-500 mb-3">{job.company_name}</p>
+          <p className="">{capitalize(job.position)}</p>
+          <p className="text-xs text-slate-500 mb-3">{capitalize(job.company_name)}</p>
         </div>
       </div>
       <div className="flex flex-row justify-between">
         <div className="flex flex-row items-center">
-          <CiLocationOn size="22" />
-          <p className="mx-2">{job.type === 'remote' ? 'Remoto' : 'Presencial'}</p>
+          <HiLocationMarker size="20" />
+          <div className="ml-1 text-sm">{job.type === 'remote' ? 'Remoto' : 'Presencial'}</div>
         </div>
         <div className="flex items-baseline">
-          <p className="text-lg font-medium me-2">{Money(job.salary).format()}</p>
+          <p className="text-xl mr-1 font-semibold">{Money(job.salary).format()}</p>
           <p className="text-sm text-slate-500">/Mensal</p>
         </div>
       </div>

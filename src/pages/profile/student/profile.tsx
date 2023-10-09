@@ -57,7 +57,7 @@ export default function Profile() {
         <RegisterHeader showProgress={{progress: 7, maxSteps: 8}} />
         <div className="max-w-full items-center p-5 flex flex-col  mt-6 select-none">
           <div className="max-w-xl w-full">
-            <p className="text-black font-semibold text-lg select-none mb-4">Seu currículo está pronto?</p>
+            <p className="text-black font-semibold text-xl select-none mb-4">Seu currículo</p>
             <p className="text-sm text-lightblack select-none mb-4">Revise e faça as alterações necessárias.</p>
           </div>
 

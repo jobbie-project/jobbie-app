@@ -4,15 +4,19 @@ import {RiMenuLine} from 'react-icons/ri';
 import {useWindowSize} from '@/hooks/useWindowSize';
 import {Sidebar} from './sidebar';
 import {Button} from '@/components/ui/button';
-import {IoIosNotificationsOutline} from 'react-icons/io';
-import {SettingsMenu} from './settings';
 import {useNavigate} from 'react-router-dom';
+import {NotificationIcon} from '@/icons/notifications';
+import {SettingsIcon} from '@/icons/settings';
+import {SettingsMenu} from './settings';
+import authenticationService from '@/services/authentication/authentication.service';
+import {UserRole} from '@/enums';
 
 export function Header() {
   const window = useWindowSize();
   const isMobile = window.width < 768;
   const [isOpen, setIsOpen] = React.useState(false);
   const navigate = useNavigate();
+  const userData = authenticationService.getUserData();
 
   return (
     <>
@@ -23,7 +27,7 @@ export function Header() {
               <RiMenuLine size="30" />
             </button>
           )}
-          <div className="py-2 px-6">
+          <div className="py-2 px-6 flex items-center">
             <a href="/inicio">
               <Logoblack width={isMobile ? '80' : '100'} height={isMobile ? '40' : '50'} />
             </a>
@@ -45,13 +49,23 @@ export function Header() {
                   className="block py-2 pr-4 pl-3 font-medium text-black cursor-pointer">
                   Pesquisar Vagas
                 </div>
-                <div
-                  onClick={() => {
-                    navigate('/aplicacoes');
-                  }}
-                  className="block py-2 pr-4 pl-3 font-medium text-black cursor-pointer">
-                  Minhas aplicações
-                </div>
+                {userData.role === UserRole.ADMIN ? (
+                  <div
+                    onClick={() => {
+                      navigate('/gerenciamento');
+                    }}
+                    className="block py-2 pr-4 pl-3 font-medium text-black cursor-pointer">
+                    Gerenciar
+                  </div>
+                ) : (
+                  <div
+                    onClick={() => {
+                      navigate('/aplicacoes');
+                    }}
+                    className="block py-2 pr-4 pl-3 font-medium text-black cursor-pointer">
+                    Minhas aplicações
+                  </div>
+                )}
                 <div
                   onClick={() => {
                     navigate('/sobre');
@@ -63,15 +77,11 @@ export function Header() {
             </div>
           )}
 
-          <div className={`py-4 flex ${isMobile && 'absolute right-5'}`}>
-            <a className="px-4" href="#">
-              <Button variant="none" className="border-none hover:none">
-                <IoIosNotificationsOutline size="30" />
-              </Button>
-            </a>
-            <a href="#">
-              <SettingsMenu />
-            </a>
+          <div className={`p-4 flex items-center ${isMobile && 'absolute right-5'}`}>
+            <div className="px-4">
+              <NotificationIcon width="28" height="28" />
+            </div>
+            <SettingsMenu />
           </div>
         </div>
       </div>

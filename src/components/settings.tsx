@@ -12,6 +12,7 @@ import {
 import {useNavigate} from 'react-router-dom';
 import authenticationService from '@/services/authentication/authentication.service';
 import {toast} from 'react-toastify';
+import {SettingsIcon} from '@/icons/settings';
 
 export function SettingsMenu() {
   const navigate = useNavigate();
@@ -24,6 +25,7 @@ export function SettingsMenu() {
   const notAdded = () => {
     toast('Oops! Funcionalidade ainda não implementada.', {
       icon: '🥺',
+      theme: 'colored',
     });
   };
 
@@ -31,7 +33,7 @@ export function SettingsMenu() {
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button variant="none" className="display:block">
-          <CiSettings size="30" />
+          <SettingsIcon width="30" height="30" />
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-56">

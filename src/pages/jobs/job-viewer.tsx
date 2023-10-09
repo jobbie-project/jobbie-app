@@ -27,7 +27,7 @@ export default function JobViewer() {
           <BreadCrumbComponent className="my-8" />
           <div className="flex flex-row">
             <SearchBar showFilter />
-            <Button variant="none" className="ml-4 h-12 px-6 text-white bg-redDefault">
+            <Button variant="none" className="ml-4 h-12 px-10 text-white bg-redDefault">
               Pesquisar
             </Button>
           </div>
@@ -80,7 +80,7 @@ export default function JobViewer() {
                     Anunciado em: <p className="ml-1">{moment(job?.created_at).format('DD/MM/YYYY')}</p>
                   </span>
                   <p className="font-semibold mt-6">Descrição da vaga</p>
-                  <div className="mt-6 text-sm text-justify">{job?.description}</div>
+                  <div className="mt-6 text-sm text-justify whitespace-pre-wrap break-words">{job?.description}</div>
                   <span className="bg-lightgray1 mt-6 rounded-md w-full h-1"></span>
                   <div className="mb-20">
                     <p className="mt-6 font-semibold text-sm">

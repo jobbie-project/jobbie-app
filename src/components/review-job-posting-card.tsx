@@ -50,7 +50,7 @@ export function ReviewJobPostingCard(props: ReviewJobPostingCardProps) {
         </div>
         <div className={`mt-4 font-medium text-primaryGray flex flex-row`}>
           <div className={`font-semibold mr-1`}>{props.titleForText3}</div>
-          {props.description}
+          <div className="max-w-sm whitespace-pre-wrap break-words text-justify">{props.description}</div>
         </div>
       </div>
     </div>
