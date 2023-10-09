@@ -19,7 +19,7 @@ export default function JobManagement() {
           <div className="w-full">
             <div className="flex flex-row justify-between">
               <div className="font-semibold my-4">Gerenciamento de Vagas</div>
-              <Button onClick={sendTo} className="bg-redDefault text-white hover:bg-lightgray1 hover:text-black">
+              <Button variant="none" onClick={sendTo} className="bg-redDefault text-white">
                 Publicar nova vaga
               </Button>
             </div>

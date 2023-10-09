@@ -9,16 +9,17 @@ import {useEffect, useState} from 'react';
 import {FiEdit, FiTrash} from 'react-icons/fi';
 import {useNavigate} from 'react-router-dom';
 
-// const navigate = useNavigate();
-
-// const dispatch = useAppDispatch();
-
-// const handleEdit = () => {};
-
-// const handleDelete = () => {};
-
 export default function TableList() {
   const {jobData} = useGetJobList();
+  const navigate = useNavigate();
+  const dispatch = useAppDispatch();
+  const handleEdit = () => {
+    // props.editRoute
+  };
+  const handleDelete = async (code: string) => {
+    await Api.delete(`/job/${code}`);
+  };
+
   return (
     <Table>
       <TableHeader>
@@ -45,7 +46,9 @@ export default function TableList() {
                 <div className="max-w-[60px] ml-4">
                   <div className="flex justify-between">
                     <div>{<FiEdit size={20} className="cursor-pointer" />}</div>
-                    <div>{<FiTrash size={20} className="cursor-pointer" />}</div>
+                    <div onClick={() => handleDelete(data.code)}>
+                      {<FiTrash size={20} className="cursor-pointer" />}
+                    </div>
                   </div>
                 </div>
               </TableCell>

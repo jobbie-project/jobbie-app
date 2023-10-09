@@ -3,13 +3,12 @@ import {Logoblack} from '@/icons/logo-black';
 import {RiMenuLine} from 'react-icons/ri';
 import {useWindowSize} from '@/hooks/useWindowSize';
 import {Sidebar} from './sidebar';
-import {Button} from '@/components/ui/button';
 import {useNavigate} from 'react-router-dom';
 import {NotificationIcon} from '@/icons/notifications';
-import {SettingsIcon} from '@/icons/settings';
 import {SettingsMenu} from './settings';
 import authenticationService from '@/services/authentication/authentication.service';
 import {UserRole} from '@/enums';
+import {toast} from 'react-toastify';
 
 export function Header() {
   const window = useWindowSize();
@@ -17,6 +16,12 @@ export function Header() {
   const [isOpen, setIsOpen] = React.useState(false);
   const navigate = useNavigate();
   const userData = authenticationService.getUserData();
+  const notAdded = () => {
+    toast('Oops! Funcionalidade ainda não implementada.', {
+      icon: '🥺',
+      theme: 'colored',
+    });
+  };
 
   return (
     <>
@@ -78,7 +83,7 @@ export function Header() {
           )}
 
           <div className={`p-4 flex items-center ${isMobile && 'absolute right-5'}`}>
-            <div className="px-4">
+            <div onClick={notAdded} className="px-4 cursor-pointer">
               <NotificationIcon width="28" height="28" />
             </div>
             <SettingsMenu />
