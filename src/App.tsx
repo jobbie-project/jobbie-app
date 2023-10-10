@@ -87,7 +87,7 @@ export const App: React.FC = () => {
         <Route path={`/vaga/editar/passo-1`} element={<UpdateJobStep1 />} />
         <Route path={`/vaga/editar/passo-2`} element={<UpdateJobStep2 />} />
         <Route path={`/vaga/editar/passo-3`} element={<UpdateJobStep3 />} />
-        <Route path={`/vaga/revisar`} element={<UpdateJobReview />} />
+        <Route path={`/vaga/editar`} element={<UpdateJobReview />} />
         <Route path={`/vaga/pesquisar`} element={<JobSearch />} />
         <Route path={`/aplicacoes`} element={<Applications />} />
         <Route path={`/404`} element={<NotFound />} />

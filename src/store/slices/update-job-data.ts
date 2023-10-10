@@ -8,7 +8,7 @@ const initialState: JobData = {
   owner_email: '',
   position: '',
   num_positions: '',
-  salary: '',
+  salary: 0,
   location: {
     city: '',
     state: '',
@@ -24,7 +24,17 @@ export const updateJobDataSlice = createSlice({
   initialState: initialState,
   reducers: {
     setUpdateJobData: (state, action: PayloadAction<JobData>) => {
-      state = action.payload;
+      state.company_name = action.payload.company_name;
+      state.owner_name = action.payload.owner_name;
+      state.owner_email = action.payload.owner_email;
+      state.position = action.payload.position;
+      state.num_positions = action.payload.num_positions;
+      state.salary = action.payload.salary;
+      state.location = action.payload.location;
+      state.description = action.payload.description;
+      state.type = action.payload.type;
+      state.job_time = action.payload.job_time;
+      state.contract_type = action.payload.contract_type;
     },
     setUpdateJobCompanyName: (state, action: PayloadAction<string>) => {
       state.company_name = action.payload;
@@ -38,7 +48,7 @@ export const updateJobDataSlice = createSlice({
     setUpdateJobPosition: (state, action: PayloadAction<string>) => {
       state.position = action.payload;
     },
-    setUpdateJobSalary: (state, action: PayloadAction<string>) => {
+    setUpdateJobSalary: (state, action: PayloadAction<number>) => {
       state.salary = action.payload;
     },
 

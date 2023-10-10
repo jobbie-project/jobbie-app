@@ -14,7 +14,7 @@ export default function TableList() {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const handleEdit = (code: string) => {
-    navigate(`/vaga/revisar?codigo=${code}`);
+    navigate(`/vaga/editar?codigo=${code}`);
   };
 
   return (

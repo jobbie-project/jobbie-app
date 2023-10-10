@@ -5,7 +5,7 @@ export interface JobData {
   owner_name: string;
   owner_email: string;
   position: string;
-  salary: string;
+  salary: number;
   num_positions: string;
   location?: {
     city: string;

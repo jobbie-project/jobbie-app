@@ -10,7 +10,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from '@/components/ui/dialog';
-import {RootState} from '@/store/store';
+import {RootState, useAppDispatch} from '@/store/store';
 import {ContractTypes, JobTimes} from '@/utils/consts';
 import {useForm} from 'react-hook-form';
 import {useSelector} from 'react-redux';
@@ -20,19 +20,22 @@ import {ReviewJobPostingCard} from '@/components/review-job-posting-card';
 import Lottie from 'lottie-react';
 import {toastError} from '@/utils/toast-error';
 import Api from '@/services/api/api.service';
+import {useGetJobData} from '@/hooks/useGetJobData';
+import {setUpdateJobData} from '@/store/slices/update-job-data';
+import {JobData} from '@/store/interfaces/job-data-interface';
 
 export default function UpdateReview() {
   const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
-  const jobData = useSelector((state: RootState) => state.jobData);
-  const [editMode, setEditMode] = useState(false);
-  const {handleSubmit, reset} = useForm();
+  const jobData = useSelector((state: RootState) => state.updateJobData);
   const [params] = useSearchParams();
+  const {job, loading} = useGetJobData(params.get('codigo') ?? '');
+  const {handleSubmit} = useForm();
+  const dispatch = useAppDispatch();
 
   const onSubmit = async () => {
     try {
-      const formattedSalary = parseFloat(jobData.salary.replace(/[^0-9,-]+/g, ''));
-      await Api.post('/job/create', {...jobData, salary: formattedSalary});
+      await Api.post('/job/create', jobData);
       setIsOpen(false);
       navigate('/gerenciamento');
     } catch (error) {
@@ -41,13 +44,12 @@ export default function UpdateReview() {
   };
 
   useEffect(() => {
-    setEditMode(true);
-    reset({
-      company_name: jobData.company_name,
-      owner_name: jobData.owner_name,
-      owner_email: jobData.owner_email,
-    });
-  }, [jobData]);
+    if (!params.get('revisar') && job) {
+      dispatch(setUpdateJobData(job));
+      console.log(job, 'called');
+    }
+    console.log(jobData);
+  }, [loading]);
 
   const [showButton, setShowButton] = useState(false);
   const code = params.get('codigo') ?? '';
@@ -81,7 +83,7 @@ export default function UpdateReview() {
               titleForText1="Cargo:"
               title={jobData.position}
               titleForText2="Salário: "
-              subtitle={jobData.salary}
+              subtitle={`${jobData.salary}`}
               titleForText3="Modalidade:"
               description={jobData.type === 'remote' ? 'Remoto' : 'Presencial'}
             />

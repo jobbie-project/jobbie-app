@@ -36,7 +36,7 @@ export default function UpdateJobStep2() {
       reset({
         position: jobData.position,
         num_positions: jobData.num_positions,
-        salary: jobData.salary,
+        salary: formatNumberToBRL(`${jobData.salary}`),
         location: `${jobData.location?.city} ${jobData.location?.state}`,
       });
     }
@@ -44,8 +44,9 @@ export default function UpdateJobStep2() {
 
   const formatNumberToBRL = (event: string) => {
     const userInput: string = event.replace(/[^0-9]/g, '');
-    if (userInput === '') {
+    if (userInput === '' || userInput === '0') {
       setValue('salary', 'R$ 0,00');
+      return 'R$ 0,00';
     } else {
       const userInputAsNumber: number = parseInt(userInput, 10) / 100;
 
@@ -54,6 +55,7 @@ export default function UpdateJobStep2() {
         .replace('.', ',')
         .replace(/(\d)(?=(\d{3})+\,)/g, '$1.')}`;
       setValue('salary', formattedNumber);
+      return formattedNumber;
     }
   };
 
@@ -64,7 +66,8 @@ export default function UpdateJobStep2() {
       if (Number.isNaN(Number(data.num_positions))) throw new Error('Número de vagas inválido');
       data.num_positions && dispatch(setJobNumPositions(data.num_positions));
       if (!data.salary) throw new Error('Insira o salário para continuar.');
-      dispatch(setJobSalary(data.salary));
+      const formattedSalary = parseFloat(data.salary.replace(/[^0-9,-]+/g, ''));
+      dispatch(setJobSalary(formattedSalary));
       if (!type) throw new Error('Selecione a modalidade da vaga.');
       dispatch(setJobType(type as JobType));
       if (type === JobType.FACE_TO_FACE && !data.location) throw new Error('Informe o Local de Trabalho.');
@@ -103,7 +106,7 @@ export default function UpdateJobStep2() {
               registerName="salary"
               label="Salário"
               callback={formatNumberToBRL}
-              defaultValue={editMode ? jobData.salary : ''}
+              defaultValue={editMode ? `${jobData.salary}` : ''}
               required
             />
             <div>
