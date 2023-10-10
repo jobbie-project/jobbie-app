@@ -18,7 +18,7 @@ export function ReviewCardSmall(props: ReviewCardSmallProps) {
   };
 
   return (
-    <div className="max-w-xl w-full bg-lightgray1 p-2 px-4 rounded-lg text-sm mb-4 select-none">
+    <div className="max-w-xl w-full bg-lightgray1 p-2 px-4 rounded-md text-sm mb-4 select-none">
       <div className={`flex flex-row justify-between font-semibold text-primaryGray ${props.className}`}>
         {props.title}
         <div className="flex flex-row">

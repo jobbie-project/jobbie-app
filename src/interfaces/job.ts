@@ -7,6 +7,7 @@ export interface Job {
   salary: number;
   company?: Company;
   owner_name: string;
+  owner_email: string;
   num_positions: string;
   contract_type: ContractType;
   job_time: JobTime;

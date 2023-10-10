@@ -28,30 +28,30 @@ export function Header() {
       <div className="flex justify-center px-4 w-full mb-2 bg-lightgray1">
         <div className={`flex ${isMobile ? 'justify-center' : 'justify-between'}  w-[1200px]`}>
           {isMobile && (
-            <button onClick={() => setIsOpen(!isOpen)} className="absolute py-3 left-5">
+            <button onClick={() => setIsOpen(!isOpen)} className="absolute left-5">
               <RiMenuLine size="30" />
             </button>
           )}
-          <div className="py-2 px-6 flex items-center">
+          <div className="px-6 flex items-center">
             <a href="/inicio">
-              <Logoblack width={isMobile ? '80' : '100'} height={isMobile ? '40' : '50'} />
+              <Logoblack width={isMobile ? '40' : '80'} height={isMobile ? '30' : '60'} />
             </a>
           </div>
           {!isMobile && (
             <div className="flex items-center">
-              <div className="flex items-center justify-between w-full ">
+              <div className="flex items-center justify-between w-full text-sm">
                 <div
                   onClick={() => {
                     navigate('/inicio');
                   }}
-                  className="block py-2 pr-4 pl-3 font-medium text-black cursor-pointer">
+                  className="block pr-4 pl-3 font-medium text-black cursor-pointer">
                   Inicio
                 </div>
                 <div
                   onClick={() => {
                     navigate('/vaga/pesquisar');
                   }}
-                  className="block py-2 pr-4 pl-3 font-medium text-black cursor-pointer">
+                  className="block pr-4 pl-3 font-medium text-black cursor-pointer">
                   Pesquisar Vagas
                 </div>
                 {userData.role === UserRole.ADMIN ? (
@@ -59,7 +59,7 @@ export function Header() {
                     onClick={() => {
                       navigate('/gerenciamento');
                     }}
-                    className="block py-2 pr-4 pl-3 font-medium text-black cursor-pointer">
+                    className="block pr-4 pl-3 font-medium text-black cursor-pointer">
                     Gerenciar
                   </div>
                 ) : (
@@ -67,7 +67,7 @@ export function Header() {
                     onClick={() => {
                       navigate('/aplicacoes');
                     }}
-                    className="block py-2 pr-4 pl-3 font-medium text-black cursor-pointer">
+                    className="block pr-4 pl-3 font-medium text-black cursor-pointer">
                     Minhas aplicações
                   </div>
                 )}
@@ -75,16 +75,16 @@ export function Header() {
                   onClick={() => {
                     navigate('/sobre');
                   }}
-                  className="block py-2 pr-4 pl-3 font-medium text-black cursor-pointer">
+                  className="block pr-4 pl-3 font-medium text-black cursor-pointer">
                   Sobre
                 </div>
               </div>
             </div>
           )}
 
-          <div className={`p-4 flex items-center ${isMobile && 'absolute right-5'}`}>
+          <div className={`p-2 flex items-center ${isMobile && 'absolute right-5'}`}>
             <div onClick={notAdded} className="px-4 cursor-pointer">
-              <NotificationIcon width="28" height="28" />
+              <NotificationIcon width="24" height="24" />
             </div>
             <SettingsMenu />
           </div>

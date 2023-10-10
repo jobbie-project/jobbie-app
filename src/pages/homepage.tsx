@@ -17,9 +17,9 @@ export default function Home() {
   }, [data]);
 
   return (
-    <>
+    <div>
       <Header />
-      <div className="max-w-full items-center py-5 flex flex-col">
+      <div className="max-w-full items-center py-5 flex flex-col text-sm">
         <div className="max-w-4xl w-full">
           <p className="my-5 font-normal">Olá, {data.name.split(' ')[0]}</p>
           <div className="flex flex-row">
@@ -28,13 +28,13 @@ export default function Home() {
               Pesquisar
             </Button>
           </div>
-          <div className="max-w-4xl flex flex-col w-full ">
+          <div className="flex flex-col w-full">
             <p className="mt-5 py-6 font-semibold">Recomendados</p>
             <div className="relative flex mb-5 items-center">
-              <div className="w-full">
+              <div className="max-w-5xl grid grid-cols-3 gap-4">
                 {jobData.jobs.length > 0 &&
-                  jobData.jobs.slice(0, 5).map((job, index) => (
-                    <div className="inline-block m-3">
+                  jobData.jobs.slice(0, 6).map((job, index) => (
+                    <div className="inline-block ">
                       <JobCardBig job={job} key={index} code={job.code} />
                     </div>
                   ))}
@@ -54,6 +54,6 @@ export default function Home() {
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 }

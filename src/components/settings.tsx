@@ -33,7 +33,7 @@ export function SettingsMenu() {
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button variant="none" className="display:block">
-          <SettingsIcon width="30" height="30" />
+          <SettingsIcon width="26" height="26" />
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-56">

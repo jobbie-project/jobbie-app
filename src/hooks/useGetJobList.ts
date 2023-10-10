@@ -8,6 +8,13 @@ export function useGetJobList() {
   const [loading, setLoading] = React.useState(false);
   const [error, setError] = React.useState(null);
 
+  const deleteJob = async (code: string) => {
+    setLoading(true);
+    await Api.delete(`/job/${code}`);
+    await fetchJobs();
+    setLoading(false);
+  };
+
   const fetchJobs = async () => {
     try {
       setLoading(true);
@@ -28,6 +35,7 @@ export function useGetJobList() {
   return {
     jobData,
     loading,
+    deleteJob,
     error,
   };
 }

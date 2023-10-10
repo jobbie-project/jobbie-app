@@ -1,7 +1,7 @@
 import {ButtonHover} from '@/components/button-hover-animation';
 import RegisterHeader from '@/components/register-header';
 import {Button} from '@/components/ui/button';
-import AnimationVerified from '../../assets/verified.json';
+import AnimationVerified from '../../../assets/verified.json';
 import {
   Dialog,
   DialogContent,
@@ -14,18 +14,20 @@ import {RootState} from '@/store/store';
 import {ContractTypes, JobTimes} from '@/utils/consts';
 import {useForm} from 'react-hook-form';
 import {useSelector} from 'react-redux';
-import {useNavigate} from 'react-router-dom';
-import {useState} from 'react';
+import {useNavigate, useSearchParams} from 'react-router-dom';
+import {useEffect, useState} from 'react';
 import {ReviewJobPostingCard} from '@/components/review-job-posting-card';
 import Lottie from 'lottie-react';
 import {toastError} from '@/utils/toast-error';
 import Api from '@/services/api/api.service';
 
-export default function JobReview() {
+export default function UpdateReview() {
   const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
   const jobData = useSelector((state: RootState) => state.jobData);
-  const {handleSubmit} = useForm();
+  const [editMode, setEditMode] = useState(false);
+  const {handleSubmit, reset} = useForm();
+  const [params] = useSearchParams();
 
   const onSubmit = async () => {
     try {
@@ -38,7 +40,17 @@ export default function JobReview() {
     }
   };
 
+  useEffect(() => {
+    setEditMode(true);
+    reset({
+      company_name: jobData.company_name,
+      owner_name: jobData.owner_name,
+      owner_email: jobData.owner_email,
+    });
+  }, [jobData]);
+
   const [showButton, setShowButton] = useState(false);
+  const code = params.get('codigo') ?? '';
 
   return (
     <div>
@@ -53,7 +65,7 @@ export default function JobReview() {
 
             <ReviewJobPostingCard
               canDelete={false}
-              editRoute={'/nova-vaga/passo-1?editar=true&redirect=/nova-vaga/revisar'}
+              editRoute={`/vaga/editar/passo-1?codigo=${code}&redirect=/vaga/revisar`}
               info="Dados para recebimento de currículos"
               titleForText1="Nome da Empresa:"
               title={` ${jobData.company_name}`}
@@ -64,7 +76,7 @@ export default function JobReview() {
             />
             <ReviewJobPostingCard
               canDelete={false}
-              editRoute={'/nova-vaga/passo-2?editar=true&redirect=/nova-vaga/revisar'}
+              editRoute={`/vaga/editar/passo-2?codigo=${code}&redirect=/vaga/revisar`}
               info="Informações da vaga"
               titleForText1="Cargo:"
               title={jobData.position}
@@ -75,7 +87,7 @@ export default function JobReview() {
             />
             <ReviewJobPostingCard
               canDelete={false}
-              editRoute={'/nova-vaga/passo-3?editar=true&redirect=/nova-vaga/revisar'}
+              editRoute={`/vaga/editar/passo-3?codigo=${code}&redirect=/vaga/revisar`}
               info="Detalhes da vaga"
               title={ContractTypes.find(contractTypes => contractTypes.value === jobData.contract_type)?.label ?? ''}
               titleForText1="Tipo de Contrato:"

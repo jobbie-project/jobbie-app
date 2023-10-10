@@ -17,7 +17,7 @@ export function SelectDropdown(props: SelectDropdownProps) {
         labelProps={{
           className: 'before:border-0 after:border-0',
         }}
-        className={`bg-lightgray1 rounded-lg w-full border-none ${props.className}`}
+        className={`bg-lightgray1 rounded-md w-full border-none ${props.className}`}
         label={props.label}
         disabled={props.disabled}
         onChange={option => props.callback(option ?? '')}

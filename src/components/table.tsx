@@ -10,20 +10,16 @@ import {FiEdit, FiTrash} from 'react-icons/fi';
 import {useNavigate} from 'react-router-dom';
 
 export default function TableList() {
-  const {jobData} = useGetJobList();
+  const {jobData, deleteJob} = useGetJobList();
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const handleEdit = () => {
-    // props.editRoute
-  };
-  const handleDelete = async (code: string) => {
-    await Api.delete(`/job/${code}`);
+  const handleEdit = (code: string) => {
+    navigate(`/vaga/revisar?codigo=${code}`);
   };
 
   return (
     <Table>
       <TableHeader>
-        <div></div>
         <TableRow className="text-center">
           <TableHead>Código</TableHead>
           <TableHead>Data de criação</TableHead>
@@ -45,10 +41,8 @@ export default function TableList() {
               <TableCell className="text-right">
                 <div className="max-w-[60px] ml-4">
                   <div className="flex justify-between">
-                    <div>{<FiEdit size={20} className="cursor-pointer" />}</div>
-                    <div onClick={() => handleDelete(data.code)}>
-                      {<FiTrash size={20} className="cursor-pointer" />}
-                    </div>
+                    <div onClick={() => handleEdit(data.code)}>{<FiEdit size={20} className="cursor-pointer" />}</div>
+                    <div onClick={() => deleteJob(data.code)}>{<FiTrash size={20} className="cursor-pointer" />}</div>
                   </div>
                 </div>
               </TableCell>

@@ -20,7 +20,7 @@ const PasswordStrengthMeter: React.FC<PasswordStrengthMeterProps> = ({password, 
   };
 
   return (
-    <div className="rounded-lg mt-4 flex flex-row items-center justify-between" style={{height: '6px'}}>
+    <div className="rounded-md mt-4 flex flex-row items-center justify-between" style={{height: '6px'}}>
       <div className="w-full flex flex-row">
         {Array(4)
           .fill(0)
@@ -32,7 +32,7 @@ const PasswordStrengthMeter: React.FC<PasswordStrengthMeterProps> = ({password, 
                 height: '6px',
                 background: index < testResult.score ? funcProgressColor() : '#F1F1F1',
               }}
-              className={`rounded-lg ${index !== 0 && 'ml-2'}`}
+              className={`rounded-md ${index !== 0 && 'ml-2'}`}
             />
           ))}
       </div>

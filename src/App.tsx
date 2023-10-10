@@ -32,6 +32,10 @@ import JobSearch from './pages/jobs/job-search';
 import NotFound from './pages/notfound';
 import Applications from './pages/applications';
 import Profile from './pages/profile/student/profile';
+import UpdateJobStep1 from './pages/jobs/update-job/update-job-step-1';
+import UpdateJobStep2 from './pages/jobs/update-job/update-job-step-2';
+import UpdateJobStep3 from './pages/jobs/update-job/update-job-step-3';
+import UpdateJobReview from './pages/jobs/update-job/update-job-review';
 
 const RedirectToLogin: React.FC = () => {
   window.location.href = '/inicio';
@@ -80,6 +84,10 @@ export const App: React.FC = () => {
         <Route path={`/nova-vaga/passo-3/editar`} element={<CreateJobStep3 />} />
         <Route path={`/nova-vaga/revisar`} element={<JobReview />} />
         <Route path={`/vaga/detalhes`} element={<JobViewer />} />
+        <Route path={`/vaga/editar/passo-1`} element={<UpdateJobStep1 />} />
+        <Route path={`/vaga/editar/passo-2`} element={<UpdateJobStep2 />} />
+        <Route path={`/vaga/editar/passo-3`} element={<UpdateJobStep3 />} />
+        <Route path={`/vaga/revisar`} element={<UpdateJobReview />} />
         <Route path={`/vaga/pesquisar`} element={<JobSearch />} />
         <Route path={`/aplicacoes`} element={<Applications />} />
         <Route path={`/404`} element={<NotFound />} />
