@@ -2,13 +2,13 @@ import {RootState, useAppDispatch} from '@/store/store';
 import {toastError} from '@/utils/toast-error';
 import {useForm} from 'react-hook-form';
 import {useNavigate, useSearchParams} from 'react-router-dom';
-import {setJobCompanyName, setJobOwner, setJobOwnerEmail} from '@/store/slices/job-data';
 import RegisterHeader from '@/components/register-header';
 import GeneralInput from '@/components/general-input';
 import {ButtonHover} from '@/components/button-hover-animation';
 import {useEffect, useState} from 'react';
+import {useSelector} from 'react-redux';
 import {Button} from '@/components/ui/button';
-import {useGetJobData} from '@/hooks/useGetJobData';
+import {setUpdateJobCompanyName, setUpdateJobOwner, setUpdateJobOwnerEmail} from '@/store/slices/update-job-data';
 
 interface FormData {
   company_name: string;
@@ -18,30 +18,28 @@ interface FormData {
 
 export default function UpdateJobStep1() {
   const {register, handleSubmit, reset} = useForm<FormData>();
+  const jobData = useSelector((state: RootState) => state.updateJobData);
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const [params] = useSearchParams();
-  const {job} = useGetJobData(params.get('codigo') ?? '');
 
   useEffect(() => {
-    if (job) {
-      reset({
-        company_name: job.company_name,
-        owner_name: job.owner_name,
-        owner_email: job.owner_email,
-      });
-    }
-  }, [job]);
+    reset({
+      company_name: jobData.company_name,
+      owner_name: jobData.owner_name,
+      owner_email: jobData.owner_email,
+    });
+  }, [jobData]);
 
   const onSubmit = (data: FormData) => {
     try {
       if (!data.company_name) throw new Error('Insira seu nome para continuar.');
-      dispatch(setJobCompanyName(data.company_name));
+      dispatch(setUpdateJobCompanyName(data.company_name));
       if (!data.owner_name) throw new Error('Insira seu nome para continuar.');
-      dispatch(setJobOwner(data.owner_name));
-      dispatch(setJobOwnerEmail(data.owner_email ?? ''));
+      dispatch(setUpdateJobOwner(data.owner_name));
+      dispatch(setUpdateJobOwnerEmail(data.owner_email ?? ''));
       const code = params.get('codigo') ?? '';
-      navigate(`/vaga/editar/passo-2?codigo=${code}`);
+      navigate(`${params.get('redirect')}&codigo=${code}`);
     } catch (error) {
       toastError(error);
     }
@@ -59,20 +57,20 @@ export default function UpdateJobStep1() {
               register={register}
               registerName="company_name"
               label="Nome da empresa"
-              defaultValue={job?.company_name}
+              defaultValue={jobData.company_name}
               required
             />
             <GeneralInput
               register={register}
               registerName="owner_name"
               label="Responsável pela vaga"
-              defaultValue={job?.owner_name}
+              defaultValue={jobData.owner_name}
             />
             <GeneralInput
               register={register}
               registerName="owner_email"
               label="Email"
-              defaultValue={job?.owner_email}
+              defaultValue={jobData.owner_email}
               required
             />
             <span className="text-xs text-gray-400 select-none">

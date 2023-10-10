@@ -22,7 +22,6 @@ import {toastError} from '@/utils/toast-error';
 import Api from '@/services/api/api.service';
 import {useGetJobData} from '@/hooks/useGetJobData';
 import {setUpdateJobData} from '@/store/slices/update-job-data';
-import {JobData} from '@/store/interfaces/job-data-interface';
 
 export default function UpdateReview() {
   const navigate = useNavigate();
@@ -35,7 +34,7 @@ export default function UpdateReview() {
 
   const onSubmit = async () => {
     try {
-      await Api.post('/job/create', jobData);
+      await Api.patch(`/job/${code}`, jobData);
       setIsOpen(false);
       navigate('/gerenciamento');
     } catch (error) {
@@ -46,9 +45,7 @@ export default function UpdateReview() {
   useEffect(() => {
     if (!params.get('revisar') && job) {
       dispatch(setUpdateJobData(job));
-      console.log(job, 'called');
     }
-    console.log(jobData);
   }, [loading]);
 
   const [showButton, setShowButton] = useState(false);
@@ -67,7 +64,7 @@ export default function UpdateReview() {
 
             <ReviewJobPostingCard
               canDelete={false}
-              editRoute={`/vaga/editar/passo-1?codigo=${code}&redirect=/vaga/revisar`}
+              editRoute={`/vaga/editar/passo-1?codigo=${code}&redirect=/vaga/editar?revisar=true`}
               info="Dados para recebimento de currículos"
               titleForText1="Nome da Empresa:"
               title={` ${jobData.company_name}`}
@@ -78,7 +75,7 @@ export default function UpdateReview() {
             />
             <ReviewJobPostingCard
               canDelete={false}
-              editRoute={`/vaga/editar/passo-2?codigo=${code}&redirect=/vaga/revisar`}
+              editRoute={`/vaga/editar/passo-2?codigo=${code}&redirect=/vaga/editar?revisar=true`}
               info="Informações da vaga"
               titleForText1="Cargo:"
               title={jobData.position}
@@ -89,7 +86,7 @@ export default function UpdateReview() {
             />
             <ReviewJobPostingCard
               canDelete={false}
-              editRoute={`/vaga/editar/passo-3?codigo=${code}&redirect=/vaga/revisar`}
+              editRoute={`/vaga/editar/passo-3?codigo=${code}&redirect=/vaga/editar?revisar=true`}
               info="Detalhes da vaga"
               title={ContractTypes.find(contractTypes => contractTypes.value === jobData.contract_type)?.label ?? ''}
               titleForText1="Tipo de Contrato:"

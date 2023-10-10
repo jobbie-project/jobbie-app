@@ -7,11 +7,11 @@ import {ButtonHover} from '@/components/button-hover-animation';
 import {ContractTypes, JobTimes} from '@/utils/consts';
 import Textarea from '@/components/ui/textarea';
 import {SelectDropdown} from '@/components/select-dropdown';
-import {setJobContractType, setJobDescription, setJobTime} from '@/store/slices/job-data';
 import {useEffect, useState} from 'react';
 import {useSelector} from 'react-redux';
 import {Button} from '@/components/ui/button';
 import {ContractType, JobTime} from '@/enums';
+import {setUpdateJobContractType, setUpdateJobDescription, setUpdateJobTime} from '@/store/slices/update-job-data';
 
 interface FormData {
   description: string;
@@ -21,32 +21,29 @@ interface FormData {
 
 export default function UpdateJobStep3() {
   const {handleSubmit, setValue, watch, reset} = useForm<FormData>();
-  const [editMode, setEditMode] = useState(false);
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const [params] = useSearchParams();
-  const jobData = useSelector((state: RootState) => state.jobData);
+  const jobData = useSelector((state: RootState) => state.updateJobData);
 
   useEffect(() => {
-    if (params.get('editar') !== null && !!params.get('editar')) {
-      setEditMode(true);
-      reset({
-        description: jobData.description,
-        time: jobData.job_time,
-        contract_type: jobData.contract_type,
-      });
-    }
+    reset({
+      description: jobData.description,
+      time: jobData.job_time,
+      contract_type: jobData.contract_type,
+    });
   }, [jobData]);
 
   const onSubmit = (data: FormData) => {
     try {
       if (!data.contract_type) throw new Error('Insira o Tipo da Vaga.');
-      dispatch(setJobContractType(data.contract_type));
+      dispatch(setUpdateJobContractType(data.contract_type));
       if (!data.time) throw new Error('Insira o Horário de Trabalho.');
-      dispatch(setJobTime(data.time));
+      dispatch(setUpdateJobTime(data.time));
       if (!data.description) throw new Error('Insira a Descrição da Vaga.');
-      dispatch(setJobDescription(data.description));
-      navigate(params.get('redirect') ?? '/nova-vaga/revisar');
+      dispatch(setUpdateJobDescription(data.description));
+      const code = params.get('codigo') ?? '';
+      navigate(`${params.get('redirect')}&codigo=${code}`);
     } catch (error) {
       toastError(error);
     }
@@ -81,7 +78,7 @@ export default function UpdateJobStep3() {
               <Textarea
                 callback={value => setValue('description', value)}
                 placeholder="Informe os requisitos e benefícios para essa vaga."
-                defaultValue={editMode ? jobData.description : ''}
+                defaultValue={jobData.description}
               />
             </div>
           </div>

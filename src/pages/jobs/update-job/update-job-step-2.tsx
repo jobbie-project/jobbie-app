@@ -2,7 +2,6 @@ import {RootState, useAppDispatch} from '@/store/store';
 import {toastError} from '@/utils/toast-error';
 import {useForm} from 'react-hook-form';
 import {useNavigate, useSearchParams} from 'react-router-dom';
-import {setJobLocation, setJobNumPositions, setJobPosition, setJobSalary, setJobType} from '@/store/slices/job-data';
 import RegisterHeader from '@/components/register-header';
 import GeneralInput from '@/components/general-input';
 import {ButtonHover} from '@/components/button-hover-animation';
@@ -12,6 +11,15 @@ import {Label} from '@/components/ui/label';
 import {useSelector} from 'react-redux';
 import {Button} from '@/components/ui/button';
 import {JobType} from '@/enums';
+import InputMask from 'react-input-mask';
+import {
+  setUpdateJobLocation,
+  setUpdateJobNumPositions,
+  setUpdateJobPosition,
+  setUpdateJobSalary,
+  setUpdateJobType,
+} from '@/store/slices/update-job-data';
+import {Money} from '@/utils/money';
 
 interface FormData {
   position: string;
@@ -23,58 +31,52 @@ interface FormData {
 export default function UpdateJobStep2() {
   const {register, handleSubmit, setValue, reset} = useForm<FormData>();
   const [type, setType] = React.useState<JobType>();
-  const [editMode, setEditMode] = useState(false);
-  const jobData = useSelector((state: RootState) => state.jobData);
+  const jobData = useSelector((state: RootState) => state.updateJobData);
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const [params] = useSearchParams();
 
   useEffect(() => {
-    if (params.get('editar') !== null && !!params.get('editar')) {
-      setEditMode(true);
-      setType(jobData.type as JobType);
-      reset({
-        position: jobData.position,
-        num_positions: jobData.num_positions,
-        salary: formatNumberToBRL(`${jobData.salary}`),
-        location: `${jobData.location?.city} ${jobData.location?.state}`,
-      });
-    }
+    setType(jobData.type as JobType);
+    reset({
+      position: jobData.position,
+      num_positions: jobData.num_positions,
+      salary: formatNumberToBRL(`${jobData.salary}`, true),
+      location: `${jobData.location?.city} ${jobData.location?.state}`,
+    });
   }, [jobData]);
 
-  const formatNumberToBRL = (event: string) => {
-    const userInput: string = event.replace(/[^0-9]/g, '');
-    if (userInput === '' || userInput === '0') {
-      setValue('salary', 'R$ 0,00');
-      return 'R$ 0,00';
-    } else {
-      const userInputAsNumber: number = parseInt(userInput, 10) / 100;
-
-      const formattedNumber: string = `R$ ${userInputAsNumber
-        .toFixed(2)
-        .replace('.', ',')
-        .replace(/(\d)(?=(\d{3})+\,)/g, '$1.')}`;
-      setValue('salary', formattedNumber);
-      return formattedNumber;
-    }
+  const formatNumberToBRL = (event: string, firstRender?: boolean) => {
+    const userInputOnlyNumbers: string = event.replace(/[^0-9]/g, '');
+    const value = firstRender ? parseFloat(userInputOnlyNumbers) : parseFloat(userInputOnlyNumbers) / 100;
+    const userInputFormatted = value.toLocaleString('pt-BR', {
+      style: 'currency',
+      currency: 'BRL',
+    });
+    setValue('salary', userInputFormatted);
+    return userInputFormatted;
   };
 
   const onSubmit = (data: FormData) => {
     try {
       if (!data.position) throw new Error('Insira o cargo para continuar.');
-      dispatch(setJobPosition(data.position));
+      dispatch(setUpdateJobPosition(data.position));
       if (Number.isNaN(Number(data.num_positions))) throw new Error('Número de vagas inválido');
-      data.num_positions && dispatch(setJobNumPositions(data.num_positions));
+      data.num_positions && dispatch(setUpdateJobNumPositions(data.num_positions));
       if (!data.salary) throw new Error('Insira o salário para continuar.');
-      const formattedSalary = parseFloat(data.salary.replace(/[^0-9,-]+/g, ''));
-      dispatch(setJobSalary(formattedSalary));
+      const formattedSalary = parseFloat(data.salary.replace('R$ ', '').replace(/\./g, '').replace(',', '.'));
+      console.log(data.salary, formattedSalary);
+      dispatch(setUpdateJobSalary(formattedSalary));
       if (!type) throw new Error('Selecione a modalidade da vaga.');
-      dispatch(setJobType(type as JobType));
+      dispatch(setUpdateJobType(type as JobType));
       if (type === JobType.FACE_TO_FACE && !data.location) throw new Error('Informe o Local de Trabalho.');
       type === JobType.FACE_TO_FACE
-        ? dispatch(setJobLocation({...data, city: data.location.split(',')[0], state: data.location.split(',')[1]}))
-        : dispatch(setJobLocation({city: '', state: ''}));
-      navigate(params.get('redirect') ?? '/nova-vaga/passo-3');
+        ? dispatch(
+            setUpdateJobLocation({...data, city: data.location.split(',')[0], state: data.location.split(',')[1]}),
+          )
+        : dispatch(setUpdateJobLocation({city: '', state: ''}));
+      const code = params.get('codigo') ?? '';
+      navigate(`${params.get('redirect')}&codigo=${code}`);
     } catch (error) {
       toastError(error);
     }
@@ -92,21 +94,21 @@ export default function UpdateJobStep2() {
               register={register}
               registerName="position"
               label="Cargo"
-              defaultValue={editMode ? jobData.position : ''}
+              defaultValue={jobData.position}
               required
             />
             <GeneralInput
               register={register}
               registerName="num_positions"
               label="Número de vagas"
-              defaultValue={editMode ? jobData.num_positions : ''}
+              defaultValue={jobData.num_positions}
             />
             <GeneralInput
               register={register}
               registerName="salary"
               label="Salário"
               callback={formatNumberToBRL}
-              defaultValue={editMode ? `${jobData.salary}` : ''}
+              defaultValue={`${jobData.salary}`}
               required
             />
             <div>
@@ -141,7 +143,7 @@ export default function UpdateJobStep2() {
                     register={register}
                     registerName="location"
                     label="Local de Trabalho"
-                    defaultValue={editMode ? `${jobData.location?.city} ${jobData.location?.state}` : ''}
+                    defaultValue={`${jobData.location?.city} ${jobData.location?.state}`}
                     required
                   />
                 </div>
