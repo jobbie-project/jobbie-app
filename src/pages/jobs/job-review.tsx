@@ -130,7 +130,8 @@ export default function StudentProfileReview() {
                       <Button
                         type="submit"
                         onClick={onSubmit}
-                        className=" bg-lightgray1 font-semibold text-black hover:bg-redDefault hover:text-white">
+                        variant="none"
+                        className=" bg-lightgray1 font-semibold text-black">
                         Continuar
                       </Button>
                     )}

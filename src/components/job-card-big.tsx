@@ -17,7 +17,7 @@ export function JobCardBig({job, code}: {job: Job; code: string}) {
   };
 
   return (
-    <div className="bg-lightgray1 max-w-xl rounded-xl px-7 py-5 my-3 flex-col justify-between">
+    <div className="bg-lightgray1 w-80 rounded-xl p-7 flex-col justify-between">
       <div className="flex flex-row justify-between mb-4">
         <div>
           <div className="bg-lightblack text-center text-white p-2 w-10 rounded-lg">
@@ -25,8 +25,8 @@ export function JobCardBig({job, code}: {job: Job; code: string}) {
           </div>
         </div>
         <div className="h-min flex flex-row justify-end">
-          <p className="bg-white  text-sm px-3 py-2 rounded-lg me-3">{job.contract_type}</p>
-          <p className="bg-white  text-sm px-3 py-2 rounded-lg me-3">
+          <p className="bg-white text-sm px-3 py-2 rounded-lg mr-4">{job.contract_type}</p>
+          <p className="bg-white text-sm px-3 py-2 rounded-lg">
             {JobTimes.find(jobTime => jobTime.value === job.job_time)?.label}
           </p>
         </div>
