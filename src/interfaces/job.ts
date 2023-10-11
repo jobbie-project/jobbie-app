@@ -4,7 +4,7 @@ import {Company} from './company';
 export interface Job {
   position: string;
   description: string;
-  salary: number;
+  salary: string;
   company?: Company;
   owner_name: string;
   owner_email: string;

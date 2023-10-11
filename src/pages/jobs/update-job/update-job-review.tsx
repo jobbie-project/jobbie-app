@@ -22,6 +22,7 @@ import {toastError} from '@/utils/toast-error';
 import Api from '@/services/api/api.service';
 import {useGetJobData} from '@/hooks/useGetJobData';
 import {setUpdateJobData} from '@/store/slices/update-job-data';
+import {formatNumberToBRL} from '@/utils/money';
 
 export default function UpdateReview() {
   const navigate = useNavigate();
@@ -80,7 +81,7 @@ export default function UpdateReview() {
               titleForText1="Cargo:"
               title={jobData.position}
               titleForText2="Salário: "
-              subtitle={`${jobData.salary}`}
+              subtitle={formatNumberToBRL(jobData.salary, true)}
               titleForText3="Modalidade:"
               description={jobData.type === 'remote' ? 'Remoto' : 'Presencial'}
             />

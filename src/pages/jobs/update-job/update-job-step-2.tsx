@@ -18,6 +18,7 @@ import {
   setUpdateJobSalary,
   setUpdateJobType,
 } from '@/store/slices/update-job-data';
+import {formatNumberToBRL} from '@/utils/money';
 
 interface FormData {
   position: string;
@@ -39,21 +40,15 @@ export default function UpdateJobStep2() {
     reset({
       position: jobData.position,
       num_positions: jobData.num_positions,
-      salary: formatNumberToBRL(`${jobData.salary}`, true),
+      salary: formatCurrency(`${jobData.salary}`, true),
       location: `${jobData.location?.city} ${jobData.location?.state}`,
     });
   }, [jobData]);
 
-  const formatNumberToBRL = (event: string, firstRender?: boolean) => {
-    const userInput: string = event.replace(/[^0-9.]/g, '');
-    const value = firstRender ? parseFloat(userInput) : parseFloat(userInput) / 100;
-    if (userInput === '' || userInput === '0') {
-      setValue('salary', 'R$ 0,00');
-      return 'R$ 0,00';
-    } else {
-      const formattedNumber: string = `R$ ${value.toFixed(2).replace('.', ',')}`;
-      setValue('salary', formattedNumber);
-    }
+  const formatCurrency = (event: string, firstRender?: boolean) => {
+    const currency = formatNumberToBRL(event, firstRender);
+    setValue('salary', currency);
+    return currency;
   };
 
   const onSubmit = (data: FormData) => {
@@ -105,7 +100,7 @@ export default function UpdateJobStep2() {
               register={register}
               registerName="salary"
               label="Salário"
-              callback={formatNumberToBRL}
+              callback={formatCurrency}
               defaultValue={`${jobData.salary}`}
               required
             />

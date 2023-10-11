@@ -20,6 +20,7 @@ import {ReviewJobPostingCard} from '@/components/review-job-posting-card';
 import Lottie from 'lottie-react';
 import {toastError} from '@/utils/toast-error';
 import Api from '@/services/api/api.service';
+import {formatNumberToBRL} from '@/utils/money';
 
 export default function JobReview() {
   const navigate = useNavigate();
@@ -68,7 +69,7 @@ export default function JobReview() {
               titleForText1="Cargo:"
               title={jobData.position}
               titleForText2="Salário: "
-              subtitle={jobData.salary}
+              subtitle={formatNumberToBRL(jobData.salary, true)}
               titleForText3="Modalidade:"
               description={jobData.type === 'remote' ? 'Remoto' : 'Presencial'}
             />
