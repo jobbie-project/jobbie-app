@@ -36,26 +36,21 @@ export default function CreateJobStep2() {
       reset({
         position: jobData.position,
         num_positions: jobData.num_positions,
-        salary: formatNumberToBRL(`${jobData.salary}`),
+        salary: formatNumberToBRL(`${jobData.salary}`, true),
         location: `${jobData.location?.city} ${jobData.location?.state}`,
       });
     }
   }, [jobData]);
 
-  const formatNumberToBRL = (event: string) => {
-    const userInput: string = event.replace(/[^0-9]/g, '');
+  const formatNumberToBRL = (event: string, firstRender?: boolean) => {
+    const userInput: string = event.replace(/[^0-9.]/g, '');
+    const value = firstRender ? parseFloat(userInput) : parseFloat(userInput) / 100;
     if (userInput === '' || userInput === '0') {
       setValue('salary', 'R$ 0,00');
       return 'R$ 0,00';
     } else {
-      const userInputAsNumber: number = parseInt(userInput, 10) / 100;
-
-      const formattedNumber: string = `R$ ${userInputAsNumber
-        .toFixed(2)
-        .replace('.', ',')
-        .replace(/(\d)(?=(\d{3})+\,)/g, '$1.')}`;
+      const formattedNumber: string = `R$ ${value.toFixed(2).replace('.', ',')}`;
       setValue('salary', formattedNumber);
-      return formattedNumber;
     }
   };
 
@@ -66,7 +61,8 @@ export default function CreateJobStep2() {
       if (Number.isNaN(Number(data.num_positions))) throw new Error('Número de vagas inválido');
       data.num_positions && dispatch(setJobNumPositions(data.num_positions));
       if (!data.salary) throw new Error('Insira o salário para continuar.');
-      const formattedSalary = parseFloat(data.salary.replace(/[^0-9,-]+/g, ''));
+      const formattedSalary = parseFloat(data.salary.replace('R$ ', '').replace(',', '.')).toFixed(2);
+
       dispatch(setJobSalary(formattedSalary));
       if (!type) throw new Error('Selecione a modalidade da vaga.');
       dispatch(setJobType(type as JobType));

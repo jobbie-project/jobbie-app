@@ -29,8 +29,7 @@ export default function JobReview() {
 
   const onSubmit = async () => {
     try {
-      const formattedSalary = parseFloat(jobData.salary.replace(/[^0-9,-]+/g, ''));
-      await Api.post('/job/create', {...jobData, salary: formattedSalary});
+      await Api.post('/job/create', jobData);
       setIsOpen(false);
       navigate('/gerenciamento');
     } catch (error) {

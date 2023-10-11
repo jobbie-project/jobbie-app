@@ -6,12 +6,11 @@ import RegisterHeader from '@/components/register-header';
 import GeneralInput from '@/components/general-input';
 import {ButtonHover} from '@/components/button-hover-animation';
 import {RadioGroup, RadioGroupItem} from '@/components/ui/radio-group';
-import React, {useEffect, useState} from 'react';
+import React, {useEffect} from 'react';
 import {Label} from '@/components/ui/label';
 import {useSelector} from 'react-redux';
 import {Button} from '@/components/ui/button';
 import {JobType} from '@/enums';
-import InputMask from 'react-input-mask';
 import {
   setUpdateJobLocation,
   setUpdateJobNumPositions,
@@ -19,7 +18,6 @@ import {
   setUpdateJobSalary,
   setUpdateJobType,
 } from '@/store/slices/update-job-data';
-import {Money} from '@/utils/money';
 
 interface FormData {
   position: string;
@@ -47,14 +45,15 @@ export default function UpdateJobStep2() {
   }, [jobData]);
 
   const formatNumberToBRL = (event: string, firstRender?: boolean) => {
-    const userInputOnlyNumbers: string = event.replace(/[^0-9]/g, '');
-    const value = firstRender ? parseFloat(userInputOnlyNumbers) : parseFloat(userInputOnlyNumbers) / 100;
-    const userInputFormatted = value.toLocaleString('pt-BR', {
-      style: 'currency',
-      currency: 'BRL',
-    });
-    setValue('salary', userInputFormatted);
-    return userInputFormatted;
+    const userInput: string = event.replace(/[^0-9.]/g, '');
+    const value = firstRender ? parseFloat(userInput) : parseFloat(userInput) / 100;
+    if (userInput === '' || userInput === '0') {
+      setValue('salary', 'R$ 0,00');
+      return 'R$ 0,00';
+    } else {
+      const formattedNumber: string = `R$ ${value.toFixed(2).replace('.', ',')}`;
+      setValue('salary', formattedNumber);
+    }
   };
 
   const onSubmit = (data: FormData) => {
@@ -64,8 +63,7 @@ export default function UpdateJobStep2() {
       if (Number.isNaN(Number(data.num_positions))) throw new Error('Número de vagas inválido');
       data.num_positions && dispatch(setUpdateJobNumPositions(data.num_positions));
       if (!data.salary) throw new Error('Insira o salário para continuar.');
-      const formattedSalary = parseFloat(data.salary.replace('R$ ', '').replace(/\./g, '').replace(',', '.'));
-      console.log(data.salary, formattedSalary);
+      const formattedSalary = parseFloat(data.salary.replace('R$ ', '').replace(',', '.')).toFixed(2);
       dispatch(setUpdateJobSalary(formattedSalary));
       if (!type) throw new Error('Selecione a modalidade da vaga.');
       dispatch(setUpdateJobType(type as JobType));

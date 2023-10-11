@@ -7,7 +7,7 @@ const headers = {
 
 const Api = axios.create({
   // baseURL: import.meta.env.MODE !== 'development' ? 'https://api.jobbie.com.br' : 'http://localhost:1337',
-  baseURL: 'http://192.168.100.42:1337',
+  baseURL: 'http://localhost:1337',
   headers,
 });
 

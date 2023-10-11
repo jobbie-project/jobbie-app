@@ -8,7 +8,7 @@ const initialState: JobData = {
   owner_email: '',
   position: '',
   num_positions: '',
-  salary: 0,
+  salary: '',
   location: {
     city: '',
     state: '',
@@ -48,7 +48,7 @@ export const updateJobDataSlice = createSlice({
     setUpdateJobPosition: (state, action: PayloadAction<string>) => {
       state.position = action.payload;
     },
-    setUpdateJobSalary: (state, action: PayloadAction<number>) => {
+    setUpdateJobSalary: (state, action: PayloadAction<string>) => {
       state.salary = action.payload;
     },
 
