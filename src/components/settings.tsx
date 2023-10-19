@@ -23,9 +23,8 @@ export function SettingsMenu() {
   };
 
   const notAdded = () => {
-    toast('Oops! Funcionalidade ainda não implementada.', {
+    toast.error('Oops! Funcionalidade ainda não implementada.', {
       icon: '🥺',
-      theme: 'colored',
     });
   };
 

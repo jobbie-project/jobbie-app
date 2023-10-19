@@ -5,6 +5,7 @@ import {Label} from '@/components/ui/label';
 import {toastError} from '@/utils/toast-error';
 import {GeneralButton} from '@/components/general-button';
 import {useNavigate} from 'react-router-dom';
+import {toast} from 'react-toastify';
 
 export default function Register() {
   const [userType, setUserType] = React.useState<'student' | 'company'>();
@@ -13,7 +14,11 @@ export default function Register() {
   const handleClick = () => {
     try {
       if (!userType) throw new Error('Selecione um tipo de usuário.');
-      navigate(`${userType === 'student' ? `/registro/estudante` : `/registro/empresa`}`);
+      if (userType === 'student') navigate('/registro/estudante');
+      else
+        toast.error('Oops! Funcionalidade ainda não implementada.', {
+          icon: '🥺',
+        });
     } catch (error) {
       toastError(error);
     }

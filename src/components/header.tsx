@@ -17,9 +17,8 @@ export function Header() {
   const navigate = useNavigate();
   const userData = authenticationService.getUserData();
   const notAdded = () => {
-    toast('Oops! Funcionalidade ainda não implementada.', {
+    toast.error('Oops! Funcionalidade ainda não implementada.', {
       icon: '🥺',
-      theme: 'colored',
     });
   };
 
