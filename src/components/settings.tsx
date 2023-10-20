@@ -1,5 +1,4 @@
 import {Cloud, LifeBuoy, LogOut, Settings, User} from 'lucide-react';
-import {CiSettings} from 'react-icons/ci';
 import {Button} from '@/components/ui/button';
 import {
   DropdownMenu,
@@ -13,9 +12,11 @@ import {useNavigate} from 'react-router-dom';
 import authenticationService from '@/services/authentication/authentication.service';
 import {toast} from 'react-toastify';
 import {SettingsIcon} from '@/icons/settings';
+import {UserRole} from '@/enums';
 
 export function SettingsMenu() {
   const navigate = useNavigate();
+  const userData = authenticationService.getUserData();
 
   const onClick = () => {
     navigate('/entrar');
@@ -38,10 +39,17 @@ export function SettingsMenu() {
       <DropdownMenuContent className="w-56">
         <DropdownMenuLabel>Sua Conta</DropdownMenuLabel>
         <DropdownMenuSeparator />
-        <DropdownMenuItem onClick={() => navigate('/perfil')}>
-          <User className="mr-2 h-4 w-4" />
-          <span>Perfil</span>
-        </DropdownMenuItem>
+        {userData.role === UserRole.STUDENT ? (
+          <DropdownMenuItem onClick={() => navigate('/perfil')}>
+            <User className="mr-2 h-4 w-4" />
+            <span>Perfil</span>
+          </DropdownMenuItem>
+        ) : (
+          <DropdownMenuItem disabled>
+            <User className="mr-2 h-4 w-4" />
+            <span>Perfil</span>
+          </DropdownMenuItem>
+        )}
         <DropdownMenuItem onClick={notAdded}>
           <Settings className="mr-2 h-4 w-4" />
           <span>Configurações</span>

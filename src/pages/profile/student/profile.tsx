@@ -26,6 +26,7 @@ import {useEffect, useState} from 'react';
 import {Input} from '@/components/ui/input';
 import {setUserCertifications} from '@/store/slices/profile-data';
 import {useGetUserData} from '@/hooks/useGetUserData';
+import {setUpdateProfileData} from '@/store/slices/update-profile-data';
 
 export default function Profile() {
   const navigate = useNavigate();
