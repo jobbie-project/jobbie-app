@@ -70,6 +70,7 @@ export const App: React.FC = () => {
         <Route path={`/registro/estudante/passo-5`} element={<StudentRegisterStep5 />} />
         <Route path={`/registro/estudante/passo-6`} element={<StudentRegisterStep6 />} />
         <Route path={`/registro/estudante/passo-7`} element={<StudentRegisterStep7 />} />
+        <Route path={`/estudante/certificações/adicionar`} element={<StudentRegisterStep7 />} />
         <Route path={`/estudante/educacao/adicionar`} element={<AddNewEducation />} />
         <Route path={`/estudante/experiencia/adicionar`} element={<AddNewExperience />} />
         <Route path={`/estudante/educacao/editar`} element={<AddNewEducation />} />

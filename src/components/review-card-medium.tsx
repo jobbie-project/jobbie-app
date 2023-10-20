@@ -32,7 +32,7 @@ export function ReviewCardMedium(props: ReviewCardMediumProps) {
 
   const handleDelete = () => {
     props.index !== undefined && dispatch(deleteUserEducation({index: props.index}));
-    toast.success('Experiência removida com sucesso!');
+    toast.success('Formação removida com sucesso!');
   };
 
   return (

@@ -2,6 +2,7 @@ import {deleteUserPreviousExperience} from '@/store/slices/profile-data';
 import {useAppDispatch} from '@/store/store';
 import {FiEdit, FiTrash} from 'react-icons/fi';
 import {useNavigate} from 'react-router-dom';
+import {toast} from 'react-toastify';
 
 interface JobReviewCardProps {
   className?: string;
@@ -29,6 +30,7 @@ export function JobReviewCard(props: JobReviewCardProps) {
 
   const handleDelete = () => {
     props.index !== undefined && dispatch(deleteUserPreviousExperience({index: props.index}));
+    toast.success('Experiência removida com sucesso!');
   };
 
   return (

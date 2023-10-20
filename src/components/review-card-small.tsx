@@ -1,6 +1,7 @@
 import {deleteUserCertifications} from '@/store/slices/profile-data';
 import {useAppDispatch} from '@/store/store';
 import {FiTrash} from 'react-icons/fi';
+import {toast} from 'react-toastify';
 
 interface ReviewCardSmallProps {
   className?: string;
@@ -15,10 +16,11 @@ export function ReviewCardSmall(props: ReviewCardSmallProps) {
 
   const handleDelete = () => {
     props.index !== undefined && dispatch(deleteUserCertifications({index: props.index}));
+    toast.success('Certificação removida com sucesso!');
   };
 
   return (
-    <div className="max-w-xl w-full bg-lightgray1 p-2 px-4 rounded-md text-sm mb-4 select-none">
+    <div className="max-w-md w-full bg-lightgray1 p-2 px-4 rounded-md text-sm mb-4 select-none">
       <div className={`flex flex-row justify-between font-semibold text-primaryGray ${props.className}`}>
         {props.title}
         <div className="flex flex-row">

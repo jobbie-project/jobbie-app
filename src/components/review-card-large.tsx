@@ -2,6 +2,7 @@ import {deleteUserCertifications} from '@/store/slices/profile-data';
 import {useAppDispatch} from '@/store/store';
 import {FiEdit, FiTrash} from 'react-icons/fi';
 import {useNavigate} from 'react-router-dom';
+import {toast} from 'react-toastify';
 
 interface ReviewCardLargeProps {
   className?: string;
@@ -28,10 +29,11 @@ export function ReviewCardLarge(props: ReviewCardLargeProps) {
 
   const handleDelete = () => {
     props.index !== undefined && dispatch(deleteUserCertifications({index: props.index}));
+    toast.success('Certificação removida com sucesso!');
   };
 
   return (
-    <div className="max-w-xl w-full bg-lightgray1 p-4 rounded-md text-sm mb-4 select-none">
+    <div className="max-w-md w-full bg-lightgray1 p-4 rounded-md text-sm mb-4 select-none">
       <div className={`flex flex-row justify-between font-semibold text-lightblack ${props.className}`}>
         {props.info}
         <div className="flex flex-row">

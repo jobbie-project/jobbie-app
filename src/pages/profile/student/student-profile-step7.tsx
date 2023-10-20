@@ -23,7 +23,7 @@ export default function StudentRegisterStep7() {
     <div>
       <RegisterHeader showProgress={{progress: 6, maxSteps: 8}} />
       <div className="max-w-full items-center p-5 flex flex-col mt-6 select-none">
-        <div className="max-w-xl w-full">
+        <div className="max-w-md w-full">
           <p className="text-black font-semibold text-lg select-none mt-4 mb-4">
             Quais certificações ou licenças você tem?
           </p>

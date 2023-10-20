@@ -5,8 +5,9 @@ import RegisterHeader from '@/components/register-header';
 import {ReviewCardLarge} from '@/components/review-card-large';
 import {ReviewCardMedium} from '@/components/review-card-medium';
 import {ReviewCardSmall} from '@/components/review-card-small';
-import {FaMedal} from 'react-icons/fa';
 import {Button} from '@/components/ui/button';
+import {Input} from '@/components/ui/input';
+import {setUserCertifications} from '@/store/slices/profile-data';
 import {
   Dialog,
   DialogContent,
@@ -15,7 +16,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from '@/components/ui/dialog';
-import {RootState} from '@/store/store';
+import {RootState, useAppDispatch} from '@/store/store';
 import {Degrees} from '@/utils/consts';
 import moment from '@/utils/moment';
 import {Checkbox} from '@radix-ui/react-checkbox';
@@ -26,12 +27,16 @@ import {useState} from 'react';
 import {toastError} from '@/utils/toast-error';
 import Api from '@/services/api/api.service';
 import {castFatecEducationData} from '@/utils/helpers';
+import Lottie from 'lottie-react';
+import AnimationVerified from '../../../assets/verified.json';
 
 export default function StudentProfileReview() {
   const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
   const profileData = useSelector((state: RootState) => state.profileData);
   const {handleSubmit} = useForm();
+  const [certification, setCertification] = useState('');
+  const dispatch = useAppDispatch();
 
   const onSubmit = () => {
     setIsOpen(false);
@@ -54,13 +59,13 @@ export default function StudentProfileReview() {
     <div>
       <form onSubmit={handleSubmit(onSubmit)}>
         <RegisterHeader showProgress={{progress: 7, maxSteps: 8}} />
-        <div className="max-w-full items-center p-5 flex flex-col  mt-6 select-none">
-          <div className="max-w-xl w-full">
+        <div className="max-w-full items-center p-5 flex flex-col mt-6 select-none">
+          <div className="max-w-md w-full">
             <p className="text-black font-semibold text-lg select-none mb-4">Seu currículo está pronto?</p>
             <p className="text-sm text-lightblack select-none mb-4">Revise e faça as alterações necessárias.</p>
           </div>
 
-          <div className="max-w-xl w-full font-semibold text-lg text-lightblack flex flex-row justify-between">
+          <div className="max-w-md w-full font-semibold text-lg text-lightblack flex flex-row justify-between">
             <p className="py-2">Sobre você</p>
           </div>
           <ReviewCardLarge
@@ -82,9 +87,9 @@ export default function StudentProfileReview() {
             subtitle={`${profileData.address.street}, ${profileData.address.zip_code}`}
           />
 
-          <div className="max-w-xl w-full font-semibold text-lightblack flex flex-row justify-between">
+          <div className="max-w-md w-full font-semibold text-lightblack flex flex-row justify-between">
             <p className="py-2 flex items-end">Formação Acadêmica</p>
-            <div className="py-2">
+            <div className="mb-2">
               <ButtonAddNew onClick={() => navigate('/estudante/educacao/adicionar')} />
             </div>
           </div>
@@ -115,9 +120,9 @@ export default function StudentProfileReview() {
               end_date={item.end_date && moment(item.end_date).format('MMMM [de] YYYY')}
             />
           ))}
-          <div className="max-w-xl w-full font-semibold text-lightblack flex flex-row justify-between">
+          <div className="max-w-md w-full font-semibold text-lightblack flex flex-row justify-between">
             <p className="py-2 flex items-end">Experiência Profissional</p>
-            <div className="py-2">
+            <div className="mb-2">
               <ButtonAddNew
                 onClick={() => navigate('/estudante/experiencia/adicionar?redirect=/estudante/perfil/revisar')}
               />
@@ -147,18 +152,33 @@ export default function StudentProfileReview() {
             </div>
           )}
 
-          <div className="max-w-xl w-full font-semibold text-lightblack flex flex-row justify-between">
+          <div className="max-w-md w-full font-semibold text-lightblack flex flex-row justify-between">
             <p className="py-2 flex items-end">Certificações e Licenças</p>
-            <div className="py-2">
-              <ButtonAddNew
-                onClick={() => navigate('/estudante/experiencia/adicionar?redirect=/estudante/perfil/revisar')}
+          </div>
+          <div className="max-w-md w-full">
+            <div className="flex justify-between">
+              <Input
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setCertification(e.target.value)}
+                type="text"
+                value={certification}
+                placeholder="Adicione uma certificação ou licença"
+                className="bg-lightgray1 border-none"
               />
+              <div className="ml-4">
+                <ButtonAddNew
+                  onClick={() => {
+                    setCertification('');
+                    dispatch(setUserCertifications(certification));
+                  }}
+                />
+              </div>
+            </div>
+            <div className="mt-4">
+              {profileData.certifications.map((item, index) => (
+                <ReviewCardSmall index={index} key={index} canDelete={true} canEdit={true} title={item} />
+              ))}
             </div>
           </div>
-          {profileData.certifications.map((item, index) => (
-            <ReviewCardSmall index={index} key={index} canDelete={true} canEdit={true} title={item} />
-          ))}
-
           <div className="mt-8 flex justify-center mb-20">
             <ButtonHover
               text={'Continuar'}
@@ -170,7 +190,12 @@ export default function StudentProfileReview() {
               <DialogContent className="sm:max-w-[425px]">
                 <DialogHeader>
                   <div className="flex justify-center m-6">
-                    <FaMedal size={60} color={'#b20000'} />
+                    <Lottie
+                      animationData={AnimationVerified}
+                      autoPlay={true}
+                      loop={false}
+                      style={{height: 100, width: 100}}
+                    />
                   </div>
                   <DialogTitle className="flex justify-center">Parabéns, seu perfil está completo!</DialogTitle>
                   <DialogDescription className="flex justify-center">
