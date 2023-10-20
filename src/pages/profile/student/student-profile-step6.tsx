@@ -31,7 +31,7 @@ export default function StudentRegisterStep6() {
                 key={index}
                 index={index}
                 canDelete={true}
-                editRoute={`/estudante/experiencia/editar?id=${index}`}
+                editRoute={`/estudante/experiencia?editar=true&id=${index}`}
                 title={item.position}
                 titleForText2="Empresa:"
                 subtitle={item.company_name}
