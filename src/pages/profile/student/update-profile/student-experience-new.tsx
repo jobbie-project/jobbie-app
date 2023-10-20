@@ -8,8 +8,7 @@ import {RootState, useAppDispatch} from '@/store/store';
 import {useSelector} from 'react-redux';
 import {SelectCountry} from '@/components/select-country';
 import moment from '@/utils/moment';
-import {SelectDropdown} from '@/components/select-dropdown';
-import {setUserEducation, setUserPreviousExperience, updateUserPreviousExperience} from '@/store/slices/profile-data';
+import {setUserPreviousExperience, updateUserPreviousExperience} from '@/store/slices/profile-data';
 import {useEffect, useState} from 'react';
 import {Checkbox} from '@/components/ui/checkbox';
 import {ProfilePreviousExperience} from '@/store/interfaces/profile-data-interface';
@@ -89,7 +88,7 @@ export default function AddNewExperience() {
     <div>
       <RegisterHeader showProgress={{progress: 4, maxSteps: 8}} />
       <div className="max-w-full items-center p-5 flex flex-col mt-6 select-none">
-        <form onSubmit={handleSubmit(onSubmit)} className="w-full max-w-xl">
+        <form onSubmit={handleSubmit(onSubmit)} className="w-full max-w-md">
           <div className="max-w-xs w-full">
             <p className="text-black font-semibold text-base select-none mt-4">Adicionando Experiência Profissional</p>
           </div>
@@ -121,7 +120,7 @@ export default function AddNewExperience() {
                 register={register}
                 registerName="start_date"
                 label="Data de ínicio"
-                className="w-64"
+                className="w-48"
                 type="month"
                 required
                 defaultValue={editMode ? moment(currentEditingJob.start_date).format('YYYY-MM') : ''}
@@ -131,7 +130,7 @@ export default function AddNewExperience() {
                   register={register}
                   registerName="end_date"
                   label="Data de fim"
-                  className="w-64"
+                  className="w-48"
                   type="month"
                   required
                   defaultValue={

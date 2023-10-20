@@ -29,7 +29,7 @@ export default function PasswordInput<T extends FieldValues>(props: {
             {props.text}
           </label>
 
-          <div className="flex absolute ml-[540px]" onClick={() => setExibir(!exibir)}>
+          <div className="flex absolute ml-[420px]" onClick={() => setExibir(!exibir)}>
             {exibir ? <AiOutlineEye size={22} /> : <AiOutlineEyeInvisible size={22} />}
           </div>
         </div>

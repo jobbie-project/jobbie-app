@@ -1,6 +1,7 @@
 import {ButtonHover} from '@/components/button-hover-animation';
 import GeneralInput from '@/components/general-input';
 import RegisterHeader from '@/components/register-header';
+import {useGetUserData} from '@/hooks/useGetUserData';
 import {setUserName, setUserPhone} from '@/store/slices/profile-data';
 import {RootState, useAppDispatch} from '@/store/store';
 import {toastError} from '@/utils/toast-error';
@@ -35,15 +36,18 @@ export default function StudentRegisterStep1() {
     }
   };
 
+  const {user, loading} = useGetUserData();
+
   useEffect(() => {
     if (params.get('editar') !== null && !!params.get('editar')) {
       setEditMode(true);
-      reset({
-        name: profileData.name,
-        phone: profileData.phone,
-      });
     }
-  }, [profileData]);
+    console.log(user);
+    reset({
+      name: editMode ? profileData.name : user?.name,
+      phone: profileData.phone,
+    });
+  }, [profileData, loading]);
 
   const handlePhone = (event: string) => {
     const regex = /^([0-9]{2})([0-9]{4,5})([0-9]{4})$/;
@@ -56,8 +60,8 @@ export default function StudentRegisterStep1() {
     <div>
       <RegisterHeader showProgress={{progress: 1, maxSteps: 8}} />
       <div className="max-w-full items-center flex flex-col">
-        <form onSubmit={handleSubmit(onSubmit)} className="w-full max-w-xl">
-          <div className="max-w-xl w-full">
+        <form onSubmit={handleSubmit(onSubmit)} className="w-full max-w-md">
+          <div className="max-w-md w-full">
             <p className="text-black font-semibold text-lg mt-10 select-none">Qual é o seu nome?</p>
           </div>
           <div className="mt-8 w-full">
@@ -65,7 +69,7 @@ export default function StudentRegisterStep1() {
               register={register}
               registerName="name"
               label="Nome completo"
-              defaultValue={editMode ? profileData.name : ''}
+              defaultValue={editMode ? profileData.name : user?.name}
               required
             />
             <div>

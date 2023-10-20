@@ -60,10 +60,10 @@ export default function StudentRegisterStep3() {
     <div>
       <RegisterHeader showProgress={{progress: 3, maxSteps: 8}} />
       <div
-        className="max-w-full items-center p-5 flex flex-col mt-6
+        className="max-w-full items-center p-5 flex flex-col mt-8
        select-none">
-        <form onSubmit={handleSubmit(onSubmit)} className="w-full max-w-xl">
-          <div className="max-w-xl w-full">
+        <form onSubmit={handleSubmit(onSubmit)} className="w-full max-w-md">
+          <div className="max-w-md w-full">
             <p className="text-black font-semibold text-base select-none">Em qual instituição Fatec você estuda?</p>
           </div>
           <SelectDropdown
@@ -86,14 +86,14 @@ export default function StudentRegisterStep3() {
               registerName="actual_cycle"
               label="Ciclo"
               required
-              className="w-64"
+              className="w-48"
               defaultValue={editMode ? fatec_education.actual_cycle : ''}
             />
             <GeneralInput
               register={register}
               registerName="start_date"
-              label="Data de ínicio"
-              className="w-64"
+              label="Data de ínicio do Curso"
+              className="w-48"
               type="month"
               defaultValue={editMode ? moment(fatec_education.start_date).format('YYYY-MM') : undefined}
               required

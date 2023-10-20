@@ -42,7 +42,7 @@ export default function Login() {
     <>
       <div className="h-screen">
         <div className="max-w-full h-full flex flex-col p-5 justify-center items-center">
-          <div className="max-w-xl w-full">
+          <div className="max-w-md w-full">
             <div className="flex justify-center">
               <Logoblack width={'100'} height={'50'} />
             </div>

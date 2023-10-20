@@ -13,6 +13,9 @@ interface JobReviewCardProps {
   canDelete: boolean;
   editRoute: string;
   index?: number;
+  titleForText1?: string;
+  titleForText2?: string;
+  titleForText3?: string;
 }
 
 export function JobReviewCard(props: JobReviewCardProps) {
@@ -29,7 +32,7 @@ export function JobReviewCard(props: JobReviewCardProps) {
   };
 
   return (
-    <div className="max-w-xl w-full bg-lightgray1 p-4 rounded-md text-sm mb-4 select-none">
+    <div className="max-w-md w-full bg-lightgray1 p-4 rounded-md text-sm mb-4 select-none">
       <div className={`flex flex-row justify-between font-semibold text-lightblack ${props.className}`}>
         {`Cargo: ${props.title}`}
         <div className="flex flex-row">
@@ -38,10 +41,14 @@ export function JobReviewCard(props: JobReviewCardProps) {
         </div>
       </div>
       <div className="flex flex-col">
-        <div className="mt-4 font-medium text-primaryGray">{props.subtitle}</div>
+        <div className="mt-4 font-medium text-primaryGray flex flex-row">
+          <div className="font-semibold mr-1">{props.titleForText2}</div>
+          {props.subtitle}
+        </div>
         <div className="mt-4 flex flex-row font-medium text-primaryGray">
-          {props.description ? `Ciclo: ${props.description} ` : ''}
-          {props.end_date ? 'De ' : 'Desde '}
+          <div className="font-semibold mr-1">{props.titleForText3}</div>
+          {props.description ? `${props.description}, ` : ''}
+          {props.end_date ? 'de ' : 'desde '}
           {props.start_date}
           {props.end_date ? ` até ${props.end_date}` : ' até atualmente.'}
         </div>

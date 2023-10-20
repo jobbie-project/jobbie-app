@@ -13,7 +13,6 @@ import {useEffect, useState} from 'react';
 import {ProfileEducation} from '@/store/interfaces/profile-data-interface';
 import {Checkbox} from '@/components/ui/checkbox';
 import {useSelector} from 'react-redux';
-import {ValueOption} from '@/interfaces/option';
 import {Degrees} from '@/utils/consts';
 import {EducationLevel} from '@/enums';
 
@@ -95,9 +94,9 @@ export default function AddNewEducation() {
     <div>
       <RegisterHeader showProgress={{progress: 3, maxSteps: 8}} />
       <div className="max-w-full items-center p-5 flex flex-col mt-6 select-none">
-        <form onSubmit={handleSubmit(onSubmit)} className="w-full max-w-[336px]">
-          <div className="max-w-xs w-full">
-            <p className="text-black font-semibold text-lg select-none mt-4">Adicionando nova Escolaridade</p>
+        <form onSubmit={handleSubmit(onSubmit)} className="w-full max-w-md">
+          <div className="max-w-md w-full">
+            <p className="text-black font-semibold text-lg select-none">Adicionando nova Escolaridade</p>
           </div>
           <SelectCountry />
           <GeneralInput
@@ -135,7 +134,7 @@ export default function AddNewEducation() {
               register={register}
               registerName="start_date"
               label="Data de ínicio"
-              className="w-36"
+              className="w-48"
               type="month"
               required
               defaultValue={editMode ? moment(currentEducation.start_date).format('YYYY-MM') : ''}
@@ -145,7 +144,7 @@ export default function AddNewEducation() {
                 register={register}
                 registerName="end_date"
                 label="Data de fim"
-                className="w-36"
+                className="w-48"
                 type="month"
                 defaultValue={
                   editMode && currentEducation.end_date ? moment(currentEducation.end_date).format('YYYY-MM') : ''

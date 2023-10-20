@@ -25,7 +25,7 @@ export default function VerifyEmail() {
     <>
       <RegisterHeader />
       <div className="max-w-full items-center p-5 flex flex-col  mt-6">
-        <div className="max-w-xl w-full">
+        <div className="max-w-md w-full">
           <p className="text-black font-semibold text-lg mt-20">Verifique seu email para validar sua conta</p>
           <p className="mt-6 text-sm">Um link de ativação foi enviado para o endereço de email cadastrado.</p>
           <div className="mt-8 flex justify-center">
@@ -33,10 +33,12 @@ export default function VerifyEmail() {
           </div>{' '}
           {showResend && (
             <div className="flex flex-col items-center">
-              <div className="text-warmGray-400 font-normal flex flex-row mt-8 justify-center">
+              <div className="text-warmGray-400 text-sm flex flex-row mt-8 justify-center">
                 Não recebeu o email?
                 <div
-                  className={`mx-1 text-black cursor-pointer font-semibold ${wasResended && 'cursor-wait text-gray3'}`}
+                  className={`mx-1 text-black cursor-pointer font-semibold text-sm ${
+                    wasResended && 'cursor-wait text-gray3'
+                  }`}
                   onClick={wasResended ? handleResendOnCountdown : handleResend}>
                   Reenviar
                 </div>

@@ -46,15 +46,17 @@ export default function StudentRegister() {
     <div>
       <RegisterHeader />
       <div className="max-w-full items-center p-5 flex flex-col  mt-6">
-        <form onSubmit={handleSubmit(onSubmit)} className="w-full max-w-xl">
-          <div className="max-w-xl w-full">
-            <p className="text-black font-semibold text-lg mt-20 select-none">Criar uma conta</p>
-            <p className="mt-6">Preencha com as informações que deseja utilizar para realizar login no portal.</p>
+        <form onSubmit={handleSubmit(onSubmit)} className="w-full max-w-md">
+          <div className="max-w-md w-full">
+            <p className="text-black font-semibold text-lg mt-8 select-none">Criar uma conta</p>
+            <p className="mt-6 text-sm">
+              Preencha com as informações que deseja utilizar para realizar login no portal.
+            </p>
           </div>
-          <div className="mt-6 w-full">
+          <div className="mt-6 w-full text-sm">
             <GeneralInput register={register} registerName="name" label="Nome completo" />
-            <GeneralInput register={register} registerName="email" label="Email" />
-            <div className="py-2 w-full">
+            <GeneralInput register={register} registerName="email" label="Email Institucional" />
+            <div className="py-2 w-full text-sm">
               <PasswordInput text="Senha" register={register} registerName="password" />
               <PasswordStrengthMeter
                 password={watch('password')}
@@ -69,7 +71,7 @@ export default function StudentRegister() {
             <GeneralButton text={'Continuar'} type={'submit'} />
           </div>
         </form>
-        <span className="text-warmGray-400 font-normal flex flex-row mt-8 justify-center">
+        <span className="text-warmGray-400 text-sm flex flex-row mt-8 justify-center">
           Já possui conta?
           <Link className="ml-1 text-black font-semibold" to="/entrar">
             Entrar

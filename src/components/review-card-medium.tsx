@@ -2,6 +2,7 @@ import {deleteUserEducation} from '@/store/slices/profile-data';
 import {useAppDispatch} from '@/store/store';
 import {FiEdit, FiTrash} from 'react-icons/fi';
 import {useNavigate} from 'react-router-dom';
+import {toast} from 'react-toastify';
 
 interface ReviewCardMediumProps {
   className?: string;
@@ -31,10 +32,11 @@ export function ReviewCardMedium(props: ReviewCardMediumProps) {
 
   const handleDelete = () => {
     props.index !== undefined && dispatch(deleteUserEducation({index: props.index}));
+    toast.success('Experiência removida com sucesso!');
   };
 
   return (
-    <div className="max-w-xl w-full bg-lightgray1 p-4 rounded-md text-sm mb-4 select-none">
+    <div className="max-w-md w-full bg-lightgray1 p-4 rounded-md text-sm mb-4 select-none">
       <div className={`flex flex-row justify-between font-semibold text-lightblack ${props.className}`}>
         {props.info}
         <div className="flex flex-row">
@@ -43,7 +45,7 @@ export function ReviewCardMedium(props: ReviewCardMediumProps) {
         </div>
       </div>
       <div className="flex flex-col">
-        <div className="mt-4 font-medium text-primaryGray flex flex-row">
+        <div className="mt-4 text-primaryGray flex flex-row">
           <div className="font-semibold mr-1">{props.titleForText1}</div>
           {props.title}
         </div>
