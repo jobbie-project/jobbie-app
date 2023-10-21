@@ -5,42 +5,44 @@ import RegisterHeader from '@/components/register-header';
 import {ReviewCardLarge} from '@/components/review-card-large';
 import {ReviewCardMedium} from '@/components/review-card-medium';
 import {ReviewCardSmall} from '@/components/review-card-small';
-import {FaMedal} from 'react-icons/fa';
-import {Button} from '@/components/ui/button';
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-} from '@/components/ui/dialog';
 import {RootState, useAppDispatch} from '@/store/store';
 import {Degrees} from '@/utils/consts';
 import moment from '@/utils/moment';
 import {Checkbox} from '@radix-ui/react-checkbox';
-import {useForm} from 'react-hook-form';
 import {useSelector} from 'react-redux';
 import {useNavigate, useSearchParams} from 'react-router-dom';
 import {useEffect, useState} from 'react';
 import {Input} from '@/components/ui/input';
-import {setUserCertifications} from '@/store/slices/profile-data';
 import {useGetUserData} from '@/hooks/useGetUserData';
-import {setUpdateProfileData} from '@/store/slices/update-profile-data';
+import {setUpdateProfileData, setUpdateUserCertifications} from '@/store/slices/update-profile-data';
+import Api from '@/services/api/api.service';
+import {castFatecEducationData} from '@/utils/helpers';
+import {toastError} from '@/utils/toast-error';
+import {toast} from 'react-toastify';
 
 export default function Profile() {
   const navigate = useNavigate();
-  const [isOpen, setIsOpen] = useState(false);
   const [certification, setCertification] = useState('');
   const dispatch = useAppDispatch();
   const profileData = useSelector((state: RootState) => state.updateProfileData);
-  const {handleSubmit} = useForm();
   const {user, loading} = useGetUserData();
   const [params] = useSearchParams();
 
-  const onSubmit = () => {
-    setIsOpen(false);
-    navigate(-1);
+  const handleSubmitProfile = async () => {
+    try {
+      console.log({
+        ...profileData,
+        fatec_education: castFatecEducationData(profileData.fatec_education),
+      });
+      await Api.patch('/student', {
+        ...profileData,
+        fatec_education: castFatecEducationData(profileData.fatec_education),
+      });
+      toast.success('Perfil atualizado com sucesso!');
+      navigate(-1);
+    } catch (error) {
+      toastError(error);
+    }
   };
 
   useEffect(() => {
@@ -51,7 +53,7 @@ export default function Profile() {
 
   return (
     <div>
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form>
         <RegisterHeader showProgress={{progress: 7, maxSteps: 8}} />
         <div className="max-w-full items-center p-5 flex flex-col  mt-6 select-none">
           <div className="max-w-md w-full">
@@ -137,7 +139,6 @@ export default function Profile() {
                 key={index}
                 index={index}
                 canDelete={true}
-                // editRoute={`/estudante/experiencia/editar?update=true&id=${index}&redirect=/estudante/perfil/revisar`}
                 titleForText1="Cargo:"
                 editRoute={`/perfil/editar/passo-5?update=true&editar=true&id=${index}&redirect=/perfil/editar?revisar=true`}
                 title={item.position}
@@ -175,20 +176,32 @@ export default function Profile() {
                 <ButtonAddNew
                   onClick={() => {
                     setCertification('');
-                    dispatch(setUserCertifications(certification));
+                    dispatch(setUpdateUserCertifications(certification));
                   }}
                 />
               </div>
             </div>
             <div className="mt-4">
               {profileData.certifications.map((item, index) => (
-                <ReviewCardSmall index={index} key={index} canDelete={true} canEdit={true} title={item} />
+                <ReviewCardSmall
+                  index={index}
+                  key={index}
+                  canDelete={true}
+                  canEdit={true}
+                  title={item}
+                  userIsBeignUpdated
+                />
               ))}
             </div>
           </div>
 
           <div className="mt-8 flex justify-center mb-20">
-            <ButtonHover text={'Continuar'} type={'button'} callback={onSubmit} className="font-semibold text-base" />
+            <ButtonHover
+              text={'Continuar'}
+              type={'button'}
+              callback={handleSubmitProfile}
+              className="font-semibold text-base"
+            />
           </div>
         </div>
       </form>

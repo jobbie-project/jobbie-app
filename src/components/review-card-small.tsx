@@ -1,4 +1,5 @@
 import {deleteUserCertifications} from '@/store/slices/profile-data';
+import {deleteUpdateUserCertifications} from '@/store/slices/update-profile-data';
 import {useAppDispatch} from '@/store/store';
 import {FiTrash} from 'react-icons/fi';
 import {toast} from 'react-toastify';
@@ -9,13 +10,19 @@ interface ReviewCardSmallProps {
   canDelete: boolean;
   canEdit: boolean;
   index?: number;
+  userIsBeignUpdated?: boolean;
 }
 
 export function ReviewCardSmall(props: ReviewCardSmallProps) {
   const dispatch = useAppDispatch();
 
   const handleDelete = () => {
-    props.index !== undefined && dispatch(deleteUserCertifications({index: props.index}));
+    props.index !== undefined &&
+      dispatch(
+        props.userIsBeignUpdated
+          ? deleteUpdateUserCertifications({index: props.index})
+          : deleteUserCertifications({index: props.index}),
+      );
     toast.success('Certificação removida com sucesso!');
   };
 

@@ -7,8 +7,8 @@ interface FormattedProfileData {
 }
 export function castFatecEducationData(fatecEducation: ProfileFatecEducation): FormattedProfileData {
   const payload: FormattedProfileData = {
-    fatec_institution: fatecEducation.institution,
-    fatec_course: fatecEducation.course,
+    fatec_institution: fatecEducation.institution.toString(),
+    fatec_course: fatecEducation.course.toString(),
     fatec_cycle: Number(fatecEducation.actual_cycle),
     fatec_start_date: fatecEducation.start_date,
   };
