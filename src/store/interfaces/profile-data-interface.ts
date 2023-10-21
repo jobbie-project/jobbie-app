@@ -23,11 +23,11 @@ export interface ProfilePreviousExperience {
   position: string;
   start_date: Date;
   end_date?: Date;
-  location: {
+  location?: {
     city: string;
     state: string;
   };
-  description: string;
+  description?: string;
 }
 
 export interface ProfileAddress {

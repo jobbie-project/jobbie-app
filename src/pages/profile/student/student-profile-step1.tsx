@@ -3,6 +3,7 @@ import GeneralInput from '@/components/general-input';
 import RegisterHeader from '@/components/register-header';
 import {useGetUserData} from '@/hooks/useGetUserData';
 import {setUserName, setUserPhone} from '@/store/slices/profile-data';
+import {setUpdateUserName, setUpdateUserPhone} from '@/store/slices/update-profile-data';
 import {RootState, useAppDispatch} from '@/store/store';
 import {toastError} from '@/utils/toast-error';
 import {useEffect, useState} from 'react';
@@ -21,14 +22,20 @@ export default function StudentRegisterStep1() {
   const dispatch = useAppDispatch();
   const [params] = useSearchParams();
   const [editMode, setEditMode] = useState(false);
-  const profileData = useSelector((state: RootState) => state.profileData);
+  const isBeingUpdated = params.get('update') === 'true';
+  const profileData = useSelector((state: RootState) => {
+    if (isBeingUpdated) {
+      return state.updateProfileData;
+    }
+    return state.profileData;
+  });
 
   const onSubmit = (data: FormData) => {
     try {
       if (!data.name) throw new Error('Insira seu nome para continuar.');
-      dispatch(setUserName(data.name));
+      dispatch(isBeingUpdated ? setUpdateUserName(data.name) : setUserName(data.name));
       if (data.phone) {
-        dispatch(setUserPhone(data.phone));
+        dispatch(isBeingUpdated ? setUpdateUserPhone(data.phone) : setUserPhone(data.phone));
       }
       navigate(params.get('redirect') ?? '/registro/estudante/passo-2');
     } catch (error) {

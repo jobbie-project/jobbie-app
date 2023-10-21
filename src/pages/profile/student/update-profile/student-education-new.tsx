@@ -15,6 +15,7 @@ import {Checkbox} from '@/components/ui/checkbox';
 import {useSelector} from 'react-redux';
 import {Degrees} from '@/utils/consts';
 import {EducationLevel} from '@/enums';
+import {changeUserEducation, setUpdateUserEducation} from '@/store/slices/update-profile-data';
 
 interface FormData {
   institution_name: string;
@@ -31,7 +32,13 @@ export default function AddNewEducation() {
   const [editMode, setEditMode] = useState<boolean>(false);
   const [currentEducation, setCurrentEducation] = useState<ProfileEducation>({} as ProfileEducation);
   const [current, setCurrent] = useState<boolean>(false);
-  const {education} = useSelector((state: RootState) => state.profileData);
+  const isBeingUpdated = params.get('update') === 'true';
+  const {education} = useSelector((state: RootState) => {
+    if (isBeingUpdated) {
+      return state.updateProfileData;
+    }
+    return state.profileData;
+  });
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
@@ -77,10 +84,17 @@ export default function AddNewEducation() {
       };
       dispatch(
         editMode && currentId !== undefined
-          ? updateUserEducation({
-              index: currentId,
-              education: userEducation,
-            })
+          ? isBeingUpdated
+            ? changeUserEducation({
+                index: currentId,
+                education: userEducation,
+              })
+            : updateUserEducation({
+                index: currentId,
+                education: userEducation,
+              })
+          : isBeingUpdated
+          ? setUpdateUserEducation(userEducation)
           : setUserEducation(userEducation),
       );
 

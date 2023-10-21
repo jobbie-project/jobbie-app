@@ -7,6 +7,7 @@ import {
   ProfileLinks,
   ProfilePreviousExperience,
 } from '../interfaces/profile-data-interface';
+import {User} from '@/interfaces/user';
 
 const initialState: ProfileData = {
   name: '',
@@ -24,8 +25,19 @@ export const updateProfileDataSlice = createSlice({
   name: 'updateProfileData',
   initialState: initialState,
   reducers: {
-    setUpdateProfileData: (state, action: PayloadAction<ProfileData>) => {
-      state = action.payload;
+    setUpdateProfileData: (state, action: PayloadAction<User>) => {
+      state.name = action.payload.name;
+      state.phone = action.payload.phone;
+      state.address = action.payload.student.curriculum.address;
+      state.education = action.payload.student.curriculum.education;
+      state.fatec_education.institution = action.payload.student.curriculum.fatec_institution.id;
+      state.fatec_education.institution_name = action.payload.student.curriculum.fatec_institution.name;
+      state.fatec_education.course = action.payload.student.curriculum.fatec_course.id;
+      state.fatec_education.course_name = action.payload.student.curriculum.fatec_course.name;
+      state.fatec_education.start_date = action.payload.student.curriculum.fatec_start_date;
+      state.fatec_education.actual_cycle = action.payload.student.curriculum.fatec_cycle.toString();
+      state.certifications = action.payload.student.curriculum.certifications;
+      state.previous_experience = action.payload.student.curriculum.previous_experience;
     },
     setUpdateUserAddress: (state, action: PayloadAction<ProfileAddress>) => {
       state.address = action.payload;

@@ -3,14 +3,13 @@ import GeneralInput from '@/components/general-input';
 import RegisterHeader from '@/components/register-header';
 import {SelectCountry} from '@/components/select-country';
 import {setUserAddress} from '@/store/slices/profile-data';
+import {setUpdateUserAddress} from '@/store/slices/update-profile-data';
 import {RootState, useAppDispatch} from '@/store/store';
 import {toastError} from '@/utils/toast-error';
 import {useEffect, useState} from 'react';
 import {useForm} from 'react-hook-form';
 import {useSelector} from 'react-redux';
 import {useNavigate, useSearchParams} from 'react-router-dom';
-import {toast} from 'react-toastify';
-
 interface FormData {
   street: string;
   location: string;
@@ -23,7 +22,13 @@ export default function StudentRegisterStep2() {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const [params] = useSearchParams();
-  const profileAddress = useSelector((state: RootState) => state.profileData.address);
+  const isBeingUpdated = params.get('update') === 'true';
+  const profileAddress = useSelector((state: RootState) => {
+    if (isBeingUpdated) {
+      return state.updateProfileData.address;
+    }
+    return state.profileData.address;
+  });
 
   const onSubmit = (data: FormData) => {
     try {
@@ -33,15 +38,14 @@ export default function StudentRegisterStep2() {
       const state = data.location.split(',')[1];
       if (!city || !state) throw new Error('É necessário informar a Cidade e o Estado, separados por vírgula.');
       if (!data.zip_code) throw new Error('Insira seu CEP para continuar.');
-      dispatch(
-        setUserAddress({
-          ...data,
-          street: data.street,
-          city: data.location.split(',')[0],
-          state: data.location.split(',')[1],
-          zip_code: data.zip_code,
-        }),
-      );
+      const payload = {
+        ...data,
+        street: data.street,
+        city: data.location.split(',')[0],
+        state: data.location.split(',')[1],
+        zip_code: data.zip_code,
+      };
+      dispatch(isBeingUpdated ? setUpdateUserAddress(payload) : setUserAddress(payload));
       navigate(params.get('redirect') ?? '/registro/estudante/passo-3');
     } catch (error) {
       toastError(error);

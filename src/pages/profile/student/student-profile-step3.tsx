@@ -12,6 +12,7 @@ import {ProfileFatecEducation} from '@/store/interfaces/profile-data-interface';
 import {Courses, FatecInstitutions} from '@/utils/consts';
 import {useSelector} from 'react-redux';
 import {useEffect, useState} from 'react';
+import {setUpdateUserFatecEducation} from '@/store/slices/update-profile-data';
 
 export default function StudentRegisterStep3() {
   const {register, handleSubmit, setValue, watch, reset} = useForm<ProfileFatecEducation>({
@@ -20,17 +21,24 @@ export default function StudentRegisterStep3() {
   const [editMode, setEditMode] = useState(false);
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const {fatec_education} = useSelector((state: RootState) => state.profileData);
   const [params] = useSearchParams();
+
+  const isBeingUpdated = params.get('update') === 'true';
+  const {fatec_education} = useSelector((state: RootState) => {
+    if (isBeingUpdated) {
+      return state.updateProfileData;
+    }
+    return state.profileData;
+  });
 
   useEffect(() => {
     if (params.get('editar') !== null && !!params.get('editar')) {
       setEditMode(true);
       reset({
-        institution: fatec_education.institution,
-        course: fatec_education.course,
-        actual_cycle: fatec_education.actual_cycle,
-        start_date: fatec_education.start_date,
+        institution: fatec_education.institution.toString(),
+        course: fatec_education.course.toString(),
+        actual_cycle: fatec_education.actual_cycle.toString(),
+        start_date: moment(fatec_education.start_date).format('YYYY-MM') as unknown as Date,
       });
     }
   }, [fatec_education]);
@@ -41,14 +49,13 @@ export default function StudentRegisterStep3() {
       if (!data.start_date) throw new Error('É necessário informar a data de ínicio do curso.');
       if (!data.course) throw new Error('É necessário informar o curso.');
       if (!data.institution) throw new Error('É necessário informar a instituição.');
-      dispatch(
-        setUserFatecEducation({
-          ...data,
-          institution: FatecInstitutions.find(institution => institution.value === data.institution)?.value || '',
-          institution_name: FatecInstitutions.find(institution => institution.value === data.institution)?.label || '',
-          course_name: Courses.find(course => course.value === data.course)?.label || '',
-        }),
-      );
+      const payload = {
+        ...data,
+        institution: FatecInstitutions.find(institution => institution.value === data.institution)?.value || '',
+        institution_name: FatecInstitutions.find(institution => institution.value === data.institution)?.label || '',
+        course_name: Courses.find(course => course.value === data.course)?.label || '',
+      };
+      dispatch(isBeingUpdated ? setUpdateUserFatecEducation(payload) : setUserFatecEducation(payload));
 
       navigate(params.get('redirect') ?? '/registro/estudante/passo-4');
     } catch (error) {

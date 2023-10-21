@@ -33,21 +33,21 @@ export default function Profile() {
   const [isOpen, setIsOpen] = useState(false);
   const [certification, setCertification] = useState('');
   const dispatch = useAppDispatch();
-  const profileData = useSelector((state: RootState) => state.profileData);
+  const profileData = useSelector((state: RootState) => state.updateProfileData);
   const {handleSubmit} = useForm();
-  const {user} = useGetUserData();
+  const {user, loading} = useGetUserData();
   const [params] = useSearchParams();
 
   const onSubmit = () => {
     setIsOpen(false);
-    navigate('navigate(-1)');
+    navigate(-1);
   };
 
-  // useEffect(() => {
-  //   if (!params.get('revisar') && user) {
-  //     dispatch(setUpdateProfileData(user));
-  //   }
-  // }, [loading]);
+  useEffect(() => {
+    if (!params.get('revisar') && user) {
+      dispatch(setUpdateProfileData(user));
+    }
+  }, [loading]);
 
   return (
     <div>
@@ -64,16 +64,16 @@ export default function Profile() {
           </div>
           <ReviewCardLarge
             canDelete={false}
-            editRoute={'/registro/estudante/passo-1?editar=true&redirect=/estudante/perfil/revisar'}
+            editRoute={'/perfil/editar/passo-1?update=true&editar=true&redirect=/perfil/editar?revisar=true'}
             info="Dados Pessoais"
             titleForText1="Nome:"
-            title={user?.name ?? ''}
+            title={profileData.name}
             titleForText2="Telefone:"
             subtitle={profileData.phone}
           />
           <ReviewCardLarge
             canDelete={false}
-            editRoute={'/registro/estudante/passo-2?editar=true&redirect=/estudante/perfil/revisar'}
+            editRoute={'/perfil/editar/passo-2?update=true&editar=true&redirect=/perfil/editar?revisar=true'}
             info="Endereço"
             titleForText1="Localização:"
             title={`${profileData.address.city}, ${profileData.address.state}`}
@@ -84,13 +84,17 @@ export default function Profile() {
           <div className="max-w-md w-full font-semibold text-lightblack flex flex-row justify-between">
             <p className="py-2 flex items-end">Formação Acadêmica</p>
             <div className="mb-2">
-              <ButtonAddNew onClick={() => navigate('/estudante/educacao/adicionar')} />
+              <ButtonAddNew
+                onClick={() =>
+                  navigate('/estudante/educacao/adicionar?update=true&redirect=/perfil/editar?revisar=true')
+                }
+              />
             </div>
           </div>
           <ReviewCardMedium
             isFatec
             canDelete={false}
-            editRoute="/registro/estudante/passo-3?editar=true&redirect=/estudante/perfil/revisar"
+            editRoute="/perfil/editar/passo-3?update=true&editar=true&redirect=/perfil/editar?revisar=true"
             info="Graduação"
             titleForText1="Curso:"
             title={profileData.fatec_education.course_name}
@@ -103,9 +107,10 @@ export default function Profile() {
 
           {profileData.education.map((item, index) => (
             <ReviewCardMedium
+              userIsBeignUpdated
               index={index}
               key={index}
-              editRoute={`/estudante/educacao/editar?id=${index}&redirect=/estudante/perfil/revisar`}
+              editRoute={`/estudante/educacao/editar?update=true&id=${index}&redirect=/perfil/editar?revisar=true`}
               canDelete={true}
               info={Degrees.find(degree => degree.value === item.degree)?.label}
               titleForText1="Curso:"
@@ -121,18 +126,20 @@ export default function Profile() {
             <p className="py-2 flex items-end">Experiência Profissional</p>
             <div className="mb-2">
               <ButtonAddNew
-                onClick={() => navigate('/estudante/experiencia/adicionar?redirect=/estudante/perfil/revisar')}
+                onClick={() => navigate('/perfil/editar/passo-5?update=true&redirect=/perfil/editar?revisar=true')}
               />
             </div>
           </div>
           {profileData.previous_experience.length > 0 ? (
             profileData.previous_experience.map((item, index) => (
               <JobReviewCard
+                userIsBeignUpdated
                 key={index}
                 index={index}
                 canDelete={true}
-                editRoute={`/estudante/experiencia/editar?id=${index}&redirect=/estudante/perfil/revisar`}
+                // editRoute={`/estudante/experiencia/editar?update=true&id=${index}&redirect=/estudante/perfil/revisar`}
                 titleForText1="Cargo:"
+                editRoute={`/perfil/editar/passo-5?update=true&editar=true&id=${index}&redirect=/perfil/editar?revisar=true`}
                 title={item.position}
                 titleForText2="Empresa:"
                 subtitle={item.company_name}

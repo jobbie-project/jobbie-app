@@ -13,6 +13,7 @@ import {useEffect, useState} from 'react';
 import {Checkbox} from '@/components/ui/checkbox';
 import {ProfilePreviousExperience} from '@/store/interfaces/profile-data-interface';
 import Textarea from '@/components/ui/textarea';
+import {changeUserPreviousExperience, setUpdateUserPreviousExperience} from '@/store/slices/update-profile-data';
 
 interface FormData {
   company_name: string;
@@ -26,8 +27,14 @@ interface FormData {
 export default function AddNewExperience() {
   const [currentJob, setCurrentJob] = useState<boolean>(false);
   const {register, handleSubmit, reset, setValue} = useForm<FormData>();
-  const {previous_experience} = useSelector((state: RootState) => state.profileData);
   const [params] = useSearchParams();
+  const isBeingUpdated = params.get('update') === 'true';
+  const {previous_experience} = useSelector((state: RootState) => {
+    if (isBeingUpdated) {
+      return state.updateProfileData;
+    }
+    return state.profileData;
+  });
   const [currentId, setCurrentId] = useState<number>();
   const [editMode, setEditMode] = useState<boolean>(false);
   const [currentEditingJob, setCurrentEditingJob] = useState<ProfilePreviousExperience>(
@@ -47,7 +54,7 @@ export default function AddNewExperience() {
       reset({
         company_name: previous_experience[id].company_name,
         position: previous_experience[id].position,
-        location: `${previous_experience[id].location.city},${previous_experience[id].location.state}`,
+        location: `${previous_experience[id].location?.city},${previous_experience[id].location?.state}`,
         start_date: previous_experience[id].start_date,
         end_date: previous_experience[id].end_date ? previous_experience[id].end_date : undefined,
       });
@@ -74,7 +81,14 @@ export default function AddNewExperience() {
       };
       dispatch(
         editMode && currentId !== undefined
-          ? updateUserPreviousExperience({index: currentId, previousExperience: userPreviousExperience})
+          ? isBeingUpdated
+            ? changeUserPreviousExperience({
+                index: currentId,
+                previousExperience: userPreviousExperience,
+              })
+            : updateUserPreviousExperience({index: currentId, previousExperience: userPreviousExperience})
+          : isBeingUpdated
+          ? setUpdateUserPreviousExperience(userPreviousExperience)
           : setUserPreviousExperience(userPreviousExperience),
       );
 
@@ -100,7 +114,7 @@ export default function AddNewExperience() {
               register={register}
               registerName="location"
               required
-              defaultValue={editMode ? `${currentEditingJob.location.city}, ${currentEditingJob.location.state}` : ''}
+              defaultValue={editMode ? `${currentEditingJob.location?.city}, ${currentEditingJob.location?.state}` : ''}
             />
             <GeneralInput
               label={'Cargo'}

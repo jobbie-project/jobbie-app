@@ -1,4 +1,5 @@
 import {deleteUserPreviousExperience} from '@/store/slices/profile-data';
+import {removeUserPreviousExperience} from '@/store/slices/update-profile-data';
 import {useAppDispatch} from '@/store/store';
 import {FiEdit, FiTrash} from 'react-icons/fi';
 import {useNavigate} from 'react-router-dom';
@@ -12,6 +13,7 @@ interface JobReviewCardProps {
   start_date?: string;
   end_date?: string;
   canDelete: boolean;
+  userIsBeignUpdated?: boolean;
   editRoute: string;
   index?: number;
   titleForText1?: string;
@@ -29,7 +31,12 @@ export function JobReviewCard(props: JobReviewCardProps) {
   const dispatch = useAppDispatch();
 
   const handleDelete = () => {
-    props.index !== undefined && dispatch(deleteUserPreviousExperience({index: props.index}));
+    props.index !== undefined &&
+      dispatch(
+        props.userIsBeignUpdated
+          ? removeUserPreviousExperience({index: props.index})
+          : deleteUserPreviousExperience({index: props.index}),
+      );
     toast.success('Experiência removida com sucesso!');
   };
 

@@ -1,4 +1,5 @@
 import {deleteUserEducation} from '@/store/slices/profile-data';
+import {removeUserEducation} from '@/store/slices/update-profile-data';
 import {useAppDispatch} from '@/store/store';
 import {FiEdit, FiTrash} from 'react-icons/fi';
 import {useNavigate} from 'react-router-dom';
@@ -13,6 +14,7 @@ interface ReviewCardMediumProps {
   start_date?: string;
   end_date?: string;
   canDelete: boolean;
+  userIsBeignUpdated?: boolean;
   editRoute: string;
   index?: number;
   isFatec?: boolean;
@@ -31,7 +33,13 @@ export function ReviewCardMedium(props: ReviewCardMediumProps) {
   const dispatch = useAppDispatch();
 
   const handleDelete = () => {
-    props.index !== undefined && dispatch(deleteUserEducation({index: props.index}));
+    if (props.index !== undefined) {
+      dispatch(
+        props.userIsBeignUpdated
+          ? removeUserEducation({index: props.index})
+          : deleteUserEducation({index: props.index}),
+      );
+    }
     toast.success('Formação removida com sucesso!');
   };
 

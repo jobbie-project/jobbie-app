@@ -19,7 +19,6 @@ import StudentRegisterStep4 from './pages/profile/student/student-profile-step4'
 import AddNewEducation from './pages/profile/student/update-profile/student-education-new';
 import StudentRegisterStep5 from './pages/profile/student/student-profile-step5';
 import StudentRegisterStep6 from './pages/profile/student/student-profile-step6';
-import AddNewExperience from './pages/profile/student/update-profile/student-experience-new';
 import StudentRegisterStep7 from './pages/profile/student/student-profile-step7';
 import StudentProfileReview from './pages/profile/student/student-profile-review';
 import JobManagement from './pages/admin-management/job-management';
@@ -36,6 +35,7 @@ import UpdateJobStep1 from './pages/jobs/update-job/update-job-step-1';
 import UpdateJobStep2 from './pages/jobs/update-job/update-job-step-2';
 import UpdateJobStep3 from './pages/jobs/update-job/update-job-step-3';
 import UpdateJobReview from './pages/jobs/update-job/update-job-review';
+import AddNewExperience from './pages/profile/student/update-profile/student-experience-new';
 
 const RedirectToLogin: React.FC = () => {
   window.location.href = '/inicio';
@@ -63,6 +63,7 @@ export const App: React.FC = () => {
         <Route path={`/recuperacao-de-conta/verificacao-de-email`} element={<EmailVerification />} />
         <Route path={`/redefinicao-de-senha`} element={<ChangePassword />} />
         <Route path={`/recuperacao-de-conta/senha-alterada`} element={<PasswordChanged />} />
+
         <Route path={`/registro/estudante/passo-1`} element={<StudentRegisterStep1 />} />
         <Route path={`/registro/estudante/passo-2`} element={<StudentRegisterStep2 />} />
         <Route path={`/registro/estudante/passo-3`} element={<StudentRegisterStep3 />} />
@@ -70,6 +71,13 @@ export const App: React.FC = () => {
         <Route path={`/registro/estudante/passo-5`} element={<StudentRegisterStep5 />} />
         <Route path={`/registro/estudante/passo-6`} element={<StudentRegisterStep6 />} />
         <Route path={`/registro/estudante/passo-7`} element={<StudentRegisterStep7 />} />
+
+        <Route path="/perfil/editar" element={<Profile />} />
+        <Route path="/perfil/editar/passo-1" element={<StudentRegisterStep1 />} />
+        <Route path="/perfil/editar/passo-2" element={<StudentRegisterStep2 />} />
+        <Route path="/perfil/editar/passo-3" element={<StudentRegisterStep3 />} />
+        <Route path="/perfil/editar/passo-5" element={<AddNewExperience />} />
+
         <Route path={`/estudante/certificações/adicionar`} element={<StudentRegisterStep7 />} />
         <Route path={`/estudante/educacao/adicionar`} element={<AddNewEducation />} />
         <Route path={`/estudante/experiencia/adicionar`} element={<AddNewExperience />} />
@@ -77,6 +85,7 @@ export const App: React.FC = () => {
         <Route path={`/estudante/experiencia`} element={<AddNewExperience />} />
         <Route path={`/estudante/perfil/revisar`} element={<StudentProfileReview />} />
         <Route path={`/gerenciamento`} element={<JobManagement />} />
+
         <Route path={`/nova-vaga/passo-1`} element={<CreateJobStep1 />} />
         <Route path={`/nova-vaga/passo-1/editar`} element={<CreateJobStep1 />} />
         <Route path={`/nova-vaga/passo-2`} element={<CreateJobStep2 />} />
@@ -84,15 +93,16 @@ export const App: React.FC = () => {
         <Route path={`/nova-vaga/passo-3`} element={<CreateJobStep3 />} />
         <Route path={`/nova-vaga/passo-3/editar`} element={<CreateJobStep3 />} />
         <Route path={`/nova-vaga/revisar`} element={<JobReview />} />
+
         <Route path={`/vaga/detalhes`} element={<JobViewer />} />
         <Route path={`/vaga/editar/passo-1`} element={<UpdateJobStep1 />} />
         <Route path={`/vaga/editar/passo-2`} element={<UpdateJobStep2 />} />
         <Route path={`/vaga/editar/passo-3`} element={<UpdateJobStep3 />} />
         <Route path={`/vaga/editar`} element={<UpdateJobReview />} />
         <Route path={`/vaga/pesquisar`} element={<JobSearch />} />
+
         <Route path={`/aplicacoes`} element={<Applications />} />
         <Route path={`/404`} element={<NotFound />} />
-        <Route path={`/perfil`} element={<Profile />} />
       </Routes>
       <ToastContainer />
     </div>

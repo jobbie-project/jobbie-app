@@ -41,7 +41,7 @@ export default function StudentRegisterStep5() {
         position: previous_experience[id].position,
         start_date: previous_experience[id].start_date,
         end_date: previous_experience[id].end_date,
-        location: `${previous_experience[id].location.city}, ${previous_experience[id].location.state}`,
+        location: `${previous_experience[id].location?.city}, ${previous_experience[id].location?.state}`,
         description: previous_experience[id].description,
       });
     }
@@ -98,7 +98,9 @@ export default function StudentRegisterStep5() {
                 label={'Cidade, Estado'}
                 register={register}
                 defaultValue={
-                  editMode ? `${previous_experience[id].location.city}, ${previous_experience[id].location.state}` : ''
+                  editMode
+                    ? `${previous_experience[id].location?.city}, ${previous_experience[id].location?.state}`
+                    : ''
                 }
                 registerName="location"
                 required

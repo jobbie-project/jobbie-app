@@ -40,7 +40,7 @@ export function SettingsMenu() {
         <DropdownMenuLabel>Sua Conta</DropdownMenuLabel>
         <DropdownMenuSeparator />
         {userData.role === UserRole.STUDENT ? (
-          <DropdownMenuItem onClick={() => navigate('/perfil')}>
+          <DropdownMenuItem onClick={() => navigate('/perfil/editar')}>
             <User className="mr-2 h-4 w-4" />
             <span>Perfil</span>
           </DropdownMenuItem>
