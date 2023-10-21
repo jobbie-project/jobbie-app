@@ -37,7 +37,7 @@ export default function TableList() {
               <TableCell>{moment(data.created_at).format('DD/MM/YYYY')}</TableCell>
               <TableCell>{JobStatus.find(status => status.value === data.status)?.label}</TableCell>
               <TableCell>{data.company_name}</TableCell>
-              <TableCell>{10 /* data.numberOfCandidates */}</TableCell>
+              <TableCell>{data.applicants?.length ?? 0}</TableCell>
               <TableCell className="text-right">
                 <div className="max-w-[60px] ml-4">
                   <div className="flex justify-between">

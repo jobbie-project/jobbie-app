@@ -49,7 +49,6 @@ export default function StudentRegisterStep1() {
     if (params.get('editar') !== null && !!params.get('editar')) {
       setEditMode(true);
     }
-    console.log(user);
     reset({
       name: editMode ? profileData.name : user?.name,
       phone: profileData.phone,

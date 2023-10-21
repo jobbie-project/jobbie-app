@@ -20,4 +20,5 @@ export interface Job {
     city: string;
     state: string;
   };
+  applicants: [];
 }
