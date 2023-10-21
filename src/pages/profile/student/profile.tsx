@@ -30,16 +30,12 @@ export default function Profile() {
 
   const handleSubmitProfile = async () => {
     try {
-      console.log({
-        ...profileData,
-        fatec_education: castFatecEducationData(profileData.fatec_education),
-      });
       await Api.patch('/student', {
         ...profileData,
         fatec_education: castFatecEducationData(profileData.fatec_education),
       });
       toast.success('Perfil atualizado com sucesso!');
-      navigate(-1);
+      navigate('/inicio');
     } catch (error) {
       toastError(error);
     }

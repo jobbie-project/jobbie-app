@@ -3,7 +3,6 @@ import {EducationLevel} from '@/enums';
 export interface User {
   name: string;
   email: string;
-  phone: string;
   student: {
     phone?: string;
     birth_date?: Date;

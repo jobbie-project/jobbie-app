@@ -27,7 +27,7 @@ export const updateProfileDataSlice = createSlice({
   reducers: {
     setUpdateProfileData: (state, action: PayloadAction<User>) => {
       state.name = action.payload.name;
-      state.phone = action.payload.phone;
+      state.phone = action.payload.student.phone ?? '';
       state.address = action.payload.student.curriculum.address;
       state.education = action.payload.student.curriculum.education;
       state.fatec_education.institution = action.payload.student.curriculum.fatec_institution.id;
