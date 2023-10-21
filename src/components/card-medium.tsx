@@ -18,8 +18,8 @@ export function JobCardMedium({job, code}: {job: Job; code: string}) {
   };
 
   return (
-    <div className="bg-lightgray1 rounded-md p-6 flex flex-col justify-between">
-      <div onClick={handleClick} className="flex max-w-fit cursor-pointer flex-row justify-start mb-1">
+    <div onClick={handleClick} className="bg-lightgray1 rounded-md p-6 flex flex-col justify-between cursor-pointer">
+      <div className="flex max-w-fit cursor-pointer flex-row justify-start mb-1">
         <div className="me-2 mr-6">
           <div className="bg-white text-center text-black font-semibold p-2 w-10 rounded-md ">
             <p>

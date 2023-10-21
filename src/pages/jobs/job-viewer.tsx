@@ -14,6 +14,7 @@ import moment from '@/utils/moment';
 import {useEffect} from 'react';
 import {JobTimes} from '@/utils/consts';
 import {JobType} from '@/enums';
+import {LocationJobViewer} from '@/icons/location-jobviewer';
 
 export default function JobViewer() {
   const [params] = useSearchParams();
@@ -57,7 +58,7 @@ export default function JobViewer() {
                 </div>
                 <div className="py-6 px-16 flex flex-row justify-between">
                   <div className="flex flex-col items-center">
-                    <LocationIcon width="52" height="52" />
+                    <LocationJobViewer width="52" height="52" />
                     <p className="text-xs text-lightblack2 my-2">Local</p>
                     <div className="text-black font-semibold text-sm">
                       {job?.type === 'remote' ? 'Remoto' : 'Presencial'}

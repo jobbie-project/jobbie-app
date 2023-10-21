@@ -6,6 +6,8 @@ import {useEffect} from 'react';
 import authenticationService from '@/services/authentication/authentication.service';
 import {useGetJobList} from '@/hooks/useGetJobList';
 import {Button} from '@/components/ui/button';
+import Pagination from '@mui/material/Pagination';
+import Stack from '@mui/material/Stack';
 
 export default function Home() {
   const {jobData} = useGetJobList();
@@ -15,6 +17,10 @@ export default function Home() {
   useEffect(() => {
     if (!data.id) window.location.href = '/entrar';
   }, [data]);
+
+  const half = Math.ceil(jobData.jobs.length / 2);
+  const firstColumn = jobData.jobs.slice(0, half);
+  const secondColumn = jobData.jobs.slice(half);
 
   return (
     <div>
@@ -31,7 +37,7 @@ export default function Home() {
           <div className="flex flex-col w-full">
             <p className="mt-5 py-6 font-semibold">Recomendados</p>
             <div className="relative flex mb-5 items-center">
-              <div className="max-w-5xl grid grid-cols-3 gap-4">
+              <div className="max-w-4xl grid grid-cols-3 gap-4">
                 {jobData.jobs.length > 0 &&
                   jobData.jobs.slice(0, 6).map((job, index) => (
                     <div className="inline-block ">
@@ -41,16 +47,29 @@ export default function Home() {
               </div>
             </div>
           </div>
-          <div className="max-w-5xl flex flex-col w-full">
+          <div className="max-w-4xl flex flex-col w-full">
             <p className="font-semibold">Vagas recentes</p>
-            <div className="py-6">
-              {jobData.jobs.length > 0 &&
-                jobData.jobs.map((job, index) => (
+            <div className="flex flex-row justify-between">
+              <div className="py-6 w-full">
+                {firstColumn.map((job, index) => (
                   <div className="mb-5">
                     <JobCardMedium job={job} key={index} code={job.code} />
                   </div>
                 ))}
+              </div>
+              <div className="py-6 w-full">
+                {secondColumn.map((job, index) => (
+                  <div className="mb-5 ml-5">
+                    <JobCardMedium job={job} key={index} code={job.code} />
+                  </div>
+                ))}
+              </div>
             </div>
+          </div>
+          <div className="flex flex-row mt-4 mb-12 justify-center">
+            <Stack spacing={2}>
+              <Pagination count={jobData.total / 5} shape="rounded" />
+            </Stack>
           </div>
         </div>
       </div>

@@ -102,7 +102,7 @@ export default function StudentProfileReview() {
             title={profileData.fatec_education.course_name}
             titleForText2="Instituição:"
             subtitle={profileData.fatec_education.institution_name}
-            titleForText3="Ciclo:"
+            titleForText3="Período:"
             description={profileData.fatec_education.actual_cycle}
             start_date={moment(profileData.fatec_education.start_date).format('MMMM [de] YYYY')}
           />
@@ -114,8 +114,11 @@ export default function StudentProfileReview() {
               editRoute={`/estudante/educacao/editar?id=${index}&redirect=/estudante/perfil/revisar`}
               canDelete={true}
               info={Degrees.find(degree => degree.value === item.degree)?.label}
+              titleForText1="Curso:"
               title={item.course}
+              titleForText2="Instituição:"
               subtitle={item.institution_name}
+              titleForText3="Período:"
               start_date={moment(item.start_date).format('MMMM [de] YYYY')}
               end_date={item.end_date && moment(item.end_date).format('MMMM [de] YYYY')}
             />
@@ -135,8 +138,11 @@ export default function StudentProfileReview() {
                 index={index}
                 canDelete={true}
                 editRoute={`/estudante/experiencia/editar?id=${index}&redirect=/estudante/perfil/revisar`}
+                titleForText1="Cargo:"
                 title={item.position}
+                titleForText2="Empresa:"
                 subtitle={item.company_name}
+                titleForText3="Período:"
                 start_date={moment(item.start_date).format('MMMM [de] YYYY')}
                 end_date={item.end_date && moment(item.end_date).format('MMMM [de] YYYY')}
               />
