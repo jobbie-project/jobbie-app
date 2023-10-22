@@ -1,4 +1,5 @@
 import {Autocomplete} from '@mui/material';
+import {IoMdArrowDropdown} from 'react-icons/io';
 
 export function SelectInput(props: {options: string[]; callback: (o: any) => any}) {
   return (
@@ -24,6 +25,9 @@ export function SelectInput(props: {options: string[]; callback: (o: any) => any
         peer-focus:text-gray-600 peer-focus:text-sm`}>
               Cidade, Estado
             </label>
+            <div className="absolute right-0">
+              <IoMdArrowDropdown />
+            </div>
           </div>
         </div>
       )}
