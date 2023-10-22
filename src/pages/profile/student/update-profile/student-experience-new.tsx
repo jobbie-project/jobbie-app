@@ -15,6 +15,9 @@ import {ProfilePreviousExperience} from '@/store/interfaces/profile-data-interfa
 import Textarea from '@/components/ui/textarea';
 import {changeUserPreviousExperience, setUpdateUserPreviousExperience} from '@/store/slices/update-profile-data';
 
+import {cities} from '@/utils/useCities';
+import {SelectInput} from '@/components/select-input';
+
 interface FormData {
   company_name: string;
   position: string;
@@ -109,12 +112,11 @@ export default function AddNewExperience() {
 
           <>
             <SelectCountry />
-            <GeneralInput
-              label={'Cidade, Estado'}
-              register={register}
-              registerName="location"
-              required
-              defaultValue={editMode ? `${currentEditingJob.location?.city}, ${currentEditingJob.location?.state}` : ''}
+            <SelectInput
+              options={cities}
+              callback={value => {
+                setValue('location', value ?? '');
+              }}
             />
             <GeneralInput
               label={'Cargo'}

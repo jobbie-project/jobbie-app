@@ -2,10 +2,13 @@ import {ButtonHover} from '@/components/button-hover-animation';
 import GeneralInput from '@/components/general-input';
 import RegisterHeader from '@/components/register-header';
 import {SelectCountry} from '@/components/select-country';
+import {SelectInput} from '@/components/select-input';
 import {setUserAddress} from '@/store/slices/profile-data';
 import {setUpdateUserAddress} from '@/store/slices/update-profile-data';
 import {RootState, useAppDispatch} from '@/store/store';
 import {toastError} from '@/utils/toast-error';
+import {cities} from '@/utils/useCities';
+import {Autocomplete, TextField} from '@mui/material';
 import {useEffect, useState} from 'react';
 import {useForm} from 'react-hook-form';
 import {useSelector} from 'react-redux';
@@ -17,7 +20,7 @@ interface FormData {
 }
 
 export default function StudentRegisterStep2() {
-  const {register, handleSubmit, reset} = useForm<FormData>();
+  const {register, handleSubmit, reset, setValue} = useForm<FormData>();
   const [editMode, setEditMode] = useState(false);
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
@@ -72,6 +75,12 @@ export default function StudentRegisterStep2() {
             <p className="text-black font-semibold text-lg select-none mt-8">Qual sua localização?</p>
           </div>
           <SelectCountry />
+          <SelectInput
+            options={cities}
+            callback={value => {
+              setValue('location', value ?? '');
+            }}
+          />
           <GeneralInput
             register={register}
             registerName="street"
@@ -79,13 +88,7 @@ export default function StudentRegisterStep2() {
             defaultValue={editMode ? profileAddress.street : ''}
             required
           />
-          <GeneralInput
-            register={register}
-            registerName="location"
-            label="Cidade, Estado"
-            defaultValue={editMode ? `${profileAddress.city}, ${profileAddress.state}` : ''}
-            required
-          />
+
           <GeneralInput
             register={register}
             registerName="zip_code"

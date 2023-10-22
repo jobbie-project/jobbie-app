@@ -16,6 +16,8 @@ import {useSelector} from 'react-redux';
 import {Degrees} from '@/utils/consts';
 import {EducationLevel} from '@/enums';
 import {changeUserEducation, setUpdateUserEducation} from '@/store/slices/update-profile-data';
+import {cities} from '@/utils/useCities';
+import {SelectInput} from '@/components/select-input';
 
 interface FormData {
   institution_name: string;
@@ -113,12 +115,11 @@ export default function AddNewEducation() {
             <p className="text-black font-semibold text-lg select-none">Adicionando nova Escolaridade</p>
           </div>
           <SelectCountry />
-          <GeneralInput
-            label={'Cidade, Estado'}
-            register={register}
-            registerName="location"
-            required
-            defaultValue={editMode ? `${currentEducation.location.city}, ${currentEducation.location.state}` : ''}
+          <SelectInput
+            options={cities}
+            callback={value => {
+              setValue('location', value ?? '');
+            }}
           />
           <GeneralInput
             label={'Nome da Instituição'}
