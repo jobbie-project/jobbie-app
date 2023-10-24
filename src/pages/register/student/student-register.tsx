@@ -36,7 +36,7 @@ export default function StudentRegister() {
       if (!validate(data.email)) throw new Error('Utilize um email institucional da Fatec');
       if (!isPasswordValid) throw new Error('Senha muito fraca');
       await Api.post('/user/create', {...data, role: UserRole.STUDENT});
-      navigate('/verificacao-de-email');
+      navigate('/verificacao-de-email?email=' + data.email);
     } catch (error) {
       toastError(error);
     }

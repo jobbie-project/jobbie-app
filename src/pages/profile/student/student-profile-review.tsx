@@ -148,7 +148,7 @@ export default function StudentProfileReview() {
               />
             ))
           ) : (
-            <div className="flex items-center text-gray-700 font-semibold text-sm select-none mt-4 mb-4 w-full max-w-xl">
+            <div className="flex items-center text-gray-700 font-semibold text-sm select-none mt-4 mb-4 w-full max-w-md">
               <Checkbox id="noexperience" checked disabled />
               <label
                 htmlFor="noexperience"

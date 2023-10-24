@@ -2,17 +2,39 @@ import Lottie from 'lottie-react';
 import AnimationVerified from '../../assets/verified.json';
 import {Logoblack} from '@/icons/logo-black';
 import {ButtonHover} from '@/components/button-hover-animation';
-import {useState} from 'react';
-import {useNavigate} from 'react-router-dom';
+import {useEffect, useState} from 'react';
+import {useNavigate, useSearchParams} from 'react-router-dom';
+import Api from '@/services/api/api.service';
+import {toastError} from '@/utils/toast-error';
+import {toast} from 'react-toastify';
 
 export default function VerifiedEmail() {
   const [showButton, setShowButton] = useState(false);
   setTimeout(() => setShowButton(true), 3500);
 
+  const [params] = useSearchParams();
   const navigate = useNavigate();
 
+  const verifyEmail = async () => {
+    try {
+      const token = params.get('token');
+      if (!token) {
+        navigate('/entrar');
+        return;
+      }
+      await Api.post('/auth/verify-email', {token});
+      toast.success('Email verificado com sucesso!');
+    } catch (error) {
+      toastError('Ocorreu um erro ao verificar seu email.');
+    }
+  };
+
+  useEffect(() => {
+    verifyEmail();
+  }, []);
+
   const onClick = () => {
-    navigate('/registro/estudante/passo-1');
+    navigate('/entrar');
   };
 
   return (
@@ -23,7 +45,7 @@ export default function VerifiedEmail() {
         </div>
       </div>
       <div className="items-center p-5 flex flex-col ">
-        <div className="max-w-sm w-full">
+        <div className="max-w-md w-full">
           <p className="text-black font-semibold text-lg mt-4">Sua conta foi verificada.</p>
           <p className="mt-6 text-sm flex">Parabéns! continue para completar seu perfil.</p>
           <div className="flex justify-center">
