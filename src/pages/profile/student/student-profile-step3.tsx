@@ -9,7 +9,6 @@ import {SelectDropdown} from '@/components/select-dropdown';
 import {RootState, useAppDispatch} from '@/store/store';
 import {setUserFatecEducation} from '@/store/slices/profile-data';
 import {ProfileFatecEducation} from '@/store/interfaces/profile-data-interface';
-import {Courses, FatecInstitutions} from '@/utils/consts';
 import {useSelector} from 'react-redux';
 import {useEffect, useState} from 'react';
 import {setUpdateUserFatecEducation} from '@/store/slices/update-profile-data';
@@ -31,6 +30,8 @@ export default function StudentRegisterStep3() {
     return state.profileData;
   });
 
+  const {fatec_institutions, fatec_course} = useSelector((state: RootState) => state.fatecDataSlice);
+
   useEffect(() => {
     if (params.get('editar') !== null && !!params.get('editar')) {
       setEditMode(true);
@@ -51,9 +52,9 @@ export default function StudentRegisterStep3() {
       if (!data.institution) throw new Error('É necessário informar a instituição.');
       const payload = {
         ...data,
-        institution: FatecInstitutions.find(institution => institution.value === data.institution)?.value || '',
-        institution_name: FatecInstitutions.find(institution => institution.value === data.institution)?.label || '',
-        course_name: Courses.find(course => course.value === data.course)?.label || '',
+        institution: fatec_institutions.find(institution => institution.value === data.institution)?.value || '',
+        institution_name: fatec_institutions.find(institution => institution.value === data.institution)?.label || '',
+        course_name: fatec_course.find(course => course.value === data.course)?.label || '',
       };
       dispatch(isBeingUpdated ? setUpdateUserFatecEducation(payload) : setUserFatecEducation(payload));
 
@@ -76,7 +77,7 @@ export default function StudentRegisterStep3() {
           <SelectDropdown
             callback={option => setValue('institution', option)}
             label={'Selecione sua Instituição'}
-            options={FatecInstitutions}
+            options={fatec_institutions}
             disabled={true}
             value={watch('institution')}
             className="bg-lightgray1"
@@ -85,7 +86,7 @@ export default function StudentRegisterStep3() {
             callback={value => setValue('course', value)}
             value={watch('course')}
             label={'Selecione seu Curso'}
-            options={Courses}
+            options={fatec_course}
           />
           <div className="w-full inline-flex mt-4 justify-between">
             <GeneralInput

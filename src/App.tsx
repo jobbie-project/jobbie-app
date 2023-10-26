@@ -36,6 +36,11 @@ import UpdateJobStep2 from './pages/jobs/update-job/update-job-step-2';
 import UpdateJobStep3 from './pages/jobs/update-job/update-job-step-3';
 import UpdateJobReview from './pages/jobs/update-job/update-job-review';
 import AddNewExperience from './pages/profile/student/update-profile/student-experience-new';
+import {useEffect} from 'react';
+import {useAppDispatch} from './store/store';
+import {setFatecCourse, setFatecInstitutions} from './store/slices/fatec-data';
+import {toastError} from './utils/toast-error';
+import Api from './services/api/api.service';
 
 const RedirectToLogin: React.FC = () => {
   window.location.href = '/inicio';
@@ -43,6 +48,21 @@ const RedirectToLogin: React.FC = () => {
 };
 
 export const App: React.FC = () => {
+  const dispatch = useAppDispatch();
+  const fetchFatecData = async () => {
+    try {
+      const fatecInstitutions = await Api.get('/fatec/institutions');
+      const fatecCourses = await Api.get('/fatec/courses');
+      dispatch(setFatecCourse(fatecCourses.data));
+      dispatch(setFatecInstitutions(fatecInstitutions.data));
+    } catch (error) {
+      toastError(error);
+    }
+  };
+  useEffect(() => {
+    fetchFatecData();
+  }, []);
+
   return (
     <div className="h-[100vh]">
       <Routes>

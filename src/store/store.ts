@@ -2,14 +2,16 @@ import {Action, ThunkAction, combineReducers, configureStore} from '@reduxjs/too
 import profileDataSlice from './slices/profile-data';
 import {useDispatch} from 'react-redux';
 import jobDataSlice from './slices/job-data';
-import updateJobData from './slices/update-job-data';
+import updateJobDataSlice from './slices/update-job-data';
 import updateProfileDataSlice from './slices/update-profile-data';
+import fatecDataSlice from './slices/fatec-data';
 
 const reducers = combineReducers({
   profileData: profileDataSlice,
   updateProfileData: updateProfileDataSlice,
   jobData: jobDataSlice,
-  updateJobData: updateJobData,
+  updateJobData: updateJobDataSlice,
+  fatecDataSlice: fatecDataSlice,
 });
 
 const store = configureStore({
