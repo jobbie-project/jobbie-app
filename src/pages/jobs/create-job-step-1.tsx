@@ -9,6 +9,8 @@ import {ButtonHover} from '@/components/button-hover-animation';
 import {useEffect, useState} from 'react';
 import {useSelector} from 'react-redux';
 import {Button} from '@/components/ui/button';
+import {RadioGroup, RadioGroupItem} from '@/components/ui/radio-group';
+import {Label} from '@/components/ui/label';
 
 interface FormData {
   company_name: string;
@@ -19,6 +21,7 @@ interface FormData {
 export default function CreateJobStep1() {
   const {register, handleSubmit, reset} = useForm<FormData>();
   const [editMode, setEditMode] = useState(false);
+  const [isSorting, setIsSorting] = useState(false);
   const jobData = useSelector((state: RootState) => state.jobData);
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
@@ -69,16 +72,35 @@ export default function CreateJobStep1() {
               label="Responsável pela vaga"
               defaultValue={editMode ? jobData.owner_name : ''}
             />
-            <GeneralInput
-              register={register}
-              registerName="owner_email"
-              label="Email"
-              defaultValue={editMode ? jobData.owner_email : ''}
-              required
-            />
-            <span className="text-xs text-gray-400 select-none">
-              os currículos dos candidatos serão enviados para o email que você fornecer acima.
-            </span>
+            <div className="font-semibold py-4">Candidaturas</div>
+            <RadioGroup>
+              <div className="flex items-center space-x-2">
+                <RadioGroupItem onClick={() => setIsSorting(true)} value="triagem" id="r1" checked={isSorting} />
+                <Label htmlFor="r1" className="mt-1">
+                  Triagem prévia dos currículos
+                </Label>
+              </div>
+              <div className="flex items-center space-x-2 mt-2">
+                <RadioGroupItem onClick={() => setIsSorting(false)} value="direc" id="r2" checked={!isSorting} />
+                <Label htmlFor="r2" className="mt-1">
+                  Enviar diretamente para o email
+                </Label>
+              </div>
+            </RadioGroup>
+            {!isSorting && (
+              <>
+                <GeneralInput
+                  register={register}
+                  registerName="owner_email"
+                  label="Email"
+                  defaultValue={editMode ? jobData.owner_email : ''}
+                  required
+                />
+                <span className="text-xs text-gray-400 select-none">
+                  os currículos dos candidatos serão enviados para o email que você fornecer acima.
+                </span>
+              </>
+            )}
           </div>
           <div className="mt-8 flex flex-row justify-between">
             <Button

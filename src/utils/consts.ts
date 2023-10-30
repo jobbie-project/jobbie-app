@@ -10,7 +10,7 @@ export const Degrees: ValueOption[] = [
 ];
 
 export const ContractTypes = [
-  {value: ContractType.CLT, label: 'CLT'},
+  {value: ContractType.CLT, label: 'Efetivo'},
   {value: ContractType.PJ, label: 'PJ'},
   {value: ContractType.INTERNSHIP, label: 'Estágio'},
   {value: ContractType.TRAINEE, label: 'Trainee'},

@@ -61,8 +61,9 @@ export default function CreateJobStep2() {
       dispatch(setJobSalary(formattedSalary));
       if (!type) throw new Error('Selecione a modalidade da vaga.');
       dispatch(setJobType(type as JobType));
-      if (type === JobType.FACE_TO_FACE && !data.location) throw new Error('Informe o Local de Trabalho.');
-      type === JobType.FACE_TO_FACE
+      if ([JobType.FACE_TO_FACE, JobType.HYBRID].includes(type) && !data.location)
+        throw new Error('Informe o Local de Trabalho.');
+      [JobType.FACE_TO_FACE, JobType.HYBRID].includes(type)
         ? dispatch(setJobLocation({...data, city: data.location.split(',')[0], state: data.location.split(',')[1]}))
         : dispatch(setJobLocation({city: '', state: ''}));
       navigate(params.get('redirect') ?? '/nova-vaga/passo-3');
@@ -125,9 +126,20 @@ export default function CreateJobStep2() {
                     Presencial
                   </Label>
                 </div>
+                <div className="flex items-center space-x-2 mt-2">
+                  <RadioGroupItem
+                    onClick={() => setType(JobType.HYBRID)}
+                    value="hybrid"
+                    id="r3"
+                    checked={type === JobType.HYBRID}
+                  />
+                  <Label htmlFor="r3" className="mt-1">
+                    Híbrido
+                  </Label>
+                </div>
               </RadioGroup>
-              {type === JobType.FACE_TO_FACE && (
-                <div className="mt-4">
+              {[JobType.FACE_TO_FACE, JobType.HYBRID].includes(type ?? JobType.REMOTE) && (
+                <div className="mt-6">
                   <GeneralInput
                     register={register}
                     registerName="location"

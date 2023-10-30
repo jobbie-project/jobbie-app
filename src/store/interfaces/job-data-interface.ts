@@ -15,4 +15,6 @@ export interface JobData {
   type: JobType | undefined;
   job_time: JobTime;
   contract_type: ContractType;
+  job_tag: string;
+  has_sorting: boolean;
 }

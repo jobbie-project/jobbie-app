@@ -17,6 +17,8 @@ const initialState: JobData = {
   type: undefined,
   job_time: '' as JobTime,
   contract_type: '' as ContractType,
+  job_tag: '',
+  has_sorting: false,
 };
 
 export const updateJobDataSlice = createSlice({

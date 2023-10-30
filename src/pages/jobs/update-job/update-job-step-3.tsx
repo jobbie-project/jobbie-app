@@ -17,6 +17,7 @@ interface FormData {
   description: string;
   time: JobTime;
   contract_type: ContractType;
+  job_tag: string;
 }
 
 export default function UpdateJobStep3() {
@@ -25,12 +26,14 @@ export default function UpdateJobStep3() {
   const dispatch = useAppDispatch();
   const [params] = useSearchParams();
   const jobData = useSelector((state: RootState) => state.updateJobData);
+  const {fatec_course} = useSelector((state: RootState) => state.fatecDataSlice);
 
   useEffect(() => {
     reset({
       description: jobData.description,
       time: jobData.job_time,
       contract_type: jobData.contract_type,
+      job_tag: jobData.job_tag,
     });
   }, [jobData]);
 
@@ -56,6 +59,15 @@ export default function UpdateJobStep3() {
           <div className="font-semibold mt-4 text-base select-none">
             Adicione os detalhes da vaga para encontrar seu próximo colaborador.
           </div>
+          <SelectDropdown
+            className="text-black"
+            callback={value => {
+              setValue('job_tag', value);
+            }}
+            value={watch('job_tag')}
+            label={'Selecione o Curso da Vaga'}
+            options={fatec_course}
+          />
           <div className="mt-8 w-full">
             <SelectDropdown
               className="text-black"

@@ -9,10 +9,11 @@ export enum EducationLevel {
 export enum JobType {
   FACE_TO_FACE = 'face_to_face',
   REMOTE = 'remote',
+  HYBRID = 'hybrid',
 }
 
 export enum ContractType {
-  CLT = 'CLT',
+  CLT = 'Efetivo',
   PJ = 'PJ',
   INTERNSHIP = 'internship',
   TRAINEE = 'trainee',

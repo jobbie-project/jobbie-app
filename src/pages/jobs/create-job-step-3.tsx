@@ -7,7 +7,7 @@ import {ButtonHover} from '@/components/button-hover-animation';
 import {ContractTypes, JobTimes} from '@/utils/consts';
 import Textarea from '@/components/ui/textarea';
 import {SelectDropdown} from '@/components/select-dropdown';
-import {setJobContractType, setJobDescription, setJobTime} from '@/store/slices/job-data';
+import {setJobContractType, setJobDescription, setJobTag, setJobTime} from '@/store/slices/job-data';
 import {useEffect, useState} from 'react';
 import {useSelector} from 'react-redux';
 import {Button} from '@/components/ui/button';
@@ -17,6 +17,7 @@ interface FormData {
   description: string;
   time: JobTime;
   contract_type: ContractType;
+  job_tag: string;
 }
 
 export default function CreateJobStep3() {
@@ -26,6 +27,7 @@ export default function CreateJobStep3() {
   const dispatch = useAppDispatch();
   const [params] = useSearchParams();
   const jobData = useSelector((state: RootState) => state.jobData);
+  const {fatec_course} = useSelector((state: RootState) => state.fatecDataSlice);
 
   useEffect(() => {
     if (params.get('editar') !== null && !!params.get('editar')) {
@@ -34,6 +36,7 @@ export default function CreateJobStep3() {
         description: jobData.description,
         time: jobData.job_time,
         contract_type: jobData.contract_type,
+        job_tag: jobData.job_tag,
       });
     }
   }, [jobData]);
@@ -46,6 +49,8 @@ export default function CreateJobStep3() {
       dispatch(setJobTime(data.time));
       if (!data.description) throw new Error('Insira a Descrição da Vaga.');
       dispatch(setJobDescription(data.description));
+      if (!data.job_tag) throw new Error('Insira a qual curso a vaga se destina');
+      dispatch(setJobTag(data.job_tag));
       navigate(params.get('redirect') ?? '/nova-vaga/revisar');
     } catch (error) {
       toastError(error);
@@ -59,6 +64,15 @@ export default function CreateJobStep3() {
           <div className="font-semibold mt-4 text-base select-none">
             Adicione os detalhes da vaga para encontrar seu próximo colaborador.
           </div>
+          <SelectDropdown
+            className="text-black"
+            callback={value => {
+              setValue('job_tag', value);
+            }}
+            value={watch('job_tag')}
+            label={'Selecione o Curso da Vaga'}
+            options={fatec_course}
+          />
           <div className="mt-8 w-full">
             <SelectDropdown
               className="text-black"

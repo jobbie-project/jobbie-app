@@ -17,6 +17,8 @@ const initialState: JobData = {
   type: undefined,
   job_time: '' as JobTime,
   contract_type: '' as ContractType,
+  job_tag: '',
+  has_sorting: false,
 };
 
 export const jobDataSlice = createSlice({
@@ -60,6 +62,9 @@ export const jobDataSlice = createSlice({
     setJobContractType: (state, action: PayloadAction<ContractType>) => {
       state.contract_type = action.payload;
     },
+    setJobTag: (state, action: PayloadAction<string>) => {
+      state.job_tag = action.payload;
+    },
   },
 });
 
@@ -76,6 +81,7 @@ export const {
   setJobType,
   setJobTime,
   setJobContractType,
+  setJobTag,
 } = jobDataSlice.actions;
 
 export default jobDataSlice.reducer;
