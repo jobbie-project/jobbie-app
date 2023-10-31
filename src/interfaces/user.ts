@@ -1,4 +1,4 @@
-import {EducationLevel} from '@/enums';
+import {EducationLevel, StudentShift} from '@/enums';
 
 export interface User {
   name: string;
@@ -6,6 +6,7 @@ export interface User {
   student: {
     phone?: string;
     birth_date?: Date;
+    shift: StudentShift;
     curriculum: {
       previous_experience: {
         company_name: string;

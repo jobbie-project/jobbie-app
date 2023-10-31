@@ -38,3 +38,7 @@ export enum JobStatus {
   INACTIVE = 'inactive',
   CLOSED = 'closed',
 }
+export enum StudentShift {
+  MORNING = 'MORNING',
+  NIGHT = 'NIGHT',
+}

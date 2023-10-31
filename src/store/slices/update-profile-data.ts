@@ -8,6 +8,7 @@ import {
   ProfilePreviousExperience,
 } from '../interfaces/profile-data-interface';
 import {User} from '@/interfaces/user';
+import {StudentShift} from '@/enums';
 
 const initialState: ProfileData = {
   name: '',
@@ -19,6 +20,7 @@ const initialState: ProfileData = {
   tech_stacks: [],
   certifications: [],
   links: {} as ProfileLinks,
+  shift: '' as StudentShift,
 };
 
 export const updateProfileDataSlice = createSlice({
@@ -38,6 +40,7 @@ export const updateProfileDataSlice = createSlice({
       state.fatec_education.actual_cycle = action.payload.student.curriculum.fatec_cycle.toString();
       state.certifications = action.payload.student.curriculum.certifications;
       state.previous_experience = action.payload.student.curriculum.previous_experience;
+      state.shift = action.payload.student.shift;
     },
     setUpdateUserAddress: (state, action: PayloadAction<ProfileAddress>) => {
       state.address = action.payload;
@@ -83,6 +86,10 @@ export const updateProfileDataSlice = createSlice({
       state.phone = action.payload;
     },
 
+    setUpdateUserShift: (state, action: PayloadAction<StudentShift>) => {
+      state.shift = action.payload;
+    },
+
     setUpdateUserTechStacks: (state, action: PayloadAction<string>) => {
       state.tech_stacks.push(action.payload);
     },
@@ -113,6 +120,7 @@ export const {
   setUpdateUserLinks,
   setUpdateUserName,
   setUpdateUserPhone,
+  setUpdateUserShift,
   setUpdateUserTechStacks,
   removeUserTechStacks,
   setUpdateUserCertifications,

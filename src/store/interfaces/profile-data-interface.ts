@@ -1,4 +1,4 @@
-import {EducationLevel} from '@/enums';
+import {EducationLevel, StudentShift} from '@/enums';
 
 export interface ProfileEducation {
   institution_name: string;
@@ -56,4 +56,5 @@ export interface ProfileData {
   tech_stacks: string[];
   certifications: string[];
   links: ProfileLinks;
+  shift: StudentShift;
 }

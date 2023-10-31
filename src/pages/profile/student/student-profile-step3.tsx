@@ -7,14 +7,16 @@ import {useNavigate, useSearchParams} from 'react-router-dom';
 import GeneralInput from '@/components/general-input';
 import {SelectDropdown} from '@/components/select-dropdown';
 import {RootState, useAppDispatch} from '@/store/store';
-import {setUserFatecEducation} from '@/store/slices/profile-data';
+import {setUserFatecEducation, setUserShift} from '@/store/slices/profile-data';
 import {ProfileFatecEducation} from '@/store/interfaces/profile-data-interface';
 import {useSelector} from 'react-redux';
 import {useEffect, useState} from 'react';
-import {setUpdateUserFatecEducation} from '@/store/slices/update-profile-data';
+import {setUpdateUserFatecEducation, setUpdateUserShift} from '@/store/slices/update-profile-data';
+import {StudentShifts} from '@/utils/consts';
+import {StudentShift} from '@/enums';
 
 export default function StudentRegisterStep3() {
-  const {register, handleSubmit, setValue, watch, reset} = useForm<ProfileFatecEducation>({
+  const {register, handleSubmit, setValue, watch, reset} = useForm<ProfileFatecEducation & {shift: string}>({
     defaultValues: {institution: '7'},
   });
   const [editMode, setEditMode] = useState(false);
@@ -23,7 +25,7 @@ export default function StudentRegisterStep3() {
   const [params] = useSearchParams();
 
   const isBeingUpdated = params.get('update') === 'true';
-  const {fatec_education} = useSelector((state: RootState) => {
+  const {fatec_education, shift} = useSelector((state: RootState) => {
     if (isBeingUpdated) {
       return state.updateProfileData;
     }
@@ -40,11 +42,12 @@ export default function StudentRegisterStep3() {
         course: fatec_education.course.toString(),
         actual_cycle: fatec_education.actual_cycle.toString(),
         start_date: moment(fatec_education.start_date).format('YYYY-MM') as unknown as Date,
+        shift: shift,
       });
     }
   }, [fatec_education]);
 
-  const onSubmit = (data: ProfileFatecEducation) => {
+  const onSubmit = (data: ProfileFatecEducation & {shift: string}) => {
     try {
       if (!data.actual_cycle) throw new Error('É necessário informar o ciclo atual.');
       if (!data.start_date) throw new Error('É necessário informar a data de ínicio do curso.');
@@ -56,8 +59,12 @@ export default function StudentRegisterStep3() {
         institution_name: fatec_institutions.find(institution => institution.value === data.institution)?.label || '',
         course_name: fatec_course.find(course => course.value === data.course)?.label || '',
       };
-      dispatch(isBeingUpdated ? setUpdateUserFatecEducation(payload) : setUserFatecEducation(payload));
 
+      dispatch(isBeingUpdated ? setUpdateUserFatecEducation(payload) : setUserFatecEducation(payload));
+      if (!data.shift) throw new Error('É necessário informar o turno.');
+      dispatch(
+        isBeingUpdated ? setUpdateUserShift(data.shift as StudentShift) : setUserShift(data.shift as StudentShift),
+      );
       navigate(params.get('redirect') ?? '/registro/estudante/passo-4');
     } catch (error) {
       toastError(error);
@@ -87,6 +94,12 @@ export default function StudentRegisterStep3() {
             value={watch('course')}
             label={'Selecione seu Curso'}
             options={fatec_course}
+          />
+          <SelectDropdown
+            callback={value => setValue('shift', value)}
+            value={watch('shift')}
+            label={'Selecione seu turno'}
+            options={StudentShifts}
           />
           <div className="w-full inline-flex mt-4 justify-between">
             <GeneralInput

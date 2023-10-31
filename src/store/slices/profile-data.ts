@@ -7,6 +7,7 @@ import {
   ProfileLinks,
   ProfilePreviousExperience,
 } from '../interfaces/profile-data-interface';
+import {StudentShift} from '@/enums';
 
 const initialState: ProfileData = {
   name: '',
@@ -18,6 +19,7 @@ const initialState: ProfileData = {
   tech_stacks: [],
   certifications: [],
   links: {} as ProfileLinks,
+  shift: '' as StudentShift,
 };
 
 export const profileDataSlice = createSlice({
@@ -42,7 +44,9 @@ export const profileDataSlice = createSlice({
     deleteUserEducation: (state, action: PayloadAction<{index: number}>) => {
       state.education.splice(action.payload.index, 1);
     },
-
+    setUserShift: (state, action: PayloadAction<StudentShift>) => {
+      state.shift = action.payload;
+    },
     setUserPreviousExperience: (state, action: PayloadAction<ProfilePreviousExperience>) => {
       state.previous_experience.push(action.payload);
     },
@@ -103,6 +107,7 @@ export const {
   setUserTechStacks,
   deleteUserTechStacks,
   setUserCertifications,
+  setUserShift,
   deleteUserCertifications,
   eraseUserPreviousExperience,
 } = profileDataSlice.actions;
