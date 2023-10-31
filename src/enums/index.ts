@@ -13,7 +13,7 @@ export enum JobType {
 }
 
 export enum ContractType {
-  CLT = 'Efetivo',
+  CLT = 'CLT',
   PJ = 'PJ',
   INTERNSHIP = 'internship',
   TRAINEE = 'trainee',

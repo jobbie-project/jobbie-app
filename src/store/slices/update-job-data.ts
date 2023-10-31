@@ -53,7 +53,9 @@ export const updateJobDataSlice = createSlice({
     setUpdateJobSalary: (state, action: PayloadAction<string>) => {
       state.salary = action.payload;
     },
-
+    setUpdateJobTagName: (state, action: PayloadAction<string>) => {
+      state.job_tag = action.payload;
+    },
     setUpdateJobNumPositions: (state, action: PayloadAction<string>) => {
       state.num_positions = action.payload;
     },
@@ -87,6 +89,7 @@ export const {
   setUpdateJobDescription,
   setUpdateJobType,
   setUpdateJobTime,
+  setUpdateJobTagName,
   setUpdateJobContractType,
 } = updateJobDataSlice.actions;
 

@@ -11,7 +11,12 @@ import {useEffect, useState} from 'react';
 import {useSelector} from 'react-redux';
 import {Button} from '@/components/ui/button';
 import {ContractType, JobTime} from '@/enums';
-import {setUpdateJobContractType, setUpdateJobDescription, setUpdateJobTime} from '@/store/slices/update-job-data';
+import {
+  setUpdateJobContractType,
+  setUpdateJobDescription,
+  setUpdateJobTagName,
+  setUpdateJobTime,
+} from '@/store/slices/update-job-data';
 
 interface FormData {
   description: string;
@@ -45,6 +50,8 @@ export default function UpdateJobStep3() {
       dispatch(setUpdateJobTime(data.time));
       if (!data.description) throw new Error('Insira a Descrição da Vaga.');
       dispatch(setUpdateJobDescription(data.description));
+      if (!data.job_tag) throw new Error('Insira a qual curso a vaga se destina');
+      dispatch(setUpdateJobTagName(data.job_tag));
       const code = params.get('codigo') ?? '';
       navigate(`${params.get('redirect')}&codigo=${code}`);
     } catch (error) {

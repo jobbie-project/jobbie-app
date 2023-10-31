@@ -9,6 +9,13 @@ import GeneralInput from '@/components/general-input';
 import {Checkbox} from '@/components/ui/checkbox';
 import Api from '@/services/api/api.service';
 import authenticationService from '@/services/authentication/authentication.service';
+import {Slogan} from '@/icons/slogan';
+import {Flowers} from '@/icons/flowers';
+import {Carousel} from '@material-tailwind/react';
+import Adrielly from '@/icons/ass_adrielly';
+import Felipe from '@/icons/ass_felipe';
+import LinkedinIcon from '@/icons/linkedin';
+import GithubIcon from '@/icons/github';
 
 interface FormData {
   email: string;
@@ -41,51 +48,131 @@ export default function Login() {
   return (
     <>
       <div className="h-screen">
-        <div className="max-w-full h-full flex flex-col p-5 justify-center items-center">
-          <div className="max-w-md w-full">
-            <div className="flex justify-center">
-              <Logoblack width={'100'} height={'50'} />
+        <div className="flex flex-row justify-between">
+          <div className="w-[50%] h-screen flex flex-col p-5 items-center">
+            <div className="max-w-md w-full m-auto">
+              <div className="flex justify-center">
+                <Logoblack width={'100'} height={'50'} />
+              </div>
+              <p className="text-black font-regular text-base select-none mt-4 flex justify-center ">
+                Continue com sua conta Jobbie.
+              </p>
+              <form onSubmit={handleSubmit(onSubmit)}>
+                <div className="mt-8">
+                  <GeneralInput register={register} registerName="email" label="Email" />
+                  <PasswordInput register={register} text="Senha" registerName="password" className="mt-4" />
+                </div>
+                <div className="mt-4 flex items-center justify-between">
+                  <div className="flex items-center">
+                    <Checkbox id="remember" className="mb-1" />
+                    <label htmlFor="remember" className="text-sm leading-none peer-disabled:cursor-not-allowed ml-2">
+                      Lembrar de mim
+                    </label>
+                  </div>
+                  <div
+                    onClick={() => navigate('/recuperacao-de-conta')}
+                    className="cursor-pointer text-sm text-black font-semibold">
+                    Esqueceu sua senha?
+                  </div>
+                </div>
+                <GeneralButton text={'Entrar'} type={'submit'} />
+                <div className="text-sm text-warmGray-400 font-normal flex flex-row mt-8 justify-center">
+                  Não possui conta? &nbsp;
+                  <Link className="text-sm text-black font-semibold" to="/registro">
+                    Cadastre-se
+                  </Link>
+                </div>
+              </form>
+              <div className="text-xs text-warmGray-400 font-normal flex flex-row mt-8 justify-center text-center">
+                <span>
+                  Ao continuar você concorda que declara que leu e concorda com os{' '}
+                  <a className="text-black font-semibold inline-block" href="">
+                    Termos de Uso
+                  </a>{' '}
+                  e a{' '}
+                  <a className="text-black font-semibold inline-block" href="">
+                    Politica de Privacidade.
+                  </a>
+                </span>
+              </div>
             </div>
-            <p className="text-black font-regular text-base select-none mt-8 flex justify-center ">
-              Continue com sua conta Jobbie.
-            </p>
-            <form onSubmit={handleSubmit(onSubmit)}>
-              <div className="mt-10">
-                <GeneralInput register={register} registerName="email" label="Email" />
-                <PasswordInput register={register} text="Senha" registerName="password" className="mt-4" />
+          </div>
+          <div className="bg-lightgray1 h-screen w-[50%] flex flex-col">
+            <div className="flex flex-row mx-auto">
+              <div className="w-[700px] flex flex-row justify-start">
+                <Slogan width="520" height="520" />
               </div>
-              <div className="mt-4 flex items-center justify-between">
-                <div className="flex items-center">
-                  <Checkbox id="remember" className="mb-1" />
-                  <label htmlFor="remember" className="text-sm leading-none peer-disabled:cursor-not-allowed ml-2">
-                    Lembrar de mim
-                  </label>
+              <div className="mt-32 absolute right-0">
+                <Flowers width="440" height="440" />
+              </div>
+            </div>
+            <div className="flex flex-row h-full">
+              <Carousel
+                autoplay
+                autoplayDelay={15000}
+                nextArrow={() => {}}
+                prevArrow={() => {}}
+                className="bg-white max-w-[500px] mx-auto h-[80%] rounded-md"
+                navigation={({setActiveIndex, activeIndex, length}) => (
+                  <div className="absolute bottom-4 left-2/4 z-50 flex -translate-x-2/4 gap-2">
+                    {new Array(length).fill('').map((_, i) => (
+                      <span
+                        key={i}
+                        className={`block h-1 cursor-pointer rounded-2xl transition-all content-[''] ${
+                          activeIndex === i ? 'w-8 bg-[#A7A7A7]' : 'w-4 bg-[#A7A7A7]/50'
+                        }`}
+                        onClick={() => setActiveIndex(i)}
+                      />
+                    ))}
+                  </div>
+                )}>
+                <div className="h-[90%] px-10 flex w-full">
+                  <div className="text-sm text-[#A7A7A7] m-auto text-justify">
+                    <p className="font-semibold mb-2">Sobre a Jobbie</p>A Jobbie é a visão transformadora de dois
+                    estudantes, Adrielly Isly e Felipe Botelho, do curso de Análise e Desenvolvimento de Sistemas com
+                    Orientação do Docente Fabrício Gustavo Henrique. Nasceu da necessidade de simplificar a busca por
+                    oportunidades de emprego relacionadas aos estudos. Nossa missão é conectar estudantes em busca de
+                    experiência na área de estudo com empresas que oferecem oportunidades de emprego.
+                  </div>
                 </div>
-                <div
-                  onClick={() => navigate('/recuperacao-de-conta')}
-                  className="cursor-pointer text-sm text-black font-semibold">
-                  Esqueceu sua senha?
+                <div className="h-[90%] px-10 flex w-full">
+                  <div className="text-sm text-[#A7A7A7] m-auto text-justify">
+                    <p className="font-semibold mb-2">O que Fazemos?</p>Oferecemos uma plataforma que facilita o
+                    registro de estudantes e empresas, a elaboração de currículos, a publicação de vagas e a busca por
+                    oportunidades com filtros criteriosos. Capacitamos os estudantes a se candidatarem diretamente às
+                    vagas que correspondem às suas ambições e habilidades.
+                  </div>
+                </div>
+                <div className="h-[90%] px-10 flex w-full">
+                  <div className="text-sm text-[#A7A7A7] m-auto text-justify">
+                    <p className="font-semibold mb-2">Nosso Compromisso</p>Estamos comprometidos em criar uma comunidade
+                    de crescimento e oportunidades. Nossa missão é conectar estudantes a oportunidades valiosas e ajudar
+                    empresas a encontrar talentos qualificados. A Jobbie é fruto de um projeto de TCC concluído em
+                    novembro de 2023. Junte-se a nós nesta jornada e seja parte do nosso ecossistema que promove o
+                    desenvolvimento profissional e o sucesso mútuo.
+                  </div>
+                </div>
+              </Carousel>
+              <div className="flex flex-col items-end  justify-end h-full pb-20 mr-20 ">
+                <div className="flex flex-col">
+                  <Adrielly width="148" height="52" />
+                  <div className="flex flex-row mb-4 items-center">
+                    <div className="mr-2">
+                      <LinkedinIcon width="24" height="24" />
+                    </div>
+                    <GithubIcon width="18" height="18" />
+                  </div>
+                </div>
+                <div className="flex flex-col mr-8">
+                  <Felipe width="148" height="52" />
+                  <div className="flex flex-row items-center ml-8">
+                    <div className="mr-2">
+                      <LinkedinIcon width="24" height="24" />
+                    </div>
+                    <GithubIcon width="18" height="18" />
+                  </div>
                 </div>
               </div>
-              <GeneralButton text={'Entrar'} type={'submit'} />
-              <div className="text-sm text-warmGray-400 font-normal flex flex-row mt-8 justify-center">
-                Não possui conta? &nbsp;
-                <Link className="text-sm text-black font-semibold" to="/registro">
-                  Cadastre-se
-                </Link>
-              </div>
-            </form>
-            <div className="text-xs text-warmGray-400 font-normal flex flex-row mt-8 justify-center text-center">
-              <span>
-                Ao continuar você concorda que declara que leu e concorda com os{' '}
-                <a className="text-black font-semibold inline-block" href="">
-                  Termos de Uso
-                </a>{' '}
-                e a{' '}
-                <a className="text-black font-semibold inline-block" href="">
-                  Politica de Privacidade.
-                </a>
-              </span>
             </div>
           </div>
         </div>
