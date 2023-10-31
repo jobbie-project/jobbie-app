@@ -12,7 +12,6 @@ export function useGetUserData() {
     try {
       setLoading(true);
       const {data} = await Api.get(`/user`);
-      console.log(data.user);
       setUser(data.user);
     } catch (error) {
       setError(error as any);

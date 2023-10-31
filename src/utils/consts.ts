@@ -1,4 +1,4 @@
-import {ContractType, EducationLevel, JobTime} from '@/enums';
+import {ContractType, EducationLevel, JobTime, StudentShift} from '@/enums';
 import {ValueOption} from '@/interfaces/option';
 
 export const Degrees: ValueOption[] = [
@@ -16,6 +16,11 @@ export const ContractTypes = [
   {value: ContractType.TRAINEE, label: 'Trainee'},
   {value: ContractType.TEMPORARY, label: 'Temporário'},
   {value: ContractType.FREE_LANCER, label: 'Freelance'},
+];
+
+export const StudentShifts = [
+  {value: StudentShift.MORNING, label: 'Manhã'},
+  {value: StudentShift.NIGHT, label: 'Noite'},
 ];
 
 export const JobTimes = [
