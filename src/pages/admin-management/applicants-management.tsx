@@ -52,7 +52,6 @@ export default function ApplicantsManagement() {
   };
 
   const sendSorting = async (code: string) => {
-    console.log(sortedIds);
     try {
       if (!emailTo || !EmailValidator.validate(emailTo)) throw new Error('Insira um e-mail válido');
       await Api.post(`/job/applicants/${code}/sorted-students`, {email: emailTo, studentIds: sortedIds});
