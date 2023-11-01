@@ -26,13 +26,13 @@ export default function JobList() {
   return (
     <Table>
       <TableHeader>
-        <TableRow className="text-center">
-          <TableHead>Código</TableHead>
-          <TableHead>Data de criação</TableHead>
-          <TableHead>Status</TableHead>
-          <TableHead>Nome da Empresa</TableHead>
-          <TableHead>Candidaturas</TableHead>
-          <TableHead className="text-right">Gerenciamento</TableHead>
+        <TableRow>
+          <TableHead className="text-center">Código</TableHead>
+          <TableHead className="text-center">Data de criação</TableHead>
+          <TableHead className="text-center">Status</TableHead>
+          <TableHead className="text-center">Nome da Empresa</TableHead>
+          <TableHead className="text-center">Candidaturas</TableHead>
+          <TableHead className="text-center">Gerenciamento</TableHead>
         </TableRow>
       </TableHeader>
       <TableBody className="text-center cursor-pointer">
@@ -44,9 +44,9 @@ export default function JobList() {
               <TableCell>{JobStatus.find(status => status.value === data.status)?.label}</TableCell>
               <TableCell>{data.company_name}</TableCell>
               <TableCell>{data.applicants?.length ?? 0}</TableCell>
-              <TableCell className="text-right">
+              <TableCell className="text-center">
                 <div className="max-w-[60px] ml-4">
-                  <div className="flex justify-between">
+                  <div className="flex justify-between ml-4">
                     <TooltipProvider>
                       <Tooltip>
                         <TooltipTrigger>

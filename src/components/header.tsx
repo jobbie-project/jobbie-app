@@ -64,10 +64,10 @@ export function Header() {
                 ) : (
                   <div
                     onClick={() => {
-                      navigate('/aplicacoes');
+                      navigate('/candidaturas');
                     }}
                     className="block pr-4 pl-3 font-medium text-black cursor-pointer">
-                    Minhas aplicações
+                    Minhas Candidaturas
                   </div>
                 )}
                 <div

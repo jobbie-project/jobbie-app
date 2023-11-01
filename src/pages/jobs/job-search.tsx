@@ -42,7 +42,7 @@ export default function JobSearch() {
         <div className="max-w-4xl w-full">
           <BreadCrumbComponent className="my-10" />
           <div className="flex flex-row">
-            <SearchBar showFilter />
+            <SearchBar />
             <Button variant="none" className="ml-4 h-12 px-6 text-white bg-redDefault">
               Pesquisar
             </Button>
@@ -96,10 +96,10 @@ export default function JobSearch() {
                 </div>
                 {showCategory && (
                   <div className="pb-4">
-                    <div className="flex flex-row items-center mb-4">
+                    <div className="flex flex-row items-center mb-2">
                       <Checkbox id="clt" />
                       <label htmlFor="clt" className="ml-2 cursor-pointer">
-                        CLT
+                        Efetivo
                       </label>
                     </div>
                     <div className="flex flex-row items-center mb-2">

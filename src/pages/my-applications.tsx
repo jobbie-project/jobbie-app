@@ -1,34 +1,32 @@
 import {Header} from '@/components/header';
-import {SearchBar} from '@/components/searchbar';
-import TableList from '@/components/job-table';
-import {Button} from '@/components/ui/button';
-import {useNavigate} from 'react-router-dom';
 import BreadCrumbComponent from '@/components/breadcrumb';
-import {RolesIcon} from '@/icons/roles';
 import {AvailableIcon} from '@/icons/available';
+import {RolesIcon} from '@/icons/roles';
 import {ClosedIcon} from '@/icons/closed';
-import {Pagination, Stack} from '@mui/material';
+import {useGetJobList} from '@/hooks/useGetJobList';
+import Pagination from '@mui/material/Pagination';
+import Stack from '@mui/material/Stack';
+import {JobCardMedium} from '@/components/card-medium';
 
-export default function JobManagement() {
-  const navigate = useNavigate();
-
-  const sendTo = () => {
-    navigate('/nova-vaga/passo-1');
-  };
+export default function MyApplications() {
+  const {jobData} = useGetJobList();
+  const half = Math.ceil(jobData.jobs.length / 2);
+  const firstColumn = jobData.jobs.slice(0, half);
+  const secondColumn = jobData.jobs.slice(half);
 
   return (
     <>
       <Header />
       <div className="w-full flex justify-center">
         <div className="max-w-4xl w-full py-6">
-          <div className="w-full">
-            <BreadCrumbComponent className="my-4" />
-            <div className="flex flex-row justify-between my-8">
+          <div className="">
+            <BreadCrumbComponent className="my-8" />
+            <div className="flex justify-between">
               <div className="w-72 h-28 bg-white border-2 border-lightgray1 rounded-md">
                 <div className="p-6 flex justify-between">
                   <div>
                     <p className="font-semibold text-3xl">10</p>
-                    <p className="text-sm text-black mt-2">Total de vagas</p>
+                    <p className="text-sm text-black mt-2">Candidaturas</p>
                   </div>
                   <RolesIcon width="52" height="52" />
                 </div>
@@ -52,22 +50,30 @@ export default function JobManagement() {
                 </div>
               </div>
             </div>
-            <div className="flex flex-row justify-between">
-              <div className="font-semibold mt-4 mb-6">Gerenciamento de Vagas</div>
-              <div className="flex items-center">
-                <Button
-                  variant="none"
-                  onClick={sendTo}
-                  className="bg-redDefault text-white hover:bg-lightgray1 hover:block hover:text-lightblack">
-                  Publicar nova vaga
-                </Button>
+            <div>
+              <p className="mt-8 font-semibold">Suas últimas candidaturas</p>
+              <div className="flex flex-row justify-between">
+                <div className="py-6 w-full">
+                  {firstColumn.map((job, index) => (
+                    <div className="mb-5">
+                      <JobCardMedium job={job} key={index} code={job.code} />
+                    </div>
+                  ))}
+                </div>
+                <div className="py-6 w-full">
+                  {secondColumn.map((job, index) => {
+                    return (
+                      <div className="mb-5 ml-5">
+                        <JobCardMedium job={job} key={index} code={job.code} />
+                      </div>
+                    );
+                  })}
+                </div>
               </div>
             </div>
-            <SearchBar className="mb-4" placeholder="Código da vaga, nome da empresa" />
-            <TableList />
-            <div className="flex flex-row m-8 justify-center">
+            <div className="flex flex-row mt-4 mb-12 justify-center">
               <Stack spacing={2}>
-                <Pagination count={10} shape="rounded" />
+                <Pagination count={jobData.total / 5} shape="rounded" />
               </Stack>
             </div>
           </div>
