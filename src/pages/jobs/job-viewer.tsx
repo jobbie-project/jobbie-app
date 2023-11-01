@@ -28,7 +28,7 @@ export default function JobViewer() {
         <div className="max-w-4xl w-full">
           <BreadCrumbComponent className="my-8" />
           <div className="flex flex-row">
-            <SearchBar showFilter />
+            <SearchBar />
             <Button variant="none" className="ml-4 h-12 px-10 text-white bg-redDefault">
               Pesquisar
             </Button>
