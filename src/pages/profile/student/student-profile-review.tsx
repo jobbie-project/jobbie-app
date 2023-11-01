@@ -69,6 +69,7 @@ export default function StudentProfileReview() {
             <p className="py-2">Sobre você</p>
           </div>
           <ReviewCardLarge
+            maxW="md"
             canDelete={false}
             editRoute={'/registro/estudante/passo-1?editar=true&redirect=/estudante/perfil/revisar'}
             info="Dados Pessoais"
@@ -78,6 +79,7 @@ export default function StudentProfileReview() {
             subtitle={profileData.phone}
           />
           <ReviewCardLarge
+            maxW="md"
             canDelete={false}
             editRoute={'/registro/estudante/passo-2?editar=true&redirect=/estudante/perfil/revisar'}
             info="Endereço"
@@ -94,6 +96,7 @@ export default function StudentProfileReview() {
             </div>
           </div>
           <ReviewCardMedium
+            maxW="md"
             isFatec
             canDelete={false}
             editRoute="/registro/estudante/passo-3?editar=true&redirect=/estudante/perfil/revisar"
@@ -109,6 +112,7 @@ export default function StudentProfileReview() {
 
           {profileData.education.map((item, index) => (
             <ReviewCardMedium
+              maxW="md"
               index={index}
               key={index}
               editRoute={`/estudante/educacao/editar?id=${index}&redirect=/estudante/perfil/revisar`}
@@ -134,6 +138,7 @@ export default function StudentProfileReview() {
           {profileData.previous_experience.length > 0 ? (
             profileData.previous_experience.map((item, index) => (
               <JobReviewCard
+                maxW="md"
                 key={index}
                 index={index}
                 canDelete={true}
@@ -181,7 +186,7 @@ export default function StudentProfileReview() {
             </div>
             <div className="mt-4">
               {profileData.certifications.map((item, index) => (
-                <ReviewCardSmall index={index} key={index} canDelete={true} canEdit={true} title={item} />
+                <ReviewCardSmall maxW="md" index={index} key={index} canDelete={true} canEdit={true} title={item} />
               ))}
             </div>
           </div>

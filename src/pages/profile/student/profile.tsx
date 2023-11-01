@@ -61,6 +61,7 @@ export default function Profile() {
             <p className="py-2">Sobre você</p>
           </div>
           <ReviewCardLarge
+            maxW="md"
             canDelete={false}
             editRoute={'/perfil/editar/passo-1?update=true&editar=true&redirect=/perfil/editar?revisar=true'}
             info="Dados Pessoais"
@@ -70,6 +71,7 @@ export default function Profile() {
             subtitle={profileData.phone}
           />
           <ReviewCardLarge
+            maxW="md"
             canDelete={false}
             editRoute={'/perfil/editar/passo-2?update=true&editar=true&redirect=/perfil/editar?revisar=true'}
             info="Endereço"
@@ -90,6 +92,7 @@ export default function Profile() {
             </div>
           </div>
           <ReviewCardMedium
+            maxW="md"
             isFatec
             canDelete={false}
             editRoute="/perfil/editar/passo-3?update=true&editar=true&redirect=/perfil/editar?revisar=true"
@@ -105,6 +108,7 @@ export default function Profile() {
 
           {profileData.education.map((item, index) => (
             <ReviewCardMedium
+              maxW="md"
               userIsBeignUpdated
               index={index}
               key={index}
@@ -131,6 +135,7 @@ export default function Profile() {
           {profileData.previous_experience.length > 0 ? (
             profileData.previous_experience.map((item, index) => (
               <JobReviewCard
+                maxW="md"
                 userIsBeignUpdated
                 key={index}
                 index={index}
@@ -180,6 +185,7 @@ export default function Profile() {
             <div className="mt-4">
               {profileData.certifications.map((item, index) => (
                 <ReviewCardSmall
+                  maxW="md"
                   index={index}
                   key={index}
                   canDelete={true}

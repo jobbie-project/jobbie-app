@@ -28,6 +28,7 @@ export default function StudentRegisterStep4() {
             <p className="text-black font-semibold text-lg select-none mb-4">Revise a Escolaridade</p>
           </div>
           <ReviewCardMedium
+            maxW="md"
             isFatec
             canDelete={false}
             editRoute={'/registro/estudante/passo-3?editar=true'}
@@ -42,6 +43,7 @@ export default function StudentRegisterStep4() {
 
           {education.map((item: ProfileEducation, index) => (
             <ReviewCardMedium
+              maxW="md"
               index={index}
               key={index}
               canDelete={true}

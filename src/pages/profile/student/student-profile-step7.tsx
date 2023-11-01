@@ -28,7 +28,7 @@ export default function StudentRegisterStep7() {
             Quais certificações ou licenças você tem?
           </p>
           {certifications.map((item, index) => (
-            <ReviewCardSmall index={index} key={index} canDelete={true} canEdit={true} title={item} />
+            <ReviewCardSmall maxW="md" index={index} key={index} canDelete={true} canEdit={true} title={item} />
           ))}
           <div className="flex justify-between mt-4">
             <Input

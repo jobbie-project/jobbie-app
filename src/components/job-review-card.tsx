@@ -6,6 +6,7 @@ import {useNavigate} from 'react-router-dom';
 import {toast} from 'react-toastify';
 
 interface JobReviewCardProps {
+  maxW?: 'md' | 'lg' | 'xl' | '2xl' | '3xl' | '4xl' | '5xl' | 'full' | undefined;
   className?: string;
   title: string;
   subtitle: string;
@@ -14,7 +15,7 @@ interface JobReviewCardProps {
   end_date?: string;
   canDelete: boolean;
   userIsBeignUpdated?: boolean;
-  editRoute: string;
+  editRoute?: string;
   index?: number;
   titleForText1?: string;
   titleForText2?: string;
@@ -41,7 +42,10 @@ export function JobReviewCard(props: JobReviewCardProps) {
   };
 
   return (
-    <div className="max-w-md w-full bg-lightgray1 p-4 rounded-md text-sm mb-4 select-none">
+    <div
+      className={`${
+        props.maxW !== undefined && `max-w-${props.maxW}`
+      } w-full bg-lightgray1 p-4 rounded-md text-sm mb-4 select-none`}>
       <div className={`flex flex-row justify-between font-semibold text-lightblack ${props.className}`}>
         {`Cargo: ${props.title}`}
         <div className="flex flex-row">
