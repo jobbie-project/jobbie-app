@@ -1,5 +1,6 @@
 import {ContractType, JobStatus, JobTime, JobType} from '@/enums';
 import {Company} from './company';
+import {JobApplicants} from './job-applicants';
 
 export interface Job {
   position: string;
@@ -20,7 +21,7 @@ export interface Job {
     city: string;
     state: string;
   };
-  applicants: [];
+  applicants: JobApplicants[];
   fatec_course: {
     name: string;
     abbreviation: string;

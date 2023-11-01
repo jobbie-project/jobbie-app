@@ -41,6 +41,7 @@ import {useAppDispatch} from './store/store';
 import {setFatecCourse, setFatecInstitutions} from './store/slices/fatec-data';
 import {toastError} from './utils/toast-error';
 import Api from './services/api/api.service';
+import ApplicantsManagement from './pages/admin-management/applicants-management';
 
 const RedirectToLogin: React.FC = () => {
   window.location.href = '/inicio';
@@ -105,6 +106,7 @@ export const App: React.FC = () => {
         <Route path={`/estudante/experiencia`} element={<AddNewExperience />} />
         <Route path={`/estudante/perfil/revisar`} element={<StudentProfileReview />} />
         <Route path={`/gerenciamento`} element={<JobManagement />} />
+        <Route path={`/gerenciamento/candidatos`} element={<ApplicantsManagement />} />
 
         <Route path={`/nova-vaga/passo-1`} element={<CreateJobStep1 />} />
         <Route path={`/nova-vaga/passo-1/editar`} element={<CreateJobStep1 />} />

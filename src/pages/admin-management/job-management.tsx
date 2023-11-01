@@ -1,6 +1,6 @@
 import {Header} from '@/components/header';
 import {SearchBar} from '@/components/searchbar';
-import TableList from '@/components/table';
+import TableList from '@/components/job-table';
 import {Button} from '@/components/ui/button';
 import {useNavigate} from 'react-router-dom';
 

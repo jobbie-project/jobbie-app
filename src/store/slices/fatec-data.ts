@@ -18,11 +18,12 @@ export const fatecDataSlice = createSlice({
         };
       });
     },
-    setFatecCourse: (state, action: PayloadAction<{id: number; name: string}[]>) => {
-      state.fatec_course = action.payload.map(institution => {
+    setFatecCourse: (state, action: PayloadAction<{id: number; name: string; abbreviation: string}[]>) => {
+      state.fatec_course = action.payload.map(course => {
         return {
-          value: `${institution.id}`,
-          label: institution.name,
+          value: `${course.id}`,
+          label: course.name,
+          abbreviation: course.abbreviation,
         };
       });
     },

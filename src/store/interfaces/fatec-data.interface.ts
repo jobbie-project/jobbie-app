@@ -6,5 +6,6 @@ export interface FatecData {
   fatec_course: {
     value: string;
     label: string;
+    abbreviation: string;
   }[];
 }
