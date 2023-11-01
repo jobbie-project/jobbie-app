@@ -28,6 +28,7 @@ export default function StudentRegisterStep6() {
           {previous_experience.length > 0 ? (
             previous_experience.map((item, index) => (
               <JobReviewCard
+                maxW="md"
                 key={index}
                 index={index}
                 canDelete={true}

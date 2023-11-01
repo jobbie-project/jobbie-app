@@ -5,6 +5,7 @@ import {useNavigate} from 'react-router-dom';
 import {toast} from 'react-toastify';
 
 interface ReviewCardLargeProps {
+  maxW?: 'md' | 'lg' | 'xl' | '2xl' | '3xl' | '4xl' | '5xl' | 'full' | undefined;
   className?: string;
   title: string;
   subtitle: string;
@@ -33,7 +34,10 @@ export function ReviewCardLarge(props: ReviewCardLargeProps) {
   };
 
   return (
-    <div className="max-w-md w-full bg-lightgray1 p-4 rounded-md text-sm mb-4 select-none">
+    <div
+      className={`${
+        props.maxW !== undefined && `max-w-${props.maxW}`
+      } w-full bg-lightgray1 p-4 rounded-md text-sm mb-4 select-none`}>
       <div className={`flex flex-row justify-between font-semibold text-lightblack ${props.className}`}>
         {props.info}
         <div className="flex flex-row">

@@ -5,6 +5,7 @@ import {FiTrash} from 'react-icons/fi';
 import {toast} from 'react-toastify';
 
 interface ReviewCardSmallProps {
+  maxW?: 'md' | 'lg' | 'xl' | '2xl' | '3xl' | '4xl' | '5xl' | 'full' | undefined;
   className?: string;
   title: string;
   canDelete: boolean;
@@ -27,7 +28,10 @@ export function ReviewCardSmall(props: ReviewCardSmallProps) {
   };
 
   return (
-    <div className="max-w-md w-full bg-lightgray1 p-2 px-4 rounded-md text-sm mb-4 select-none">
+    <div
+      className={`${
+        props.maxW !== undefined && `max-w-${props.maxW}`
+      } w-full bg-lightgray1 p-2 px-4 rounded-md text-sm mb-4 select-none`}>
       <div className={`flex flex-row justify-between font-semibold text-primaryGray ${props.className}`}>
         {props.title}
         <div className="flex flex-row">

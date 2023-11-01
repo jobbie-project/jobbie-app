@@ -3,11 +3,13 @@ interface ButtonHoverProps {
   type: 'button' | 'submit' | 'reset';
   className?: string;
   callback?: () => void;
+  divClassName?: string;
 }
 
 export function ButtonHover(props: ButtonHoverProps) {
   return (
-    <div className="w-40 justify-center text-center items-center flex flex-row btn group place-content">
+    <div
+      className={`w-40 justify-center text-center items-center flex flex-row btn group place-content ${props.divClassName}`}>
       <button
         onClick={props.callback}
         type={props.type}

@@ -7,6 +7,7 @@ import {toast} from 'react-toastify';
 
 interface ReviewCardMediumProps {
   className?: string;
+  maxW?: 'md' | 'lg' | 'xl' | '2xl' | '3xl' | '4xl' | '5xl' | 'full' | undefined;
   title: string;
   subtitle: string;
   description?: string;
@@ -15,7 +16,7 @@ interface ReviewCardMediumProps {
   end_date?: string;
   canDelete: boolean;
   userIsBeignUpdated?: boolean;
-  editRoute: string;
+  editRoute?: string;
   index?: number;
   isFatec?: boolean;
   titleForText1?: string;
@@ -44,7 +45,10 @@ export function ReviewCardMedium(props: ReviewCardMediumProps) {
   };
 
   return (
-    <div className="max-w-md w-full bg-lightgray1 p-4 rounded-md text-sm mb-4 select-none">
+    <div
+      className={`${
+        props.maxW !== undefined && `max-w-${props.maxW}`
+      } w-full bg-lightgray1 p-4 rounded-md text-sm mb-4 select-none`}>
       <div className={`flex flex-row justify-between font-semibold text-lightblack ${props.className}`}>
         {props.info}
         <div className="flex flex-row">
