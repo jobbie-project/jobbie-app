@@ -21,16 +21,8 @@ export function JobCardMedium({job, code}: {job: Job; code: string}) {
     <div onClick={handleClick} className="bg-lightgray1 rounded-md p-6 flex flex-col justify-between cursor-pointer">
       <div className="flex max-w-fit cursor-pointer flex-row justify-start mb-1">
         <div className="me-2 mr-6">
-          <div className="bg-white text-center text-black font-semibold p-2 w-10 rounded-md ">
-            <p>
-              {job.company_name
-                .split(' ')
-                .map((word, index) => {
-                  if (index < 2) return word[0];
-                })
-                .join('')
-                .toUpperCase()}
-            </p>
+          <div className="bg-white text-black font-bold flex flex-row justify-center p-2 w-10 rounded-md ">
+            <p className="m-auto">{job?.fatec_course?.abbreviation}</p>
           </div>
         </div>
         <div className="flex flex-col items-start justify-start">
@@ -44,7 +36,8 @@ export function JobCardMedium({job, code}: {job: Job; code: string}) {
           <div className="ml-1 text-sm">{job.type === 'remote' ? 'Remoto' : 'Presencial'}</div>
         </div>
         <div className="flex items-baseline">
-          <p className="text-xl mr-1 font-semibold">{Money(job.salary).format()}</p>
+          {/* <p className="text-xl mr-1 font-semibold">{`R$${job.salary.replace('.', ',')}`}</p> */}
+          <p className="text-xl mr-1 font-semibold">{job.salary}</p>
           <p className="text-sm text-slate-500">/Mensal</p>
         </div>
       </div>

@@ -24,9 +24,9 @@ export default function EmailVerification() {
   return (
     <>
       <RegisterHeader />
-      <div className="max-w-full items-center p-5 flex flex-col mt-6">
+      <div className="max-w-full items-center p-5 flex flex-col">
         <div className="max-w-md w-full">
-          <p className="text-black font-semibold text-lg">Verifique seu email para continuar</p>
+          <p className="text-black font-semibold text-lg mt-10">Verifique seu email para continuar</p>
           <p className="mt-6 text-sm">Um link de confirmação foi enviado para o seu endereço de email.</p>
           <div className="mt-8 flex justify-center">
             <Lottie animationData={AnimationEmail} autoPlay={true} style={{height: 140, width: 140}} />

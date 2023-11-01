@@ -35,10 +35,10 @@ export default function ChangePassword() {
   return (
     <div>
       <RegisterHeader />
-      <div className="max-w-full items-center p-5 flex flex-col  mt-6">
-        <form onSubmit={handleSubmit(onSubmit)} className="w-full max-w-xl">
-          <div className="max-w-xl w-full">
-            <p className="text-black font-semibold text-lg mt-20 select-none">Redefinição de senha</p>
+      <div className="max-w-full items-center p-5 flex flex-col">
+        <form onSubmit={handleSubmit(onSubmit)} className="w-full max-w-md">
+          <div className="max-w-md w-full">
+            <p className="text-black font-semibold text-lg mt-10 select-none">Redefinição de senha</p>
             <p className="mt-6">Crie uma nova senha para realizar login no portal.</p>
           </div>
           <div className="py-2 w-full">

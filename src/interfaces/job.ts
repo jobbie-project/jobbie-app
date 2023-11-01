@@ -21,4 +21,8 @@ export interface Job {
     state: string;
   };
   applicants: [];
+  fatec_course: {
+    name: string;
+    abbreviation: string;
+  };
 }

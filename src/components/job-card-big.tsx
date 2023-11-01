@@ -1,16 +1,11 @@
 import {Job} from '@/interfaces/job';
 import {Money} from '@/utils/money';
-import {JobTimes} from '@/utils/consts';
+import {ContractTypes, JobTimes} from '@/utils/consts';
 import {useNavigate} from 'react-router-dom';
 import LocationIcon from '@/icons/location';
 export function JobCardBig({job, code}: {job: Job; code: string}) {
   const navigate = useNavigate();
-  const generateCompanyName = () => {
-    const array = job.company_name.split(' ');
-    if (array.length === 1) return array[0][0].toUpperCase();
-    const firstAndLast = array[0][0] + array[array.length - 1][0];
-    return firstAndLast.toUpperCase();
-  };
+  console.log(job.salary);
   const capitalize = (word: string) => {
     const array = word.split(' ');
     array.map((word, index) => {
@@ -24,15 +19,18 @@ export function JobCardBig({job, code}: {job: Job; code: string}) {
   };
 
   return (
-    <div className="bg-lightgray1 w-72 rounded-md p-6">
+    <div className="bg-lightgray1 w-72 rounded-md p-6 cursor-pointer" onClick={handleClick}>
       <div className="flex flex-row justify-between">
         <div>
-          <div className="bg-white text-center text-black p-2 w-10 rounded-md">
-            <p>{generateCompanyName()}</p>
+          {' '}
+          <div className="bg-white text-black font-bold flex flex-row justify-center p-2 w-10 rounded-md ">
+            <p className="m-auto">{job?.fatec_course?.abbreviation}</p>
           </div>
         </div>
-        <div className="h-min flex flex-row justify-end">
-          <p className="bg-white text-xs p-2 rounded-md mr-3 font-semibold">{job.contract_type}</p>
+        <div className="h-min flex flex-row justify-end select-none">
+          <p className="bg-white text-xs p-2 rounded-md mr-3 font-semibold">
+            {ContractTypes.find(contractType => contractType.value === job.contract_type)?.label}
+          </p>
           <p className="bg-white text-xs p-2 rounded-md font-semibold">
             {JobTimes.find(jobTime => jobTime.value === job.job_time)?.label}
           </p>

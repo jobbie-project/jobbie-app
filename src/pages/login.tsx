@@ -110,9 +110,10 @@ export default function Login() {
               <Carousel
                 autoplay
                 autoplayDelay={15000}
+                loop
                 nextArrow={() => {}}
                 prevArrow={() => {}}
-                className="bg-white max-w-[500px] mx-auto h-[80%] rounded-md"
+                className="bg-white max-w-[500px] mx-auto h-[80%] rounded-md select-none"
                 navigation={({setActiveIndex, activeIndex, length}) => (
                   <div className="absolute bottom-4 left-2/4 z-50 flex -translate-x-2/4 gap-2">
                     {new Array(length).fill('').map((_, i) => (
@@ -129,10 +130,30 @@ export default function Login() {
                 <div className="h-[90%] px-10 flex w-full">
                   <div className="text-sm text-[#A7A7A7] m-auto text-justify">
                     <p className="font-semibold mb-2">Sobre a Jobbie</p>A Jobbie é a visão transformadora de dois
-                    estudantes, Adrielly Isly e Felipe Botelho, do curso de Análise e Desenvolvimento de Sistemas com
-                    Orientação do Docente Fabrício Gustavo Henrique. Nasceu da necessidade de simplificar a busca por
-                    oportunidades de emprego relacionadas aos estudos. Nossa missão é conectar estudantes em busca de
-                    experiência na área de estudo com empresas que oferecem oportunidades de emprego.
+                    estudantes,{' '}
+                    <a
+                      href="https://www.linkedin.com/in/adriellyisly/"
+                      target="_blank"
+                      className="font-bold underline cursor-pointer">
+                      Adrielly Isly
+                    </a>{' '}
+                    e{' '}
+                    <a
+                      href="https://www.linkedin.com/in/felipe-gabriel-botelho/"
+                      target="_blank"
+                      className="font-bold underline cursor-pointer">
+                      Felipe Botelho
+                    </a>
+                    , do curso de Análise e Desenvolvimento de Sistemas com Orientação do Docente{' '}
+                    <a
+                      href="http://lattes.cnpq.br/7498826465229905"
+                      target="_blank"
+                      className="font-bold underline cursor-pointer">
+                      Fabrício Gustavo Henrique
+                    </a>
+                    . Nasceu da necessidade de simplificar a busca por oportunidades de emprego relacionadas aos
+                    estudos. Nossa missão é conectar estudantes em busca de experiência na área de estudo com empresas
+                    que oferecem oportunidades de emprego.
                   </div>
                 </div>
                 <div className="h-[90%] px-10 flex w-full">
@@ -155,22 +176,14 @@ export default function Login() {
               </Carousel>
               <div className="flex flex-col items-end  justify-end h-full pb-20 mr-20 ">
                 <div className="flex flex-col">
-                  <Adrielly width="148" height="52" />
-                  <div className="flex flex-row mb-4 items-center">
-                    <div className="mr-2">
-                      <LinkedinIcon width="24" height="24" />
-                    </div>
-                    <GithubIcon width="18" height="18" />
-                  </div>
+                  <a href="https://www.linkedin.com/in/adriellyisly/" target="_blank">
+                    <Adrielly width="138" height="42" />
+                  </a>
                 </div>
                 <div className="flex flex-col mr-8">
-                  <Felipe width="148" height="52" />
-                  <div className="flex flex-row items-center ml-8">
-                    <div className="mr-2">
-                      <LinkedinIcon width="24" height="24" />
-                    </div>
-                    <GithubIcon width="18" height="18" />
-                  </div>
+                  <a href="https://www.linkedin.com/in/felipe-gabriel-botelho/" target="_blank">
+                    <Felipe width="138" height="42" />
+                  </a>
                 </div>
               </div>
             </div>
