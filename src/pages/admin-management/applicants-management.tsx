@@ -20,6 +20,7 @@ import {
 } from '@/components/ui/dialog';
 import {toast} from 'react-toastify';
 import GeneralInput from '@/components/general-input';
+import CvIcon from '@/icons/cvs';
 export default function ApplicantsManagement() {
   const navigate = useNavigate();
   const [params] = useSearchParams();
@@ -91,18 +92,23 @@ export default function ApplicantsManagement() {
                 </TooltipProvider>
               </div>
             </div>
-            <SearchBar className="mb-4" placeholder="Código da vaga, nome da empresa" />
+            <SearchBar className="mb-4" placeholder="Nome do aluno, curso" />
             <ApplicantsList applicants={jobApplicants ?? []} setSortedCallback={handleSelectStudent} />
           </div>
         </div>
         <Dialog open={isOpen} onOpenChange={setIsOpen}>
           <DialogContent className="sm:max-w-[425px]">
             <DialogHeader>
-              <DialogTitle className="flex justify-center mt-2">
-                Os currículos estão prontos para serem enviados!
+              <DialogTitle>
+                <div className="flex flex-col items-center">
+                  <CvIcon width="120" height="160" />
+                  <p className="mt-4 text-base">Os currículos estão prontos para serem enviados!</p>
+                </div>
               </DialogTitle>
               <DialogDescription className="flex justify-center flex-col text-sm text-black">
-                <span className="mt-6">Insira aqui o e-mail para o qual deseja enviar os currículos selecionados.</span>
+                <span className="mt-2 text-sm">
+                  Insira aqui o e-mail para o qual deseja enviar os currículos selecionados.
+                </span>
                 <GeneralInput label="E-mail" type="email" callback={setEmailTo} />
               </DialogDescription>
             </DialogHeader>
@@ -114,7 +120,7 @@ export default function ApplicantsManagement() {
                   sendSorting(code ?? '');
                 }}
                 variant="none"
-                className=" bg-lightgray1 font-semibold text-black">
+                className=" bg-lightgray1 font-semibold text-black hover:bg-redDefault hover:text-white">
                 Continuar
               </Button>
             </DialogFooter>
