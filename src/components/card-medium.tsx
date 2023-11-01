@@ -2,6 +2,8 @@ import {HiLocationMarker} from 'react-icons/hi';
 import {Job} from '@/interfaces/job';
 import {Money} from '@/utils/money';
 import {useNavigate} from 'react-router-dom';
+import {PeopleIcon} from '@/icons/people';
+import LocationIcon from '@/icons/location';
 
 export function JobCardMedium({job, code}: {job: Job; code: string}) {
   const navigate = useNavigate();
@@ -32,11 +34,16 @@ export function JobCardMedium({job, code}: {job: Job; code: string}) {
       </div>
       <div className="flex flex-row justify-between">
         <div className="flex flex-row items-center">
-          <HiLocationMarker size="20" />
-          <div className="ml-1 text-sm">{job.type === 'remote' ? 'Remoto' : 'Presencial'}</div>
+          <LocationIcon width="16" height="16" />
+          <div className="ml-1 text-xs font-semibold">{job.type === 'remote' ? 'REMOTO' : 'Presencial'}</div>
         </div>
-        <div className="flex items-baseline">
-          {/* <p className="text-xl mr-1 font-semibold">{`R$${job.salary.replace('.', ',')}`}</p> */}
+      </div>
+      <div className="mt-6 flex flex-row justify-between">
+        <div className="flex flex-row items-center">
+          <PeopleIcon width="20" height="20" />
+          <p className="text-sm ml-2 ">25 pessoas se candidataram</p>
+        </div>
+        <div className="flex flex-row items-baseline">
           <p className="text-xl mr-1 font-semibold">{job.salary}</p>
           <p className="text-sm text-slate-500">/Mensal</p>
         </div>

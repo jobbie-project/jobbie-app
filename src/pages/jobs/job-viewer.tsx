@@ -15,6 +15,7 @@ import {useEffect} from 'react';
 import {JobTimes} from '@/utils/consts';
 import {JobType} from '@/enums';
 import {LocationJobViewer} from '@/icons/location-jobviewer';
+import {PeopleIcon} from '@/icons/people';
 
 export default function JobViewer() {
   const [params] = useSearchParams();
@@ -103,9 +104,10 @@ export default function JobViewer() {
                   </Button>
                 </div>
                 <div className="flex flex-col mt-8 border-2 border-lightgray1 rounded-md p-6">
-                  <span className="text-xs mb-6 flex flex-row font-semibold text-black">
-                    Anunciado em: <p className="ml-1">{moment(job?.created_at).format('DD/MM/YYYY')}</p>
-                  </span>
+                  <div className="flex flex-row items-center mb-4">
+                    <PeopleIcon width="18" height="18" />
+                    <p className="text-xs ml-2">25 pessoas se candidataram</p>
+                  </div>
                   <div className="text-xs text-lightblack2">
                     Responsável:<p className="font-semibold text-sm text-black">{job?.owner_name}</p>
                   </div>
