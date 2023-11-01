@@ -6,7 +6,10 @@ import {cn} from '@/utils';
 const badgeVariants = cva('inline-flex items-center px-2.5 py-0.5 text-xs', {
   variants: {
     variant: {
-      default: 'bg-white text-black rounded-md h-6 p-4 select-none',
+      default: 'border-transparent bg-primary text-primary-foreground shadow hover:bg-primary/80',
+      secondary: 'border-transparent bg-secondary text-secondary-foreground hover:bg-secondary/80',
+      destructive: 'border-transparent bg-redDefault text-destructive-foreground shadow rounded-md ',
+      outline: 'text-foreground',
     },
   },
   defaultVariants: {
