@@ -3,15 +3,14 @@ import moment from '@/utils/moment';
 import {AiOutlineEye} from 'react-icons/ai';
 import {Tooltip, TooltipContent, TooltipProvider, TooltipTrigger} from '@/components/ui/tooltip';
 import {JobApplicants} from '../interfaces/job-applicants';
-import {useState} from 'react';
 import {Checkbox} from '@/components/ui/checkbox';
 
 interface ApplicantsListProps {
   applicants: JobApplicants[];
+  setSortedCallback: (id: string) => void;
 }
 
 export default function ApplicantsList(props: ApplicantsListProps) {
-  const [sortedIds, setSortedIds] = useState<string[]>([]);
   return (
     <Table>
       <TableHeader>
@@ -29,7 +28,11 @@ export default function ApplicantsList(props: ApplicantsListProps) {
           props.applicants.map(data => (
             <TableRow key={data.id}>
               <TableCell>
-                <Checkbox id={data.id} onClick={e => console.log(e.target)} />
+                <Checkbox
+                  className="block ml-5"
+                  id={data.id}
+                  onClick={() => props.setSortedCallback(`${data.student_id}`)}
+                />
               </TableCell>
               <TableCell>{moment(data.created_at).format('DD/MM/YYYY')}</TableCell>
               <TableCell>{data.student.curriculum.fatec_course.abbreviation}</TableCell>
