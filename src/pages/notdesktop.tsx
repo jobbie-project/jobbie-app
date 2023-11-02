@@ -4,10 +4,20 @@ import {useNavigate} from 'react-router-dom';
 import Lottie from 'lottie-react';
 import AnimationVerified from '@/assets/notdesktop.json';
 import {toast} from 'react-toastify';
+import {useEffect, useState} from 'react';
 
 export default function NotDesktop() {
   const navigate = useNavigate();
-  toast.error('Se já estiver em uma sessão desktop, tente reduzir o zoom da página pelo navegador.');
+  const [wasShown, setWasShown] = useState(false);
+  useEffect(() => {
+    if (!wasShown) {
+      toast.error('Se já estiver em uma sessão desktop, tente reduzir o zoom da página pelo navegador.');
+      setWasShown(true);
+      setTimeout(() => {
+        setWasShown(false);
+      }, 2000);
+    }
+  }, []);
 
   return (
     <div className="flex flex-col justify-between h-screen">
