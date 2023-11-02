@@ -50,7 +50,7 @@ export default function Login() {
       <div className="h-screen">
         <div className="flex flex-row justify-between">
           <div className="w-[50%] h-screen flex flex-col p-5 items-center">
-            <div className="max-w-md w-full m-auto">
+            <div className="max-w-xs w-full m-auto">
               <div className="flex justify-center">
                 <Logoblack width={'100'} height={'50'} />
               </div>
@@ -99,8 +99,8 @@ export default function Login() {
           </div>
           <div className="bg-lightgray1 h-screen w-[50%] flex flex-col">
             <div className="flex flex-row mx-auto">
-              <div className="w-[700px] flex flex-row justify-start">
-                <Slogan width="520" height="520" />
+              <div className="w-[600px] flex flex-row justify-start">
+                <Slogan width="420" height="420" />
               </div>
               <div className="mt-32 absolute right-0">
                 <Flowers width="440" height="440" />
