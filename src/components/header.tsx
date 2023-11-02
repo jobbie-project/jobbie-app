@@ -48,7 +48,7 @@ export function Header() {
                 </div>
                 <div
                   onClick={() => {
-                    navigate('/vaga/pesquisar');
+                    navigate('/pesquisar');
                   }}
                   className="block pr-4 pl-3 font-medium text-black cursor-pointer">
                   Pesquisar Vagas
