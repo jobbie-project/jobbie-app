@@ -16,6 +16,7 @@ import Adrielly from '@/icons/ass_adrielly';
 import Felipe from '@/icons/ass_felipe';
 import LinkedinIcon from '@/icons/linkedin';
 import GithubIcon from '@/icons/github';
+import PairProgramming from '@/icons/pair-programming';
 
 interface FormData {
   email: string;
@@ -99,21 +100,21 @@ export default function Login() {
           </div>
           <div className="bg-lightgray1 h-screen w-[50%] flex flex-col">
             <div className="flex flex-row mx-auto">
-              <div className="w-[700px] flex flex-row justify-start">
-                <Slogan width="520" height="520" />
+              <div className="w-[700px] flex flex-row justify-start z-10">
+                <Slogan width="460" height="460" />
               </div>
               <div className="mt-32 absolute right-0">
-                <Flowers width="440" height="440" />
+                <PairProgramming width="520" height="380" />
               </div>
             </div>
-            <div className="flex flex-row h-full">
+            <div className="flex h-full mt-6">
               <Carousel
                 autoplay
                 autoplayDelay={15000}
                 loop
                 nextArrow={() => {}}
                 prevArrow={() => {}}
-                className="bg-white max-w-[500px] mx-auto h-[80%] rounded-md select-none"
+                className="bg-white max-w-[600px] mx-auto h-[60%] rounded-md select-none"
                 navigation={({setActiveIndex, activeIndex, length}) => (
                   <div className="absolute bottom-4 left-2/4 z-50 flex -translate-x-2/4 gap-2">
                     {new Array(length).fill('').map((_, i) => (
@@ -127,7 +128,7 @@ export default function Login() {
                     ))}
                   </div>
                 )}>
-                <div className="h-[90%] px-10 flex w-full">
+                <div className="h-[80%] px-10 flex w-full">
                   <div className="text-sm text-[#A7A7A7] m-auto text-justify">
                     <p className="font-semibold mb-2">Sobre a Jobbie</p>A Jobbie é a visão transformadora de dois
                     estudantes,{' '}
@@ -174,7 +175,7 @@ export default function Login() {
                   </div>
                 </div>
               </Carousel>
-              <div className="flex flex-col items-end  justify-end h-full pb-20 mr-20 ">
+              <div className="flex flex-row items-end justify-end h-full pb-10 mr-20 ">
                 <div className="flex flex-col">
                   <a href="https://www.linkedin.com/in/adriellyisly/" target="_blank">
                     <Adrielly width="138" height="42" />

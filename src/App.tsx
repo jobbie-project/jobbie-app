@@ -29,7 +29,6 @@ import JobReview from './pages/jobs/job-review';
 import JobViewer from './pages/jobs/job-viewer';
 import JobSearch from './pages/jobs/job-search';
 import NotFound from './pages/notfound';
-import Applications from './pages/my-applications';
 import Profile from './pages/profile/student/profile';
 import UpdateJobStep1 from './pages/jobs/update-job/update-job-step-1';
 import UpdateJobStep2 from './pages/jobs/update-job/update-job-step-2';
@@ -44,6 +43,7 @@ import Api from './services/api/api.service';
 import ApplicantsManagement from './pages/admin-management/applicants-management';
 import MyApplications from './pages/my-applications';
 import NotDesktop from './pages/notdesktop';
+import AboutUs from './pages/about-us';
 
 const RedirectToLogin: React.FC = () => {
   window.location.href = '/inicio';
@@ -77,6 +77,7 @@ export const App: React.FC = () => {
         {/* Public routes */}
         <Route path={`/entrar`} element={<Login />} />
         <Route path={`/inicio`} element={<Home />} />
+        <Route path={`/sobre`} element={<AboutUs />} />
         <Route path={`/registro`} element={<Register />} />
         <Route path={`/registro/estudante`} element={<StudentRegister />} />
         <Route path={`/registro/empresa`} element={<CompanyRegister />} />
