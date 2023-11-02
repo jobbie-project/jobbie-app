@@ -59,7 +59,7 @@ export function JobCardMedium({job, code, isClosed}: {job: Job; code: string; is
           </p>
         </div>
         <div className="flex flex-row items-baseline">
-          <p className="text-xl mr-1 font-semibold">{job.salary}</p>
+          <p className="text-xl mr-1 font-semibold">{Money(job.salary as unknow as number).format()}</p>
           <p className="text-sm text-slate-500">/Mensal</p>
         </div>
       </div>

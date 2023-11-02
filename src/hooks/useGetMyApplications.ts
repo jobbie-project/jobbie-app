@@ -17,7 +17,6 @@ export function useGetMyApplications() {
     try {
       setLoading(true);
       const {data} = await Api.get('/job/my-applications');
-      console.log(data);
       setJobData(data);
     } catch (error) {
       setError(error as any);

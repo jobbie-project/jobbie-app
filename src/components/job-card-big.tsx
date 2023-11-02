@@ -1,13 +1,11 @@
 import {Job} from '@/interfaces/job';
 import {Money} from '@/utils/money';
 import {ContractTypes, JobTimes} from '@/utils/consts';
-import {useNavigate, useSearchParams} from 'react-router-dom';
+import {useNavigate} from 'react-router-dom';
 import LocationIcon from '@/icons/location';
 import {JobType} from '@/enums';
-import {RootState} from '@/store/store';
 export function JobCardBig({job, code}: {job: Job; code: string}) {
   const navigate = useNavigate();
-  console.log(job.salary);
   const capitalize = (word: string) => {
     const array = word.split(' ');
     array.map((word, index) => {
@@ -50,7 +48,11 @@ export function JobCardBig({job, code}: {job: Job; code: string}) {
       </div>
       <div className="flex flex-row justify-between items-center">
         <div className="flex items-baseline mr-7 mt-4">
-          <p className="text-sm font-semibold">{Money(job.salary).format()}</p>
+          <p className="text-sm font-semibold">
+            {Money(job.salary as unknow as number).format({
+              decimal: ',',
+            })}
+          </p>
           <p className="text-xs text-slate-500">/Mensal</p>
         </div>
         <button className="bg-redDefault text-white font-medium px-6 py-2 rounded-md" onClick={handleClick}>

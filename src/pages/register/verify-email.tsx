@@ -17,9 +17,7 @@ export default function VerifyEmail() {
 
   const handleResend = async () => {
     const email = params.get('email');
-    console.log('antes do api');
     await Api.post('/auth/resend-email-confirmation', {email});
-    console.log('depois do api');
     toast.success('O email de verificação foi reenviado.');
     setWasResended(true);
   };

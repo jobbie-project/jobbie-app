@@ -1,5 +1,5 @@
 import currency from 'currency.js';
-export const Money = (value: number) => currency(value, {symbol: 'R$ ', separator: '', precision: 2});
+export const Money = (value: number) => currency(value, {symbol: 'R$ ', separator: '', precision: 0});
 
 export const formatNumberToBRL = (event: string, firstRender?: boolean) => {
   event = event.toString();
