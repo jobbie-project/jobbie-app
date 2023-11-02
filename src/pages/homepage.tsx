@@ -27,7 +27,7 @@ export default function Home() {
       <Header />
       <div className="max-w-full items-center py-5 flex flex-col text-sm">
         <div className="max-w-4xl w-full">
-          <p className="my-5 font-normal">Olá, {data.name.split(' ')[0]}</p>
+          <p className="my-5 font-normal">Olá, {data?.name?.split(' ')[0]}</p>
           <div className="flex flex-row">
             <SearchBar placeholder="Procure por vagas, empresas" />
             <Button variant="none" className="h-12 px-10 ml-4 text-sm text-white bg-redDefault">
@@ -40,7 +40,7 @@ export default function Home() {
               <div className="max-w-4xl grid grid-cols-3 gap-4">
                 {jobData.jobs.length > 0 &&
                   jobData.jobs.slice(0, 6).map((job, index) => (
-                    <div className="inline-block ">
+                    <div className="inline-block" key={index}>
                       <JobCardBig job={job} key={index} code={job.code} />
                     </div>
                   ))}
