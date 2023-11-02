@@ -1,4 +1,4 @@
-import {Route, Routes} from 'react-router-dom';
+import {Route, Routes, useLocation, useNavigate} from 'react-router-dom';
 import Login from './pages/login';
 import Home from './pages/homepage';
 import Register from './pages/register/register';
@@ -44,14 +44,38 @@ import ApplicantsManagement from './pages/admin-management/applicants-management
 import MyApplications from './pages/my-applications';
 import NotDesktop from './pages/notdesktop';
 import AboutUs from './pages/about-us';
+import {useWindowSize} from './hooks/useWindowSize';
+import authenticationService from './services/authentication/authentication.service';
 
 const RedirectToLogin: React.FC = () => {
-  window.location.href = '/inicio';
+  const {token} = authenticationService.getUserData();
+  window.location.href = token ? '/inicio' : '/entrar';
   return <></>;
 };
 
 export const App: React.FC = () => {
   const dispatch = useAppDispatch();
+
+  const navigate = useNavigate();
+  const location = useLocation();
+  const {width, zoomLevel} = useWindowSize();
+
+  const isNotCompatible = () => {
+    if (width && width < 1800 && zoomLevel > 80) {
+      return true;
+    }
+    return false;
+  };
+
+  useEffect(() => {
+    isNotCompatible();
+    if (isNotCompatible() && location.pathname !== 'notdesktop') {
+      navigate('/notdesktop');
+    } else if (!isNotCompatible() && location.pathname === '/notdesktop') {
+      navigate('/inicio');
+    }
+  }, [width, location.pathname, zoomLevel]);
+
   const fetchFatecData = async () => {
     try {
       const fatecInstitutions = await Api.get('/fatec/institutions');
@@ -67,7 +91,7 @@ export const App: React.FC = () => {
   }, []);
 
   return (
-    <div className="h-[100vh]">
+    <div className="h-[100vh] scale-">
       <Routes>
         {/* Home Redirect */}
         <Route>
