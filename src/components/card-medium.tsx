@@ -5,6 +5,7 @@ import {useNavigate} from 'react-router-dom';
 import {PeopleIcon} from '@/icons/people';
 import LocationIcon from '@/icons/location';
 import {Badge} from './ui/badge';
+import {JobType} from '@/enums';
 
 export function JobCardMedium({job, code, isClosed}: {job: Job; code: string; isClosed?: boolean}) {
   const navigate = useNavigate();
@@ -35,12 +36,14 @@ export function JobCardMedium({job, code, isClosed}: {job: Job; code: string; is
               <p className="text-xs text-slate-500 mb-3">{capitalize(job.company_name)}</p>
             </div>
           </div>
-          <div className="flex flex-row justify-start">
-            <div className="flex flex-row items-center">
-              <LocationIcon width="16" height="16" />
-              <div className="ml-1 text-xs font-semibold">{job.type === 'remote' ? 'REMOTO' : 'Presencial'}</div>
-            </div>
-          </div>
+        </div>
+      </div>
+      <div className="flex flex-row justify-between">
+        <div className="flex flex-row items-center">
+          <LocationIcon width="12" height="12" />
+          <p className="ml-1 text-xs font-semibold">
+            {job.type === JobType.REMOTE ? 'REMOTO' : job.type === JobType.FACE_TO_FACE ? 'PRESENCIAL' : 'HÍBRIDO'}
+          </p>
         </div>
         {isClosed && (
           <Badge variant="destructive" className="h-min w-min text-white px-2 py-1 font-semibold bg-[#d25a55]">

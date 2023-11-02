@@ -12,8 +12,8 @@ import {useGetJobData} from '@/hooks/useGetJobData';
 import {Money} from '@/utils/money';
 import moment from '@/utils/moment';
 import {useEffect} from 'react';
-import {JobTimes} from '@/utils/consts';
-import {JobType} from '@/enums';
+import {ContractTypes, JobTimes} from '@/utils/consts';
+import {ContractType, JobType} from '@/enums';
 import {LocationJobViewer} from '@/icons/location-jobviewer';
 import {PeopleIcon} from '@/icons/people';
 
@@ -41,9 +41,15 @@ export default function JobViewer() {
                     <p className="pt-7 text-lg font-semibold">{job?.position}</p>
                     <div className="flex flex-row justify-between mt-7">
                       <Badge variant="default" className="mr-4">
-                        {job?.contract_type}
+                        {ContractTypes.find(contractType => contractType.value === job?.contract_type)?.label}
                       </Badge>
-                      <Badge variant="default">{job?.type === 'remote' ? 'Remoto' : 'Presencial'}</Badge>
+                      <Badge variant="default">
+                        {job?.type === JobType.REMOTE
+                          ? 'Remoto'
+                          : job?.type === JobType.FACE_TO_FACE
+                          ? 'Presencial'
+                          : 'Híbrido'}
+                      </Badge>
                     </div>
                   </div>
                   <p className="text-xs">{job?.company_name}</p>
@@ -61,14 +67,20 @@ export default function JobViewer() {
                   <div className="flex flex-col items-center">
                     <LocationJobViewer width="52" height="52" />
                     <p className="text-xs text-lightblack2 my-2">Local</p>
-                    <div className="text-black font-semibold text-sm">
-                      {job?.type === 'remote' ? 'Remoto' : 'Presencial'}
-                    </div>
+                    <p className="ml-1 text-sm font-semibold">
+                      {job?.type === JobType.REMOTE
+                        ? 'Remoto'
+                        : job?.type === JobType.FACE_TO_FACE
+                        ? 'Presencial'
+                        : 'Híbrido'}
+                    </p>
                   </div>
                   <div className="flex flex-col items-center">
                     <CategoryIcon width="52" height="52" />
                     <p className="text-xs text-lightblack2 my-2">Categoria</p>
-                    <div className="text-black font-semibold text-sm">{job?.contract_type}</div>
+                    <div className="text-black font-semibold text-sm">
+                      {ContractTypes.find(contractType => contractType.value === job?.contract_type)?.label}
+                    </div>
                   </div>
                   <div className="flex flex-col items-center">
                     <SalaryIcon width="52" height="52" />
@@ -115,7 +127,10 @@ export default function JobViewer() {
                     Número de Vagas:<p className="font-semibold text-sm text-black">{job?.num_positions}</p>
                   </div>
                   <div className="text-xs text-lightblack2 mt-6">
-                    Categoria:<p className="font-semibold text-sm text-black">{job?.contract_type}</p>
+                    Categoria:
+                    <p className="font-semibold text-sm text-black">
+                      {ContractTypes.find(contractType => contractType.value === job?.contract_type)?.label}
+                    </p>
                   </div>
                   <div className="text-xs text-lightblack2 mt-6">
                     Jornada de Trabalho:
