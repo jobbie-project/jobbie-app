@@ -1,16 +1,9 @@
-import {Job} from '@/interfaces/job';
 import Api from '@/services/api/api.service';
 import {toastError} from '@/utils/toast-error';
 import React from 'react';
+import {JobDataReturn} from './useGetJobList';
 
-export interface JobDataReturn {
-  total: number;
-  jobs: Job[];
-  closed: number;
-  open: number;
-}
-
-export function useGetJobList() {
+export function useGetMyApplications() {
   const [jobData, setJobData] = React.useState<JobDataReturn>({
     total: 0,
     jobs: [],
@@ -20,17 +13,11 @@ export function useGetJobList() {
   const [loading, setLoading] = React.useState(false);
   const [error, setError] = React.useState(null);
 
-  const deleteJob = async (code: string) => {
-    setLoading(true);
-    await Api.delete(`/job/${code}`);
-    await fetchJobs();
-    setLoading(false);
-  };
-
   const fetchJobs = async () => {
     try {
       setLoading(true);
-      const {data} = await Api.get('/job');
+      const {data} = await Api.get('/job/my-applications');
+      console.log(data);
       setJobData(data);
     } catch (error) {
       setError(error as any);
@@ -47,7 +34,6 @@ export function useGetJobList() {
   return {
     jobData,
     loading,
-    deleteJob,
     error,
   };
 }

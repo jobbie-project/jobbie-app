@@ -3,14 +3,13 @@ import BreadCrumbComponent from '@/components/breadcrumb';
 import {AvailableIcon} from '@/icons/available';
 import {RolesIcon} from '@/icons/roles';
 import {ClosedIcon} from '@/icons/closed';
-import {useGetJobList} from '@/hooks/useGetJobList';
 import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
 import {JobCardMedium} from '@/components/card-medium';
-import {JobStatus} from '@/utils/consts';
+import {useGetMyApplications} from '@/hooks/useGetMyApplications';
 
 export default function MyApplications() {
-  const {jobData} = useGetJobList();
+  const {jobData} = useGetMyApplications();
   const half = Math.ceil(jobData.jobs.length / 2);
   const firstColumn = jobData.jobs.slice(0, half);
   const secondColumn = jobData.jobs.slice(half);

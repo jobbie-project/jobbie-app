@@ -8,9 +8,11 @@ import {RolesIcon} from '@/icons/roles';
 import {AvailableIcon} from '@/icons/available';
 import {ClosedIcon} from '@/icons/closed';
 import {Pagination, Stack} from '@mui/material';
+import {useGetJobList} from '@/hooks/useGetJobList';
 
 export default function JobManagement() {
   const navigate = useNavigate();
+  const {jobData, deleteJob} = useGetJobList();
 
   const sendTo = () => {
     navigate('/nova-vaga/passo-1');
@@ -27,7 +29,7 @@ export default function JobManagement() {
               <div className="w-72 h-28 bg-white border-2 border-lightgray1 rounded-md">
                 <div className="p-6 flex justify-between">
                   <div>
-                    <p className="font-semibold text-3xl">10</p>
+                    <p className="font-semibold text-3xl">{jobData.total}</p>
                     <p className="text-sm text-black mt-2">Total de vagas</p>
                   </div>
                   <RolesIcon width="52" height="52" />
@@ -36,7 +38,7 @@ export default function JobManagement() {
               <div className="w-72 h-28 bg-white border-2 border-lightgray1 rounded-md">
                 <div className="p-6 flex justify-between">
                   <div>
-                    <p className="font-semibold text-3xl">06</p>
+                    <p className="font-semibold text-3xl">{jobData.open}</p>
                     <p className="text-sm text-black mt-2">Em aberto</p>
                   </div>
                   <AvailableIcon width="52" height="52" />
@@ -45,7 +47,7 @@ export default function JobManagement() {
               <div className="w-72 h-28 bg-white border-2 border-lightgray1 rounded-md">
                 <div className="p-6 flex justify-between">
                   <div>
-                    <p className="font-semibold text-3xl">04</p>
+                    <p className="font-semibold text-3xl">{jobData.closed}</p>
                     <p className="text-sm text-black mt-2">Finalizadas</p>
                   </div>
                   <ClosedIcon width="52" height="52" />
@@ -64,7 +66,7 @@ export default function JobManagement() {
               </div>
             </div>
             <SearchBar className="mb-4" placeholder="Código da vaga, nome da empresa" />
-            <TableList />
+            <TableList jobData={jobData} deleteJob={deleteJob} />
             <div className="flex flex-row m-8 justify-center">
               <Stack spacing={2}>
                 <Pagination count={10} shape="rounded" />

@@ -1,20 +1,20 @@
 import {Table, TableBody, TableCell, TableHead, TableHeader, TableRow} from '@/components/ui/table';
-import {useGetJobList} from '@/hooks/useGetJobList';
-import {Job} from '@/interfaces/job';
-import Api from '@/services/api/api.service';
-import {useAppDispatch} from '@/store/store';
+import {JobDataReturn} from '@/hooks/useGetJobList';
 import {JobStatus} from '@/utils/consts';
 import moment from '@/utils/moment';
-import {useEffect, useState} from 'react';
 import {FiEdit, FiTrash} from 'react-icons/fi';
 import {RiNewspaperLine} from 'react-icons/ri';
 import {useNavigate} from 'react-router-dom';
 import {Tooltip, TooltipContent, TooltipProvider, TooltipTrigger} from '@/components/ui/tooltip';
 
-export default function JobList() {
-  const {jobData, deleteJob} = useGetJobList();
+export default function JobList({
+  jobData,
+  deleteJob,
+}: {
+  jobData: JobDataReturn;
+  deleteJob: (code: string) => Promise<void>;
+}) {
   const navigate = useNavigate();
-  const dispatch = useAppDispatch();
   const handleEdit = (code: string) => {
     navigate(`/vaga/editar?codigo=${code}`);
   };

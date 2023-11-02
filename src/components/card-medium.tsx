@@ -51,7 +51,9 @@ export function JobCardMedium({job, code, isClosed}: {job: Job; code: string; is
       <div className="mt-6 flex flex-row justify-between">
         <div className="flex flex-row items-center">
           <PeopleIcon width="20" height="20" />
-          <p className="text-sm ml-2 ">25 pessoas se candidataram</p>
+          <p className="text-sm ml-2 ">
+            {job.applicants.length} {job.applicants.length !== 1 ? 'pessoas se candidataram' : 'pessoa se candidatou'}
+          </p>
         </div>
         <div className="flex flex-row items-baseline">
           <p className="text-xl mr-1 font-semibold">{job.salary}</p>
