@@ -43,6 +43,7 @@ import {toastError} from './utils/toast-error';
 import Api from './services/api/api.service';
 import ApplicantsManagement from './pages/admin-management/applicants-management';
 import MyApplications from './pages/my-applications';
+import NotDesktop from './pages/notdesktop';
 
 const RedirectToLogin: React.FC = () => {
   window.location.href = '/inicio';
@@ -126,6 +127,7 @@ export const App: React.FC = () => {
 
         <Route path={`/candidaturas`} element={<MyApplications />} />
         <Route path={`/404`} element={<NotFound />} />
+        <Route path={`/notdesktop`} element={<NotDesktop />} />
       </Routes>
       <ToastContainer />
     </div>
