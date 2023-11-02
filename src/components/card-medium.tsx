@@ -37,10 +37,6 @@ export function JobCardMedium({job, code, isClosed}: {job: Job; code: string; is
             </div>
           </div>
         </div>
-        <div className="flex flex-col items-start justify-start">
-          <p className="">{capitalize(job.position)}</p>
-          <p className="text-xs text-slate-500 mb-3">{capitalize(job.company_name)}</p>
-        </div>
       </div>
       <div className="flex flex-row justify-between">
         <div className="flex flex-row items-center">
