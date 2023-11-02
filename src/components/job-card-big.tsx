@@ -1,8 +1,10 @@
 import {Job} from '@/interfaces/job';
 import {Money} from '@/utils/money';
 import {ContractTypes, JobTimes} from '@/utils/consts';
-import {useNavigate} from 'react-router-dom';
+import {useNavigate, useSearchParams} from 'react-router-dom';
 import LocationIcon from '@/icons/location';
+import {JobType} from '@/enums';
+import {RootState} from '@/store/store';
 export function JobCardBig({job, code}: {job: Job; code: string}) {
   const navigate = useNavigate();
   console.log(job.salary);
@@ -40,8 +42,10 @@ export function JobCardBig({job, code}: {job: Job; code: string}) {
         <p className="text-base mt-2 font-semibold">{capitalize(job.position)}</p>
         <p className="text-xs mb-3">{capitalize(job.company_name)}</p>
         <div className="flex flex-row items-center mt-2">
-          <LocationIcon width="16" height="16" />
-          <p className="ml-1 text-xs">{job.type === 'remote' ? 'Remoto' : 'Presencial'}</p>
+          <LocationIcon width="12" height="12" />
+          <p className="ml-1 text-xs font-semibold">
+            {job.type === JobType.REMOTE ? 'REMOTO' : job.type === JobType.FACE_TO_FACE ? 'PRESENCIAL' : 'HÍBRIDO'}
+          </p>
         </div>
       </div>
       <div className="flex flex-row justify-between items-center">

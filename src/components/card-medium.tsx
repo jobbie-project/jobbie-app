@@ -34,7 +34,7 @@ export function JobCardMedium({job, code}: {job: Job; code: string}) {
       </div>
       <div className="flex flex-row justify-between">
         <div className="flex flex-row items-center">
-          <LocationIcon width="16" height="16" />
+          <LocationIcon width="12" height="12" />
           <div className="ml-1 text-xs font-semibold">{job.type === 'remote' ? 'REMOTO' : 'Presencial'}</div>
         </div>
       </div>
