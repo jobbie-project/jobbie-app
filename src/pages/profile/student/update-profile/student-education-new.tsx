@@ -110,8 +110,8 @@ export default function AddNewEducation() {
     <div>
       <RegisterHeader showProgress={{progress: 3, maxSteps: 8}} />
       <div className="max-w-full items-center p-5 flex flex-col mt-6 select-none">
-        <form onSubmit={handleSubmit(onSubmit)} className="w-full max-w-md">
-          <div className="max-w-md w-full">
+        <form onSubmit={handleSubmit(onSubmit)} className="w-full max-w-xl">
+          <div className="max-w-xl w-full">
             <p className="text-black font-semibold text-lg select-none">Adicionando nova Escolaridade</p>
           </div>
           <SelectCountry />
@@ -149,7 +149,7 @@ export default function AddNewEducation() {
               register={register}
               registerName="start_date"
               label="Data de ínicio"
-              className="w-48"
+              className="w-64"
               type="month"
               required
               defaultValue={editMode ? moment(currentEducation.start_date).format('YYYY-MM') : ''}
@@ -159,7 +159,7 @@ export default function AddNewEducation() {
                 register={register}
                 registerName="end_date"
                 label="Data de fim"
-                className="w-48"
+                className="w-64"
                 type="month"
                 defaultValue={
                   editMode && currentEducation.end_date ? moment(currentEducation.end_date).format('YYYY-MM') : ''

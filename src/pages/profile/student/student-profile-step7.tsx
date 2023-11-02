@@ -23,12 +23,12 @@ export default function StudentRegisterStep7() {
     <div>
       <RegisterHeader showProgress={{progress: 6, maxSteps: 8}} />
       <div className="max-w-full items-center p-5 flex flex-col mt-6 select-none">
-        <div className="max-w-md w-full">
+        <div className="max-w-xl w-full">
           <p className="text-black font-semibold text-lg select-none mt-4 mb-4">
             Quais certificações ou licenças você tem?
           </p>
           {certifications.map((item, index) => (
-            <ReviewCardSmall maxW="md" index={index} key={index} canDelete={true} canEdit={true} title={item} />
+            <ReviewCardSmall maxW="xl" index={index} key={index} canDelete={true} canEdit={true} title={item} />
           ))}
           <div className="flex justify-between mt-4">
             <Input

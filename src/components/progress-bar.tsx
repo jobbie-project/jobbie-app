@@ -5,7 +5,7 @@ interface ProgressBarProps {
 
 export function ProgressBar(props: ProgressBarProps) {
   return (
-    <div className="w-full max-w-[448px] rounded-full flex flex-row bg-[#E5E7EB]" style={{height: '6px'}}>
+    <div className="w-full max-w-[560px] rounded-full flex flex-row bg-[#E5E7EB]" style={{height: '6px'}}>
       <div
         style={{
           width: `${(100 / props.maxSteps) * props.actualStep}%`,

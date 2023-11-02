@@ -22,7 +22,7 @@ export default function CardLarge({job, code, isClosed}: {job: Job; code: string
 
   return (
     <div onClick={handleClick}>
-      <div className="w-full rounded-md px-7 mb-6 bg-lightgray1">
+      <div className="w-full rounded-md px-7 mb-6 bg-lightgray1 cursor-pointer">
         <div className="flex flex-row justify-between">
           <div className="bg-white text-black font-bold flex flex-row justify-center p-2 rounded-md mt-6">
             <p className="m-auto">{job?.fatec_course?.abbreviation}</p>

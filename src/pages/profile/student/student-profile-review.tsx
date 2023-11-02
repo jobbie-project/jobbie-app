@@ -60,16 +60,16 @@ export default function StudentProfileReview() {
       <form onSubmit={handleSubmit(onSubmit)}>
         <RegisterHeader showProgress={{progress: 7, maxSteps: 8}} />
         <div className="max-w-full items-center p-5 flex flex-col mt-6 select-none">
-          <div className="max-w-md w-full">
+          <div className="max-w-xl w-full">
             <p className="text-black font-semibold text-lg select-none mb-4">Seu currículo está pronto?</p>
             <p className="text-sm text-lightblack select-none mb-4">Revise e faça as alterações necessárias.</p>
           </div>
 
-          <div className="max-w-md w-full font-semibold text-lg text-lightblack flex flex-row justify-between">
+          <div className="max-w-xl w-full font-semibold text-lg text-lightblack flex flex-row justify-between">
             <p className="py-2">Sobre você</p>
           </div>
           <ReviewCardLarge
-            maxW="md"
+            maxW="xl"
             canDelete={false}
             editRoute={'/registro/estudante/passo-1?editar=true&redirect=/estudante/perfil/revisar'}
             info="Dados Pessoais"
@@ -79,7 +79,7 @@ export default function StudentProfileReview() {
             subtitle={profileData.phone}
           />
           <ReviewCardLarge
-            maxW="md"
+            maxW="xl"
             canDelete={false}
             editRoute={'/registro/estudante/passo-2?editar=true&redirect=/estudante/perfil/revisar'}
             info="Endereço"
@@ -89,14 +89,14 @@ export default function StudentProfileReview() {
             subtitle={`${profileData.address.street}, ${profileData.address.zip_code}`}
           />
 
-          <div className="max-w-md w-full font-semibold text-lightblack flex flex-row justify-between">
+          <div className="max-w-xl w-full font-semibold text-lightblack flex flex-row justify-between">
             <p className="py-2 flex items-end">Formação Acadêmica</p>
             <div className="mb-2">
               <ButtonAddNew onClick={() => navigate('/estudante/educacao/adicionar')} />
             </div>
           </div>
           <ReviewCardMedium
-            maxW="md"
+            maxW="xl"
             isFatec
             canDelete={false}
             editRoute="/registro/estudante/passo-3?editar=true&redirect=/estudante/perfil/revisar"
@@ -112,7 +112,7 @@ export default function StudentProfileReview() {
 
           {profileData.education.map((item, index) => (
             <ReviewCardMedium
-              maxW="md"
+              maxW="xl"
               index={index}
               key={index}
               editRoute={`/estudante/educacao/editar?id=${index}&redirect=/estudante/perfil/revisar`}
@@ -127,7 +127,7 @@ export default function StudentProfileReview() {
               end_date={item.end_date && moment(item.end_date).format('MMMM [de] YYYY')}
             />
           ))}
-          <div className="max-w-md w-full font-semibold text-lightblack flex flex-row justify-between">
+          <div className="max-w-xl w-full font-semibold text-lightblack flex flex-row justify-between">
             <p className="py-2 flex items-end">Experiência Profissional</p>
             <div className="mb-2">
               <ButtonAddNew
@@ -138,7 +138,7 @@ export default function StudentProfileReview() {
           {profileData.previous_experience.length > 0 ? (
             profileData.previous_experience.map((item, index) => (
               <JobReviewCard
-                maxW="md"
+                maxW="xl"
                 key={index}
                 index={index}
                 canDelete={true}
@@ -153,7 +153,7 @@ export default function StudentProfileReview() {
               />
             ))
           ) : (
-            <div className="flex items-center text-gray-700 font-semibold text-sm select-none mt-4 mb-4 w-full max-w-md">
+            <div className="flex items-center text-gray-700 font-semibold text-sm select-none mt-4 mb-4 w-full max-w-xl">
               <Checkbox id="noexperience" checked disabled />
               <label
                 htmlFor="noexperience"
@@ -163,10 +163,10 @@ export default function StudentProfileReview() {
             </div>
           )}
 
-          <div className="max-w-md w-full font-semibold text-lightblack flex flex-row justify-between">
+          <div className="max-w-xl w-full font-semibold text-lightblack flex flex-row justify-between">
             <p className="py-2 flex items-end">Certificações e Licenças</p>
           </div>
-          <div className="max-w-md w-full">
+          <div className="max-w-xl w-full">
             <div className="flex justify-between">
               <Input
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) => setCertification(e.target.value)}
@@ -186,7 +186,7 @@ export default function StudentProfileReview() {
             </div>
             <div className="mt-4">
               {profileData.certifications.map((item, index) => (
-                <ReviewCardSmall maxW="md" index={index} key={index} canDelete={true} canEdit={true} title={item} />
+                <ReviewCardSmall maxW="xl" index={index} key={index} canDelete={true} canEdit={true} title={item} />
               ))}
             </div>
           </div>

@@ -24,41 +24,42 @@ export default function StudentRegisterStep4() {
       <form onSubmit={handleSubmit(onSubmit)}>
         <RegisterHeader showProgress={{progress: 3, maxSteps: 8}} />
         <div className="max-w-full items-center p-5 flex flex-col mt-8 select-none">
-          <div className="max-w-md w-full">
+          <div className="max-w-xl w-full">
             <p className="text-black font-semibold text-lg select-none mb-4">Revise a Escolaridade</p>
-          </div>
-          <ReviewCardMedium
-            maxW="md"
-            isFatec
-            canDelete={false}
-            editRoute={'/registro/estudante/passo-3?editar=true'}
-            info="Graduação"
-            titleForText1="Curso: "
-            title={fatec_education.course_name}
-            titleForText2="Instituição: "
-            subtitle={fatec_education.institution_name}
-            titleForText3="Período: "
-            start_date={moment(fatec_education.start_date).format('MMMM [de] YYYY')}
-          />
 
-          {education.map((item: ProfileEducation, index) => (
             <ReviewCardMedium
-              maxW="md"
-              index={index}
-              key={index}
-              canDelete={true}
-              editRoute={`/estudante/educacao/editar?id=${index}`}
-              info={Degrees.find(degree => degree.value === item.degree)?.label}
+              maxW="xl"
+              isFatec
+              canDelete={false}
+              editRoute={'/registro/estudante/passo-3?editar=true'}
+              info="Graduação"
               titleForText1="Curso: "
-              title={item.course}
+              title={fatec_education.course_name}
               titleForText2="Instituição: "
-              subtitle={item.institution_name}
+              subtitle={fatec_education.institution_name}
               titleForText3="Período: "
-              start_date={moment(item.start_date).format('MMMM [de] YYYY')}
-              end_date={item.end_date && moment(item.end_date).format('MMMM [de] YYYY')}
+              start_date={moment(fatec_education.start_date).format('MMMM [de] YYYY')}
             />
-          ))}
-          <ButtonAddNew onClick={() => navigate('/estudante/educacao/adicionar')} />
+
+            {education.map((item: ProfileEducation, index) => (
+              <ReviewCardMedium
+                maxW="xl"
+                index={index}
+                key={index}
+                canDelete={true}
+                editRoute={`/estudante/educacao/editar?id=${index}`}
+                info={Degrees.find(degree => degree.value === item.degree)?.label}
+                titleForText1="Curso: "
+                title={item.course}
+                titleForText2="Instituição: "
+                subtitle={item.institution_name}
+                titleForText3="Período: "
+                start_date={moment(item.start_date).format('MMMM [de] YYYY')}
+                end_date={item.end_date && moment(item.end_date).format('MMMM [de] YYYY')}
+              />
+            ))}
+            <ButtonAddNew onClick={() => navigate('/estudante/educacao/adicionar')} />
+          </div>
           <div className="mt-8 flex justify-center">
             <ButtonHover text={'Continuar'} type={'submit'} className="font-semibold text-base" />
           </div>

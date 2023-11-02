@@ -4,7 +4,6 @@ import {SearchBar} from '@/components/searchbar';
 import {Button} from '@/components/ui/button';
 import {Badge} from '@/components/ui/badge';
 import {BiSolidShareAlt} from 'react-icons/bi';
-import LocationIcon from '@/icons/location';
 import {CategoryIcon} from '@/icons/category';
 import {SalaryIcon} from '@/icons/salary';
 import {useSearchParams} from 'react-router-dom';
@@ -16,11 +15,26 @@ import {ContractTypes, JobTimes} from '@/utils/consts';
 import {ContractType, JobType} from '@/enums';
 import {LocationJobViewer} from '@/icons/location-jobviewer';
 import {PeopleIcon} from '@/icons/people';
+import {toast} from 'react-toastify';
+import {Job} from '@/interfaces/job';
 
 export default function JobViewer() {
   const [params] = useSearchParams();
-  const {job, loading} = useGetJobData(params.get('codigo') ?? '');
-  useEffect(() => {}, []);
+  const {job} = useGetJobData(params.get('codigo') ?? '');
+  const notAdded = () => {
+    toast.error('Oops! Funcionalidade ainda não implementada.', {
+      icon: '🥺',
+    });
+  };
+
+  const Share = () => {
+    navigator.share({
+      title: 'Jobbie: O Portal de vagas da Fatec',
+      text: 'Confira essa vaga de emprego que encontrei na Jobbie!',
+      url: window.location.href,
+    });
+  };
+
   return (
     <div className="w-full select-none">
       <Header />
@@ -58,7 +72,10 @@ export default function JobViewer() {
                       {Money(job?.salary ?? 0).format()}{' '}
                       <div className="text-xs font-normal flex items-end mb-[2px]">/Mensal</div>
                     </div>
-                    <Button variant="none" className="h-8 p-2 rounded-md bg-white flex flex-row items-center">
+                    <Button
+                      onClick={Share}
+                      variant="none"
+                      className="h-8 p-2 rounded-md bg-white flex flex-row items-center">
                       <BiSolidShareAlt size="24" color="#7C7979" />
                     </Button>
                   </div>
@@ -107,6 +124,7 @@ export default function JobViewer() {
               <div className="flex flex-col ml-6">
                 <div className="flex flex-row ">
                   <Button
+                    onClick={notAdded}
                     variant="none"
                     className="h-10 px-4 text-sm text-lightblack2 bg-white border-2 border-lightgray1 whitespace-nowrap">
                     Relatar um problema
@@ -118,7 +136,14 @@ export default function JobViewer() {
                 <div className="flex flex-col mt-8 border-2 border-lightgray1 rounded-md p-6">
                   <div className="flex flex-row items-center mb-4">
                     <PeopleIcon width="18" height="18" />
-                    <p className="text-xs ml-2">25 pessoas se candidataram</p>
+                    <p className="text-xs ml-2">
+                      {job?.applicants?.length}{' '}
+                      {job?.applicants?.length !== 0
+                        ? job?.applicants?.length !== 1
+                          ? 'pessoas se candidataram'
+                          : 'pessoa se candidatou'
+                        : 'ainda não há candidatos'}
+                    </p>
                   </div>
                   <div className="text-xs text-lightblack2">
                     Responsável:<p className="font-semibold text-sm text-black">{job?.owner_name}</p>

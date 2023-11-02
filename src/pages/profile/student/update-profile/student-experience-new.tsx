@@ -105,7 +105,7 @@ export default function AddNewExperience() {
     <div>
       <RegisterHeader showProgress={{progress: 4, maxSteps: 8}} />
       <div className="max-w-full items-center p-5 flex flex-col mt-6 select-none">
-        <form onSubmit={handleSubmit(onSubmit)} className="w-full max-w-md">
+        <form onSubmit={handleSubmit(onSubmit)} className="w-full max-w-xl">
           <div className="max-w-xs w-full">
             <p className="text-black font-semibold text-base select-none mt-4">Adicionando Experiência Profissional</p>
           </div>
@@ -136,7 +136,7 @@ export default function AddNewExperience() {
                 register={register}
                 registerName="start_date"
                 label="Data de ínicio"
-                className="w-48"
+                className="w-64"
                 type="month"
                 required
                 defaultValue={editMode ? moment(currentEditingJob.start_date).format('YYYY-MM') : ''}
@@ -146,7 +146,7 @@ export default function AddNewExperience() {
                   register={register}
                   registerName="end_date"
                   label="Data de fim"
-                  className="w-48"
+                  className="w-64"
                   type="month"
                   required
                   defaultValue={

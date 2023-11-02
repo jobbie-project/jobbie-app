@@ -1,4 +1,3 @@
-import {HiLocationMarker} from 'react-icons/hi';
 import {Job} from '@/interfaces/job';
 import {Money} from '@/utils/money';
 import {useNavigate} from 'react-router-dom';
@@ -54,7 +53,7 @@ export function JobCardMedium({job, code, isClosed}: {job: Job; code: string; is
       <div className="mt-6 flex flex-row justify-between">
         <div className="flex flex-row items-center">
           <PeopleIcon width="20" height="20" />
-          <p className="text-sm ml-2 ">
+          <p className="text-sm ml-2">
             {job.applicants.length} {job.applicants.length !== 1 ? 'pessoas se candidataram' : 'pessoa se candidatou'}
           </p>
         </div>

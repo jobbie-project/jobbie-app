@@ -2,9 +2,11 @@ import {ButtonHover} from '@/components/button-hover-animation';
 import RegisterHeader from '@/components/register-header';
 import {toastError} from '@/utils/toast-error';
 import {useForm} from 'react-hook-form';
+import {SelectInput} from '@/components/select-input';
 import {useNavigate, useSearchParams} from 'react-router-dom';
 import GeneralInput from '@/components/general-input';
 import {RootState, useAppDispatch} from '@/store/store';
+import {cities} from '@/utils/useCities';
 import {SelectCountry} from '@/components/select-country';
 import {eraseUserPreviousExperience, setUserPreviousExperience} from '@/store/slices/profile-data';
 import {useEffect, useState} from 'react';
@@ -83,7 +85,7 @@ export default function StudentRegisterStep5() {
     <div>
       <RegisterHeader showProgress={{progress: 4, maxSteps: 8}} />
       <div className="max-w-full items-center p-5 flex flex-col mt-6 select-none">
-        <form onSubmit={handleSubmit(onSubmit)} className="w-full max-w-md">
+        <form onSubmit={handleSubmit(onSubmit)} className="w-full max-w-xl">
           <p className="text-black font-semibold text-base select-none">Adicionando Experiência Profissional</p>
           <div className="flex items-center mt-6">
             <Checkbox id="noexperience" onClick={() => setDontHaveExperience(!dontHaveExperience)} />
@@ -94,16 +96,11 @@ export default function StudentRegisterStep5() {
           {!dontHaveExperience && (
             <>
               <SelectCountry />
-              <GeneralInput
-                label={'Cidade, Estado'}
-                register={register}
-                defaultValue={
-                  editMode
-                    ? `${previous_experience[id].location?.city}, ${previous_experience[id].location?.state}`
-                    : ''
-                }
-                registerName="location"
-                required
+              <SelectInput
+                options={cities}
+                callback={value => {
+                  setValue('location', value ?? '');
+                }}
               />
               <GeneralInput
                 label={'Cargo'}
@@ -124,7 +121,7 @@ export default function StudentRegisterStep5() {
                   defaultValue={editMode ? moment(previous_experience[id].start_date).format() : ''}
                   registerName="start_date"
                   label="Data de ínicio"
-                  className="w-48"
+                  className="w-64"
                   type="month"
                   required
                 />
@@ -134,7 +131,7 @@ export default function StudentRegisterStep5() {
                     defaultValue={editMode ? moment(previous_experience[id].end_date).format() : ''}
                     registerName="end_date"
                     label="Data de fim"
-                    className="w-48"
+                    className="w-64"
                     type="month"
                     required
                   />
