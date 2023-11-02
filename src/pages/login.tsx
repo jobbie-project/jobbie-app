@@ -107,14 +107,14 @@ export default function Login() {
                 <PairProgramming width="520" height="380" />
               </div>
             </div>
-            <div className="flex h-full mt-6">
+            <div className="flex h-full flex-col justify-evenly mt-6">
               <Carousel
                 autoplay
                 autoplayDelay={15000}
                 loop
                 nextArrow={() => {}}
                 prevArrow={() => {}}
-                className="bg-white max-w-[600px] mx-auto h-[60%] rounded-md select-none"
+                className="bg-white max-w-[600px] mx-auto h-[300px] rounded-md select-none"
                 navigation={({setActiveIndex, activeIndex, length}) => (
                   <div className="absolute bottom-4 left-2/4 z-50 flex -translate-x-2/4 gap-2">
                     {new Array(length).fill('').map((_, i) => (
@@ -175,17 +175,13 @@ export default function Login() {
                   </div>
                 </div>
               </Carousel>
-              <div className="flex flex-row items-end justify-end h-full pb-10 mr-20 ">
-                <div className="flex flex-col">
-                  <a href="https://www.linkedin.com/in/adriellyisly/" target="_blank">
-                    <Adrielly width="138" height="42" />
-                  </a>
-                </div>
-                <div className="flex flex-col mr-8">
-                  <a href="https://www.linkedin.com/in/felipe-gabriel-botelho/" target="_blank">
-                    <Felipe width="138" height="42" />
-                  </a>
-                </div>
+              <div className="flex flex-row w-[600px] mx-auto justify-end">
+                <a href="https://www.linkedin.com/in/adriellyisly/" target="_blank">
+                  <Adrielly width="138" height="42" />
+                </a>
+                <a href="https://www.linkedin.com/in/felipe-gabriel-botelho/" target="_blank">
+                  <Felipe width="138" height="42" />
+                </a>
               </div>
             </div>
           </div>
