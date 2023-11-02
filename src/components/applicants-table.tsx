@@ -93,14 +93,6 @@ export default function ApplicantsList(props: ApplicantsListProps) {
           </div>
         </div>
       )}
-      {/* <Dialog open={isOpen} onOpenChange={setIsOpen}>
-        <DialogContent className="overflow-y-scroll">
-          <DialogDescription>
-          </DialogDescription>
-          <DialogFooter>
-          </DialogFooter>
-        </DialogContent>
-      </Dialog> */}
     </div>
   );
 }

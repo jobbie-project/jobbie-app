@@ -7,6 +7,7 @@ import {useGetJobList} from '@/hooks/useGetJobList';
 import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
 import {JobCardMedium} from '@/components/card-medium';
+import {JobStatus} from '@/utils/consts';
 
 export default function MyApplications() {
   const {jobData} = useGetJobList();
@@ -25,7 +26,7 @@ export default function MyApplications() {
               <div className="w-72 h-28 bg-white border-2 border-lightgray1 rounded-md">
                 <div className="p-6 flex justify-between">
                   <div>
-                    <p className="font-semibold text-3xl">10</p>
+                    <p className="font-semibold text-3xl">{jobData.total}</p>
                     <p className="text-sm text-black mt-2">Candidaturas</p>
                   </div>
                   <RolesIcon width="52" height="52" />
@@ -34,7 +35,7 @@ export default function MyApplications() {
               <div className="w-72 h-28 bg-white border-2 border-lightgray1 rounded-md">
                 <div className="p-6 flex justify-between">
                   <div>
-                    <p className="font-semibold text-3xl">06</p>
+                    <p className="font-semibold text-3xl">{jobData.open}</p>
                     <p className="text-sm text-black mt-2">Em aberto</p>
                   </div>
                   <AvailableIcon width="52" height="52" />
@@ -43,7 +44,7 @@ export default function MyApplications() {
               <div className="w-72 h-28 bg-white border-2 border-lightgray1 rounded-md">
                 <div className="p-6 flex justify-between">
                   <div>
-                    <p className="font-semibold text-3xl">04</p>
+                    <p className="font-semibold text-3xl">{jobData.closed}</p>
                     <p className="text-sm text-black mt-2">Finalizadas</p>
                   </div>
                   <ClosedIcon width="52" height="52" />
@@ -56,7 +57,7 @@ export default function MyApplications() {
                 <div className="py-6 w-full">
                   {firstColumn.map((job, index) => (
                     <div className="mb-5">
-                      <JobCardMedium job={job} key={index} code={job.code} />
+                      <JobCardMedium job={job} key={index} code={job.code} isClosed={job.status === 'closed'} />
                     </div>
                   ))}
                 </div>
@@ -64,7 +65,7 @@ export default function MyApplications() {
                   {secondColumn.map((job, index) => {
                     return (
                       <div className="mb-5 ml-5">
-                        <JobCardMedium job={job} key={index} code={job.code} />
+                        <JobCardMedium job={job} key={index} code={job.code} isClosed={job.status === 'closed'} />
                       </div>
                     );
                   })}
