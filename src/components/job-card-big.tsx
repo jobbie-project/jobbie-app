@@ -3,6 +3,7 @@ import {Money} from '@/utils/money';
 import {ContractTypes, JobTimes} from '@/utils/consts';
 import {useNavigate} from 'react-router-dom';
 import LocationIcon from '@/icons/location';
+import {Badge} from './ui/badge';
 import {JobType} from '@/enums';
 export function JobCardBig({job, code}: {job: Job; code: string}) {
   const navigate = useNavigate();
@@ -28,12 +29,10 @@ export function JobCardBig({job, code}: {job: Job; code: string}) {
           </div>
         </div>
         <div className="h-min flex flex-row justify-end select-none">
-          <p className="bg-white text-xs p-2 rounded-md mr-3 font-semibold">
+          <Badge className="mr-2">
             {ContractTypes.find(contractType => contractType.value === job.contract_type)?.label}
-          </p>
-          <p className="bg-white text-xs p-2 rounded-md font-semibold">
-            {JobTimes.find(jobTime => jobTime.value === job.job_time)?.label}
-          </p>
+          </Badge>
+          <Badge>{JobTimes.find(jobTime => jobTime.value === job.job_time)?.label}</Badge>
         </div>
       </div>
       <div>

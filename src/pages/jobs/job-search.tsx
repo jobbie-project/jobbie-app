@@ -9,6 +9,7 @@ import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
 import {Checkbox} from '@/components/ui/checkbox';
 import {useState} from 'react';
+import {useGetJobList} from '@/hooks/useGetJobList';
 
 const mockJob: Job = {
   title: 'Desenvolvedor Front-end',
@@ -34,6 +35,7 @@ export default function JobSearch() {
   const [showModality, setShowModality] = useState(false);
   const [showCategory, setShowCategory] = useState(false);
   const jobs = Array(5).fill(mockJob);
+  const {jobData} = useGetJobList();
 
   return (
     <div className="w-full select-none">
@@ -49,8 +51,8 @@ export default function JobSearch() {
           </div>
           <div className="w-full flex flex-row mt-8 justify-between">
             <div className="w-full">
-              {jobs.map((_, index) => (
-                <CardLarge key={index} />
+              {jobData.jobs.map((job, index) => (
+                <CardLarge job={job} key={index} code={job.code} />
               ))}
               <div className="flex flex-row my-8 justify-center">
                 <Stack spacing={2}>
