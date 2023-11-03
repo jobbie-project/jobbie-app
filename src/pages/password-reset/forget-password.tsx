@@ -15,7 +15,7 @@ export default function ForgetPassword() {
   const onSubmit = () => {
     try {
       if (!EmailValidator.validate(email)) throw new Error('Insira um email válido');
-      navigate('/recuperacao-de-conta/verificacao-de-email');
+      navigate(`/recuperacao-de-conta/verificacao-de-email?email=${email}`);
     } catch (error) {
       toastError(error);
     }

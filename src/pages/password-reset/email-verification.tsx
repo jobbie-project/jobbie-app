@@ -2,24 +2,52 @@ import RegisterHeader from '@/components/register-header';
 import Lottie from 'lottie-react';
 import AnimationEmail from '../../assets/sent-email.json';
 import {toast} from 'react-toastify';
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 import {Countdown} from '@/components/countdown';
 import {toastError} from '@/utils/toast-error';
+import {useSearchParams} from 'react-router-dom';
+import Api from '@/services/api/api.service';
 
 export default function EmailVerification() {
   const [showResend, setShowButton] = useState(false);
   const [wasResended, setWasResended] = useState(false);
+  const [params] = useSearchParams();
+  const [email, _] = useState(params.get('email'));
 
   setTimeout(() => setShowButton(true), 2000);
 
-  const handleResend = () => {
-    toast.success('O email de verificação foi reenviado.');
-    setWasResended(true);
+  const handleResend = async () => {
+    try {
+      await Api.post('/auth/forgot-password', {email});
+      toast.success('O email de verificação foi reenviado.');
+      setWasResended(true);
+    } catch (error) {
+      toastError(error);
+    }
+  };
+
+  const handleSendEmail = async () => {
+    try {
+      const email = params.get('email');
+      await Api.post('/auth/forgot-password', {email});
+      toast.success('O email de verificação foi enviado.');
+      setWasResended(true);
+    } catch (error) {
+      toastError(error);
+    }
   };
 
   const handleResendOnCountdown = () => {
     toastError('Espere o tempo terminar para solicitar outro código');
   };
+
+  useEffect(() => {
+    try {
+      handleSendEmail();
+    } catch (error) {
+      toastError(error);
+    }
+  }, []);
 
   return (
     <>

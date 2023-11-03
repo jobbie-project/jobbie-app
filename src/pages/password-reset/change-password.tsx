@@ -2,10 +2,11 @@ import {GeneralButton} from '@/components/general-button';
 import PasswordInput from '@/components/password';
 import PasswordStrengthMeter from '@/components/password-strength-meter';
 import RegisterHeader from '@/components/register-header';
+import Api from '@/services/api/api.service';
 import {toastError} from '@/utils/toast-error';
 import {useState} from 'react';
 import {useForm} from 'react-hook-form';
-import {useNavigate} from 'react-router-dom';
+import {useNavigate, useSearchParams} from 'react-router-dom';
 
 interface FormData {
   passwordMatch: string;
@@ -21,11 +22,14 @@ export default function ChangePassword() {
   });
   const [isPasswordValid, setIsPasswordValid] = useState(false);
   const navigate = useNavigate();
-
-  const onSubmit = (data: FormData) => {
+  const [params] = useSearchParams();
+  const onSubmit = async (data: FormData) => {
     try {
+      const token = params.get('token');
+      if (!token) throw new Error('Token inválido, solicite outro email');
       if (data.password !== data.passwordMatch) throw new Error('As senhas não coincidem. Tente novamente.');
       if (!isPasswordValid) throw new Error('Senha muito fraca');
+      await Api.post('/auth/reset-password', {password: data.password, token, confim_password: data.passwordMatch});
       navigate('/recuperacao-de-conta/senha-alterada');
     } catch (error) {
       toastError(error);
