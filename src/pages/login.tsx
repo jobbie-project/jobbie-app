@@ -17,6 +17,7 @@ import Felipe from '@/icons/ass_felipe';
 import LinkedinIcon from '@/icons/linkedin';
 import GithubIcon from '@/icons/github';
 import PairProgramming from '@/icons/pair-programming';
+import {useWindowSize} from '@/hooks/useWindowSize';
 
 interface FormData {
   email: string;
@@ -25,6 +26,7 @@ interface FormData {
 
 export default function Login() {
   const navigate = useNavigate();
+  const {width} = useWindowSize();
 
   const onSubmit = async (formData: FormData) => {
     try {
@@ -99,22 +101,33 @@ export default function Login() {
             </div>
           </div>
           <div className="bg-lightgray1 h-screen w-[50%] flex flex-col">
-            <div className="flex flex-row mx-auto">
-              <div className="w-[700px] flex flex-row justify-start z-10">
-                <Slogan width="460" height="460" />
+            <div className={width <= 1400 ? 'flex flex-row ml-10' : 'flex flex-row mx-auto'}>
+              <div className="flex flex-row justify-start z-10">
+                {width <= 1400 ? <Slogan width="360" height="360" /> : <Slogan width="460" height="460" />}
               </div>
               <div className="mt-32 absolute right-0">
-                <PairProgramming width="520" height="380" />
+                {width <= 1400 ? (
+                  <PairProgramming width="420" height="280" />
+                ) : (
+                  <PairProgramming width="520" height="380" />
+                )}
               </div>
             </div>
-            <div className="flex h-full flex-col justify-evenly mt-6">
+            <div
+              className={
+                width <= 1400 ? 'flex h-full flex-col justify-evenly mt-8' : 'flex h-full flex-col justify-evenly mt-6'
+              }>
               <Carousel
                 autoplay
                 autoplayDelay={15000}
                 loop
                 nextArrow={() => {}}
                 prevArrow={() => {}}
-                className="bg-white max-w-[600px] mx-auto h-[300px] rounded-md select-none"
+                className={
+                  width <= 1400
+                    ? 'bg-white max-w-[580px] mx-auto h-[150px] rounded-md select-none'
+                    : 'bg-white max-w-[600px] mx-auto h-[300px] rounded-md select-none'
+                }
                 navigation={({setActiveIndex, activeIndex, length}) => (
                   <div className="absolute bottom-4 left-2/4 z-50 flex -translate-x-2/4 gap-2">
                     {new Array(length).fill('').map((_, i) => (
@@ -128,8 +141,13 @@ export default function Login() {
                     ))}
                   </div>
                 )}>
-                <div className="h-[80%] px-10 flex w-full">
-                  <div className="text-sm text-[#A7A7A7] m-auto text-justify">
+                <div className={width <= 1400 ? 'h-[80%] px-10 py-4 flex w-full' : 'h-[80%] px-10 flex w-full'}>
+                  <div
+                    className={
+                      width <= 1400
+                        ? 'text-xs text-[#A7A7A7] m-auto text-justify'
+                        : 'text-sm text-[#A7A7A7] m-auto text-justify'
+                    }>
                     <p className="font-semibold mb-2">Sobre a Jobbie</p>A Jobbie é a visão transformadora de dois
                     estudantes,{' '}
                     <a
@@ -157,16 +175,26 @@ export default function Login() {
                     que oferecem oportunidades de emprego.
                   </div>
                 </div>
-                <div className="h-[90%] px-10 flex w-full">
-                  <div className="text-sm text-[#A7A7A7] m-auto text-justify">
+                <div className={width <= 1400 ? 'h-[80%] px-10 py-4 flex w-full' : 'h-[80%] px-10 flex w-full'}>
+                  <div
+                    className={
+                      width <= 1400
+                        ? 'text-xs text-[#A7A7A7] m-auto text-justify'
+                        : 'text-sm text-[#A7A7A7] m-auto text-justify'
+                    }>
                     <p className="font-semibold mb-2">O que Fazemos?</p>Oferecemos uma plataforma que facilita o
                     registro de estudantes e empresas, a elaboração de currículos, a publicação de vagas e a busca por
                     oportunidades com filtros criteriosos. Capacitamos os estudantes a se candidatarem diretamente às
                     vagas que correspondem às suas ambições e habilidades.
                   </div>
                 </div>
-                <div className="h-[90%] px-10 flex w-full">
-                  <div className="text-sm text-[#A7A7A7] m-auto text-justify">
+                <div className={width <= 1400 ? 'h-[80%] px-10 py-4 flex w-full' : 'h-[80%] px-10 flex w-full'}>
+                  <div
+                    className={
+                      width <= 1400
+                        ? 'text-xs text-[#A7A7A7] m-auto text-justify'
+                        : 'text-sm text-[#A7A7A7] m-auto text-justify'
+                    }>
                     <p className="font-semibold mb-2">Nosso Compromisso</p>Estamos comprometidos em criar uma comunidade
                     de crescimento e oportunidades. Nossa missão é conectar estudantes a oportunidades valiosas e ajudar
                     empresas a encontrar talentos qualificados. A Jobbie é fruto de um projeto de TCC concluído em
@@ -177,10 +205,10 @@ export default function Login() {
               </Carousel>
               <div className="flex flex-row w-[600px] mx-auto justify-end">
                 <a href="https://www.linkedin.com/in/adriellyisly/" target="_blank">
-                  <Adrielly width="138" height="42" />
+                  {width <= 1400 ? <Adrielly width="100" height="42" /> : <Adrielly width="138" height="42" />}
                 </a>
                 <a href="https://www.linkedin.com/in/felipe-gabriel-botelho/" target="_blank">
-                  <Felipe width="138" height="42" />
+                  {width <= 1400 ? <Felipe width="100" height="42" /> : <Felipe width="138" height="42" />}
                 </a>
               </div>
             </div>
