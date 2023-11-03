@@ -20,6 +20,7 @@ export const jobFiltersSlice = createSlice({
     },
     setSearchTerm: (state, action: PayloadAction<string>) => {
       state.searchTerm = action.payload;
+      state.page = 1;
     },
     clearFilters: state => {
       state.searchTerm = initialState.searchTerm;
@@ -31,6 +32,7 @@ export const jobFiltersSlice = createSlice({
     },
     clearSearchTerm: state => {
       state.searchTerm = initialState.searchTerm;
+      state.page = 1;
     },
     setContractType: (state, action: PayloadAction<ContractType[]>) => {
       state.contractType = action.payload;
@@ -39,12 +41,14 @@ export const jobFiltersSlice = createSlice({
       state.jobType = action.payload;
     },
     setPage: (state, action: PayloadAction<number>) => {
+      state.page = 1;
       state.page = action.payload;
     },
     setStudentName: (state, action: PayloadAction<string>) => {
       state.studentName = action.payload;
     },
     setJobCode: (state, action: PayloadAction<string>) => {
+      state.page = 1;
       state.code = action.payload;
     },
   },
@@ -58,6 +62,7 @@ export const {
   setContractType,
   setJobType,
   setStudentName,
+  setPage,
   setJobCode,
 } = jobFiltersSlice.actions;
 

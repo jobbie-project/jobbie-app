@@ -10,11 +10,9 @@ import {Checkbox} from '@/components/ui/checkbox';
 import {useEffect, useState} from 'react';
 import {useGetJobList} from '@/hooks/useGetJobList';
 import {useAppDispatch} from '@/store/store';
-import {clearFilters, setContractType, setJobType, setSearchTerm} from '@/store/slices/job-filters';
+import {clearFilters, setContractType, setJobType, setPage, setSearchTerm} from '@/store/slices/job-filters';
 import {ContractType, JobType} from '@/enums';
 import {useSearchParams} from 'react-router-dom';
-
-const numberOfJobs = 30;
 
 export default function JobSearch() {
   const [showModality, setShowModality] = useState(false);
@@ -24,8 +22,15 @@ export default function JobSearch() {
   const [selectedJobContractType, setSelectedJobContractType] = useState<string[]>([]);
   const [selectedJobType, setSelectedJobType] = useState<string[]>([]);
   const {jobData} = useGetJobList();
-
+  const [homepagePage, setHomepagePage] = useState(1);
   const [params] = useSearchParams();
+
+  const handleChange = (_: any, value: number) => {
+    if (value !== homepagePage) {
+      setHomepagePage(value);
+      dispatch(setPage(value));
+    }
+  };
 
   const onSubmit = () => {
     dispatch(setSearchTerm(search));
@@ -70,7 +75,7 @@ export default function JobSearch() {
         <div className="max-w-4xl w-full">
           <BreadCrumbComponent className="my-10" />
           <div className="flex flex-row">
-            <SearchBar onChange={setSearch} value={search} />
+            <SearchBar onChange={setSearch} value={search} onClick={onSubmit} />
             <Button onClick={onSubmit} variant="none" className="ml-4 h-12 px-6 text-white bg-redDefault">
               Pesquisar
             </Button>
@@ -82,12 +87,14 @@ export default function JobSearch() {
               ))}
               <div className="flex flex-row my-8 justify-center">
                 <Stack spacing={2}>
-                  <Pagination count={numberOfJobs} shape="rounded" />
+                  <Pagination count={Math.ceil(jobData.total / 10)} shape="rounded" onChange={handleChange} />
                 </Stack>
               </div>
             </div>
             <div className="flex flex-col ml-6 w-96">
-              <span className="text-xs text-lightblack">{jobData.jobs.length} Resultados</span>
+              <span className="text-xs text-lightblack">
+                {jobData.total} Resultados, com {jobData.jobs.length} na página
+              </span>
               <div className="flex flex-row justify-between border-2 border-lightgray1 rounded-md p-4 my-6 font-semibold text-sm">
                 Filtros{' '}
                 <span onClick={() => clearJobFilters()} className="cursor-pointer text-xs mt-1 text-primaryGray">

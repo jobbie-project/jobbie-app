@@ -7,12 +7,24 @@ import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
 import {JobCardMedium} from '@/components/card-medium';
 import {useGetMyApplications} from '@/hooks/useGetMyApplications';
+import {setPage} from '@/store/slices/job-filters';
+import {useState} from 'react';
+import {useAppDispatch} from '@/store/store';
 
 export default function MyApplications() {
   const {jobData} = useGetMyApplications();
   const half = Math.ceil(jobData.jobs.length / 2);
   const firstColumn = jobData.jobs.slice(0, half);
   const secondColumn = jobData.jobs.slice(half);
+  const [homepagePage, setHomepagePage] = useState(1);
+  const dispatch = useAppDispatch();
+
+  const handleChange = (_: any, value: number) => {
+    if (value !== homepagePage) {
+      setHomepagePage(value);
+      dispatch(setPage(value));
+    }
+  };
 
   return (
     <>
@@ -73,7 +85,7 @@ export default function MyApplications() {
             </div>
             <div className="flex flex-row mt-4 mb-12 justify-center">
               <Stack spacing={2}>
-                <Pagination count={jobData.total / 5} shape="rounded" />
+                <Pagination count={Math.ceil(jobData.total / 10)} shape="rounded" onChange={handleChange} />
               </Stack>
             </div>
           </div>

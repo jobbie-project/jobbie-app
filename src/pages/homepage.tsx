@@ -10,7 +10,7 @@ import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
 import {Footer} from '@/components/footer';
 import {useAppDispatch} from '@/store/store';
-import {clearFilters} from '@/store/slices/job-filters';
+import {clearFilters, setPage} from '@/store/slices/job-filters';
 import {useNavigate} from 'react-router-dom';
 
 export default function Home() {
@@ -19,6 +19,15 @@ export default function Home() {
   const [search, setSearch] = useState('');
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+  const [homepagePage, setHomepagePage] = useState(1);
+
+  const handleChange = (_: any, value: number) => {
+    if (value !== homepagePage) {
+      setHomepagePage(value);
+      dispatch(setPage(value));
+    }
+  };
+
   useEffect(() => {
     if (!data.id) window.location.href = '/entrar';
   }, [data]);
@@ -41,7 +50,7 @@ export default function Home() {
         <div className="max-w-4xl w-full">
           <p className="my-5 font-normal">Olá, {data?.name?.split(' ')[0]}</p>
           <div className="flex flex-row">
-            <SearchBar placeholder="Procure por vagas" onChange={setSearch} />
+            <SearchBar placeholder="Procure por vagas" onChange={setSearch} onClick={onSubmit} />
             <Button variant="none" className="h-12 px-10 ml-4 text-sm text-white bg-redDefault" onClick={onSubmit}>
               Pesquisar
             </Button>
@@ -79,18 +88,8 @@ export default function Home() {
             </div>
           </div>
           <div className="flex flex-row mt-4 mb-12 justify-center">
-            <Stack
-              spacing={2}
-              onClick={e => {
-                console.log(e);
-              }}>
-              <Pagination
-                count={5}
-                shape="rounded"
-                onChange={e => {
-                  console.log(e.currentTarget);
-                }}
-              />
+            <Stack spacing={2}>
+              <Pagination count={Math.ceil(jobData.total / 10)} shape="rounded" onChange={handleChange} />
             </Stack>
           </div>
         </div>

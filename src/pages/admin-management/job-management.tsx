@@ -11,14 +11,21 @@ import {Pagination, Stack} from '@mui/material';
 import {useGetJobList} from '@/hooks/useGetJobList';
 import {useEffect, useState} from 'react';
 import {useAppDispatch} from '@/store/store';
-import {clearFilters, setJobCode} from '@/store/slices/job-filters';
+import {clearFilters, setJobCode, setPage} from '@/store/slices/job-filters';
 
 export default function JobManagement() {
   const navigate = useNavigate();
   const [code, setCode] = useState('');
   const {jobData, deleteJob} = useGetJobList();
   const dispatch = useAppDispatch();
+  const [homepagePage, setHomepagePage] = useState(1);
 
+  const handleChange = (_: any, value: number) => {
+    if (value !== homepagePage) {
+      setHomepagePage(value);
+      dispatch(setPage(value));
+    }
+  };
   useEffect(() => {
     setCode('');
     dispatch(clearFilters());
@@ -89,7 +96,7 @@ export default function JobManagement() {
             <TableList jobData={jobData} deleteJob={deleteJob} />
             <div className="flex flex-row m-8 justify-center">
               <Stack spacing={2}>
-                <Pagination count={10} shape="rounded" />
+                <Pagination count={Math.ceil(jobData.total / 10)} shape="rounded" onChange={handleChange} />
               </Stack>
             </div>
           </div>

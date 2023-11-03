@@ -1,4 +1,3 @@
-import {ContractType, JobType} from '@/enums';
 import {Job} from '@/interfaces/job';
 import Api from '@/services/api/api.service';
 import {RootState} from '@/store/store';
