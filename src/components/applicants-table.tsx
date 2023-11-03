@@ -15,6 +15,7 @@ interface ApplicantsListProps {
 export default function ApplicantsList(props: ApplicantsListProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedId, setSelectedId] = useState<string>('');
+  console.log(props.applicants);
 
   return (
     <div>

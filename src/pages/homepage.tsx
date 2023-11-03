@@ -9,6 +9,7 @@ import {Button} from '@/components/ui/button';
 import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
 import {useSearchParams} from 'react-router-dom';
+import {Footer} from '@/components/footer';
 
 export default function Home() {
   const {jobData} = useGetJobList();
@@ -73,6 +74,7 @@ export default function Home() {
           </div>
         </div>
       </div>
+      <Footer />
     </div>
   );
 }

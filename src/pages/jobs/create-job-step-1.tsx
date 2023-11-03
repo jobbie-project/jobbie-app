@@ -11,7 +11,7 @@ import {useSelector} from 'react-redux';
 import {Button} from '@/components/ui/button';
 import {RadioGroup, RadioGroupItem} from '@/components/ui/radio-group';
 import {Label} from '@/components/ui/label';
-
+import * as EmailValidator from 'email-validator';
 interface FormData {
   company_name: string;
   owner_name?: string;
@@ -44,7 +44,11 @@ export default function CreateJobStep1() {
       dispatch(setJobCompanyName(data.company_name));
       if (!data.owner_name) throw new Error('Insira seu nome para continuar.');
       dispatch(setJobOwner(data.owner_name));
-      dispatch(setJobOwnerEmail(data.owner_email ?? ''));
+      if (!isSorting) {
+        if (!data.owner_email) throw new Error('Insira seu email para continuar.');
+        if (!EmailValidator.validate(data.owner_email)) throw new Error('Insira um email válido');
+        dispatch(setJobOwnerEmail(data.owner_email ?? ''));
+      }
       navigate(params.get('redirect') ?? '/nova-vaga/passo-2');
     } catch (error) {
       toastError(error);

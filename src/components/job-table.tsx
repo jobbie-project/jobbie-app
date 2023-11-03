@@ -38,7 +38,7 @@ export default function JobList({
       <TableBody className="text-center cursor-pointer">
         {jobData?.jobs?.length > 0 &&
           jobData?.jobs?.map(data => (
-            <TableRow key={data.code} onClick={() => handleGoToApplicants(data.code)}>
+            <TableRow key={data.code}>
               <TableCell>{data.code}</TableCell>
               <TableCell>{moment(data.created_at).format('DD/MM/YYYY')}</TableCell>
               <TableCell>{JobStatus.find(status => status.value === data.status)?.label}</TableCell>

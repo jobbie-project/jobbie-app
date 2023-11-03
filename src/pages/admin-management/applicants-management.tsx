@@ -21,6 +21,8 @@ import {
 import {toast} from 'react-toastify';
 import GeneralInput from '@/components/general-input';
 import CvIcon from '@/icons/cvs';
+import BreadCrumbComponent from '@/components/breadcrumb';
+import {IsEmpty} from '@/icons/empty';
 export default function ApplicantsManagement() {
   const navigate = useNavigate();
   const [params] = useSearchParams();
@@ -66,9 +68,10 @@ export default function ApplicantsManagement() {
   return (
     <>
       <Header />
-      <div className="max-w w-full flex justify-center">
-        <div className="max-w-3xl py-6">
+      <div className="w-full flex justify-center">
+        <div className="max-w-4xl w-full py-6">
           <div className="w-full">
+            <BreadCrumbComponent className="my-4" />
             <div className="flex flex-row justify-between">
               <div className="font-semibold my-4">Candidaturas da vaga {code}</div>
               <div className="flex justify-between">
@@ -93,7 +96,14 @@ export default function ApplicantsManagement() {
               </div>
             </div>
             <SearchBar className="mb-4" placeholder="Nome do aluno, curso" />
-            <ApplicantsList applicants={jobApplicants ?? []} setSortedCallback={handleSelectStudent} />
+            {jobApplicants?.length > 0 ? (
+              <ApplicantsList applicants={jobApplicants ?? []} setSortedCallback={handleSelectStudent} />
+            ) : (
+              <div className="flex flex-col items-center justify-center">
+                <IsEmpty width="380" height="380" />
+                <p className="font-semibold">Parece que não há candidatos ainda..</p>
+              </div>
+            )}
           </div>
         </div>
         <Dialog open={isOpen} onOpenChange={setIsOpen}>
