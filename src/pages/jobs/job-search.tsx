@@ -12,6 +12,7 @@ import {useGetJobList} from '@/hooks/useGetJobList';
 import {useAppDispatch} from '@/store/store';
 import {clearFilters, setContractType, setJobType, setPage, setSearchTerm} from '@/store/slices/job-filters';
 import {ContractType, JobType} from '@/enums';
+import {Footer} from '@/components/footer';
 import {useSearchParams} from 'react-router-dom';
 
 export default function JobSearch() {
@@ -237,6 +238,7 @@ export default function JobSearch() {
           </div>
         </div>
       </div>
+      <Footer />
     </div>
   );
 }

@@ -23,6 +23,7 @@ import GeneralInput from '@/components/general-input';
 import CvIcon from '@/icons/cvs';
 import BreadCrumbComponent from '@/components/breadcrumb';
 import {IsEmpty} from '@/icons/empty';
+import {Footer} from '@/components/footer';
 export default function ApplicantsManagement() {
   const navigate = useNavigate();
   const [params] = useSearchParams();
@@ -142,6 +143,7 @@ export default function ApplicantsManagement() {
           </DialogContent>
         </Dialog>
       </div>
+      <Footer />
     </>
   );
 }

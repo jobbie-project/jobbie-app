@@ -87,7 +87,7 @@ export default function Home() {
               </div>
             </div>
           </div>
-          <div className="flex flex-row mt-4 mb-12 justify-center">
+          <div className="flex flex-row mt-4 mb-6 justify-center">
             <Stack spacing={2}>
               <Pagination count={Math.ceil(jobData.total / 10)} shape="rounded" onChange={handleChange} />
             </Stack>
