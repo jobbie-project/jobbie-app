@@ -137,7 +137,7 @@ export default function JobViewer() {
                   <div className="flex flex-row items-center mb-4">
                     <PeopleIcon width="18" height="18" />
                     <p className="text-xs ml-2">
-                      {job?.applicants?.length}{' '}
+                      {job?.applicants?.length !== 0 ? job?.applicants?.length : ''}
                       {job?.applicants?.length !== 0
                         ? job?.applicants?.length !== 1
                           ? 'pessoas se candidataram'
