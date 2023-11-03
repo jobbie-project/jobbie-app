@@ -1,7 +1,10 @@
+import {ContractType, JobType} from '@/enums';
 import {Job} from '@/interfaces/job';
 import Api from '@/services/api/api.service';
+import {RootState} from '@/store/store';
 import {toastError} from '@/utils/toast-error';
 import React from 'react';
+import {useSelector} from 'react-redux';
 
 export interface JobDataReturn {
   total: number;
@@ -11,6 +14,7 @@ export interface JobDataReturn {
 }
 
 export function useGetJobList() {
+  const jobFilters = useSelector((state: RootState) => state.jobFilters);
   const [jobData, setJobData] = React.useState<JobDataReturn>({
     total: 0,
     jobs: [],
@@ -27,22 +31,34 @@ export function useGetJobList() {
     setLoading(false);
   };
 
+  React.useEffect(() => {
+    fetchJobs();
+  }, [jobFilters?.searchTerm, jobFilters?.contractType, jobFilters?.jobType, jobFilters?.page]);
+
   const fetchJobs = async () => {
     try {
       setLoading(true);
-      const {data} = await Api.get('/job');
+      let url = `/job?`;
+      if (jobFilters?.searchTerm) {
+        url += `position=${jobFilters?.searchTerm}&`;
+      }
+      if (jobFilters?.contractType) {
+        url += `${jobFilters.contractType.map(type => `contract_type=${type}&`).join('')}`;
+      }
+
+      if (jobFilters?.jobType) {
+        url += `${jobFilters.jobType.map(type => `type=${type}&`).join('')}`;
+      }
+      const {data} = await Api.get(url);
       setJobData(data);
     } catch (error) {
       setError(error as any);
+
       toastError(error);
     } finally {
       setLoading(false);
     }
   };
-
-  React.useEffect(() => {
-    fetchJobs();
-  }, []);
 
   return {
     jobData,

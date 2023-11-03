@@ -5,6 +5,8 @@ interface SearchBarProps {
   placeholder?: string;
   className?: string;
   showFilter?: boolean;
+  onChange?: (value: string) => void;
+  value?: string;
 }
 
 export function SearchBar(props: SearchBarProps) {
@@ -18,9 +20,11 @@ export function SearchBar(props: SearchBarProps) {
                 <CiSearch size="30" color={'#7C7979'} />
               </div>
               <input
+                value={props.value}
                 type="text"
                 className="bg-lightgray1 text-gray-900 focus:outline-none text-sm rounded-md block w-full pl-16 placeholder-[#7C7979]"
                 placeholder={props.placeholder ? props.placeholder : 'Pesquisar'}
+                onChange={event => props.onChange && props.onChange(event.target.value)}
               />
               {props.showFilter && (
                 <div className="flex flex-row items-center mr-4">
