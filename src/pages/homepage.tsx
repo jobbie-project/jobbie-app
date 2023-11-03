@@ -8,18 +8,17 @@ import {useGetJobList} from '@/hooks/useGetJobList';
 import {Button} from '@/components/ui/button';
 import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
-
-import {useSearchParams} from 'react-router-dom';
 import {Footer} from '@/components/footer';
 import {useAppDispatch} from '@/store/store';
-import {clearFilters, setSearchTerm} from '@/store/slices/job-filters';
+import {clearFilters} from '@/store/slices/job-filters';
+import {useNavigate} from 'react-router-dom';
 
 export default function Home() {
   const {jobData} = useGetJobList();
   const data = authenticationService.getUserData();
   const [search, setSearch] = useState('');
   const dispatch = useAppDispatch();
-
+  const navigate = useNavigate();
   useEffect(() => {
     if (!data.id) window.location.href = '/entrar';
   }, [data]);
@@ -32,7 +31,7 @@ export default function Home() {
   const firstColumn = jobData.jobs.slice(0, half);
   const secondColumn = jobData.jobs.slice(half);
   const onSubmit = () => {
-    dispatch(setSearchTerm(search));
+    navigate(`/pesquisar?search=${search}`);
   };
 
   return (

@@ -12,6 +12,7 @@ import {useGetJobList} from '@/hooks/useGetJobList';
 import {useAppDispatch} from '@/store/store';
 import {clearFilters, setContractType, setJobType, setSearchTerm} from '@/store/slices/job-filters';
 import {ContractType, JobType} from '@/enums';
+import {useSearchParams} from 'react-router-dom';
 
 const numberOfJobs = 30;
 
@@ -23,6 +24,9 @@ export default function JobSearch() {
   const [selectedJobContractType, setSelectedJobContractType] = useState<string[]>([]);
   const [selectedJobType, setSelectedJobType] = useState<string[]>([]);
   const {jobData} = useGetJobList();
+
+  const [params] = useSearchParams();
+
   const onSubmit = () => {
     dispatch(setSearchTerm(search));
     dispatch(setContractType(selectedJobContractType as ContractType[]));
@@ -52,6 +56,11 @@ export default function JobSearch() {
 
   useEffect(() => {
     dispatch(clearFilters());
+    if (params.get('search')) {
+      const previousSearch = params.get('search') as string;
+      setSearch(previousSearch);
+      dispatch(setSearchTerm(previousSearch));
+    }
   }, []);
 
   return (
