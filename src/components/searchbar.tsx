@@ -7,6 +7,7 @@ interface SearchBarProps {
   showFilter?: boolean;
   onChange?: (value: string) => void;
   value?: string;
+  onClick?: () => void;
 }
 
 export function SearchBar(props: SearchBarProps) {
@@ -22,6 +23,12 @@ export function SearchBar(props: SearchBarProps) {
               <input
                 value={props.value}
                 type="text"
+                onKeyDown={event => {
+                  if (event.key === 'Enter') {
+                    event.preventDefault();
+                    props.onClick && props.onClick();
+                  }
+                }}
                 className="bg-lightgray1 text-gray-900 focus:outline-none text-sm rounded-md block w-full pl-16 placeholder-[#7C7979]"
                 placeholder={props.placeholder ? props.placeholder : 'Pesquisar'}
                 onChange={event => props.onChange && props.onChange(event.target.value)}

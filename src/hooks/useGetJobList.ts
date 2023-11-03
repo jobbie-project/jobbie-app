@@ -33,27 +33,42 @@ export function useGetJobList() {
 
   React.useEffect(() => {
     fetchJobs();
-  }, [jobFilters?.searchTerm, jobFilters?.contractType, jobFilters?.jobType, jobFilters?.page]);
+  }, [
+    jobFilters?.searchTerm,
+    jobFilters?.contractType,
+    jobFilters?.jobType,
+    jobFilters?.page,
+    jobFilters?.code,
+    jobFilters?.studentName,
+  ]);
 
   const fetchJobs = async () => {
     try {
       setLoading(true);
       let url = `/job?`;
+      if (jobFilters?.page) {
+        url += `page=${jobFilters?.page}&`;
+      }
       if (jobFilters?.searchTerm) {
         url += `position=${jobFilters?.searchTerm}&`;
+      }
+      if (jobFilters.code) {
+        url += `code=${jobFilters.code}&`;
+      }
+      if (jobFilters.studentName) {
+        url += `student_name=${jobFilters.studentName}&`;
       }
       if (jobFilters?.contractType) {
         url += `${jobFilters.contractType.map(type => `contract_type=${type}&`).join('')}`;
       }
-
       if (jobFilters?.jobType) {
         url += `${jobFilters.jobType.map(type => `type=${type}&`).join('')}`;
       }
+      console.log(url);
       const {data} = await Api.get(url);
       setJobData(data);
     } catch (error) {
       setError(error as any);
-
       toastError(error);
     } finally {
       setLoading(false);

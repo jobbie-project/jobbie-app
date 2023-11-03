@@ -35,7 +35,7 @@ export default function JobList({
           <TableHead className="text-center">Gerenciamento</TableHead>
         </TableRow>
       </TableHeader>
-      <TableBody className="text-center cursor-pointer">
+      <TableBody className="text-center">
         {jobData?.jobs?.length > 0 &&
           jobData?.jobs?.map(data => (
             <TableRow key={data.code}>

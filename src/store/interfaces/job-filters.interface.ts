@@ -5,4 +5,6 @@ export interface JobFilters {
   contractType: ContractType[];
   jobType: JobType[];
   page?: number;
+  code?: string;
+  studentName?: string;
 }

@@ -9,10 +9,24 @@ import {AvailableIcon} from '@/icons/available';
 import {ClosedIcon} from '@/icons/closed';
 import {Pagination, Stack} from '@mui/material';
 import {useGetJobList} from '@/hooks/useGetJobList';
+import {useEffect, useState} from 'react';
+import {useAppDispatch} from '@/store/store';
+import {clearFilters, setJobCode} from '@/store/slices/job-filters';
 
 export default function JobManagement() {
   const navigate = useNavigate();
+  const [code, setCode] = useState('');
   const {jobData, deleteJob} = useGetJobList();
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    setCode('');
+    dispatch(clearFilters());
+  }, []);
+
+  const onSubmit = () => {
+    dispatch(setJobCode(code));
+  };
 
   const sendTo = () => {
     navigate('/nova-vaga/passo-1');
@@ -65,7 +79,13 @@ export default function JobManagement() {
                 </Button>
               </div>
             </div>
-            <SearchBar className="mb-4" placeholder="Código da vaga, nome da empresa" />
+            <SearchBar
+              className="mb-4"
+              placeholder="Pesquise pelo código da vaga"
+              value={code}
+              onChange={setCode}
+              onClick={onSubmit}
+            />
             <TableList jobData={jobData} deleteJob={deleteJob} />
             <div className="flex flex-row m-8 justify-center">
               <Stack spacing={2}>

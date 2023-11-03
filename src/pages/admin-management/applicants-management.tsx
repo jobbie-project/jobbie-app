@@ -31,16 +31,21 @@ export default function ApplicantsManagement() {
   const [emailTo, setEmailTo] = useState<string>('');
   const [sortedIds, setSortedIds] = useState<string[]>([]);
   const code = params.get('codigo');
-
+  const [studentName, setStudentName] = useState<string>('');
   const fetchJob = async () => {
     try {
       if (code && code !== undefined) {
-        const {data} = await Api.get(`/job/applicants/${code}`);
+        const {data} = await Api.get(`/job/applicants/${code}?student_name=${studentName}`);
         setJobApplicants(data.applicants);
       }
     } catch (error) {
       toastError(error);
     }
+  };
+
+  const onSubmit = () => {
+    setStudentName(studentName);
+    fetchJob();
   };
 
   useEffect(() => {
@@ -95,7 +100,7 @@ export default function ApplicantsManagement() {
                 </TooltipProvider>
               </div>
             </div>
-            <SearchBar className="mb-4" placeholder="Nome do aluno, curso" />
+            <SearchBar className="mb-4" placeholder="Nome do aluno" onClick={onSubmit} onChange={setStudentName} />
             {jobApplicants?.length > 0 ? (
               <ApplicantsList applicants={jobApplicants ?? []} setSortedCallback={handleSelectStudent} />
             ) : (

@@ -7,6 +7,8 @@ const initialState: JobFilters = {
   contractType: [],
   jobType: [],
   page: 1,
+  code: '',
+  studentName: '',
 };
 
 export const jobFiltersSlice = createSlice({
@@ -23,6 +25,9 @@ export const jobFiltersSlice = createSlice({
       state.searchTerm = initialState.searchTerm;
       state.contractType = initialState.contractType;
       state.jobType = initialState.jobType;
+      state.page = initialState.page;
+      state.code = initialState.code;
+      state.studentName = initialState.studentName;
     },
     clearSearchTerm: state => {
       state.searchTerm = initialState.searchTerm;
@@ -36,10 +41,24 @@ export const jobFiltersSlice = createSlice({
     setPage: (state, action: PayloadAction<number>) => {
       state.page = action.payload;
     },
+    setStudentName: (state, action: PayloadAction<string>) => {
+      state.studentName = action.payload;
+    },
+    setJobCode: (state, action: PayloadAction<string>) => {
+      state.code = action.payload;
+    },
   },
 });
 
-export const {setJobFilters, setSearchTerm, clearFilters, clearSearchTerm, setContractType, setJobType} =
-  jobFiltersSlice.actions;
+export const {
+  setJobFilters,
+  setSearchTerm,
+  clearFilters,
+  clearSearchTerm,
+  setContractType,
+  setJobType,
+  setStudentName,
+  setJobCode,
+} = jobFiltersSlice.actions;
 
 export default jobFiltersSlice.reducer;
