@@ -9,6 +9,7 @@ import {AvailableIcon} from '@/icons/available';
 import {ClosedIcon} from '@/icons/closed';
 import {Pagination, Stack} from '@mui/material';
 import {useGetJobList} from '@/hooks/useGetJobList';
+import {Footer} from '@/components/footer';
 import {useEffect, useState} from 'react';
 import {useAppDispatch} from '@/store/store';
 import {clearFilters, setJobCode, setPage} from '@/store/slices/job-filters';
@@ -102,6 +103,7 @@ export default function JobManagement() {
           </div>
         </div>
       </div>
+      <Footer />
     </>
   );
 }

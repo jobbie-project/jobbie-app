@@ -1,21 +1,15 @@
-import {Header} from '@/components/header';
-import {Button} from '@/components/ui/button';
-import {useNavigate} from 'react-router-dom';
-import Lottie from 'lottie-react';
-import AnimationVerified from '@/assets/notdesktop.json';
 import {toast} from 'react-toastify';
 import {useEffect, useState} from 'react';
 import {useWindowSize} from '@/hooks/useWindowSize';
-import {dividerClasses} from '@mui/material';
+import {ServerDownIcon} from '@/icons/server-down-icon';
 
 export default function ServerDown() {
-  const navigate = useNavigate();
   const [wasShown, setWasShown] = useState(false);
   const {width} = useWindowSize();
 
   useEffect(() => {
     if (!wasShown) {
-      toast.error('Se já estiver em uma sessão desktop, tente reduzir o zoom da página pelo navegador.');
+      toast.error('Estamos enfrentando problemas, tente novamente mais tarde.');
       setWasShown(true);
       setTimeout(() => {
         setWasShown(false);
@@ -31,27 +25,18 @@ export default function ServerDown() {
             <div className="p-10">
               <div className="font-semibold text-2xl flex flex-col justify-center items-center">
                 <p className="mb-2">Ops!</p>
-                <p className="text-lg">No momento, essa página só esta dispónível para desktop.</p>
+                <p className="text-lg">Parece que você foi desconectado do servidor.</p>
               </div>
             </div>
           ) : (
             <div className="font-semibold text-2xl flex flex-col justify-center items-center">
               <p className="mb-2">Ops!</p>
-              <p className="text-lg">No momento, essa página só esta dispónível para desktop.</p>
+              <p className="text-lg">Parece que você foi desconectado do servidor.</p>
             </div>
           )}
           <div className="flex justify-center">
-            <Lottie animationData={AnimationVerified} autoPlay={true} loop={true} style={{height: 260, width: 260}} />
+            <ServerDownIcon width="460" height="460" />
           </div>
-          {width <= 500 ? (
-            <p className="text-sm p-10">
-              Se já estiver em uma sessão desktop, tente reduzir o zoom da página pelo navegador.
-            </p>
-          ) : (
-            <p className="text-sm">
-              Se já estiver em uma sessão desktop, tente reduzir o zoom da página pelo navegador.
-            </p>
-          )}
         </div>
       </div>
     </div>

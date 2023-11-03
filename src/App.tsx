@@ -45,11 +45,10 @@ import MyApplications from './pages/my-applications';
 import NotDesktop from './pages/notdesktop';
 import AboutUs from './pages/about-us';
 import {useWindowSize} from './hooks/useWindowSize';
-import authenticationService from './services/authentication/authentication.service';
+import ServerDown from './pages/server-down';
 
 const RedirectToLogin: React.FC = () => {
-  const {token} = authenticationService.getUserData();
-  window.location.href = token ? '/inicio' : '/entrar';
+  window.location.href = '/404';
   return <></>;
 };
 
@@ -153,6 +152,7 @@ export const App: React.FC = () => {
         <Route path={`/candidaturas`} element={<MyApplications />} />
         <Route path={`/404`} element={<NotFound />} />
         <Route path={`/notdesktop`} element={<NotDesktop />} />
+        <Route path={`/serverdown`} element={<ServerDown />} />
       </Routes>
       <ToastContainer />
     </div>

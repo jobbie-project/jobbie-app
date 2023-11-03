@@ -7,6 +7,7 @@ import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
 import {JobCardMedium} from '@/components/card-medium';
 import {useGetMyApplications} from '@/hooks/useGetMyApplications';
+import {Footer} from '@/components/footer';
 import {setPage} from '@/store/slices/job-filters';
 import {useState} from 'react';
 import {useAppDispatch} from '@/store/store';
@@ -27,7 +28,7 @@ export default function MyApplications() {
   };
 
   return (
-    <>
+    <div className="w-full h-screen flex flex-col justify-between">
       <Header />
       <div className="w-full flex justify-center">
         <div className="max-w-4xl w-full py-6">
@@ -83,7 +84,7 @@ export default function MyApplications() {
                 </div>
               </div>
             </div>
-            <div className="flex flex-row mt-4 mb-12 justify-center">
+            <div className="flex flex-row mt-4 mb-8 justify-center">
               <Stack spacing={2}>
                 <Pagination count={Math.ceil(jobData.total / 10)} shape="rounded" onChange={handleChange} />
               </Stack>
@@ -91,6 +92,7 @@ export default function MyApplications() {
           </div>
         </div>
       </div>
-    </>
+      <Footer />
+    </div>
   );
 }
