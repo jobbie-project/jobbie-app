@@ -61,7 +61,7 @@ export const App: React.FC = () => {
   const {width, zoomLevel} = useWindowSize();
 
   const isNotCompatible = () => {
-    if (width && width < 1280 && zoomLevel > 80) {
+    if (width && width <= 1280 && zoomLevel > 80) {
       return true;
     }
     return false;
