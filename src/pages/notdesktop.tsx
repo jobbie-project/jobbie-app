@@ -31,13 +31,13 @@ export default function NotDesktop() {
             <div className="p-10">
               <div className="font-semibold text-2xl flex flex-col justify-center items-center">
                 <p className="mb-2">Ops!</p>
-                <p className="text-lg">No momento, essa página só esta dispónível para desktop.</p>
+                <p className="text-lg">No momento, essa página só esta disponível para desktop.</p>
               </div>
             </div>
           ) : (
             <div className="font-semibold text-2xl flex flex-col justify-center items-center">
               <p className="mb-2">Ops!</p>
-              <p className="text-lg">No momento, essa página só esta dispónível para desktop.</p>
+              <p className="text-lg">No momento, essa página só esta disponível para desktop.</p>
             </div>
           )}
           <div className="flex justify-center">
