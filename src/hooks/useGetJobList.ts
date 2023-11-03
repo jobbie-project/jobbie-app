@@ -64,7 +64,6 @@ export function useGetJobList() {
       if (jobFilters?.jobType) {
         url += `${jobFilters.jobType.map(type => `type=${type}&`).join('')}`;
       }
-      console.log(url);
       const {data} = await Api.get(url);
       setJobData(data);
     } catch (error) {
