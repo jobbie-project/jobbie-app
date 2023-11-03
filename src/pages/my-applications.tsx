@@ -67,7 +67,7 @@ export default function MyApplications() {
               <div className="flex flex-row justify-between">
                 <div className="py-6 w-full">
                   {firstColumn.map((job, index) => (
-                    <div className="mb-5">
+                    <div className="mb-5" key={index}>
                       <JobCardMedium job={job} key={index} code={job.code} isClosed={job.status === 'closed'} />
                     </div>
                   ))}
@@ -75,7 +75,7 @@ export default function MyApplications() {
                 <div className="py-6 w-full">
                   {secondColumn.map((job, index) => {
                     return (
-                      <div className="mb-5 ml-5">
+                      <div className="mb-5 ml-5" key={index}>
                         <JobCardMedium job={job} key={index} code={job.code} isClosed={job.status === 'closed'} />
                       </div>
                     );

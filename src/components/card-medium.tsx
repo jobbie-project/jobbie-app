@@ -21,7 +21,9 @@ export function JobCardMedium({job, code, isClosed}: {job: Job; code: string; is
   };
 
   return (
-    <div onClick={handleClick} className="bg-lightgray1 rounded-md p-6 flex flex-col justify-between cursor-pointer">
+    <div
+      onClick={handleClick}
+      className="bg-lightgray1 rounded-md p-6 flex flex-col justify-between cursor-pointer max-h-[448px]">
       <div className="flex flex-row justify-between">
         <div className="flex flex-col justify-start">
           <div className="flex max-w-fit cursor-pointer flex-row justify-start mb-1">
@@ -37,7 +39,7 @@ export function JobCardMedium({job, code, isClosed}: {job: Job; code: string; is
           </div>
         </div>
       </div>
-      <div className="flex flex-row justify-between">
+      <div className="flex flex-row justify-between h-6">
         <div className="flex flex-row items-center">
           <LocationIcon width="12" height="12" />
           <p className="ml-1 text-xs font-semibold">
@@ -58,7 +60,7 @@ export function JobCardMedium({job, code, isClosed}: {job: Job; code: string; is
           </p>
         </div>
         <div className="flex flex-row items-baseline">
-          <p className="text-xl mr-1 font-semibold">{Money(job.salary as unknow as number).format()}</p>
+          <p className="text-xl mr-1 font-semibold">{Money(job.salary as unknown as number).format()}</p>
           <p className="text-sm text-slate-500">/Mensal</p>
         </div>
       </div>
