@@ -6,25 +6,61 @@ import {Badge} from '@/components/ui/badge';
 import {BiSolidShareAlt} from 'react-icons/bi';
 import {CategoryIcon} from '@/icons/category';
 import {SalaryIcon} from '@/icons/salary';
-import {useSearchParams} from 'react-router-dom';
+import {useNavigate, useSearchParams} from 'react-router-dom';
 import {useGetJobData} from '@/hooks/useGetJobData';
 import {Money} from '@/utils/money';
 import moment from '@/utils/moment';
-import {useEffect} from 'react';
+import {useEffect, useState} from 'react';
 import {ContractTypes, JobTimes} from '@/utils/consts';
 import {ContractType, JobType} from '@/enums';
 import {LocationJobViewer} from '@/icons/location-jobviewer';
 import {PeopleIcon} from '@/icons/people';
 import {toast} from 'react-toastify';
 import {Job} from '@/interfaces/job';
+import Api from '@/services/api/api.service';
+import authenticationService from '@/services/authentication/authentication.service';
 
 export default function JobViewer() {
   const [params] = useSearchParams();
   const {job} = useGetJobData(params.get('codigo') ?? '');
+  const [alreadyApplied, setAlreadyApplied] = useState(false);
   const notAdded = () => {
     toast.error('Oops! Funcionalidade ainda não implementada.', {
       icon: '🥺',
     });
+  };
+
+  const {id} = authenticationService.getUserData();
+
+  useEffect(() => {
+    if (job?.applicants) {
+      job?.applicants.forEach(applicant => {
+        if (applicant.student.user.id == id) {
+          setAlreadyApplied(true);
+        }
+      });
+    }
+  }, [job?.applicants]);
+
+  const applyJob = async () => {
+    try {
+      if (alreadyApplied) {
+        toast.error('Você já aplicou para essa vaga.', {
+          icon: '😉',
+        });
+        return;
+      }
+      const {data} = await Api.post(`/job/apply/${job?.code}`);
+      console.log(data);
+      toast.success('Parabéns! Você se candidatou para a vaga.', {
+        icon: '🥳',
+      });
+      setAlreadyApplied(true);
+    } catch (error) {
+      toast.error('Oops! Erro ao aplicar para a vaga.', {
+        icon: '🥺',
+      });
+    }
   };
 
   const Share = () => {
@@ -129,8 +165,11 @@ export default function JobViewer() {
                     className="h-10 px-4 text-sm text-lightblack2 bg-white border-2 border-lightgray1 whitespace-nowrap">
                     Relatar um problema
                   </Button>
-                  <Button variant="none" className="h-10 px-6 ml-4 text-sm text-white bg-redDefault">
-                    Aplicar
+                  <Button
+                    variant="none"
+                    className={`h-10 px-6 ml-4 text-sm text-white bg-redDefault ${alreadyApplied && 'opacity-50'}`}
+                    onClick={applyJob}>
+                    {alreadyApplied ? 'Aplicado' : 'Aplicar'}
                   </Button>
                 </div>
                 <div className="flex flex-col mt-8 border-2 border-lightgray1 rounded-md p-6">
@@ -140,8 +179,8 @@ export default function JobViewer() {
                       {job?.applicants?.length !== 0 ? job?.applicants?.length : ''}
                       {job?.applicants?.length !== 0
                         ? job?.applicants?.length !== 1
-                          ? 'pessoas se candidataram'
-                          : 'pessoa se candidatou'
+                          ? ' pessoas se candidataram'
+                          : ' pessoa se candidatou'
                         : 'ainda não há candidatos'}
                     </p>
                   </div>
