@@ -10,12 +10,9 @@ import {Checkbox} from '@/components/ui/checkbox';
 import Api from '@/services/api/api.service';
 import authenticationService from '@/services/authentication/authentication.service';
 import {Slogan} from '@/icons/slogan';
-import {Flowers} from '@/icons/flowers';
 import {Carousel} from '@material-tailwind/react';
 import Adrielly from '@/icons/ass_adrielly';
 import Felipe from '@/icons/ass_felipe';
-import LinkedinIcon from '@/icons/linkedin';
-import GithubIcon from '@/icons/github';
 import PairProgramming from '@/icons/pair-programming';
 import {useWindowSize} from '@/hooks/useWindowSize';
 
