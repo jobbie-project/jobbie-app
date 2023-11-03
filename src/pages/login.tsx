@@ -98,9 +98,22 @@ export default function Login() {
             </div>
           </div>
           <div className="bg-lightgray1 h-screen w-[50%] flex flex-col">
-            <div className={width <= 1400 ? 'flex flex-row ml-10' : 'flex flex-row mx-auto'}>
+            <div
+              className={
+                width <= 1400
+                  ? 'flex flex-row ml-10'
+                  : width >= 1800 && width <= 2000
+                  ? 'flex flex-row ml-10'
+                  : 'flex flex-row mx-auto'
+              }>
               <div className="flex flex-row justify-start z-10">
-                {width <= 1400 ? <Slogan width="360" height="360" /> : <Slogan width="460" height="460" />}
+                {width <= 1400 ? (
+                  <Slogan width="360" height="360" />
+                ) : width >= 1800 && width <= 2000 ? (
+                  <Slogan width="460" height="560" />
+                ) : (
+                  <Slogan width="460" height="460" />
+                )}
               </div>
               <div className="mt-32 absolute right-0">
                 {width <= 1400 ? (
@@ -123,10 +136,12 @@ export default function Login() {
                 className={
                   width <= 1400
                     ? 'bg-white max-w-[580px] mx-auto h-[150px] rounded-md select-none'
+                    : width >= 1800 && width <= 2000
+                    ? 'bg-white max-w-[600px] mx-auto h-[240px] rounded-md select-none'
                     : 'bg-white max-w-[600px] mx-auto h-[300px] rounded-md select-none'
                 }
                 navigation={({setActiveIndex, activeIndex, length}) => (
-                  <div className="absolute bottom-4 left-2/4 z-50 flex -translate-x-2/4 gap-2">
+                  <div className="absolute bottom-6 left-2/4 z-50 flex -translate-x-2/4 gap-2">
                     {new Array(length).fill('').map((_, i) => (
                       <span
                         key={i}
