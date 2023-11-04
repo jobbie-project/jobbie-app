@@ -20,12 +20,13 @@ interface FormData {
 }
 
 export default function StudentRegisterStep2() {
-  const {register, handleSubmit, reset, setValue} = useForm<FormData>();
+  const {register, handleSubmit, reset, setValue, watch} = useForm<FormData>();
   const [editMode, setEditMode] = useState(false);
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const [params] = useSearchParams();
   const isBeingUpdated = params.get('update') === 'true';
+
   const profileAddress = useSelector((state: RootState) => {
     if (isBeingUpdated) {
       return state.updateProfileData.address;
@@ -80,6 +81,7 @@ export default function StudentRegisterStep2() {
             callback={value => {
               setValue('location', value ?? '');
             }}
+            value={watch('location')}
           />
           <GeneralInput
             register={register}

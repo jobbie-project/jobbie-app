@@ -92,7 +92,9 @@ export default function StudentProfileReview() {
           <div className="max-w-xl w-full font-semibold text-lightblack flex flex-row justify-between">
             <p className="py-2 flex items-end">Formação Acadêmica</p>
             <div className="mb-2">
-              <ButtonAddNew onClick={() => navigate('/estudante/educacao/adicionar')} />
+              <ButtonAddNew
+                onClick={() => navigate('/estudante/educacao/adicionar?redirect=/estudante/perfil/revisar')}
+              />
             </div>
           </div>
           <ReviewCardMedium

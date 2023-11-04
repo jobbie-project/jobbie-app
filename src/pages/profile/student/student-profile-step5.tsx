@@ -26,7 +26,7 @@ interface FormData {
 export default function StudentRegisterStep5() {
   const [dontHaveExperience, setDontHaveExperience] = useState<boolean>(false);
   const [currentJob, setCurrentJob] = useState<boolean>(false);
-  const {register, handleSubmit, setValue, reset} = useForm<FormData>();
+  const {register, handleSubmit, setValue, reset, watch} = useForm<FormData>();
   const [editMode, setEditMode] = useState(false);
   const {previous_experience} = useSelector((state: RootState) => state.profileData);
   const navigate = useNavigate();
@@ -101,6 +101,7 @@ export default function StudentRegisterStep5() {
                 callback={value => {
                   setValue('location', value ?? '');
                 }}
+                value={watch('location')}
               />
               <GeneralInput
                 label={'Cargo'}

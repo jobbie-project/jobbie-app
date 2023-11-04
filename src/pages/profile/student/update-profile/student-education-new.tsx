@@ -120,6 +120,7 @@ export default function AddNewEducation() {
             callback={value => {
               setValue('location', value ?? '');
             }}
+            value={watch('location')}
           />
           <GeneralInput
             label={'Nome da Instituição'}

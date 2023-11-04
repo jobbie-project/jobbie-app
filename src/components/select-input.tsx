@@ -1,7 +1,7 @@
 import {Autocomplete} from '@mui/material';
 import {IoMdArrowDropdown} from 'react-icons/io';
 
-export function SelectInput(props: {options: string[]; callback: (o: any) => any}) {
+export function SelectInput(props: {options: string[]; callback: (o: any) => any; value: string}) {
   return (
     <Autocomplete
       disablePortal
@@ -15,6 +15,11 @@ export function SelectInput(props: {options: string[]; callback: (o: any) => any
             <input
               {...params.inputProps}
               placeholder=""
+              value={props.value}
+              onChange={e => {
+                params?.inputProps?.onChange && params.inputProps.onChange(e);
+                props.callback(e.target.value);
+              }}
               className="peer h-10 w-full border-b-[3px] border-gray1 text-gray-900 focus:outline-none focus:border-redDefault text-sm"
               type="text"
               id="location"

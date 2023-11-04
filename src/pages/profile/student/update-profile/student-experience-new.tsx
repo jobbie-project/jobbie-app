@@ -29,7 +29,7 @@ interface FormData {
 
 export default function AddNewExperience() {
   const [currentJob, setCurrentJob] = useState<boolean>(false);
-  const {register, handleSubmit, reset, setValue} = useForm<FormData>();
+  const {register, handleSubmit, reset, setValue, watch} = useForm<FormData>();
   const [params] = useSearchParams();
   const isBeingUpdated = params.get('update') === 'true';
   const {previous_experience} = useSelector((state: RootState) => {
@@ -117,6 +117,7 @@ export default function AddNewExperience() {
               callback={value => {
                 setValue('location', value ?? '');
               }}
+              value={watch('location')}
             />
             <GeneralInput
               label={'Cargo'}
