@@ -149,7 +149,9 @@ export default function ApplicantsManagement() {
           </DialogContent>
         </Dialog>
       </div>
-      <Footer />
+      <div className="absolute bottom-0 w-screen">
+        <Footer />
+      </div>
     </>
   );
 }

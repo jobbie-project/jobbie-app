@@ -103,7 +103,9 @@ export default function JobManagement() {
           </div>
         </div>
       </div>
-      <Footer />
+      <div className="absolute bottom-0 w-screen">
+        <Footer />
+      </div>
     </>
   );
 }
