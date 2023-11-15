@@ -31,6 +31,7 @@ export default function ApplicantsManagement() {
   const [jobApplicants, setJobApplicants] = useState<JobApplicants[]>();
   const [emailTo, setEmailTo] = useState<string>('');
   const [sortedIds, setSortedIds] = useState<string[]>([]);
+  const [loading, setLoading] = useState(false);
   const code = params.get('codigo');
   const [studentName, setStudentName] = useState<string>('');
   const fetchJob = async () => {
@@ -63,10 +64,13 @@ export default function ApplicantsManagement() {
   const sendSorting = async (code: string) => {
     try {
       if (!emailTo || !EmailValidator.validate(emailTo)) throw new Error('Insira um e-mail válido');
+      setLoading(true);
       await Api.post(`/job/applicants/${code}/sorted-students`, {email: emailTo, studentIds: sortedIds});
       toast.success('Currículos enviados com sucesso!');
+      setLoading(false);
       navigate('/gerenciamento');
     } catch (error) {
+      setLoading(false);
       toastError(error);
     }
   };
@@ -133,10 +137,12 @@ export default function ApplicantsManagement() {
               <Button
                 type="submit"
                 onClick={() => {
-                  sendSorting(code ?? '');
+                  loading ? null : sendSorting(code ?? '');
                 }}
                 variant="none"
-                className=" bg-lightgray1 font-semibold text-black hover:bg-redDefault hover:text-white">
+                className={`${
+                  loading && 'opacity-50 cursor-wait'
+                } bg-lightgray1 font-semibold text-black hover:bg-redDefault hover:text-white`}>
                 Continuar
               </Button>
             </DialogFooter>

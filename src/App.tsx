@@ -99,6 +99,7 @@ export const App: React.FC = () => {
 
         {/* Public routes */}
         <Route path={`/entrar`} element={<Login />} />
+        <Route path="/" element={<Home />} />
         <Route path={`/inicio`} element={<Home />} />
         <Route path={`/sobre`} element={<AboutUs />} />
         <Route path={`/registro`} element={<Register />} />

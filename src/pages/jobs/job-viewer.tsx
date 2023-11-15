@@ -23,6 +23,7 @@ import authenticationService from '@/services/authentication/authentication.serv
 export default function JobViewer() {
   const [params] = useSearchParams();
   const {job} = useGetJobData(params.get('codigo') ?? '');
+  const [loading, setLoading] = useState(false);
   const [alreadyApplied, setAlreadyApplied] = useState(false);
   const notAdded = () => {
     toast.error('Oops! Funcionalidade ainda não implementada.', {
@@ -44,19 +45,22 @@ export default function JobViewer() {
 
   const applyJob = async () => {
     try {
+      if (loading) return;
       if (alreadyApplied) {
         toast.error('Você já aplicou para essa vaga.', {
           icon: '😉',
         });
         return;
       }
-      const {data} = await Api.post(`/job/apply/${job?.code}`);
-      console.log(data);
+      setLoading(true);
+      await Api.post(`/job/apply/${job?.code}`);
+      setLoading(false);
       toast.success('Parabéns! Você se candidatou para a vaga.', {
         icon: '🥳',
       });
       setAlreadyApplied(true);
     } catch (error) {
+      setLoading(false);
       toast.error('Oops! Erro ao aplicar para a vaga.', {
         icon: '🥺',
       });
@@ -167,7 +171,9 @@ export default function JobViewer() {
                   </Button>
                   <Button
                     variant="none"
-                    className={`h-10 px-6 ml-4 text-sm text-white bg-redDefault ${alreadyApplied && 'opacity-50'}`}
+                    className={`h-10 px-6 ml-4 text-sm text-white bg-redDefault ${alreadyApplied && 'opacity-50'} ${
+                      loading && 'opacity-50 cursor-wait'
+                    }`}
                     onClick={applyJob}>
                     {alreadyApplied ? 'Aplicado' : 'Aplicar'}
                   </Button>
