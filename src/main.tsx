@@ -7,7 +7,7 @@ import store from './store/store.ts';
 import 'react-toastify/dist/ReactToastify.css';
 import './main.css';
 
-ReactDOM.createRoot(document.getElementById('root')!).render(
+ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <ThemeProvider>
     <Provider store={store}>
       <BrowserRouter>

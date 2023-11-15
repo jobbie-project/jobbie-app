@@ -7,7 +7,7 @@ import {ButtonHover} from '@/components/button-hover-animation';
 import {ContractTypes, JobTimes} from '@/utils/consts';
 import Textarea from '@/components/ui/textarea';
 import {SelectDropdown} from '@/components/select-dropdown';
-import {useEffect, useState} from 'react';
+import {useEffect} from 'react';
 import {useSelector} from 'react-redux';
 import {Button} from '@/components/ui/button';
 import {ContractType, JobTime} from '@/enums';

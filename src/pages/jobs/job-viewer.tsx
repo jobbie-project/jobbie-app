@@ -6,17 +6,16 @@ import {Badge} from '@/components/ui/badge';
 import {BiSolidShareAlt} from 'react-icons/bi';
 import {CategoryIcon} from '@/icons/category';
 import {SalaryIcon} from '@/icons/salary';
-import {useNavigate, useSearchParams} from 'react-router-dom';
+import {useSearchParams} from 'react-router-dom';
 import {useGetJobData} from '@/hooks/useGetJobData';
 import {Money} from '@/utils/money';
 import moment from '@/utils/moment';
 import {useEffect, useState} from 'react';
 import {ContractTypes, JobTimes} from '@/utils/consts';
-import {ContractType, JobType} from '@/enums';
+import {JobType} from '@/enums';
 import {LocationJobViewer} from '@/icons/location-jobviewer';
 import {PeopleIcon} from '@/icons/people';
 import {toast} from 'react-toastify';
-import {Job} from '@/interfaces/job';
 import Api from '@/services/api/api.service';
 import authenticationService from '@/services/authentication/authentication.service';
 
@@ -109,7 +108,7 @@ export default function JobViewer() {
                   <p className="text-xs">{job?.company_name}</p>
                   <div className="mt-8 mb-7 pb-7 flex flex-row justify-between">
                     <div className="font-semibold flex flex-row items-end">
-                      {Money(job?.salary ?? 0).format()}{' '}
+                      {Money(Number(job?.salary) ?? 0).format()}{' '}
                       <div className="text-xs font-normal flex items-end mb-[2px]">/Mensal</div>
                     </div>
                     <Button
@@ -142,7 +141,7 @@ export default function JobViewer() {
                   <div className="flex flex-col items-center">
                     <SalaryIcon width="52" height="52" />
                     <p className="text-xs text-lightblack2 my-2">Salário</p>
-                    <div className="text-black font-semibold text-sm">{Money(job?.salary ?? 0).format()}</div>
+                    <div className="text-black font-semibold text-sm">{Money(Number(job?.salary) ?? 0).format()}</div>
                   </div>
                 </div>
                 <div className="flex flex-col px-7 mt-6">
@@ -209,7 +208,8 @@ export default function JobViewer() {
                     </p>
                   </div>
                   <div className="text-xs text-lightblack2 mt-6">
-                    Salário:<p className="font-semibold text-sm text-black">{Money(job?.salary ?? 0).format()}</p>
+                    Salário:
+                    <p className="font-semibold text-sm text-black">{Money(Number(job?.salary) ?? 0).format()}</p>
                   </div>
                   <div className="text-xs text-lightblack2 mt-6">
                     Modalidade:

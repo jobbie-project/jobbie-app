@@ -1,6 +1,5 @@
 import {CpsIcon} from '@/icons/cps-logo';
 import {FatecIcon} from '@/icons/fatec-logo';
-import {SpIcon} from '@/icons/sp-icon';
 
 export function Footer() {
   return (

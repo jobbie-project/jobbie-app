@@ -48,7 +48,7 @@ export function JobCardBig({job, code}: {job: Job; code: string}) {
       <div className="flex flex-row justify-between items-center">
         <div className="flex items-baseline mr-7 mt-4">
           <p className="text-sm font-semibold">
-            {Money(job.salary as unknow as number).format({
+            {Money(job.salary as unknown as number).format({
               decimal: ',',
             })}
           </p>

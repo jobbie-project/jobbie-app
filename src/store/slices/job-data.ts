@@ -25,9 +25,6 @@ export const jobDataSlice = createSlice({
   name: 'jobData',
   initialState: initialState,
   reducers: {
-    setJobData: (state, action: PayloadAction<JobData>) => {
-      state = action.payload;
-    },
     setJobCompanyName: (state, action: PayloadAction<string>) => {
       state.company_name = action.payload;
     },
@@ -69,7 +66,6 @@ export const jobDataSlice = createSlice({
 });
 
 export const {
-  setJobData,
   setJobCompanyName,
   setJobOwner,
   setJobOwnerEmail,

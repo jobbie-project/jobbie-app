@@ -106,7 +106,7 @@ export default function ApplicantsManagement() {
               </div>
             </div>
             <SearchBar className="mb-4" placeholder="Nome do aluno" onClick={onSubmit} onChange={setStudentName} />
-            {jobApplicants?.length > 0 ? (
+            {jobApplicants?.length !== undefined && jobApplicants?.length > 0 ? (
               <ApplicantsList applicants={jobApplicants ?? []} setSortedCallback={handleSelectStudent} />
             ) : (
               <div className="flex flex-col items-center justify-center">

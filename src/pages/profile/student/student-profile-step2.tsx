@@ -8,7 +8,6 @@ import {setUpdateUserAddress} from '@/store/slices/update-profile-data';
 import {RootState, useAppDispatch} from '@/store/store';
 import {toastError} from '@/utils/toast-error';
 import {cities} from '@/utils/useCities';
-import {Autocomplete, TextField} from '@mui/material';
 import {useEffect, useState} from 'react';
 import {useForm} from 'react-hook-form';
 import {useSelector} from 'react-redux';

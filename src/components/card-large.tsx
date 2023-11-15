@@ -7,16 +7,8 @@ import {Job} from '@/interfaces/job';
 import {Money} from '@/utils/money';
 import {ContractTypes} from '@/utils/consts';
 
-export default function CardLarge({job, code, isClosed}: {job: Job; code: string; isClosed?: boolean}) {
+export default function CardLarge({job, code}: {job: Job; code: string; isClosed?: boolean}) {
   const navigate = useNavigate();
-  const capitalize = (word: string) => {
-    const array = word.split(' ');
-    array.map((word, index) => {
-      array[index] = word[0].toUpperCase() + word.slice(1);
-    });
-    return array.join(' ');
-  };
-
   const handleClick = () => {
     navigate(`/vaga/detalhes?codigo=${code}`);
   };

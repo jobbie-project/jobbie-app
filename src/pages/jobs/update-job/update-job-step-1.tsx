@@ -5,7 +5,7 @@ import {useNavigate, useSearchParams} from 'react-router-dom';
 import RegisterHeader from '@/components/register-header';
 import GeneralInput from '@/components/general-input';
 import {ButtonHover} from '@/components/button-hover-animation';
-import {useEffect, useState} from 'react';
+import {useEffect} from 'react';
 import {useSelector} from 'react-redux';
 import {Button} from '@/components/ui/button';
 import {setUpdateJobCompanyName, setUpdateJobOwner, setUpdateJobOwnerEmail} from '@/store/slices/update-job-data';

@@ -1,12 +1,12 @@
 import axios, {AxiosError} from 'axios';
-
+import dotenv from 'dotenv';
 const headers = {
   Accept: 'application/json',
   'Content-Type': 'application/json',
 };
-
+dotenv.config();
 const Api = axios.create({
-  baseURL: import.meta.env.MODE !== 'development' ? import.meta.env.BACKEND_URL : 'http://localhost:1337',
+  baseURL: process.env.MODE !== 'development' ? process.env.BACKEND_URL : 'http://localhost:1337',
   headers,
 });
 

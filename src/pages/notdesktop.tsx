@@ -1,15 +1,10 @@
-import {Header} from '@/components/header';
-import {Button} from '@/components/ui/button';
-import {useNavigate} from 'react-router-dom';
 import Lottie from 'lottie-react';
 import AnimationVerified from '@/assets/notdesktop.json';
 import {toast} from 'react-toastify';
 import {useEffect, useState} from 'react';
 import {useWindowSize} from '@/hooks/useWindowSize';
-import {dividerClasses} from '@mui/material';
 
 export default function NotDesktop() {
-  const navigate = useNavigate();
   const [wasShown, setWasShown] = useState(false);
   const {width} = useWindowSize();
 

@@ -26,4 +26,6 @@ export interface Job {
     name: string;
     abbreviation: string;
   };
+  job_tag: string;
+  has_sorting: boolean;
 }
