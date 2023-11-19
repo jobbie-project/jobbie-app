@@ -1,3 +1,8 @@
+
+networks:
+  jobbie:
+    external: true
+
 services:
   frontend:
     build:
@@ -6,4 +11,6 @@ services:
     ports:
       - '3000:3000'
     environment:
-      - BACKEND_URL=${BACKEND_URL}
+      - VITE_BACKEND_URL=${VITE_BACKEND_URL}
+    networks:
+      - jobbie

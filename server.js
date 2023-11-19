@@ -14,6 +14,9 @@ dotenv.config({path: path.join(__dirname, '.env')});
 app.use(express.static(path.join(__dirname, 'dist')));
 app.use(express.static('public'));
 
+const baseDir = `${__dirname}/dist/`;
+app.get('*', (req, res) => res.sendFile('index.html', {root: baseDir}));
+
 app.use((req, res, next) => {
   console.log('called');
   res.sendFile(path.join(__dirname, 'dist', 'index.html'));
