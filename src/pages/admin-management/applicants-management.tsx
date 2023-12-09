@@ -78,7 +78,7 @@ export default function ApplicantsManagement() {
   return (
     <div className="flex flex-col justify-between h-screen">
       <Header />
-      <div className="w-full flex justify-center">
+      <div className="w-full flex justify-center h-full">
         <div className="max-w-4xl w-full py-6">
           <div className="w-full">
             <BreadCrumbComponent className="my-4" />
