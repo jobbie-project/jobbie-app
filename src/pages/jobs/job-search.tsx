@@ -61,16 +61,15 @@ export default function JobSearch() {
   };
 
   useEffect(() => {
-    dispatch(clearFilters());
     if (params.get('search')) {
       const previousSearch = params.get('search') as string;
-      setSearch(previousSearch);
       dispatch(setSearchTerm(previousSearch));
+      setSearch(previousSearch);
     }
   }, []);
 
   return (
-    <div className="w-full select-none">
+    <div className="w-full select-none flex flex-col justify-between h-screen">
       <Header />
       <div className="w-full flex justify-center">
         <div className="max-w-4xl w-full">

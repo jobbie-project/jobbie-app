@@ -17,13 +17,15 @@ export function JobCardMedium({job, code, isClosed}: {job: Job; code: string; is
   };
 
   const handleClick = () => {
-    navigate(`/vaga/detalhes?codigo=${code}`);
+    !isClosed && navigate(`/vaga/detalhes?codigo=${code}`);
   };
 
   return (
     <div
       onClick={handleClick}
-      className="bg-lightgray1 rounded-md p-6 flex flex-col justify-between cursor-pointer max-h-[448px]">
+      className={`bg-lightgray1 rounded-md p-6 flex flex-col justify-between max-h-[448px] ${
+        isClosed ? 'cursor-not-allowed' : 'cursor-pointer'
+      }`}>
       <div className="flex flex-row justify-between">
         <div className="flex flex-col justify-start">
           <div className="flex max-w-fit cursor-pointer flex-row justify-start mb-1">

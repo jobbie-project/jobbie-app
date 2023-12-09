@@ -44,7 +44,7 @@ export default function Home() {
   };
 
   return (
-    <div>
+    <div className="flex flex-col justify-between h-screen">
       <Header />
       <div className="max-w-full items-center py-5 flex flex-col text-sm">
         <div className="max-w-4xl w-full">

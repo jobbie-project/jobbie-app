@@ -41,7 +41,7 @@ export default function JobManagement() {
   };
 
   return (
-    <>
+    <div className="flex flex-col justify-between h-screen">
       <Header />
       <div className="w-full flex justify-center">
         <div className="max-w-4xl w-full py-6">
@@ -103,9 +103,8 @@ export default function JobManagement() {
           </div>
         </div>
       </div>
-      <div className="absolute bottom-0 w-screen">
-        <Footer />
-      </div>
-    </>
+
+      <Footer />
+    </div>
   );
 }
